@@ -57,6 +57,15 @@ select:-webkit-autofill:focus {
   transition: background-color 5000s ease-in-out 0s;
 }
 
+.change-form {
+    color: #3d5a80;
+}
+
+a.change-form:hover {
+    color: #98c1d9;
+    text-decoration: underline !important;
+}
+
 @media (max-width: 575px) {
     .home-content {
         width: 100% !important;
