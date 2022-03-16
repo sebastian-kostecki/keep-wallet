@@ -1,9 +1,66 @@
 {% extends "base.html" %}
 
-{% block title %}Page not found{% endblock %}
+{% block title %}Rejestracja{% endblock %}
 
 {% block body %}
 
-<h1>Rejestracja</h1>
+<main class="min-vh-100 d-flex align-items-center">
+    <div class="container-fluid">
+        <div class="row justify-content-center title mb-4">
+            <div class="col-10 col-sm-8 col-md-6 col-xl-4 d-flex justify-content-between">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-wallet me-2 title-icon"></i>
+                </div>
+                <div class="ms-1">
+                    <h1 class="text-uppercase title-main text-end">Ogarniam portfel</h1>
+                    <h2 class="fst-italic title-sub text-end">Zapanuj nad swoimi wydatkami</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center ">
+            <form action="saveNewUser.php" method="post" class="col-10 col-sm-8 col-md-6 col-xl-4">
+                <div class="input-group mb-3">
+                    <span class="input-group-text border-0 p-3" id="basic-addon1"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-person-fill" viewBox="0 0 16 16">
+                            <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                        </svg></span>
+                    <input type="text" class="form-control border-0 p-3 ms-0 text-white" placeholder="Imię"
+                        aria-label="Imię" aria-describedby="basic-addon1" name="name" required>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text border-0 p-3" id="basic-addon2"><i class="fas fa-at"></i></span>
+                    <input type="email" class="form-control border-0 p-3 ms-0 text-white" placeholder="Email"
+                        aria-label="Email" aria-describedby="basic-addon2" name="email" required>
+                </div>
+                <div class="input-group mb-3 border-0">
+                    <span class="input-group-text border-0 p-3" id="basic-addon3"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-lock-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+                        </svg></span>
+                    <input type="password" class="form-control border-0 p-3 ms-0 text-white" placeholder="Hasło"
+                        aria-label="Hasło" aria-describedby="basic-addon3" name="firstPassword" required>
+                </div>
+                <div class="input-group mb-3 border-0">
+                    <span class="input-group-text border-0 p-3" id="basic-addon4"><svg
+                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-lock-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z" />
+                        </svg></span>
+                    <input type="password" class="form-control border-0 p-3 ms-0 text-white" placeholder="Powtórz hasło"
+                        aria-label="Powtórz hasło" aria-describedby="basic-addon4" name="secondPassword" required>
+                </div>
+                <button class="btn btn-primary w-100 button-sign p-3 text-uppercase fw-bold border-0">Zarejestruj
+                    się</button>
+            </form>
+        </div>
+        <div class="row justify-content-center mt-3 ">
+            <p class="col-10 col-sm-8 col-md-6 col-lg-4 text-center information">Masz już konto? <a href="index.php"
+                    class="information text-decoration-none">Zaloguj się</a></p>
+        </div>
+    </div>
 
-{% endblock %}
+    {% endblock %}
