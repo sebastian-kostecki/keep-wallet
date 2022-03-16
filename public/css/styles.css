@@ -1,0 +1,37 @@
+body {
+    background-color: #293241;
+    font-family: 'Open Sans', sans-serif;
+    color: #6A707A;
+}
+
+.home-image {
+    background-image: url(/img/money.jpg);
+    background-size: cover;
+}
+
+.button-normal {
+    color: #fff;
+    background-color: #ee6c4d;
+}
+
+.button-normal:hover {
+    color: #fff;
+    background-color: #b64c32;
+}
+
+.button-outline {
+    color: #ee6c4d;
+    border: 1px solid #ee6c4d;
+    background-color: transparent;
+}
+
+.button-outline:hover {
+    color: #fff;
+    background-color: #ee6c4d;
+}
+
+@media (max-width: 575px) {
+    .home-content {
+        width: 100% !important;
+    }
+}
