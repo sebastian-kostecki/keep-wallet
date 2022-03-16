@@ -29,3 +29,9 @@ body {
     color: #fff;
     background-color: #ee6c4d;
 }
+
+@media (max-width: 575px) {
+    .home-content {
+        width: 100% !important;
+    }
+}
