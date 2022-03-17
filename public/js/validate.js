@@ -7,11 +7,13 @@ $(document).ready(function () {
             },
             email: {
                 required: true,
-                email: true,
+                email: true
             },
             password: {
                 required: true,
-                minlength: 6,
+                minlength: 8,
+                isLetterInPassword: true,
+                isDigitInPassword: true
             }
         },
         messages: {
@@ -36,4 +38,28 @@ $.validator.addMethod('validName',
         return true;
     },
     'Imię nie może zawierać znaków specjalnych'
+)
+
+$.validator.addMethod('isLetterInPassword',
+    function (value, element, param) {
+        if (value != '') {
+            if (value.match(/.*[a-z]+.*/i) == null) {
+                return false;
+            }
+        }
+        return true;
+    },
+    'Hasło powinno zawierać przynajmniej jedną literę'
+)
+
+$.validator.addMethod('isDigitInPassword',
+    function (value, element, param) {
+        if (value != '') {
+            if (value.match(/.*\d+.*/) == null) {
+                return false;
+            }
+        }
+        return true;
+    },
+    'Hasło powinno zawierać przynajmniej jedną cyfrę'
 )
