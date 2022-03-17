@@ -73,16 +73,16 @@ a.change-form:hover {
 .hidden-password {
     background-color: transparent;
     border: none;
-    color: #6A707A;
-    z-index: 4;
+    color: #293241;
+    z-index: 2;
 }
 
 .showed-password {
     display: none;
     background-color: transparent;
     border: none;
-    color: #6A707A;
-    z-index: 4;
+    color: #293241;
+    z-index: 2;
 }
 
 @media (max-width: 575px) {
