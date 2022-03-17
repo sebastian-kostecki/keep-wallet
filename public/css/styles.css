@@ -85,6 +85,13 @@ a.change-form:hover {
     z-index: 2;
 }
 
+label.error {
+    color:#ee6c4d;
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
+}
+
 @media (max-width: 575px) {
     .home-content {
         width: 100% !important;
