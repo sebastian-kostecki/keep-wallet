@@ -66,6 +66,19 @@ a.change-form:hover {
     text-decoration: underline !important;
 }
 
+.hidden-password {
+    background-color: transparent;
+    border: none;
+    color: #293241;
+}
+
+.showed-password {
+    display: none;
+    background-color: transparent;
+    border: none;
+    color: #293241;
+}
+
 @media (max-width: 575px) {
     .home-content {
         width: 100% !important;
