@@ -1,7 +1,10 @@
 $(document).ready(function () {
     $('#form').validate({
         rules: {
-            name: 'required',
+            name: {
+                required: true,
+                validName: true
+            },
             email: {
                 required: true,
                 email: true,
@@ -13,3 +16,15 @@ $(document).ready(function () {
         },
     });
 });
+
+$.validator.addMethod('validName',
+    function (value, element, param) {
+        if (value != '') {
+            if (value.match(/.*[$&+,:;=?[\]@#|{}'<>.^*()%!-/]+.*/i)) {
+                return false;
+            }
+        }
+        return true;
+    },
+    'Hasło nie może zawierać znaków specjalnych'
+)
