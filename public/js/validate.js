@@ -14,6 +14,15 @@ $(document).ready(function () {
                 minlength: 6,
             }
         },
+        messages: {
+            name: {
+                required: 'Wpisz imię',
+            },
+            email: {
+                required: 'Wpisz email',
+                email: 'Wpisz poprawny email'
+            }
+        },
     });
 });
 
@@ -26,5 +35,5 @@ $.validator.addMethod('validName',
         }
         return true;
     },
-    'Hasło nie może zawierać znaków specjalnych'
+    'Imię nie może zawierać znaków specjalnych'
 )
