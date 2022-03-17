@@ -6,7 +6,7 @@ $(document).ready(function () {
                 required: true,
                 email: true,
             },
-            firstPassword: {
+            password: {
                 required: true,
                 minlength: 6,
             }

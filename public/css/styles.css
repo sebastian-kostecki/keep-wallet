@@ -75,6 +75,7 @@ a.change-form:hover {
     border: none;
     color: #293241;
     z-index: 2;
+    padding-top: 0.75rem !important;
 }
 
 .showed-password {
@@ -83,6 +84,7 @@ a.change-form:hover {
     border: none;
     color: #293241;
     z-index: 2;
+    padding-top: 0.75rem !important;
 }
 
 label.error {
