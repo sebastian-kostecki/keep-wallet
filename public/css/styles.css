@@ -74,7 +74,7 @@ a.change-form:hover {
     background-color: transparent;
     border: none;
     color: #293241;
-    z-index: 2;
+    z-index: 4;
     padding-top: 0.75rem !important;
 }
 
@@ -83,7 +83,7 @@ a.change-form:hover {
     background-color: transparent;
     border: none;
     color: #293241;
-    z-index: 2;
+    z-index: 4;
     padding-top: 0.75rem !important;
 }
 

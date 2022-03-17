@@ -23,6 +23,10 @@ $(document).ready(function () {
             email: {
                 required: 'Wpisz email',
                 email: 'Wpisz poprawny email'
+            },
+            password: {
+                required: 'Wpisz hasło',
+                minlength: 'Hasło musi zawierać przynajmniej 8 znaków'
             }
         },
     });
