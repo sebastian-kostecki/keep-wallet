@@ -66,10 +66,15 @@ a.change-form:hover {
     text-decoration: underline !important;
 }
 
+#password-input {
+    padding-right: 50px !important;
+}
+
 .hidden-password {
     background-color: transparent;
     border: none;
     color: #6A707A;
+    z-index: 4;
 }
 
 .showed-password {
@@ -77,6 +82,7 @@ a.change-form:hover {
     background-color: transparent;
     border: none;
     color: #6A707A;
+    z-index: 4;
 }
 
 @media (max-width: 575px) {
