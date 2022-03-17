@@ -73,18 +73,26 @@ a.change-form:hover {
 .hidden-password {
     background-color: transparent;
     border: none;
-    color: #6A707A;
-    line-height: 1 !important;
+    color: #293241;
     z-index: 4;
+    padding-top: 0.75rem !important;
 }
 
 .showed-password {
     display: none;
     background-color: transparent;
     border: none;
-    color: #6A707A;
-    line-height: 1 !important;
+    color: #293241;
     z-index: 4;
+    padding-top: 0.75rem !important;
+}
+
+label.error {
+    color: red;
+    font-weight: 100;
+    width: 100%;
+    text-align: center;
+    margin-top: 0.5rem;
 }
 
 @media (max-width: 575px) {
