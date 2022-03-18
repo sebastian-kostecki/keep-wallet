@@ -87,7 +87,8 @@ a.change-form:hover {
     padding-top: 0.75rem !important;
 }
 
-label.error {
+label.error,
+li.error {
     color: red;
     font-weight: 100;
     width: 100%;

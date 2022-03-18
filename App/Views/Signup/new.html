@@ -36,6 +36,13 @@
                 <button class="btn button-normal w-100 button-sign p-3 text-uppercase fw-bold border-0">Zarejestruj
                     się</button>
             </form>
+            {% if user.errors is not empty %}
+            <ul class="list-unstyled">
+                {% for error in user.errors %}
+                <li class="error">{{ error }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
         </div>
         <div class="row justify-content-center mt-3 ">
             <p class="change-form col-10 col-sm-8 col-md-6 col-lg-4 text-center">Masz już konto? <a href=""
