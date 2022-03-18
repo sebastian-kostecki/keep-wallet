@@ -10,4 +10,6 @@ class Config
     const DB_PASSWORD = "";
 
     const SHOW_ERRORS = true;
+
+    const SECRET_KEY = "pMOOCeGRNAXjBiag9QPj36x4kTzNr1QT";
 }
