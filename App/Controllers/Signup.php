@@ -10,4 +10,8 @@ class Signup extends \Core\Controller
     {
         View::renderTemplate('Signup/new.html');
     }
+
+    public function createUserAction()
+    {
+    }
 }
