@@ -43,6 +43,16 @@ class User extends \Core\Model
         if ($this->isEmailExists($this->email, $this->id ?? null)) {
             $this->errors[] = 'Podany email jest zajęty';
         }
+
+        if (strlen($this->password) < 8) {
+            $this->errors[] = 'Hasło musi zawierać przynajmniej 8 znaków';
+        }
+        if (preg_match('/.*[a-z]+.*/i', $this->password) == 0) {
+            $this->errors[] = 'Hasło powinno zawierać przynajmniej jedną literę';
+        }
+        if (preg_match('/.*\d+.*/i', $this->password) == 0) {
+            $this->errors[] = 'Hasło powinno zawierać przynajmniej jedną liczbę';
+        }
     }
 
     public static function isEmailExists($email, $ignore_id = null)
