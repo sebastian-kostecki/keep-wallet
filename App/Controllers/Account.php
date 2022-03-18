@@ -13,4 +13,12 @@ class Account extends \Core\Controller
         header('Content-type: application/json');
         echo json_encode($isValidEmail);
     }
+
+    public function validateNameAction()
+    {
+        $isValidName = !User::isNameExists($_GET['name']);
+
+        header('Content-type: application/json');
+        echo json_encode($isValidName);
+    }
 }
