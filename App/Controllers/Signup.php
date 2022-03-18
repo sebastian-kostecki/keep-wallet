@@ -24,8 +24,8 @@ class Signup extends \Core\Controller
         }
     }
 
-    public function succesAction()
+    public function successAction()
     {
-        View::renderTemplate('Signup/succes.html');
+        View::renderTemplate('Signup/success.html');
     }
 }
