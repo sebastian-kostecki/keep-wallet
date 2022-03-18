@@ -36,5 +36,9 @@ class User extends \Core\Model
         if (preg_match('/.*[\$&\+,:;=?[\]@#|{}\'<>.^*()%!-/]+.*/i', $this->name)) {
             $this->errors[] = 'Imię nie może zawierać znaków specjalnych';
         }
+
+        if (filter_var($this->email, FILTER_VALIDATE_EMAIL) === false) {
+            $this->errors[] = 'Wpisz poprawny email';
+        }
     }
 }
