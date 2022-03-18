@@ -3,7 +3,8 @@ $(document).ready(function () {
         rules: {
             name: {
                 required: true,
-                validName: true
+                validName: true,
+                remote: '/account/validate-name'
             },
             email: {
                 required: true,
@@ -20,6 +21,7 @@ $(document).ready(function () {
         messages: {
             name: {
                 required: 'Wpisz imię',
+                remote: 'Podane imię jest zajęte'
             },
             email: {
                 required: 'Wpisz email',
