@@ -72,6 +72,15 @@ class User extends \Core\Model
         return false;
     }
 
+    public static function isNameExists($name)
+    {
+        $user = static::findByName($name);
+        if ($user) {
+            return true;
+        }
+        return false;
+    }
+
     public static function findByEmail($email)
     {
         $db = static::getDataBase();
