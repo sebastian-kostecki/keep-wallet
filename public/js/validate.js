@@ -3,11 +3,13 @@ $(document).ready(function () {
         rules: {
             name: {
                 required: true,
-                validName: true
+                validName: true,
+                remote: '/account/validate-name'
             },
             email: {
                 required: true,
-                email: true
+                email: true,
+                remote: '/account/validate-email'
             },
             password: {
                 required: true,
@@ -19,10 +21,12 @@ $(document).ready(function () {
         messages: {
             name: {
                 required: 'Wpisz imię',
+                remote: 'Podane imię jest zajęte'
             },
             email: {
                 required: 'Wpisz email',
-                email: 'Wpisz poprawny email'
+                email: 'Wpisz poprawny email',
+                remote: 'Podany email jest zajęty'
             },
             password: {
                 required: 'Wpisz hasło',
