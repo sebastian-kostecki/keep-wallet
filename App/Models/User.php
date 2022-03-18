@@ -108,4 +108,9 @@ class User extends \Core\Model
         $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
         return $query->fetch();
     }
+
+    public function sendActivationEmail()
+    {
+        $url = 'http://' . $_SERVER['HTTP_HOST'] . '/signup/activate/' . $this->activation_token;
+    }
 }
