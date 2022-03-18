@@ -7,7 +7,8 @@ $(document).ready(function () {
             },
             email: {
                 required: true,
-                email: true
+                email: true,
+                remote: '/account/validate-email'
             },
             password: {
                 required: true,
@@ -22,7 +23,8 @@ $(document).ready(function () {
             },
             email: {
                 required: 'Wpisz email',
-                email: 'Wpisz poprawny email'
+                email: 'Wpisz poprawny email',
+                remote: 'Podany email jest zajęty'
             },
             password: {
                 required: 'Wpisz hasło',
