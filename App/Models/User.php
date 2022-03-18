@@ -40,5 +40,30 @@ class User extends \Core\Model
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL) === false) {
             $this->errors[] = 'Wpisz poprawny email';
         }
+        if ($this->isEmailExists($this->email, $this->id ?? null)) {
+            $this->errors[] = 'Podany email jest zajęty';
+        }
+    }
+
+    public static function isEmailExists($email, $ignore_id = null)
+    {
+        $user = static::findByEmail($email);
+        if ($user) {
+            if ($user->id != $ignore_id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static function findByEmail($email)
+    {
+        $db = static::getDataBase();
+        $query = $db->prepare('SELECT * FROM users WHERE email = :email');
+        $query->bindValue(':email', $email, PDO::PARAM_STR);
+        $query->execute();
+
+        $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        return $query->fetch();
     }
 }
