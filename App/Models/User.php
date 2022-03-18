@@ -82,4 +82,15 @@ class User extends \Core\Model
         $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
         return $query->fetch();
     }
+
+    public static function findByName($name)
+    {
+        $db = static::getDataBase();
+        $query = $db->prepare('SELECT * FROM users WHERE username = :name');
+        $query->bindValue(':name', $name, PDO::PARAM_STR);
+        $query->execute();
+
+        $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        return $query->fetch();
+    }
 }
