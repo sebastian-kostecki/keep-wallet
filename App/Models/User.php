@@ -10,4 +10,8 @@ class User extends \Core\Model
             $this->$key = $value;
         }
     }
+
+    public function saveUser()
+    {
+    }
 }
