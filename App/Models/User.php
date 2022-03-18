@@ -30,5 +30,11 @@ class User extends \Core\Model
 
     public function validateNewUser()
     {
+        if ($this->name == '') {
+            $this->errors[] = 'Wpisz imię';
+        }
+        if (preg_match('/.*[\$&\+,:;=?[\]@#|{}\'<>.^*()%!-/]+.*/i', $this->name)) {
+            $this->errors[] = 'Imię nie może zawierać znaków specjalnych';
+        }
     }
 }
