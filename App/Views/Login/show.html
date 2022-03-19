@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Logowanie{% endblock %}
+
+{% block body %}
+
+<main class="min-vh-100 d-flex align-items-center">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-10 col-sm-8 col-md-6 col-xl-4">
+                <img src="/img/title.png" alt="" class="w-100 my-3 mt-xl-0">
+            </div>
+        </div>
+        <div class="row justify-content-center ">
+            <form action="" id="form" method="post" class="col-10 col-sm-8 col-md-6 col-xl-4">
+                <div class="input-group mb-3">
+                    <span class="input-group-text border-0 p-3" id="basic-addon1"><i class="fas fa-user"></i></span>
+                    <input type="text" class="form-control border-0 p-3 ms-0 text-white" placeholder="Imię lub hasło"
+                        aria-label="Imię lub hasło" aria-describedby="basic-addon1" name="login" autofocus required>
+                </div>
+                <div class="input-group mb-3 border-0">
+                    <span class="input-group-text border-0 p-3" id="basic-addon3"><i class="fas fa-lock"></i></span>
+                    <input type="password" id="password-input"
+                        class="form-control border-0 p-3 ms-0 text-white rounded-end" placeholder="Hasło"
+                        aria-label="Hasło" aria-describedby="basic-addon3" name="password" required>
+                    <button type="button" class="hidden-password me-2 p-2 fs-4 position-absolute top-0 end-0"><i
+                            class="fas fa-eye-slash"></i></button>
+                    <button type="button" class="showed-password me-2 p-2 fs-4 position-absolute top-0 end-0"> <i
+                            class="fas fa-eye"></i></button>
+                </div>
+                <button class="btn button-normal w-100 button-sign p-3 text-uppercase fw-bold border-0">Zaloguj
+                    się</button>
+            </form>
+        </div>
+        <div class="row justify-content-center mt-3 ">
+            <p class="change-form col-10 col-sm-8 col-md-6 col-lg-4 text-center">Nie masz konta? <a href=""
+                    class="change-form text-decoration-none">Zarejestruj się</a></p>
+        </div>
+    </div>
+
+    {% endblock %}
+
+    {% block footer %}
+    <script src="/js/hideShowPassword.js"></script>
+    {% endblock %}
