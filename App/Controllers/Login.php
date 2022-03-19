@@ -15,5 +15,6 @@ class Login extends \Core\Controller
     public function checkAction()
     {
         $user = User::authenticate($_POST['login'], $_POST['password']);
+        $rememberMe = isset($_POST['rememberMe']);
     }
 }
