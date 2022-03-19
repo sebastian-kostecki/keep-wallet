@@ -4,6 +4,7 @@ namespace App\Models;
 
 use PDO;
 use App\Token;
+use App\Mail;
 
 class User extends \Core\Model
 {
@@ -112,5 +113,6 @@ class User extends \Core\Model
     public function sendActivationEmail()
     {
         $url = 'http://' . $_SERVER['HTTP_HOST'] . '/signup/activate/' . $this->activation_token;
+        Mail::sendMail();
     }
 }
