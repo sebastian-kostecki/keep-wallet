@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use Core\View;
+use App\Models\User;
 
 class Login extends \Core\Controller
 {
@@ -13,5 +14,6 @@ class Login extends \Core\Controller
 
     public function checkAction()
     {
+        $user = User::authenticate($_POST['login'], $_POST['password']);
     }
 }
