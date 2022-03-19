@@ -115,8 +115,8 @@ class User extends \Core\Model
     {
         $url = 'http://' . $_SERVER['HTTP_HOST'] . '/signup/activate/' . $this->activation_token;
 
-        $htmlContent = View::getTemplate('Signup/activationEmail.html', ['url' => $url]);;
-        $txtContent = '';
+        $htmlContent = View::getTemplate('Signup/activationEmail.html', ['url' => $url]);
+        $txtContent = View::getTemplate('Signup/activationEmail.txt', ['url' => $url]);
 
         Mail::sendMail($this->email, 'Aktywacja konta', $htmlContent, $txtContent);
     }

@@ -1,0 +1,4 @@
+Aktywacja konta
+Link aktywacyjny do Twojego konta w aplikacji Ogarnij portfel
+Kliknij w link, aby aktywować swoje konto
+{{ url }}
