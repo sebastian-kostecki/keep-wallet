@@ -61,6 +61,10 @@ class User extends \Core\Model
             $this->errors[] = 'Imię nie może zawierać znaków specjalnych';
         }
 
+        if ((strlen($this->name) < 3) || (strlen($this->name) > 50)) {
+            $this->errors[] = 'Imię musi zawierać od 3 do 50 znaków';
+        }
+
         if (filter_var($this->email, FILTER_VALIDATE_EMAIL) === false) {
             $this->errors[] = 'Wpisz poprawny email';
         }
