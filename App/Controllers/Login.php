@@ -33,6 +33,6 @@ class Login extends \Core\Controller
     public function logoutAction()
     {
         Authentication::logout();
-        $this->redirect('/');
+        $this->redirect('/login');
     }
 }
