@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use PDO;
+use App\Token;
+use App\Mail;
+use Core\View;
 
 class User extends \Core\Model
 {
@@ -22,11 +25,16 @@ class User extends \Core\Model
         if (empty($this->errors)) {
             $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
 
+            $token = new Token;
+            $hashed_token = $token->getHash($token);
+            $this->activation_token = $token->getValue();
+
             $db = static::getDataBase();
-            $newUserQuery = $db->prepare('INSERT INTO users VALUES (NULL, :name, :password, :email)');
+            $newUserQuery = $db->prepare('INSERT INTO users (username, password, email, activation_hash) VALUES (:name, :password, :email, :hashed_token)');
             $newUserQuery->bindValue(':name', $this->name, PDO::PARAM_STR);
             $newUserQuery->bindValue(':password', $password_hash, PDO::PARAM_STR);
             $newUserQuery->bindValue(':email', $this->email, PDO::PARAM_STR);
+            $newUserQuery->bindValue(':hashed_token', $hashed_token, PDO::PARAM_STR);
 
             return $newUserQuery->execute();
         }
@@ -101,5 +109,15 @@ class User extends \Core\Model
 
         $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
         return $query->fetch();
+    }
+
+    public function sendActivationEmail()
+    {
+        $url = 'http://' . $_SERVER['HTTP_HOST'] . '/signup/activate/' . $this->activation_token;
+
+        $htmlContent = View::getTemplate('Signup/activationEmail.html', ['url' => $url]);
+        $txtContent = View::getTemplate('Signup/activationEmail.txt', ['url' => $url]);
+
+        Mail::sendMail($this->email, 'Aktywacja konta', $htmlContent, $txtContent);
     }
 }
