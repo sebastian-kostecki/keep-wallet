@@ -31,7 +31,7 @@ class Mail
             $mail->Subject = $subject;
             $mail->Body    = $htmlContent;
             $mail->AltBody = $txtContent;
-            $mail->addAttachment('img/title.png');
+            $mail->AddEmbeddedImage("img/title.png", "image", "img/title.png");
 
             $mail->send();
             echo 'Message has been sent';

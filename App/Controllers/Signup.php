@@ -29,4 +29,9 @@ class Signup extends \Core\Controller
     {
         View::renderTemplate('Signup/success.html');
     }
+
+    public function activAction()
+    {
+        View::renderTemplate('Signup/activationEmail.html');
+    }
 }
