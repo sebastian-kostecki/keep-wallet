@@ -53,6 +53,10 @@ class User extends \Core\Model
             $this->errors[] = 'Wpisz imię';
         }
 
+        if ($this->isNameExists($this->name)) {
+            $this->errors[] = 'Podane imię jest zajęte';
+        }
+
         if (preg_match("/.*[$&+,:;=?[\]@#|{}'<>.^*()%!-\/]+.*/i", $this->name)) {
             $this->errors[] = 'Imię nie może zawierać znaków specjalnych';
         }
