@@ -4,6 +4,8 @@ $(document).ready(function () {
             name: {
                 required: true,
                 validName: true,
+                minlength: 3,
+                maxlength: 50,
                 remote: '/account/validate-name'
             },
             email: {
@@ -21,6 +23,8 @@ $(document).ready(function () {
         messages: {
             name: {
                 required: 'Wpisz imię',
+                minlength: 'Imię powinno zawierać co najmniej 3 znaki',
+                maxlength: 'Imię może zawierać maksymalnie 50 znaków',
                 remote: 'Podane imię jest zajęte'
             },
             email: {
