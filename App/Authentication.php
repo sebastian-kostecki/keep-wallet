@@ -18,6 +18,6 @@ class Authentication
 
     public static function getReturnToPage()
     {
-        return $_SESSION['returnTo'] ?? '/';
+        return $_SESSION['returnTo'] ?? '/menu';
     }
 }
