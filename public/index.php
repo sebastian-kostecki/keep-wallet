@@ -16,5 +16,6 @@ $router->add('', ['controller' => 'Home', 'action' => 'index']);
 $router->add('{controller}/{action}');
 $router->add('signup/activate/{token:[\da-f]+}', ['controller' => 'Signup', 'action' => 'activate']);
 $router->add('login', ['controller' => 'login', 'action' => 'show']);
+$router->add('menu', ['controller' => 'menu', 'action' => 'show']);
 
 $router->dispatch($_SERVER['QUERY_STRING']);
