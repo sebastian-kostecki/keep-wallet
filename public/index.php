@@ -2,9 +2,13 @@
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
+ini_set('session.cookie_lifetime', '864000');
+
 error_reporting(E_ALL);
 set_error_handler('Core\Error::errorHandler');
 set_exception_handler('Core\Error::exceptionHandler');
+
+session_start();
 
 $router = new Core\Router();
 
