@@ -30,8 +30,8 @@ class Signup extends \Core\Controller
         View::renderTemplate('Signup/success.html');
     }
 
-    public function activAction()
+    public function activateAction()
     {
-        View::renderTemplate('Signup/activationEmail.html');
+        User::activateUser($this->route_params['token']);
     }
 }
