@@ -30,13 +30,19 @@ class User extends \Core\Model
             $this->activation_token = $token->getValue();
 
             $db = static::getDataBase();
+
             $newUserQuery = $db->prepare('INSERT INTO users (username, password, email, activation_hash) VALUES (:name, :password, :email, :hashed_token)');
             $newUserQuery->bindValue(':name', $this->name, PDO::PARAM_STR);
             $newUserQuery->bindValue(':password', $password_hash, PDO::PARAM_STR);
             $newUserQuery->bindValue(':email', $this->email, PDO::PARAM_STR);
             $newUserQuery->bindValue(':hashed_token', $hashed_token, PDO::PARAM_STR);
+            $newUserQuery->execute();
 
-            return $newUserQuery->execute();
+            $db->query("INSERT INTO expenses_category_assigned_to_users (user_id, name, icon) SELECT users.id, expenses_category_default.name, expenses_category_default.icon  FROM expenses_category_default CROSS JOIN users WHERE users.id = (SELECT id FROM users WHERE username = '{$this->name}')");
+            $db->query("INSERT INTO incomes_category_assigned_to_users (user_id, name, icon) SELECT users.id, incomes_category_default.name, incomes_category_default.icon FROM incomes_category_default CROSS JOIN users WHERE users.id = (SELECT id FROM users WHERE username = '{$this->name}')");
+            $db->query("INSERT INTO payment_methods_assigned_to_users (user_id, name, icon) SELECT users.id, payment_methods_default.name, payment_methods_default.icon FROM payment_methods_default CROSS JOIN users WHERE users.id = (SELECT id FROM users WHERE username = '{$this->name}')");
+
+            return true;
         }
         return false;
     }
