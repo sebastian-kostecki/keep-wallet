@@ -155,7 +155,7 @@ class User extends \Core\Model
         }
 
         if ($user && $user->is_active) {
-            if (password_verify($password, $user->password_hash)) {
+            if (password_verify($password, $user->password)) {
                 return $user;
             }
         }
