@@ -5,6 +5,7 @@ namespace App\Models;
 use PDO;
 use App\Token;
 use App\Mail;
+use Core\View;
 
 class User extends \Core\Model
 {
@@ -114,7 +115,7 @@ class User extends \Core\Model
     {
         $url = 'http://' . $_SERVER['HTTP_HOST'] . '/signup/activate/' . $this->activation_token;
 
-        $htmlContent = 'Udana aktywacja';
+        $htmlContent = View::getTemplate('Signup/activationEmail.html', ['url' => $url]);;
         $txtContent = '';
 
         Mail::sendMail($this->email, 'Aktywacja konta', $htmlContent, $txtContent);
