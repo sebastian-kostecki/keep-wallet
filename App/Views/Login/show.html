@@ -12,11 +12,12 @@
             </div>
         </div>
         <div class="row justify-content-center ">
-            <form action="" id="form" method="post" class="col-10 col-sm-8 col-md-6 col-xl-4">
+            <form action="login/check" id="form" method="post" class="col-10 col-sm-8 col-md-6 col-xl-4">
                 <div class="input-group mb-3">
                     <span class="input-group-text border-0 p-3" id="basic-addon1"><i class="fas fa-user"></i></span>
                     <input type="text" class="form-control border-0 p-3 ms-0 text-white" placeholder="Imię lub hasło"
-                        aria-label="Imię lub hasło" aria-describedby="basic-addon1" name="login" autofocus required>
+                        aria-label="Imię lub hasło" aria-describedby="basic-addon1" name="login" value="{{ login }}"
+                        autofocus required>
                 </div>
                 <div class="input-group mb-3 border-0">
                     <span class="input-group-text border-0 p-3" id="basic-addon3"><i class="fas fa-lock"></i></span>
@@ -29,7 +30,8 @@
                             class="fas fa-eye"></i></button>
                 </div>
                 <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" id="rememberMe" name="rememberMe">
+                    <input class="form-check-input" type="checkbox" id="rememberMe" name="rememberMe" {% if rememberMe
+                        %} checked="checked" {% endif %}>
                     <label class="form-check-label ms-2" for="rememberMe">Zapamiętaj mnie</label>
                 </div>
                 <button class="btn button-normal w-100 button-sign p-3 text-uppercase fw-bold border-0">Zaloguj

@@ -11,8 +11,13 @@ class Authentication
 
         if ($rememberMe) {
             if ($user->rememberLogin()) {
-                setcookie('remember_me', $user->remember_token, $user->expiry_timestamp, '/');
+                setcookie('rememberMe', $user->remember_token, $user->expiry_timestamp, '/');
             }
         }
+    }
+
+    public static function getReturnToPage()
+    {
+        return $_SESSION['returnTo'] ?? '/';
     }
 }
