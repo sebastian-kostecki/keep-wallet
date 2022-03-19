@@ -29,4 +29,8 @@ class Login extends \Core\Controller
             ]);
         }
     }
+
+    public function logoutAction()
+    {
+    }
 }
