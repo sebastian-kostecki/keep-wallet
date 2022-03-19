@@ -113,6 +113,10 @@ class User extends \Core\Model
     public function sendActivationEmail()
     {
         $url = 'http://' . $_SERVER['HTTP_HOST'] . '/signup/activate/' . $this->activation_token;
-        Mail::sendMail();
+
+        $htmlContent = 'Udana aktywacja';
+        $txtContent = '';
+
+        Mail::sendMail($this->email, 'Aktywacja konta', $htmlContent, $txtContent);
     }
 }

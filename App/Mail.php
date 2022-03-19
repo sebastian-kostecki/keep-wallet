@@ -10,7 +10,7 @@ use PHPMailer\PHPMailer\Exception;
 class Mail
 {
 
-    public static function sendMail()
+    public static function sendMail($recipient, $subject, $htmlContent, $txtContent)
     {
         $mail = new PHPMailer(true);
 
@@ -24,13 +24,13 @@ class Mail
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port       = \App\Config::EMAIL_PORT;;
 
-            $mail->setFrom('sebastian.kostecki.programista@gmail.com', 'Ogarniam portfel');
-            $mail->addAddress('sebastian.kostecki@gmail.com');
+            $mail->setFrom(\App\Config::EMAIL_USER, 'Ogarniam portfel');
+            $mail->addAddress($recipient);
 
             $mail->isHTML(true);
-            $mail->Subject = 'Here is the subject';
-            $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-            $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            $mail->Subject = $subject;
+            $mail->Body    = $htmlContent;
+            $mail->AltBody = $txtContent;
             $mail->addAttachment('img/title.png');
 
             $mail->send();
