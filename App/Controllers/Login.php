@@ -10,4 +10,8 @@ class Login extends \Core\Controller
     {
         View::renderTemplate('Login/show.html');
     }
+
+    public function checkAction()
+    {
+    }
 }
