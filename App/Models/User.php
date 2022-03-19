@@ -146,4 +146,19 @@ class User extends \Core\Model
 
         $stmt->execute();
     }
+
+    public static function authenticate($login, $password)
+    {
+        $user = static::findByEmail($login);
+        if(!$user) {
+            $user = static::findByName($login);
+        }
+
+        if ($user && $user->is_active) {
+            if (password_verify($password, $user->password_hash)) {
+                return $user;
+            }
+        }
+        return false;
+    }
 }
