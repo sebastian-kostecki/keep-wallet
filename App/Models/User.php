@@ -61,7 +61,7 @@ class User extends \Core\Model
             $this->errors[] = 'Imię nie może zawierać znaków specjalnych';
         }
 
-        if ((strlen($this->name) < 3) || (strlen($this->name) > 50)) {
+        if ((strlen($this->name) < 2) || (strlen($this->name) > 50)) {
             $this->errors[] = 'Imię musi zawierać od 3 do 50 znaków';
         }
 
