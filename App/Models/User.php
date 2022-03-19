@@ -120,4 +120,16 @@ class User extends \Core\Model
 
         Mail::sendMail($this->email, 'Aktywacja konta', $htmlContent, $txtContent);
     }
+
+    public static function activateUser($userToken)
+    {
+        $token = new Token($userToken);
+        $hashed_token = $token->getHash($token);
+
+        $db = static::getDataBase();
+        $stmt = $db->prepare('UPDATE users SET is_active = 1, activation_hash = null WHERE activation_hash = :hashed_token');
+        $stmt->bindValue(':hashed_token', $hashed_token, PDO::PARAM_STR);
+
+        $stmt->execute();
+    }
 }
