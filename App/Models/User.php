@@ -150,7 +150,7 @@ class User extends \Core\Model
     public static function authenticate($login, $password)
     {
         $user = static::findByEmail($login);
-        if(!$user) {
+        if (!$user) {
             $user = static::findByName($login);
         }
 
@@ -160,5 +160,25 @@ class User extends \Core\Model
             }
         }
         return false;
+    }
+
+    public function rememberLogin()
+    {
+        $token = new Token;
+        $token_hash = $token->getHash();
+        $this->remember_token = $token->getValue();
+
+        $this->expiry_timestamp = time() + 60 * 60 * 24 * 14;
+
+        $sql = 'INSERT INTO remebered_logins (token_hash, user_id, expiry_at)
+                VALUES (:token_hash, :user_id, :expiry_at)';
+
+        $db = static::getDataBase();
+        $query = $db->prepare($sql);
+        $query->bindValue(':token_hash', $token_hash, PDO::PARAM_STR);
+        $query->bindValue(':user_id', $this->id, PDO::PARAM_INT);
+        $query->bindValue(':expiry_at', date('Y-m-d H:i:s', $this->expiry_timestamp), PDO::PARAM_STR);
+
+        return $query->execute();
     }
 }
