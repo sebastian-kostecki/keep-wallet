@@ -125,6 +125,17 @@ class User extends \Core\Model
         return $query->fetch();
     }
 
+    public static function findByID($id)
+    {
+        $db = static::getDataBase();
+        $query = $db->prepare('SELECT * FROM users WHERE id = :id');
+        $query->bindValue(':id', $id, PDO::PARAM_INT);
+        $query->execute();
+
+        $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        return $query->fetch();
+    }
+
     public function sendActivationEmail()
     {
         $url = 'http://' . $_SERVER['HTTP_HOST'] . '/signup/activate/' . $this->activation_token;
