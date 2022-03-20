@@ -228,6 +228,6 @@ class User extends \Core\Model
         $htmlContent = View::getTemplate('Password/resetEmail.html', ['url' => $url]);
         $txtContent = View::getTemplate('Password/resetEmail.txt', ['url' => $url]);
 
-        Mail::sendMail($this->email, 'Przypomnienie hasła', $htmlContent, $txtContent);
+        Mail::sendMail($this->email, 'Reset hasła', $htmlContent, $txtContent);
     }
 }
