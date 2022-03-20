@@ -31,16 +31,16 @@ class User extends \Core\Model
 
             $db = static::getDataBase();
 
-            $newUserQuery = $db->prepare('INSERT INTO users (username, password, email, activation_hash) VALUES (:name, :password, :email, :hashed_token)');
+            $newUserQuery = $db->prepare('INSERT INTO users (name, password, email, activation_hash) VALUES (:name, :password, :email, :hashed_token)');
             $newUserQuery->bindValue(':name', $this->name, PDO::PARAM_STR);
             $newUserQuery->bindValue(':password', $password_hash, PDO::PARAM_STR);
             $newUserQuery->bindValue(':email', $this->email, PDO::PARAM_STR);
             $newUserQuery->bindValue(':hashed_token', $hashed_token, PDO::PARAM_STR);
             $newUserQuery->execute();
 
-            $db->query("INSERT INTO expenses_category_assigned_to_users (user_id, name, icon) SELECT users.id, expenses_category_default.name, expenses_category_default.icon  FROM expenses_category_default CROSS JOIN users WHERE users.id = (SELECT id FROM users WHERE username = '{$this->name}')");
-            $db->query("INSERT INTO incomes_category_assigned_to_users (user_id, name, icon) SELECT users.id, incomes_category_default.name, incomes_category_default.icon FROM incomes_category_default CROSS JOIN users WHERE users.id = (SELECT id FROM users WHERE username = '{$this->name}')");
-            $db->query("INSERT INTO payment_methods_assigned_to_users (user_id, name, icon) SELECT users.id, payment_methods_default.name, payment_methods_default.icon FROM payment_methods_default CROSS JOIN users WHERE users.id = (SELECT id FROM users WHERE username = '{$this->name}')");
+            $db->query("INSERT INTO expenses_category_assigned_to_users (user_id, name, icon) SELECT users.id, expenses_category_default.name, expenses_category_default.icon  FROM expenses_category_default CROSS JOIN users WHERE users.id = (SELECT id FROM users WHERE name = '{$this->name}')");
+            $db->query("INSERT INTO incomes_category_assigned_to_users (user_id, name, icon) SELECT users.id, incomes_category_default.name, incomes_category_default.icon FROM incomes_category_default CROSS JOIN users WHERE users.id = (SELECT id FROM users WHERE name = '{$this->name}')");
+            $db->query("INSERT INTO payment_methods_assigned_to_users (user_id, name, icon) SELECT users.id, payment_methods_default.name, payment_methods_default.icon FROM payment_methods_default CROSS JOIN users WHERE users.id = (SELECT id FROM users WHERE name = '{$this->name}')");
 
             return true;
         }
@@ -53,7 +53,7 @@ class User extends \Core\Model
             $this->errors[] = 'Wpisz imię';
         }
 
-        if ($this->isNameExists($this->name)) {
+        if ($this->isNameExists($this->name, $this->id ?? null)) {
             $this->errors[] = 'Podane imię jest zajęte';
         }
 
@@ -94,11 +94,13 @@ class User extends \Core\Model
         return false;
     }
 
-    public static function isNameExists($name)
+    public static function isNameExists($name, $ignore_id = null)
     {
         $user = static::findByName($name);
         if ($user) {
-            return true;
+            if ($user->id != $ignore_id) {
+                return true;
+            }
         }
         return false;
     }
@@ -117,7 +119,7 @@ class User extends \Core\Model
     public static function findByName($name)
     {
         $db = static::getDataBase();
-        $query = $db->prepare('SELECT * FROM users WHERE username = :name');
+        $query = $db->prepare('SELECT * FROM users WHERE name = :name');
         $query->bindValue(':name', $name, PDO::PARAM_STR);
         $query->execute();
 
@@ -134,6 +136,25 @@ class User extends \Core\Model
 
         $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
         return $query->fetch();
+    }
+
+    public static function findByPasswordReset($token)
+    {
+        $token = new Token($token);
+        $hashed_token = $token->getHash();
+
+        $db = static::getDataBase();
+        $query = $db->prepare('SELECT * FROM users WHERE password_reset_hash = :token_hash');
+        $query->bindValue(':token_hash', $hashed_token, PDO::PARAM_STR);
+        $query->execute();
+        $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        $user = $query->fetch();
+        if ($user) {
+            if (strtotime($user->password_reset_expiry) > time()) {
+                return $user;
+            }
+        }
     }
 
     public function sendActivationEmail()
@@ -191,5 +212,61 @@ class User extends \Core\Model
         $query->bindValue(':expiry_at', date('Y-m-d H:i:s', $this->expiry_timestamp), PDO::PARAM_STR);
 
         return $query->execute();
+    }
+
+    public static function sendPasswordReset($email)
+    {
+        $user = static::findByEmail($email);
+
+        if ($user) {
+            if ($user->createTokenReset()) {
+                $user->sendPasswordResetEmail();
+            }
+        }
+    }
+
+    protected function createTokenReset()
+    {
+        $token = new Token;
+        $hashed_token = $token->getHash();
+        $this->resetPasswordToken = $token->getValue();
+
+        $expiry_timestamp = time() + 60 * 60 * 2;
+
+        $db = static::getDataBase();
+        $query = $db->prepare('UPDATE users SET password_reset_hash = :token_hash, password_reset_expiry = :expires_at WHERE id = :id');
+        $query->bindValue(':token_hash', $hashed_token, PDO::PARAM_STR);
+        $query->bindValue(':expires_at', date('Y-m-d H:i:s', $expiry_timestamp), PDO::PARAM_STR);
+        $query->bindValue(':id', $this->id, PDO::PARAM_INT);
+
+        return $query->execute();
+    }
+
+    protected function sendPasswordResetEmail()
+    {
+        $url = 'http://' . $_SERVER['HTTP_HOST'] . '/password/reset/' . $this->resetPasswordToken;
+
+        $htmlContent = View::getTemplate('Password/resetEmail.html', ['url' => $url]);
+        $txtContent = View::getTemplate('Password/resetEmail.txt', ['url' => $url]);
+
+        Mail::sendMail($this->email, 'Reset hasła', $htmlContent, $txtContent);
+    }
+
+    public function resetPassword($password)
+    {
+        $this->password = $password;
+        $this->validateNewUser();
+
+        if (empty($this->errors)) {
+            $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
+
+            $db = static::getDataBase();
+            $query = $db->prepare('UPDATE users SET password = :password_hash, password_reset_hash = NULL, password_reset_expiry = NULL WHERE id = :id');
+            $query->bindValue(':id', $this->id, PDO::PARAM_INT);
+            $query->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
+
+            return $query->execute();
+        }
+        return false;
     }
 }

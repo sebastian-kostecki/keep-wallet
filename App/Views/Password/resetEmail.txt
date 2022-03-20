@@ -1,0 +1,4 @@
+Reset hasła
+Zresetuj hasło do Twojego konta w aplikacji Ogarnij portfel
+Pobierz link, aby aktywować zresetować hasło
+{{ url }}
