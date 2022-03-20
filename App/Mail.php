@@ -27,6 +27,7 @@ class Mail
             $mail->setFrom(\App\Config::EMAIL_USER, 'Ogarniam portfel');
             $mail->addAddress($recipient);
 
+            $mail->CharSet = "UTF-8";
             $mail->isHTML(true);
             $mail->Subject = $subject;
             $mail->Body    = $htmlContent;
@@ -34,7 +35,6 @@ class Mail
             $mail->AddEmbeddedImage("img/title.png", "image", "img/title.png");
 
             $mail->send();
-            echo 'Message has been sent';
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }

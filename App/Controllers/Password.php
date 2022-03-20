@@ -19,5 +19,6 @@ class Password extends \Core\Controller
 
         //wyświetlenie komunikatu o wysłaniu emaila
         User::sendPasswordReset($_POST['email']);
+        View::renderTemplate('Password/sendInfo.html');
     }
 }
