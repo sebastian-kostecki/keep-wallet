@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use App\Authentication;
+
 abstract class Controller
 {
     protected $route_params = [];
@@ -41,7 +43,9 @@ abstract class Controller
 
     public function requireLogin()
     {
-        //sprawdź czy użytkownik jest zalogowany
-        //jeśli nie jest to zapamiętaj wcześniejszą stronę oraz przekieruj na logowanie
+        if (!Authentication::getUser()) {
+            Authentication::rememberRequestedPage();
+            $this->redirect('/login');
+        }
     }
 }
