@@ -40,4 +40,11 @@ class Signup extends \Core\Controller
     {
         View::renderTemplate('Signup/activated.html');
     }
+
+    protected function before()
+    {
+        if (isset($_SESSION['userId'])) {
+            $this->redirect('/menu');
+        }
+    }
 }
