@@ -36,6 +36,8 @@ class Authentication
             );
         }
         session_destroy();
+
+        static::forgetLogin();
     }
 
     public static function getReturnToPage()
@@ -47,6 +49,8 @@ class Authentication
     {
         if (isset($_SESSION['userId'])) {
             return User::findByID($_SESSION['userId']);
+        } else {
+            return static::loginFromRememberCookie();
         }
     }
 
