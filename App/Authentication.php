@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Models\User;
+
 class Authentication
 {
     public static function login($user, $rememberMe)
@@ -42,6 +44,8 @@ class Authentication
 
     public static function getUser()
     {
-        //ustawienienie zmiennej sesyjnej przechowującej id użytkownika
+        if (isset($_SESSION['userId'])) {
+            return User::findByID($_SESSION['userId']);
+        }
     }
 }
