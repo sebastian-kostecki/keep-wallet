@@ -57,7 +57,7 @@ class Authentication
 
     protected static function loginFromRememberCookie()
     {
-        $cookie = $_COOKIE['remember_me'] ?? false;
+        $cookie = $_COOKIE['rememberMe'] ?? false;
         if ($cookie) {
             $remembered_login = RememberedLogin::findByToken($cookie);
 
@@ -66,6 +66,20 @@ class Authentication
                 static::login($user, false);
                 return $user;
             }
+        }
+    }
+
+    protected static function forgetLogin()
+    {
+        $cookie = $_COOKIE['rememberMe'] ?? false;
+
+        if ($cookie) {
+            $remembered_login = RememberedLogin::findByToken($cookie);
+
+            if ($remembered_login) {
+                $remembered_login->delete();
+            }
+            setcookie('rememberMe', '', time() - 3600);
         }
     }
 }
