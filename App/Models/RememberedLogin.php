@@ -30,4 +30,12 @@ class RememberedLogin extends \Core\Model
     {
         return strtotime($this->expiry_at) < time();
     }
+
+    public function delete()
+    {
+        $db = static::getDataBase();
+        $query = $db->prepare("DELETE FROM remebered_logins WHERE token_hash = :token_hash");
+        $query->bindValue(':token_hash', $this->token_hash, PDO::PARAM_STR);
+        $query->execute();
+    }
 }
