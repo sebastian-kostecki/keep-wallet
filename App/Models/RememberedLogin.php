@@ -20,4 +20,9 @@ class RememberedLogin extends \Core\Model
         $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
         return $query->fetch();
     }
+
+    public function getUser()
+    {
+        return User::findByID($this->user_id);
+    }
 }
