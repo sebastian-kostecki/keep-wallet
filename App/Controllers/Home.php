@@ -10,4 +10,11 @@ class Home extends \Core\Controller
     {
         View::renderTemplate('Home/index.html');
     }
+
+    protected function before()
+    {
+        if (isset($_SESSION['userId'])) {
+            $this->redirect('/menu');
+        }
+    }
 }

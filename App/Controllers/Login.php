@@ -43,4 +43,11 @@ class Login extends \Core\Controller
         Flash::addMessage("Zostałeś wylogowany");
         $this->redirect('/login');
     }
+
+    protected function before()
+    {
+        if (isset($_SESSION['userId'])) {
+            $this->redirect('/menu');
+        }
+    }
 }
