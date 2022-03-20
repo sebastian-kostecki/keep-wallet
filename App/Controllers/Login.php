@@ -35,6 +35,12 @@ class Login extends \Core\Controller
     public function logoutAction()
     {
         Authentication::logout();
+        $this->redirect('/login/show-logout');
+    }
+
+    public function showLogoutAction()
+    {
+        Flash::addMessage("Wylogowałeś się");
         $this->redirect('/login');
     }
 }
