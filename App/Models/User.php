@@ -224,5 +224,10 @@ class User extends \Core\Model
     protected function sendPasswordResetEmail()
     {
         $url = 'http://' . $_SERVER['HTTP_HOST'] . '/password/reset/' . $this->resetPasswordToken;
+
+        $htmlContent = View::getTemplate('Password/resetEmail.html', ['url' => $url]);
+        $txtContent = View::getTemplate('Password/resetEmail.txt', ['url' => $url]);
+
+        Mail::sendMail($this->email, 'Przypomnienie hasła', $htmlContent, $txtContent);
     }
 }
