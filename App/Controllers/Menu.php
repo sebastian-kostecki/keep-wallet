@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use Core\View;
 
-class Menu extends \Core\Controller
+class Menu extends Authenticated
 {
     public function showAction()
     {
