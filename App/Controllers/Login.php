@@ -44,7 +44,7 @@ class Login extends \Core\Controller
         $this->redirect('/login');
     }
 
-    protected function before()
+    protected function after()
     {
         if (isset($_SESSION['userId'])) {
             $this->redirect('/menu');
