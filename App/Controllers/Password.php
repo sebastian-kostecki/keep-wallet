@@ -21,10 +21,12 @@ class Password extends \Core\Controller
     public function resetAction()
     {
         $token = $this->route_params['token'];
+        $user = User::findByPasswordReset($token);
 
-        //pobieramy użytkownika na podstawie przesłanego przez niego tokenu
-
-        //wyświetlamy stronę z formularzem zawierającym zmianę hasła
-        //dodajemy to niego token, aby potem przekazać go do metody zmieniającej hasło
+        if ($user) {
+            //wyświetlamy stronę z formularzem
+        } else {
+            //wyświetlamy stronę z komunikatem o wygaśnięciu tokenu
+        }
     }
 }
