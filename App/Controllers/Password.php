@@ -14,11 +14,17 @@ class Password extends \Core\Controller
 
     public function requestResetAction()
     {
-        //wysyłamy do modelu żądanie przetworzenia prośby
-        //tam będzie wygenerowany model
-
-        //wyświetlenie komunikatu o wysłaniu emaila
         User::sendPasswordReset($_POST['email']);
         View::renderTemplate('Password/sendInfo.html');
+    }
+
+    public function resetAction()
+    {
+        $token = $this->route_params['token'];
+
+        //pobieramy użytkownika na podstawie przesłanego przez niego tokenu
+
+        //wyświetlamy stronę z formularzem zawierającym zmianę hasła
+        //dodajemy to niego token, aby potem przekazać go do metody zmieniającej hasło
     }
 }
