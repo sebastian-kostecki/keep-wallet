@@ -24,9 +24,12 @@ class Password extends \Core\Controller
         $user = User::findByPasswordReset($token);
 
         if ($user) {
-            //wyświetlamy stronę z formularzem
+            View::renderTemplate('Password/resetPassword.html', [
+                'token' => $token
+            ]);
         } else {
-            //wyświetlamy stronę z komunikatem o wygaśnięciu tokenu
+            View::renderTemplate('Password/tokenExpired.html');
+            exit();
         }
     }
 }
