@@ -220,4 +220,9 @@ class User extends \Core\Model
 
         return $query->execute();
     }
+
+    protected function sendPasswordResetEmail()
+    {
+        $url = 'http://' . $_SERVER['HTTP_HOST'] . '/password/reset/' . $this->resetPasswordToken;
+    }
 }
