@@ -24,7 +24,7 @@ class Login extends \Core\Controller
             Flash::addMessage("Udane logowanie");
             $this->redirect(Authentication::getReturnToPage());
         } else {
-            Flash::addMessage("Logowanie nieudane, spróbuj jeszcze raz", Flash::DANGER);
+            Flash::addMessage("Logowanie nieudane", Flash::DANGER);
             View::renderTemplate('Login/show.html', [
                 'login' => $_POST['login'],
                 'rememberMe' => $rememberMe
@@ -40,7 +40,7 @@ class Login extends \Core\Controller
 
     public function showLogoutAction()
     {
-        Flash::addMessage("Wylogowałeś się");
+        Flash::addMessage("Zostałeś wylogowany");
         $this->redirect('/login');
     }
 }
