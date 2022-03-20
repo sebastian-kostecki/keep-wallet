@@ -125,6 +125,17 @@ class User extends \Core\Model
         return $query->fetch();
     }
 
+    public static function findByID($id)
+    {
+        $db = static::getDataBase();
+        $query = $db->prepare('SELECT * FROM users WHERE id = :id');
+        $query->bindValue(':id', $id, PDO::PARAM_INT);
+        $query->execute();
+
+        $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        return $query->fetch();
+    }
+
     public function sendActivationEmail()
     {
         $url = 'http://' . $_SERVER['HTTP_HOST'] . '/signup/activate/' . $this->activation_token;
@@ -145,5 +156,40 @@ class User extends \Core\Model
         $stmt->bindValue(':hashed_token', $hashed_token, PDO::PARAM_STR);
 
         $stmt->execute();
+    }
+
+    public static function authenticate($login, $password)
+    {
+        $user = static::findByEmail($login);
+        if (!$user) {
+            $user = static::findByName($login);
+        }
+
+        if ($user && $user->is_active) {
+            if (password_verify($password, $user->password)) {
+                return $user;
+            }
+        }
+        return false;
+    }
+
+    public function rememberLogin()
+    {
+        $token = new Token;
+        $token_hash = $token->getHash();
+        $this->remember_token = $token->getValue();
+
+        $this->expiry_timestamp = time() + 60 * 60 * 24 * 14;
+
+        $sql = 'INSERT INTO remebered_logins (token_hash, user_id, expiry_at)
+                VALUES (:token_hash, :user_id, :expiry_at)';
+
+        $db = static::getDataBase();
+        $query = $db->prepare($sql);
+        $query->bindValue(':token_hash', $token_hash, PDO::PARAM_STR);
+        $query->bindValue(':user_id', $this->id, PDO::PARAM_INT);
+        $query->bindValue(':expiry_at', date('Y-m-d H:i:s', $this->expiry_timestamp), PDO::PARAM_STR);
+
+        return $query->execute();
     }
 }

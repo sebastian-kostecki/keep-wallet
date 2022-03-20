@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Rejestracja{% endblock %}
+{% block title %}Logowanie{% endblock %}
 
 {% block body %}
 
@@ -12,18 +12,12 @@
             </div>
         </div>
         <div class="row justify-content-center ">
-            <form action="/signup/createUser" id="form" method="post" class="col-10 col-sm-8 col-md-6 col-xl-4">
+            <form action="/login/check" id="form" method="post" class="col-10 col-sm-8 col-md-6 col-xl-4">
                 <div class="input-group mb-3">
                     <span class="input-group-text border-0 p-3" id="basic-addon1"><i class="fas fa-user"></i></span>
-                    <input type="text" class="form-control border-0 p-3 ms-0 text-white" placeholder="Imię"
-                        aria-label="Imię" aria-describedby="basic-addon1" name="name" autofocus value="{{ user.name }}"
-                        required>
-                </div>
-                <div class="input-group mb-3">
-                    <span class="input-group-text border-0 p-3" id="basic-addon2"><i class="fas fa-at"></i></span>
-                    <input type="email" class="form-control border-0 p-3 ms-0 text-white" placeholder="Email"
-                        aria-label="Email" aria-describedby="basic-addon2" name="email" value=" {{ user.email }}"
-                        required>
+                    <input type="text" class="form-control border-0 p-3 ms-0 text-white" placeholder="Imię lub hasło"
+                        aria-label="Imię lub hasło" aria-describedby="basic-addon1" name="login" value="{{ login }}"
+                        autofocus required>
                 </div>
                 <div class="input-group mb-3 border-0">
                     <span class="input-group-text border-0 p-3" id="basic-addon3"><i class="fas fa-lock"></i></span>
@@ -35,27 +29,23 @@
                     <button type="button" class="showed-password me-2 p-2 fs-4 position-absolute top-0 end-0"> <i
                             class="fas fa-eye"></i></button>
                 </div>
-                {% if user.errors is not empty %}
-                <ul class="list-unstyled">
-                    {% for error in user.errors %}
-                    <li class="error m-0">{{ error }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-                <button class="btn button-normal w-100 button-sign p-3 text-uppercase fw-bold border-0">Zarejestruj
+                <div class="form-check mb-3">
+                    <input class="form-check-input" type="checkbox" id="rememberMe" name="rememberMe" {% if rememberMe
+                        %} checked="checked" {% endif %}>
+                    <label class="form-check-label ms-2" for="rememberMe">Zapamiętaj mnie</label>
+                </div>
+                <button class="btn button-normal w-100 button-sign p-3 text-uppercase fw-bold border-0">Zaloguj
                     się</button>
             </form>
         </div>
         <div class="row justify-content-center mt-3 ">
-            <p class="change-form col-10 col-sm-8 col-md-6 col-lg-4 text-center">Masz już konto? <a href="/login"
-                    class="change-form text-decoration-none">Zaloguj się</a></p>
+            <p class="change-form col-10 col-sm-8 col-md-6 col-lg-4 text-center">Nie masz konta? <a href="/signup/new"
+                    class="change-form text-decoration-none">Zarejestruj się</a></p>
         </div>
     </div>
 
     {% endblock %}
 
     {% block footer %}
-    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
     <script src="/js/hideShowPassword.js"></script>
-    <script src="/js/validate.js"></script>
     {% endblock %}
