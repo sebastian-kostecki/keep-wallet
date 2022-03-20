@@ -48,4 +48,9 @@ class Authentication
             return User::findByID($_SESSION['userId']);
         }
     }
+
+    public static function rememberRequestedPage()
+    {
+        $_SESSION['returnTo'] = $_SERVER['REQUEST_URI'];
+    }
 }
