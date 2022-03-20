@@ -131,30 +131,6 @@ li.error {
       margin-top: 1px;
   }
 
-  .flash-warning,
-  .flash-info,
-  .flash-success {
-      color: white;
-      font-weight: 700;
-      margin-bottom: 2rem;
-      height: 2rem;
-      line-height: 2rem;
-      text-align: center;
-  }
-  
-  .flash-warning {
-      background-color: red;
-  }
-  
-  .flash-success {
-      background-color: green;
-  }
-  
-  .flash-info {
-      background-color: blue;
-  }
-
-
 @media (max-width: 575px) {
     .home-content {
         width: 100% !important;
