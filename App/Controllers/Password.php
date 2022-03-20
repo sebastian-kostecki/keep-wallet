@@ -32,4 +32,16 @@ class Password extends \Core\Controller
             exit();
         }
     }
+
+    public function resetPasswordAction()
+    {
+        $token = $_POST['token'];
+        $user = User::findByPasswordReset($token);
+
+        if ($user && $user->resetPassword($_POST['password'])) {
+            View::renderTemplate('Password/resetSuccess.html');
+        } else {
+            View::renderTemplate('Password/resetPassword.html');
+        }
+    }
 }
