@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Models\User;
+use App\Models\RememberedLogin;
 
 class Authentication
 {
@@ -58,6 +59,10 @@ class Authentication
     {
         $cookie = $_COOKIE['remember_me'] ?? false;
         if ($cookie) {
+            $remembered_login = RememberedLogin::findByToken($cookie);
+
+            if ($remembered_login) {
+            }
         }
     }
 }
