@@ -39,4 +39,9 @@ class Authentication
     {
         return $_SESSION['returnTo'] ?? '/menu';
     }
+
+    public static function getUser()
+    {
+        //ustawienienie zmiennej sesyjnej przechowującej id użytkownika
+    }
 }
