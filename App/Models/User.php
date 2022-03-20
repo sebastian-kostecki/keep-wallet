@@ -192,4 +192,15 @@ class User extends \Core\Model
 
         return $query->execute();
     }
+
+    public static function sendPasswordReset($email)
+    {
+        $user = static::findByEmail($email);
+
+        if ($user) {
+            if ($user->startPasswordReset()) {
+                $user->sendPasswordResetEmail();
+            }
+        }
+    }
 }
