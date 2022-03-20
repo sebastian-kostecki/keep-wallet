@@ -136,6 +136,25 @@ class User extends \Core\Model
         return $query->fetch();
     }
 
+    public static function findByPasswordReset($token)
+    {
+        $token = new Token($token);
+        $hashed_token = $token->getHash();
+
+        $db = static::getDataBase();
+        $query = $db->prepare('SELECT * FROM users WHERE password_reset_hash = :token_hash');
+        $query->bindValue(':token_hash', $hashed_token, PDO::PARAM_STR);
+        $query->execute();
+        $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+
+        $user = $query->fetch();
+        if ($user) {
+            if (strtotime($user->password_reset_expiry) > time()) {
+                return $user;
+            }
+        }
+    }
+
     public function sendActivationEmail()
     {
         $url = 'http://' . $_SERVER['HTTP_HOST'] . '/signup/activate/' . $this->activation_token;
