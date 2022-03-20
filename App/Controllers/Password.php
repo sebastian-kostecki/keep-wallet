@@ -18,5 +18,6 @@ class Password extends \Core\Controller
         //tam będzie wygenerowany model
 
         //wyświetlenie komunikatu o wysłaniu emaila
+        User::sendPasswordReset($_POST['email']);
     }
 }
