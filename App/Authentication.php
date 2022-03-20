@@ -53,4 +53,11 @@ class Authentication
     {
         $_SESSION['returnTo'] = $_SERVER['REQUEST_URI'];
     }
+
+    protected static function loginFromRememberCookie()
+    {
+        $cookie = $_COOKIE['remember_me'] ?? false;
+        if ($cookie) {
+        }
+    }
 }
