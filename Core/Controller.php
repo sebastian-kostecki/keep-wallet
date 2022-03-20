@@ -38,4 +38,10 @@ abstract class Controller
         header('Location: http://' . $_SERVER['HTTP_HOST'] . $url, true, 303);
         exit();
     }
+
+    public function requireLogin()
+    {
+        //sprawdź czy użytkownik jest zalogowany
+        //jeśli nie jest to zapamiętaj wcześniejszą stronę oraz przekieruj na logowanie
+    }
 }
