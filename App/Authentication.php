@@ -36,6 +36,8 @@ class Authentication
             );
         }
         session_destroy();
+
+        static::forgetLogin();
     }
 
     public static function getReturnToPage()
