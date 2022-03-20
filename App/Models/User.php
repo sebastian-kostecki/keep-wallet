@@ -249,4 +249,22 @@ class User extends \Core\Model
 
         Mail::sendMail($this->email, 'Reset hasła', $htmlContent, $txtContent);
     }
+
+    public function resetPassword($password)
+    {
+        $this->firstPassword = $password;
+        $this->validateNewUser();
+
+        if (empty($this->errors)) {
+            $password_hash = password_hash($this->firstPassword, PASSWORD_DEFAULT);
+
+            $db = static::getDataBase();
+            $query = $db->prepare('UPDATE users SET password_hash = :password_hash, password_reset_hash = NULL, password_reset_expiry = NULL WHERE id = :id');
+            $query->bindValue(':id', $this->id, PDO::PARAM_INT);
+            $query->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
+
+            return $query->execute();
+        }
+        return false;
+    }
 }
