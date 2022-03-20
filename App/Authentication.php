@@ -62,6 +62,9 @@ class Authentication
             $remembered_login = RememberedLogin::findByToken($cookie);
 
             if ($remembered_login) {
+                $user = $remembered_login->getUser();
+                static::login($user, false);
+                return $user;
             }
         }
     }
