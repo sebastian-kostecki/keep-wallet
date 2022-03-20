@@ -5,6 +5,7 @@ namespace App\Controllers;
 use Core\View;
 use App\Models\User;
 use App\Authentication;
+use App\Flash;
 
 class Login extends \Core\Controller
 {
@@ -20,9 +21,10 @@ class Login extends \Core\Controller
 
         if ($user) {
             Authentication::login($user, $rememberMe);
-
+            Flash::addMessage("Udane logowanie");
             $this->redirect(Authentication::getReturnToPage());
         } else {
+            Flash::addMessage("Logowanie nieudane", Flash::DANGER);
             View::renderTemplate('Login/show.html', [
                 'login' => $_POST['login'],
                 'rememberMe' => $rememberMe
@@ -33,6 +35,12 @@ class Login extends \Core\Controller
     public function logoutAction()
     {
         Authentication::logout();
+        $this->redirect('/login/show-logout');
+    }
+
+    public function showLogoutAction()
+    {
+        Flash::addMessage("Zostałeś wylogowany");
         $this->redirect('/login');
     }
 }
