@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Models\User;
+
 class Authentication
 {
     public static function login($user, $rememberMe)
@@ -38,5 +40,17 @@ class Authentication
     public static function getReturnToPage()
     {
         return $_SESSION['returnTo'] ?? '/menu';
+    }
+
+    public static function getUser()
+    {
+        if (isset($_SESSION['userId'])) {
+            return User::findByID($_SESSION['userId']);
+        }
+    }
+
+    public static function rememberRequestedPage()
+    {
+        $_SESSION['returnTo'] = $_SERVER['REQUEST_URI'];
     }
 }
