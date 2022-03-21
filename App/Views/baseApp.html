@@ -69,7 +69,7 @@
             </nav>
             <div class="col-10 content-main p-0">
                 {% for message in flash_messages %}
-                <div class="alert alert-{{ message.type }} text-center fw-bold alert-dismissible fade show position-fixed w-100"
+                <div class="alert alert-{{ message.type }} text-center fw-bold alert-dismissible fade show position-fixed content-alert"
                     role="alert">
                     {{ message.body }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
