@@ -29,19 +29,20 @@
                     <button type="button" class="showed-password me-2 p-2 fs-4 position-absolute top-0 end-0"> <i
                             class="fas fa-eye"></i></button>
                 </div>
-                <div class="form-check mb-3">
-                    <input class="form-check-input" type="checkbox" id="rememberMe" name="rememberMe" {% if rememberMe
-                        %} checked="checked" {% endif %}>
-                    <label class="form-check-label ms-2" for="rememberMe">Zapamiętaj mnie</label>
+                <div class="d-flex justify-content-between">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="rememberMe" name="rememberMe" {% if
+                            rememberMe %} checked="checked" {% endif %}>
+                        <label class="form-check-label ms-2" for="rememberMe">Zapamiętaj mnie</label>
+                    </div>
+                    <div>
+                        <p class="forgot-password text-center"><a href="/password/forgot"
+                                class="forgot-password text-decoration-none text-reset">Zapomniałeś hasła?</a></p>
+                    </div>
                 </div>
                 <button class="btn button-normal w-100 button-sign p-3 text-uppercase fw-bold border-0">Zaloguj
                     się</button>
             </form>
-        </div>
-        <div class="row justify-content-center mt-2">
-            <p class="forgot-password col-10 col-sm-8 col-md-6 col-lg-4 text-center"><a href="/password/forgot"
-                    class="forgot-password text-decoration-none text-reset">Zapomniałeś
-                    hasła?</a></p>
         </div>
         <div class="row justify-content-center mt-3">
             <p class="change-form col-10 col-sm-8 col-md-6 col-lg-4 text-center">Nie masz konta? <a href="/signup/new"

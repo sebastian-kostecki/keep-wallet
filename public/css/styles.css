@@ -131,6 +131,10 @@ input[type=checkbox]:checked+label::after {
     margin-top: 1px;
   }
 
+.forgot-password {
+    margin-top: 1px;
+}
+
 a.forgot-password:hover {
     color: #98c1d9 !important;
     text-decoration: underline !important;
