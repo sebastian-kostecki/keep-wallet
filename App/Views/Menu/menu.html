@@ -5,17 +5,22 @@
 {% block body %}
 
 <div class="container-fluid">
-    <ul class="nav flex-column">
-        <li class="nav-item">
-            <a class="nav-link" href="#">Dodaj przychód</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Dodaj wydatek</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Przeglądaj bilans</a>
-        </li>
-    </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Dodaj przychód</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Dodaj wydatek</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Przeglądaj bilans</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Wyloguj</a>
+            </li>
+        </ul>
+    </nav>
 </div>
 
 {% endblock %}
