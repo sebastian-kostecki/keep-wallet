@@ -144,6 +144,14 @@ a.forgot-password:hover {
     z-index: 2000 !important;
 }
 
+.nav-link {
+    color:rgba(255,255,255, 0.55);
+}
+
+.nav-link:hover {
+    color: #fff;
+}
+
 @media (max-width: 575px) {
     .home-content {
         width: 100% !important;
