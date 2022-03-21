@@ -5,31 +5,47 @@
 {% block body %}
 
 <div class="container-fluid">
-    <nav class="navbar navbar-expand-lg navbar-dark">
-        <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-caret-square-left me-2"></i>Dodaj przychód</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-caret-square-right me-2"></i>Dodaj wydatek</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-table me-2"></i>Przeglądaj bilans</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout"><i class="fas fa-power-off  me-2"></i>Wyloguj</a>
-                    </li>
-                </ul>
-            </div>
+    <header class="row header">
+        <div class="col-3 position-relative">
+            <img src="/img/title.png" alt="" class="img-fluid p-1 position-absolute top-50 start-50 translate-middle">
         </div>
-    </nav>
+        <div class="col-5">
+            <h1 class="display-5">Menu</h1>
+        </div>
+        <div class="col-2">
+            <h1 class="display-5">Menu</h1>
+        </div>
+        <div class="col-2">
+            <h1 class="display-5">Menu</h1>
+        </div>
+    </header>
+    <div class="row">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fas fa-caret-square-left me-2"></i>Dodaj przychód</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fas fa-caret-square-right me-2"></i>Dodaj wydatek</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><i class="fas fa-table me-2"></i>Przeglądaj bilans</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout"><i class="fas fa-power-off  me-2"></i>Wyloguj</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
 </div>
 
 {% endblock %}
