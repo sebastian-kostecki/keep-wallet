@@ -178,6 +178,10 @@ a.forgot-password:hover {
     border-color: #ee6c4d !important;
 }
 
+.content-alert {
+    width: 83%;
+}
+
 @media (max-width: 1400px) {
     .nav-link {
         font-size: 1rem;
