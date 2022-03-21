@@ -140,6 +140,10 @@ a.forgot-password:hover {
     text-decoration: underline !important;
 }
 
+.alert {
+    z-index: 2000 !important;
+}
+
 @media (max-width: 575px) {
     .home-content {
         width: 100% !important;
