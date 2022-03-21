@@ -7,10 +7,10 @@ use Core\View;
 
 class Income extends Authenticated
 {
-    public function addAction()
+    public function newAction()
     {
         $user = User::findByID($_SESSION['userId']);
-        View::renderTemplate('Income/add.html', [
+        View::renderTemplate('Income/new.html', [
             'user' => $user
         ]);
     }
