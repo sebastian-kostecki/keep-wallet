@@ -170,6 +170,10 @@ a.forgot-password:hover {
     color:rgba(255,255,255, 0.55);
 }
 
+.nav-mobile {
+    display: none;
+}
+
 @media (max-width: 1400px) {
     .nav-link {
         font-size: 1rem;
@@ -179,5 +183,37 @@ a.forgot-password:hover {
 @media (max-width: 575px) {
     .home-content {
         width: 100% !important;
+    }
+
+    .content-logo,
+    .content-user,
+    .content-logout {
+        display: none !important;
+    }
+
+    .content-title {
+        width: 100%;
+        text-align: center;
+        margin-top: 3rem;
+    }
+
+    .content-title h1 {
+        font-size: 2.75rem;
+    }
+
+    .content-nav {
+        position: absolute;
+        top: -15px;
+        width: 100%;
+        background-color: #293241 !important;
+        --bs-bg-opacity: 1;
+    }
+
+    .nav-mobile {
+        display: list-item;
+    }
+
+    .content-main {
+        width: 100%;
     }
 }
