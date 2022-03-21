@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,700;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <title>{% block title %} {% endblock %}</title>
+</head>
+
+<body>
+    <div class="container-fluid">
+        <header class="row header mt-2">
+            <div class="col-2 position-relative content-logo">
+                <img src="/img/icon-content.png" alt=""
+                    class="img-fluid p-4 m-2 position-absolute top-50 start-50 translate-middle">
+            </div>
+            <div class="col-5 border-bottom p-0 content-title">
+                <h1 class="display-5">{% block pageTitle %} {% endblock %}</h1>
+            </div>
+            <div class="col-3 position-relative border-bottom content-user">
+                <div
+                    class="position-absolute top-50 start-50 translate-middle border py-1 px-3 rounded-pill content-user-pill">
+                    <i class="fas fa-user me-2 fs-5 d-inline-block"></i>
+                    <p class="fs-5 fw-light m-0 d-inline-block">{{ user.name }}</p>
+                </div>
+            </div>
+            <div class="col-2 border-bottom d-flex align-items-center justify-content-end content-logout">
+                <a href="#" class="content-link d-inline-block mx-3"><i class="fas fa-cog fs-1"></i></a>
+                <a href="/logout" class="content-link d-inline-block mx-3"><i class="fas fa-power-off fs-1"></i></a>
+            </div>
+        </header>
+        <div class="row mt-3">
+            <nav class="navbar navbar-expand-lg navbar-dark col-2 mt-3 content-nav">
+                <div class="container-fluid p-lg-0">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link my-2" href="#"><i class="fas fa-caret-square-left me-3"></i>Dodaj
+                                    przychód</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link my-2" href="#"><i class="fas fa-caret-square-right me-3"></i>Dodaj
+                                    wydatek</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link my-2" href="#"><i class="fas fa-table me-3"></i>Przeglądaj bilans</a>
+                            </li>
+                            <li class="nav-item nav-mobile">
+                                <a class="nav-link my-2" href="#"><i class="fas fa-cog me-3"></i>Ustawienia</a>
+                            </li>
+                            <li class="nav-item nav-mobile">
+                                <a class="nav-link my-2" href="/logout"><i class="fas fa-power-off me-3"></i>Wyloguj</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="col-10 content-main p-0">
+                {% for message in flash_messages %}
+                <div class="alert alert-{{ message.type }} text-center fw-bold alert-dismissible fade show position-fixed w-100"
+                    role="alert">
+                    {{ message.body }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {% endfor %}
+                {% block body %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script defer src="/js/all.js"></script>
+    <script src="/js/bootstrap.js"></script>
+
+    {% block footer %}
+    {% endblock %}
+</body>
+
+</html>
