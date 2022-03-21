@@ -154,6 +154,15 @@ a.forgot-password:hover {
     transform: translateX(0.5rem);
 }
 
+.content-link {
+    color:rgba(255,255,255, 0.55);
+    transition: all 1s;
+}
+
+.content-link:hover {
+    color: #fff;
+}
+
 .header {
     color:rgba(255,255,255, 0.55);
 }
