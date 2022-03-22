@@ -23,6 +23,14 @@ $(document).ready(function () {
                 required: 'Wybierz kategorię przychodu'
             }
         },
+        errorPlacement: function (error, element) {
+            if (element.attr("name") == "incomeCategory")
+                error.insertAfter("#comment");
+            else {
+                error.insertAfter(element);
+            }
+
+        },
     });
 });
 
