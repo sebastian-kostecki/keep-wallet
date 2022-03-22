@@ -2,7 +2,8 @@ $(document).ready(function () {
     $('.budget-form').validate({
         rules: {
             amount: {
-                required: true
+                required: true,
+                validAmount: true
             },
             date: {
                 required: true
@@ -24,3 +25,14 @@ $(document).ready(function () {
         },
     });
 });
+
+$.validator.addMethod('validAmount',
+    function (value, element, param) {
+        value *= 1000;
+        if (value % 10 == 0 && value > 0) {
+            return true;
+        }
+        return false;
+    },
+    'Kwota jest nieprawidłowa'
+)
