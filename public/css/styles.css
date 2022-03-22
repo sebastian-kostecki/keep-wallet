@@ -225,6 +225,12 @@ a.forgot-password:hover {
     .nav-link {
         font-size: 1rem;
     }
+
+    .budget-item,
+    .category-label,
+    .budget-item-btn {
+        font-size: 1.25rem !important;
+    }
 }
 
 @media (max-width: 575px) {
