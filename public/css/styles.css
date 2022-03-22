@@ -182,6 +182,51 @@ a.forgot-password:hover {
     width: 83%;
 }
 
+.budget-item, 
+.budget-item::placeholder, 
+.balance, 
+.form-select, 
+.balance-table {
+    color: #e0fbfc;
+}
+
+.form-label-budget-item {
+    font-size: 1.5rem;
+    color: #e0fbfc;
+}
+
+#date:focus, #amount:focus {
+    color:#e0fbfc;
+}
+
+[type="radio"]:checked,
+[type="radio"]:not(:checked){
+	position: absolute;
+	left: -9999px;
+	width: 0;
+	height: 0;
+	visibility: hidden;
+}
+
+.form-check-label {
+    background-color: rgba(255,255,255, 0.15);
+    color: #e0fbfc;
+    transition: 300ms;
+}
+
+.form-check-input:checked + .form-check-label {
+    background-color: #98c1d9;
+    
+}
+
+.budget-item-radio {
+    margin-right: -8px;
+}
+
+.navbar {
+    min-height: 100vh;
+}
+
 @media (max-width: 1400px) {
     .nav-link {
         font-size: 1rem;
