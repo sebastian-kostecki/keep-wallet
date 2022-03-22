@@ -186,12 +186,8 @@ a.forgot-password:hover {
 .budget-item::placeholder, 
 .balance, 
 .form-select, 
-.balance-table {
-    color: #e0fbfc;
-}
-
+.balance-table,
 .form-label-budget-item {
-    font-size: 1.5rem;
     color: #e0fbfc;
 }
 
