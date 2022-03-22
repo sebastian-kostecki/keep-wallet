@@ -204,7 +204,7 @@ a.forgot-password:hover {
 	visibility: hidden;
 }
 
-.form-check-label {
+.category-label {
     background-color: rgba(255,255,255, 0.15);
     color: #e0fbfc;
     transition: 300ms;
