@@ -5,11 +5,11 @@
 {% block pageTitle %}Dodaj przychód{% endblock %}
 
 {% block body %}
-<form action="saveIncome.php" method="POST" class="form-income container-fluid ps-lg-0">
+<form action="" method="POST" class="budget-form form-income container-fluid ps-lg-0">
     <div class="row mb-2">
         <div class="col-12 col-sm-6 pe-sm-1 mb-2">
             <h2 class="form-label display-6 form-label-budget-item">Kwota</h2>
-            <input type="number" step="0.01" id="amount" name="amount"
+            <input type="number" id="amount" name="amount"
                 class="budget-item form-control border-0 fs-5 px-xxl-4 py-xxl-3" required placeholder="0">
         </div>
         <div class="col-12 col-sm-6 ps-sm-1 mb-2">
@@ -27,8 +27,8 @@
         <div class="col-12 p-0 justify-content-center d-flex flex-wrap">
             {% for category in incomeCategories %}
             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                <input type="radio" class="form-check-input" name="categoriesOfIncomes" id="{{ category.id }}"
-                    value="{{ category.id }}">
+                <input type="radio" class="form-check-input" name="incomeCategory" id="{{ category.id }}"
+                    value="{{ category.id }}" required>
                 <label for="{{ category.id }}"
                     class="category-label form-check-label text-uppercase px-3 py-2 px-xxl-4 py-xxl-3 rounded w-100 text-center fs-5"
                     role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name }}</label>
@@ -56,4 +56,6 @@
 
 {% block footer %}
 <script src="/js/getCurrentDate.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+<script src="/js/validateIncome.js"></script>
 {% endblock %}
