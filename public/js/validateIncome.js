@@ -12,20 +12,14 @@ $(document).ready(function () {
             }
         },
         messages: {
-            name: {
-                required: 'Wpisz imię',
-                minlength: 'Imię powinno zawierać co najmniej 3 znaki',
-                maxlength: 'Imię może zawierać maksymalnie 50 znaków',
-                remote: 'Podane imię jest zajęte'
+            amount: {
+                required: 'Wpisz kwotę'
             },
-            email: {
-                required: 'Wpisz email',
-                email: 'Wpisz poprawny email',
-                remote: 'Podany email jest zajęty'
+            date: {
+                required: 'Wybierz datę'
             },
-            password: {
-                required: 'Wpisz hasło',
-                minlength: 'Hasło musi zawierać przynajmniej 8 znaków'
+            incomeCategory: {
+                required: 'Wybierz kategorię przychodu'
             }
         },
     });
