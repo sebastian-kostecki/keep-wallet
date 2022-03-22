@@ -219,7 +219,9 @@ a.forgot-password:hover {
     margin-right: -8px;
 }
 
-
+#incomeCategory-error {
+    margin-top: 0;
+}
 
 @media (max-width: 1400px) {
     .nav-link {
@@ -229,7 +231,7 @@ a.forgot-password:hover {
     .budget-item,
     .category-label,
     .budget-item-btn {
-        font-size: 1.25rem !important;
+        font-size: 1rem !important;
     }
 }
 
