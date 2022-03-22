@@ -9,13 +9,12 @@
     <div class="row mb-2">
         <div class="col-12 col-sm-6 pe-sm-1 mb-2">
             <h2 class="form-label display-6 form-label-budget-item">Kwota</h2>
-            <input type="number" id="amount" name="amount"
-                class="budget-item form-control border-0 fs-5 px-xxl-4 py-xxl-3" required placeholder="0">
+            <input type="number" id="amount" name="amount" class="budget-item form-control border-0 fs-6" required
+                placeholder="0">
         </div>
         <div class="col-12 col-sm-6 ps-sm-1 mb-2">
             <h2 class="form-label display-6 form-label-budget-item">Data</h2>
-            <input type="date" id="date" name="date" class="budget-item form-control border-0 fs-5 px-xxl-4 py-xxl-3"
-                required>
+            <input type="date" id="date" name="date" class="budget-item form-control border-0 fs-6" required>
         </div>
     </div>
     <div class="row mt-1">
@@ -30,24 +29,24 @@
                 <input type="radio" class="form-check-input" name="incomeCategory" id="{{ category.id }}"
                     value="{{ category.id }}" required>
                 <label for="{{ category.id }}"
-                    class="category-label form-check-label text-uppercase px-3 py-2 px-xxl-4 py-xxl-3 rounded w-100 text-center fs-5"
+                    class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
                     role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name }}</label>
             </div>
             {% endfor %}
             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                <input type="text" class="category-label form-control border-0 h-100 text-white fs-5 px-xxl-4 py-xxl-3"
-                    name="comment" placeholder="Komentarz">
+                <input type="text" class="category-label form-control border-0 h-100 text-white fs-6" name="comment"
+                    placeholder="Komentarz">
             </div>
         </div>
     </div>
     <div class="row mb-1 mb-lg-0">
         <div class="col-6 pe-1">
             <button type="submit"
-                class="btn button-normal w-100 text-uppercase fw-bold border-0 budget-item-btn fs-5 px-xxl-4 py-xxl-3">Dodaj</button>
+                class="btn button-normal w-100 text-uppercase fw-bold border-0 budget-item-btn fs-6">Dodaj</button>
         </div>
         <div class="col-6 ps-1">
             <button type="reset"
-                class="btn button-normal w-100 text-uppercase fw-bold border-0 budget-item-btn fs-5 px-xxl-4 py-xxl-3">Anuluj</button>
+                class="btn button-normal w-100 text-uppercase fw-bold border-0 budget-item-btn fs-6">Anuluj</button>
         </div>
     </div>
 </form>
