@@ -25,6 +25,6 @@ class IncomeCategory extends \Core\Model
         $query->execute();
 
         $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
-        return $query->fetch();
+        return $query->fetchAll();
     }
 }

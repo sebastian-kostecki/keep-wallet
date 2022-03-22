@@ -25,31 +25,15 @@
     </div>
     <div class="row mb-3 ms-0 budget-item-radio">
         <div class="col-12 p-0 justify-content-center d-flex flex-wrap">
+            {% for category in incomeCategories %}
             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                <input type="radio" class="form-check-input" name="categoriesOfIncomes" id="salary" value="salary">
-                <label for="salary"
+                <input type="radio" class="form-check-input" name="categoriesOfIncomes" id="{{ category.id }}"
+                    value="{{ category.id }}">
+                <label for="{{ category.id }}"
                     class="category-label form-check-label text-uppercase px-3 py-2 px-xxl-4 py-xxl-3 rounded w-100 text-center fs-5"
-                    role="button"><i class="fas fa-briefcase me-2"></i>Wynagrodzenie</label>
+                    role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name }}</label>
             </div>
-            <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                <input type="radio" class="form-check-input" name="categoriesOfIncomes" id="interest" value="interest">
-                <label for="interest"
-                    class="category-label form-check-label text-uppercase px-3 py-2 px-xxl-4 py-xxl-3 rounded w-100 text-center fs-5"
-                    role="button"><i class="fas fa-money-bill me-2"></i>Odsetki</label>
-            </div>
-            <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                <input type="radio" class="form-check-input" name="categoriesOfIncomes" id="allegro" value="allegro">
-                <label for="allegro"
-                    class="category-label form-check-label text-uppercase px-3 py-2 px-xxl-4 py-xxl-3 rounded w-100 text-center fs-5"
-                    role="button"><i class="fas fa-shopping-cart me-2"></i>Sprzedaż na
-                    allegro</label>
-            </div>
-            <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                <input type="radio" class="form-check-input" name="categoriesOfIncomes" id="other" value="other">
-                <label for="other"
-                    class="category-label form-check-label text-uppercase px-3 py-2 px-xxl-4 py-xxl-3 rounded w-100 text-center fs-5"
-                    role="button"><i class="fas fa-exchange-alt me-2"></i>Inne przychody</label>
-            </div>
+            {% endfor %}
             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
                 <input type="text" class="category-label form-control border-0 h-100 text-white fs-5 px-xxl-4 py-xxl-3"
                     name="comment" placeholder="Komentarz">
