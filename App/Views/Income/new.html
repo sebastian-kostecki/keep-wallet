@@ -5,65 +5,61 @@
 {% block pageTitle %}Dodaj przychód{% endblock %}
 
 {% block body %}
-<form action="saveIncome.php" method="POST" class="form-income col-10 col-md-8 p-0">
-    <div class="container-fluid p-0">
-        <div class="row">
-            <div class="col-12 col-sm-6 pe-sm-1">
-                <h2 class="form-label display-6 form-label-budget-item">Kwota</h2>
-                <input type="number" step="0.01" id="amount" name="amount"
-                    class="budget-item form-control border-0 mb-2" required placeholder="0">
+<form action="saveIncome.php" method="POST" class="form-income container-fluid ps-0">
+    <div class="row">
+        <div class="col-12 col-sm-6 pe-sm-1">
+            <h2 class="form-label display-6 form-label-budget-item">Kwota</h2>
+            <input type="number" step="0.01" id="amount" name="amount" class="budget-item form-control border-0 mb-2"
+                required placeholder="0">
+        </div>
+        <div class="col-12 col-sm-6 ps-sm-1">
+            <h2 class="form-label display-6 form-label-budget-item">Data</h2>
+            <input type="date" id="date" name="date" class="budget-item form-control border-0 mb-2" required>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <div class="col-12">
+            <h2 class="form-label display-6 form-label-budget-item text-center">Kategorie</h2>
+        </div>
+    </div>
+    <div class="row mb-3 ms-0 budget-item-radio">
+        <div class="col-12 p-0 justify-content-center d-flex flex-wrap">
+            <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                <input type="radio" class="form-check-input" name="categoriesOfIncomes" id="salary" value="salary">
+                <label for="salary" class="form-check-label text-uppercase px-3 py-2 rounded w-100 text-center"
+                    role="button"><i class="fas fa-briefcase me-2"></i>Wynagrodzenie</label>
             </div>
-            <div class="col-12 col-sm-6 ps-sm-1">
-                <h2 class="form-label display-6 form-label-budget-item">Data</h2>
-                <input type="date" id="date" name="date" class="budget-item form-control border-0 mb-2" required>
+            <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                <input type="radio" class="form-check-input" name="categoriesOfIncomes" id="interest" value="interest">
+                <label for="interest" class="form-check-label text-uppercase px-3 py-2 rounded w-100 text-center"
+                    role="button"><i class="fas fa-money-bill me-2"></i>Odsetki</label>
+            </div>
+            <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                <input type="radio" class="form-check-input" name="categoriesOfIncomes" id="allegro" value="allegro">
+                <label for="allegro" class="form-check-label text-uppercase px-3 py-2 rounded w-100 text-center"
+                    role="button"><i class="fas fa-shopping-cart me-2"></i>Sprzedaż na
+                    allegro</label>
+            </div>
+            <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                <input type="radio" class="form-check-input" name="categoriesOfIncomes" id="other" value="other">
+                <label for="other" class="form-check-label text-uppercase px-3 py-2 rounded w-100 text-center"
+                    role="button"><i class="fas fa-exchange-alt me-2"></i>Inne przychody</label>
+            </div>
+            <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                <input type="text" class="form-control border-0 h-100 text-white" name="comment"
+                    placeholder="Komentarz">
             </div>
         </div>
-        <div class="row mt-1">
-            <div class="col-12">
-                <h2 class="form-label display-6 form-label-budget-item text-center">Kategorie</h2>
-            </div>
+        <p class="error-income-category" aria-live="polite"></p>
+    </div>
+    <div class="row mb-1 mb-lg-0">
+        <div class="col-6 pe-1">
+            <button type="submit"
+                class="btn button-normal w-100 text-uppercase fw-bold border-0 budget-item-btn">Dodaj</button>
         </div>
-        <div class="row mb-3 ms-0 budget-item-radio">
-            <div class="col-12 p-0 justify-content-center d-flex flex-wrap">
-                <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                    <input type="radio" class="form-check-input" name="categoriesOfIncomes" id="salary" value="salary">
-                    <label for="salary" class="form-check-label text-uppercase px-3 py-2 rounded w-100 text-center"
-                        role="button"><i class="fas fa-briefcase me-2"></i>Wynagrodzenie</label>
-                </div>
-                <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                    <input type="radio" class="form-check-input" name="categoriesOfIncomes" id="interest"
-                        value="interest">
-                    <label for="interest" class="form-check-label text-uppercase px-3 py-2 rounded w-100 text-center"
-                        role="button"><i class="fas fa-money-bill me-2"></i>Odsetki</label>
-                </div>
-                <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                    <input type="radio" class="form-check-input" name="categoriesOfIncomes" id="allegro"
-                        value="allegro">
-                    <label for="allegro" class="form-check-label text-uppercase px-3 py-2 rounded w-100 text-center"
-                        role="button"><i class="fas fa-shopping-cart me-2"></i>Sprzedaż na
-                        allegro</label>
-                </div>
-                <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                    <input type="radio" class="form-check-input" name="categoriesOfIncomes" id="other" value="other">
-                    <label for="other" class="form-check-label text-uppercase px-3 py-2 rounded w-100 text-center"
-                        role="button"><i class="fas fa-exchange-alt me-2"></i>Inne przychody</label>
-                </div>
-                <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                    <input type="text" class="form-control border-0 h-100 text-white" name="comment"
-                        placeholder="Komentarz">
-                </div>
-            </div>
-            <p class="error-income-category" aria-live="polite"></p>
-        </div>
-        <div class="row mb-1 mb-lg-0">
-            <div class="col-6 pe-1">
-                <button type="submit"
-                    class="btn button-normal w-100 text-uppercase fw-bold border-0 budget-item-btn">Dodaj</button>
-            </div>
-            <div class="col-6 ps-1">
-                <a href="mainMenu.php"
-                    class="btn button-normal w-100 text-uppercase fw-bold border-0 budget-item-btn">Anuluj</a>
-            </div>
+        <div class="col-6 ps-1">
+            <a href="mainMenu.php"
+                class="btn button-normal w-100 text-uppercase fw-bold border-0 budget-item-btn">Anuluj</a>
         </div>
     </div>
 </form>
