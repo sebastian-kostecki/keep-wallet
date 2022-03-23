@@ -6,6 +6,8 @@ use PDO;
 
 class Incomes extends \Core\Model
 {
+    public $errors = [];
+
     public function __construct($data = [])
     {
         foreach ($data as $key => $value) {
