@@ -1,0 +1,67 @@
+{% extends "baseApp.html" %}
+
+{% block title %}Dodaj wydatek{% endblock %}
+
+{% block pageTitle %}Dodaj wydatek{% endblock %}
+
+{% block body %}
+<form action="" method="POST" class="budget-form form-income container-fluid ps-lg-0">
+    <div class="row mb-2">
+        <div class="col-12 col-sm-6 pe-sm-1 mb-2">
+            <h2 class="form-label form-label-budget-item fw-light">Kwota</h2>
+            <input type="number" id="amount" name="amount" class="budget-item form-control border-0 fs-6" required
+                placeholder="0">
+        </div>
+        <div class="col-12 col-sm-6 ps-sm-1 mb-2">
+            <h2 class="form-label form-label-budget-item fw-light">Data</h2>
+            <input type="date" id="date" name="date" class="budget-item form-control border-0 fs-6" required>
+        </div>
+    </div>
+    <div class="row mt-1">
+        <div class="col-12 mb-2">
+            <h2 class="form-label form-label-budget-item text-center fw-light">Kategorie</h2>
+        </div>
+    </div>
+    <div class="row mb-3 ms-0 budget-item-radio">
+        <div class="col-12 p-0 justify-content-center d-flex flex-wrap">
+            {% for category in expenseCategories %}
+            <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                <input type="radio" class="form-check-input" name="incomeCategory" id="{{ category.id }}"
+                    value="{{ category.id }}" required>
+                <label for="{{ category.id }}"
+                    class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
+                    role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name }}</label>
+            </div>
+            {% endfor %}
+            <div class="form-check-inline categories mb-2 me-2 flex-grow-1" id="comment">
+                <input type="text" class="category-label form-control border-0 h-100 text-white fs-6" name="comment"
+                    placeholder="Komentarz">
+            </div>
+        </div>
+        {% if income.errors is not empty %}
+        <ul class="list-unstyled">
+            {% for error in income.errors %}
+            <li class="error m-0">{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <div class="row mb-1 mb-lg-0">
+        <div class="col-6 pe-1">
+            <button type="submit"
+                class="btn button-normal w-100 text-uppercase fw-bold border-0 budget-item-btn fs-6">Dodaj</button>
+        </div>
+        <div class="col-6 ps-1">
+            <button type="reset"
+                class="btn button-normal w-100 text-uppercase fw-bold border-0 budget-item-btn fs-6">Anuluj</button>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock %}
+
+{% block footer %}
+<script src="/js/getCurrentDate.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+<script src="/js/validateIncome.js"></script>
+{% endblock %}
