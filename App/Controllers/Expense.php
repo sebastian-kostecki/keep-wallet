@@ -16,7 +16,8 @@ class Expense extends \Core\Controller
         $paymentMethods = PaymentMethod::findPaymentMethods($user);
         View::renderTemplate('Expense/new.html', [
             'user' => $user,
-            'expenseCategories' => $expenseCategories
+            'expenseCategories' => $expenseCategories,
+            'paymentMethods' => $paymentMethods
         ]);
     }
 }
