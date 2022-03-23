@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="row mb-3 ms-0 budget-item-radio">
-        <div class="col-12 p-0 justify-content-center d-flex flex-wrap">
+        <div id="paymentMethods" class="col-12 p-0 justify-content-center d-flex flex-wrap">
             {% for paymentMethod in paymentMethods %}
             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
                 <input type="radio" class="form-check-input" name="paymentMethod" id="{{ paymentMethod.id }}"
@@ -81,5 +81,5 @@
 {% block footer %}
 <script src="/js/getCurrentDate.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
-<script src="/js/validateIncome.js"></script>
+<script src="/js/validateExpense.js"></script>
 {% endblock %}

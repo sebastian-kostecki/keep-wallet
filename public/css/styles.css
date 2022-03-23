@@ -219,7 +219,9 @@ a.forgot-password:hover {
     margin-right: -8px;
 }
 
-#incomeCategory-error {
+#incomeCategory-error,
+#expenseCategory-error,
+#paymentMethod-error {
     margin-top: 0;
 }
 
