@@ -15,7 +15,6 @@ class Income extends Authenticated
         $user = User::findByID($_SESSION['userId']);
         $userIncomeCategories = IncomeCategory::findCategories($user);
         View::renderTemplate('Income/new.html', [
-            'user' => $user,
             'incomeCategories' => $userIncomeCategories
         ]);
     }
@@ -31,7 +30,6 @@ class Income extends Authenticated
             $userIncomeCategories = IncomeCategory::findCategories($user);
             View::renderTemplate('Income/new.html', [
                 'income' => $income,
-                'user' => $user,
                 'incomeCategories' => $userIncomeCategories
             ]);
         }
