@@ -32,4 +32,9 @@ class Incomes extends \Core\Model
         $query->bindValue(':comment', $this->comment, PDO::PARAM_STR);
         return $query->execute();
     }
+
+    public function validate()
+    {
+        
+    }
 }
