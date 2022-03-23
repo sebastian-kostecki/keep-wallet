@@ -48,7 +48,7 @@
 
 {% block body %}
 <div class="container-fluid p-0">
-    <div class="row justify-content-center border-bottom border-1">
+    <div class="row justify-content-center w-100 me-0">
         <div class="col-12 col-lg-4 my-2">
             <h2 class="balance-heading text-center fs-3 fw-light">Przychody</h2>
             <table class="balance-table w-100">
@@ -111,13 +111,13 @@
             </div>
         </div>
     </div>
-    <div class="row mt-2 footer">
-        <div id="balanceInfo"
-            class="col-12 d-flex flex-lg-row flex-column justify-content-center justify-content-lg-between px-2 py-1">
-            <p class="balance-heading fs-2 fw-bold w-auto m-0 text-uppercase text-center">Saldo wynosi: 1560,60 zł</p>
-            <p id="balanceText" class="fs-2 balance-heading w-auto text-center m-0 text-uppercase fst-italic">Świetnie
-                zarządzasz finansami</p>
-        </div>
+    <div class="row mt-2 footer me-4 ms-1 border-top">
+
+        <p class="display-6 balance-heading w-auto p-0 py-2 m-0 text-uppercase ">Saldo wynosi: <span>0 zł</span>
+        </p>
+        <p class="display-6 balance-heading balance-info w-auto text-end p-2 m-0 rounded">
+            Świetnie zarządzasz finansami
+        </p>
     </div>
     {% endblock %}
 
