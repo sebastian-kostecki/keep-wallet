@@ -17,7 +17,6 @@ class Expense extends \Core\Controller
         $expenseCategories = ExpenseCategory::findCategories($user);
         $paymentMethods = PaymentMethod::findPaymentMethods($user);
         View::renderTemplate('Expense/new.html', [
-            'user' => $user,
             'expenseCategories' => $expenseCategories,
             'paymentMethods' => $paymentMethods
         ]);
@@ -35,7 +34,6 @@ class Expense extends \Core\Controller
             $paymentMethods = PaymentMethod::findPaymentMethods($user);
             View::renderTemplate('Expense/new.html', [
                 'expense' => $expense,
-                'user' => $user,
                 'expenseCategories' => $expenseCategories,
                 'paymentMethods' => $paymentMethods
             ]);
