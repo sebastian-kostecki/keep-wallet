@@ -29,6 +29,16 @@ class Expense extends \Core\Controller
         if ($expense->save()) {
             Flash::addMessage('Dodano nowy wydatek');
             $this->redirect('/menu');
+        } else {
+            $user = User::findByID($_SESSION['userId']);
+            $expenseCategories = ExpenseCategory::findCategories($user);
+            $paymentMethods = PaymentMethod::findPaymentMethods($user);
+            View::renderTemplate('Expense/new.html', [
+                'expense' => $expense,
+                'user' => $user,
+                'expenseCategories' => $expenseCategories,
+                'paymentMethods' => $paymentMethods
+            ]);
         }
     }
 }

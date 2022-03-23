@@ -15,19 +15,24 @@ class Expenditure extends \Core\Model
 
     public function save()
     {
-        $sql = "INSERT INTO expenses 
+        $this->validate();
+
+        if (empty($this->errors)) {
+            $sql = "INSERT INTO expenses 
                 VALUES (NULL, :userId, :category, :payment, :amount, :date, :comment)";
 
-        $db = static::getDataBase();
-        $query = $db->prepare($sql);
-        $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
-        $query->bindValue(':category', $this->expenseCategory, PDO::PARAM_INT);
-        $query->bindValue(':payment', $this->paymentMethod, PDO::PARAM_INT);
-        $query->bindValue(':amount', $this->amount, PDO::PARAM_STR);
-        $query->bindValue(':date', $this->date, PDO::PARAM_STR);
-        $query->bindValue(':comment', $this->comment, PDO::PARAM_STR);
+            $db = static::getDataBase();
+            $query = $db->prepare($sql);
+            $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+            $query->bindValue(':category', $this->expenseCategory, PDO::PARAM_INT);
+            $query->bindValue(':payment', $this->paymentMethod, PDO::PARAM_INT);
+            $query->bindValue(':amount', $this->amount, PDO::PARAM_STR);
+            $query->bindValue(':date', $this->date, PDO::PARAM_STR);
+            $query->bindValue(':comment', $this->comment, PDO::PARAM_STR);
 
-        return $query->execute();
+            return $query->execute();
+        }
+        return false;
     }
 
     public function validate()
@@ -57,7 +62,7 @@ class Expenditure extends \Core\Model
             $this->errors[] = 'Nie wybrano sposobu płatności';
         }
 
-        if (!isset($this->incomeCategory)) {
+        if (!isset($this->expenseCategory)) {
             $this->errors[] = 'Nie wybrano kategorii przychodu';
         }
 
