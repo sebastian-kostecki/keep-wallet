@@ -50,5 +50,9 @@ class Incomes extends \Core\Model
         if (!isset($this->incomeCategory)) {
             $this->errors[] = 'Nie wybrano kategorii przychodu';
         }
+
+        if (strlen($this->comment) > 100) {
+            $this->errors[]  = 'Komentarz może zawierać maksymalnie 100 znaków';
+        }
     }
 }
