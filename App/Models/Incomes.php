@@ -46,5 +46,9 @@ class Incomes extends \Core\Model
                 $this->errors[]  = 'Data jest nieprawidłowa';
             }
         }
+
+        if (!isset($this->incomeCategory)) {
+            $this->errors[] = 'Nie wybrano kategorii przychodu';
+        }
     }
 }
