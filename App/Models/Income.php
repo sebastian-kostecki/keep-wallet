@@ -10,4 +10,10 @@ class Income extends \Core\Model
             $this->$key = $value;
         }
     }
+
+    public function save()
+    {
+        //walidacja danych
+        //zapisanie do bazy danych
+    }
 }
