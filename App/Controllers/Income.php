@@ -28,9 +28,11 @@ class Income extends Authenticated
             $this->redirect('/menu');
         } else {
             $user = User::findByID($_SESSION['userId']);
+            $userIncomeCategories = IncomeCategory::findCategories($user);
             View::renderTemplate('Income/new.html', [
                 'income' => $income,
-                'user' => $user
+                'user' => $user,
+                'incomeCategories' => $userIncomeCategories
             ]);
         }
     }
