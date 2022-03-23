@@ -3,11 +3,52 @@
 {% block title %}Przeglądaj bilans{% endblock %}
 
 {% block pageTitle %}
-<h1 class="display-6">Przeglądaj bilans</h1>
+<div class="container-fluid">
+    <div class="row justify-content-between border-bottom border-1 mb-0">
+        <div class="col-12 col-lg-7 ps-0">
+            <h1 class="display-6">Przeglądaj bilans</h1>
+        </div>
+        <form id="choosePeriod" class="col-12 col-lg-5 d-flex align-items-center pe-lg-0 mb-3 mb-lg-0" method="post"
+            name="choosePeriod">
+            <select id="choosePeriod" class="form-select text-center period-balance border-0" name="balancePeriod"
+                onchange="sendSelectValue()">
+                <option selected>Bieżący miesiąc</option>
+                <option>Poprzedni miesiąc</option>
+                <option>Bieżący rok</option>
+                <option>Niestandardowy</option>
+            </select>
+        </form>
+        <div class="modal fade" id="periodModal" tabindex="-1" aria-labelledby="periodModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Wybierz przedział czasowy</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex flex-column flex-lg-row">
+                        <div class="my-1 d-flex justify-content-between d-lg-block">
+                            <label class="fw-bold" for="startDate">Początek</label>
+                            <input type="date" name="startDate" id="startDate">
+                        </div>
+                        <div class="ms-0 ms-lg-1 my-1 d-flex justify-content-between d-lg-block">
+                            <label class="fw-bold" for="endDate">Koniec</label>
+                            <input type="date" name="endDate" id="endDate">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+                        <button id="selectDate" type="button" class="btn button-normal">Wybierz</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block body %}
 {% endblock %}
 
 {% block footer %}
+<script src="/js/showModalPeriod.js"></script>
 {% endblock %}

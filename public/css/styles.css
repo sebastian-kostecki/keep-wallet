@@ -225,6 +225,11 @@ a.forgot-password:hover {
     margin-top: 0;
 }
 
+option,
+.modal {
+    color: #293241;
+}
+
 @media (max-width: 1400px) {
     .nav-link {
         font-size: 1rem;
