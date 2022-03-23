@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\IncomeCategory;
 use App\Models\User;
+use App\Models\Incomes;
 use Core\View;
 
 class Income extends Authenticated
@@ -20,6 +21,7 @@ class Income extends Authenticated
 
     public function saveAction()
     {
-        $income = new Income($_POST);
+        $income = new Incomes($_POST);
+        $income->save();
     }
 }
