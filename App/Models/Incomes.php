@@ -39,5 +39,12 @@ class Incomes extends \Core\Model
         if ((!$this->amount) || ($this->amount < 0) || (strlen(substr(strrchr($this->amount, "."), 1)) > 2)) {
             $this->errors[] = 'Kwota jest nieprawidłowa';
         }
+
+        $dateArr  = explode('/', $this->date);
+        if (count($dateArr) == 3) {
+            if (!(checkdate($dateArr[0], $dateArr[1], $dateArr[2]))) {
+                $this->errors[]  = 'Data jest nieprawidłowa';
+            }
+        }
     }
 }
