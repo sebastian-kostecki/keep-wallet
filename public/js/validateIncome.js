@@ -10,6 +10,9 @@ $(document).ready(function () {
             },
             incomeCategory: {
                 required: true
+            },
+            comment: {
+                maxlength: 100
             }
         },
         messages: {
@@ -21,6 +24,9 @@ $(document).ready(function () {
             },
             incomeCategory: {
                 required: 'Wybierz kategorię przychodu'
+            },
+            comment: {
+                maxlength: 'Komentarz może zawierać maksymalnie 100 znaków'
             }
         },
         errorPlacement: function (error, element) {
