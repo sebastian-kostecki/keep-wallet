@@ -4,7 +4,7 @@
 
 {% block pageTitle %}
 <div class="container-fluid">
-    <div class="row justify-content-between border-bottom border-1 mb-0">
+    <div class="row justify-content-between mb-0">
         <div class="col-12 col-lg-7 ps-0">
             <h1 class="display-6">Przeglądaj bilans</h1>
         </div>
@@ -47,8 +47,82 @@
 {% endblock %}
 
 {% block body %}
-{% endblock %}
+<div class="container-fluid">
+    <div class="row justify-content-center border-bottom border-1">
+        <div class="col-12 col-lg-4 my-2">
+            <h2 class="display-6 balance-heading text-center">Przychody</h2>
+            <table class="w-100 balance-table">
+                <thead>
+                    <tr>
+                        <th colspan="2" class="text-start ps-1">Kategoria</th>
+                        <th class="text-end pe-1">Kwota</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="2" class="title-item text-start ps-1" onclick="toggleRow(this);">Wynagrodzenie
+                        </td>
+                        <td class="text-end pe-1">2300 zł</td>
+                    </tr>
+                    <tr class="fw-light border-top-0 {$particularIncome['name']} extensively">
+                        <td class="text-end pe-1"></td>
+                        <td class="income-date text-end pe-1">23.03.2022</td>
+                        <td class="text-end pe-1 ">2300 zł</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="3" class="text-end pe-1">0 zł</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="col-12 col-lg-4 my-2">
+            <h2 class="display-6 balance-heading text-center">Wydatki</h2>
+            <table class="w-100 balance-table">
+                <thead>
+                    <tr>
+                        <th colspan="3" class="text-start ps-1">Kategoria</th>
+                        <th class="text-end pe-1">Kwota</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="3" class="title-item expense-name text-start ps-1" onclick="toggleRow(this);">
+                            Jedzenie</td>
+                        <td class="expense-amount text-end pe-1">150,65 zł</td>
+                    </tr>
+                    <tr class="fw-light border-top-0 {$particularExpense['name']} extensively">
+                        <td class="text-end pe-1"></td>
+                        <td class="text-end pe-1">Karta debetowa</td>
+                        <td class="income-date text-end pe-1">23.03.2022</td>
+                        <td class="text-end pe-1 ">150,65 zł</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="4" class="text-end pe-1">156,65 zł</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="col-12 col-lg-4 my-2">
+            <h2 class="display-6 balance-heading text-center">Wykres</h2>
+            <div>
+                <canvas id="expensesChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-2 footer">
+        <div id="balanceInfo"
+            class="col-12 d-flex flex-lg-row flex-column justify-content-center justify-content-lg-between px-2 py-1">
+            <p class="balance-heading fs-2 fw-bold w-auto m-0 text-uppercase text-center">Saldo wynosi: 1560,60 zł</p>
+            <p id="balanceText" class="fs-2 balance-heading w-auto text-center m-0 text-uppercase fst-italic">Świetnie
+                zarządzasz finansami</p>
+        </div>
+    </div>
+    {% endblock %}
 
-{% block footer %}
-<script src="/js/showModalPeriod.js"></script>
-{% endblock %}
+    {% block footer %}
+    <script src="/js/showModalPeriod.js"></script>
+    {% endblock %}
