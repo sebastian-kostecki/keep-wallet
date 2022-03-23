@@ -186,9 +186,33 @@ a.forgot-password:hover {
 .budget-item::placeholder, 
 .balance, 
 .form-select, 
-.balance-table,
 .form-label-budget-item {
     color: #e0fbfc;
+}
+
+.balance-table {
+    color: rgba(255,255,255, 0.55);
+}
+
+.balance-heading {
+    font-size: 1.75rem;
+    color:#e0fbfc;
+}
+
+td {
+    padding: 0;
+}
+
+tbody tr {
+    border-top: 1px solid rgba(255,255,255, 0.2);
+}
+
+tbody tr:first-of-type {
+    border: none;
+}
+
+.balance-table thead, .balance-table tfoot {
+    background-color: rgba(255,255,255, 0.2);
 }
 
 #date:focus, #amount:focus {
