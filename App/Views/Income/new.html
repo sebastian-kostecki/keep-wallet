@@ -38,6 +38,13 @@
                     placeholder="Komentarz">
             </div>
         </div>
+        {% if income.errors is not empty %}
+        <ul class="list-unstyled">
+            {% for error in income.errors %}
+            <li class="error m-0">{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
     </div>
     <div class="row mb-1 mb-lg-0">
         <div class="col-6 pe-1">

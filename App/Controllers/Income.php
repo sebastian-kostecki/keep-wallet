@@ -26,6 +26,12 @@ class Income extends Authenticated
         if ($income->save()) {
             Flash::addMessage('Dodano nowy przychód');
             $this->redirect('/menu');
+        } else {
+            $user = User::findByID($_SESSION['userId']);
+            View::renderTemplate('Income/new.html', [
+                'income' => $income,
+                'user' => $user
+            ]);
         }
     }
 }
