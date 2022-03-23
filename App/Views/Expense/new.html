@@ -26,7 +26,7 @@
         <div class="col-12 p-0 justify-content-center d-flex flex-wrap">
             {% for paymentMethod in paymentMethods %}
             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                <input type="radio" class="form-check-input" name="incomeCategory" id="{{ paymentMethod.id }}"
+                <input type="radio" class="form-check-input" name="paymentMethod" id="{{ paymentMethod.id }}"
                     value="{{ paymentMethod.id }}" required>
                 <label for="{{ paymentMethod.id }}"
                     class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
@@ -44,7 +44,7 @@
         <div class="col-12 p-0 justify-content-center d-flex flex-wrap">
             {% for category in expenseCategories %}
             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                <input type="radio" class="form-check-input" name="incomeCategory" id="{{ category.id }}"
+                <input type="radio" class="form-check-input" name="expenseCategory" id="{{ category.id }}"
                     value="{{ category.id }}" required>
                 <label for="{{ category.id }}"
                     class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
