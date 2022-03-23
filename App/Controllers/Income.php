@@ -20,5 +20,6 @@ class Income extends Authenticated
 
     public function saveAction()
     {
+        $income = new Income($_POST);
     }
 }
