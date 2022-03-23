@@ -17,7 +17,8 @@ $(document).ready(function () {
         },
         messages: {
             amount: {
-                required: 'Wpisz kwotę'
+                required: 'Wpisz kwotę',
+                number: 'Kwota jest nieprawidłowa'
             },
             date: {
                 required: 'Wybierz datę'
