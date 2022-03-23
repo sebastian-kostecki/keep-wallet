@@ -17,4 +17,8 @@ class Income extends Authenticated
             'incomeCategories' => $userIncomeCategories
         ]);
     }
+
+    public function saveAction()
+    {
+    }
 }
