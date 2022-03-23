@@ -20,4 +20,8 @@ class Expense extends \Core\Controller
             'paymentMethods' => $paymentMethods
         ]);
     }
+
+    public function saveAction()
+    {
+    }
 }
