@@ -29,4 +29,40 @@ class Expenditure extends \Core\Model
 
         return $query->execute();
     }
+
+    public function validate()
+    {
+        if (!isset($this->amount)) {
+            $this->errors[] = 'Brak kwoty wydatku';
+        }
+
+        $this->amount = filter_var($this->amount, FILTER_VALIDATE_FLOAT);
+        if ((!$this->amount) || ($this->amount < 0) || (strlen(substr(strrchr($this->amount, "."), 1)) > 2)) {
+            $this->errors[] = 'Kwota jest nieprawidłowa';
+        }
+
+        if (!isset($this->date)) {
+            $this->errors[] = 'Nie wybrano daty wydatku';
+        }
+
+
+        $dateArr  = explode('/', $this->date);
+        if (count($dateArr) == 3) {
+            if (!(checkdate($dateArr[0], $dateArr[1], $dateArr[2]))) {
+                $this->errors[]  = 'Data jest nieprawidłowa';
+            }
+        }
+
+        if (!isset($this->paymentMethod)) {
+            $this->errors[] = 'Nie wybrano sposobu płatności';
+        }
+
+        if (!isset($this->incomeCategory)) {
+            $this->errors[] = 'Nie wybrano kategorii przychodu';
+        }
+
+        if (strlen($this->comment) > 100) {
+            $this->errors[]  = 'Komentarz może zawierać maksymalnie 100 znaków';
+        }
+    }
 }
