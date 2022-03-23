@@ -5,7 +5,7 @@
 {% block pageTitle %}Dodaj wydatek{% endblock %}
 
 {% block body %}
-<form action="" method="POST" class="budget-form form-income container-fluid ps-lg-0">
+<form action="/expense/save" method="POST" class="budget-form form-income container-fluid ps-lg-0">
     <div class="row mb-3">
         <div class="col-12 col-sm-6 pe-sm-1 mb-2">
             <h2 class="form-label form-label-budget-item fw-light fs-4">Kwota</h2>
@@ -44,9 +44,9 @@
         <div class="col-12 p-0 justify-content-center d-flex flex-wrap">
             {% for category in expenseCategories %}
             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                <input type="radio" class="form-check-input" name="expenseCategory" id="{{ category.id }}"
+                <input type="radio" class="form-check-input" name="expenseCategory" id="{{ category.name }}"
                     value="{{ category.id }}" required>
-                <label for="{{ category.id }}"
+                <label for="{{ category.name }}"
                     class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
                     role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name }}</label>
             </div>
