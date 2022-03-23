@@ -47,11 +47,11 @@
 {% endblock %}
 
 {% block body %}
-<div class="container-fluid">
+<div class="container-fluid p-0">
     <div class="row justify-content-center border-bottom border-1">
         <div class="col-12 col-lg-4 my-2">
-            <h2 class="display-6 balance-heading text-center">Przychody</h2>
-            <table class="w-100 balance-table">
+            <h2 class="balance-heading text-center fs-3 fw-light">Przychody</h2>
+            <table class="balance-table w-100">
                 <thead>
                     <tr>
                         <th colspan="2" class="text-start ps-1">Kategoria</th>
@@ -60,11 +60,10 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="2" class="title-item text-start ps-1" onclick="toggleRow(this);">Wynagrodzenie
-                        </td>
+                        <td colspan="2" class="title-item text-start ps-1">Wynagrodzenie</td>
                         <td class="text-end pe-1">2300 zł</td>
                     </tr>
-                    <tr class="fw-light border-top-0 {$particularIncome['name']} extensively">
+                    <tr class="fw-light border-top-0 extensively">
                         <td class="text-end pe-1"></td>
                         <td class="income-date text-end pe-1">23.03.2022</td>
                         <td class="text-end pe-1 ">2300 zł</td>
@@ -78,7 +77,7 @@
             </table>
         </div>
         <div class="col-12 col-lg-4 my-2">
-            <h2 class="display-6 balance-heading text-center">Wydatki</h2>
+            <h2 class="balance-heading text-center fs-3 fw-light">Wydatki</h2>
             <table class="w-100 balance-table">
                 <thead>
                     <tr>
@@ -88,11 +87,10 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td colspan="3" class="title-item expense-name text-start ps-1" onclick="toggleRow(this);">
-                            Jedzenie</td>
+                        <td colspan="3" class="title-item expense-name text-start ps-1">Jedzenie</td>
                         <td class="expense-amount text-end pe-1">150,65 zł</td>
                     </tr>
-                    <tr class="fw-light border-top-0 {$particularExpense['name']} extensively">
+                    <tr class="fw-light border-top-0 extensively">
                         <td class="text-end pe-1"></td>
                         <td class="text-end pe-1">Karta debetowa</td>
                         <td class="income-date text-end pe-1">23.03.2022</td>
@@ -107,7 +105,7 @@
             </table>
         </div>
         <div class="col-12 col-lg-4 my-2">
-            <h2 class="display-6 balance-heading text-center">Wykres</h2>
+            <h2 class="balance-heading text-center fs-3 fw-light">Wykres</h2>
             <div>
                 <canvas id="expensesChart"></canvas>
             </div>
