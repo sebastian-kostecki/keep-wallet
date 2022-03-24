@@ -7,7 +7,7 @@ const currentMonthPeriod = () => {
     const firstDayCurrentMonth = currentData.toISOString().substr(0, 10);
     currentData.setMonth(currentData.getMonth() + 1, 0);
     const lastDayCurrentMonth = currentData.toISOString().substr(0, 10);
-    return "0-" + firstDayCurrentMonth + "-" + lastDayCurrentMonth;
+    return firstDayCurrentMonth + "-" + lastDayCurrentMonth;
 }
 
 const previousMonthPeriod = () => {
@@ -16,7 +16,7 @@ const previousMonthPeriod = () => {
     const firstDayPreviousMonth = currentData.toISOString().substr(0, 10);
     currentData.setMonth(currentData.getMonth() + 1, 0);
     const lastDayPreviousMonth = currentData.toISOString().substr(0, 10);
-    return "1-" + firstDayPreviousMonth + "-" + lastDayPreviousMonth;
+    return firstDayPreviousMonth + "-" + lastDayPreviousMonth;
 }
 
 const currentYear = () => {
@@ -25,7 +25,7 @@ const currentYear = () => {
     const firstDayCurrentYear = currentData.toISOString().substr(0, 10);
     currentData.setMonth(11, 31);
     const lastDayCurrentYear = currentData.toISOString().substr(0, 10);
-    return "2-" + firstDayCurrentYear + "-" + lastDayCurrentYear;
+    return firstDayCurrentYear + "-" + lastDayCurrentYear;
 }
 
 selectDatePeriod[0].value = currentMonthPeriod();
@@ -67,3 +67,5 @@ const convertDate = (inputFormat) => {
     const d = new Date(inputFormat)
     return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('.')
 }
+
+//chosenPeriodForm.addEventListener('onchange', sendSelectValue());
