@@ -10,7 +10,7 @@ use App\Models\User;
 
 class Balance extends Authenticated
 {
-    public function currentMonthAction()
+    public function showAction()
     {
         $chosenPeriod = $_POST['chosenPeriod'];
         $incomes = Revenue::fetchIncomes($chosenPeriod);
