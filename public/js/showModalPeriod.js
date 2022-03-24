@@ -1,5 +1,5 @@
 const selectDatePeriod = document.querySelector("select");
-const currentData = new Date();
+//const currentData = new Date();
 
 const currentMonthPeriod = () => {
     const currentData = new Date();
