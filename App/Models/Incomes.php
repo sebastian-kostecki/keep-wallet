@@ -59,7 +59,7 @@ class Incomes extends \Core\Model
         }
     }
 
-    public static function fetchIncomesCategory($user, $period)
+    public static function fetchIncomesCategory($period)
     {
         $firstDay = substr($period, 0, 10);
         $lastDay = substr($period, 11);
@@ -70,7 +70,7 @@ class Incomes extends \Core\Model
 
         $db = static::getDataBase();
         $query = $db->prepare($sql);
-        $query->bindValue(':userId', $user->id, PDO::PARAM_INT);
+        $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
         $query->bindValue(':firstDay', $firstDay, PDO::PARAM_STR);
         $query->bindValue(':lastDay', $lastDay, PDO::PARAM_STR);
         $query->execute();
@@ -79,7 +79,7 @@ class Incomes extends \Core\Model
         return $query->fetchAll();
     }
 
-    public static function fetchAllIncomes($user, $period)
+    public static function fetchAllIncomes($period)
     {
         $firstDay = substr($period, 0, 10);
         $lastDay = substr($period, 11);
@@ -90,7 +90,7 @@ class Incomes extends \Core\Model
 
         $db = static::getDataBase();
         $query = $db->prepare($sql);
-        $query->bindValue(':userId', $user->id, PDO::PARAM_INT);
+        $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
         $query->bindValue(':firstDay', $firstDay, PDO::PARAM_STR);
         $query->bindValue(':lastDay', $lastDay, PDO::PARAM_STR);
         $query->execute();
@@ -98,10 +98,10 @@ class Incomes extends \Core\Model
         return $query->fetchAll();
     }
 
-    public static function fetchIncomes($user, $period)
+    public static function fetchIncomes($period)
     {
-        $incomesByCategory = static::fetchIncomesCategory($user, $period);
-        $incomesAll = static::fetchAllIncomes($user, $period);
+        $incomesByCategory = static::fetchIncomesCategory($period);
+        $incomesAll = static::fetchAllIncomes($period);
 
         foreach ($incomesByCategory as $incomeByCategory) {
             foreach ($incomesAll as $income) {

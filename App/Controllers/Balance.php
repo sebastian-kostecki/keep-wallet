@@ -10,11 +10,8 @@ class Balance extends Authenticated
 {
     public function currentMonthAction()
     {
-        $user = User::findByID($_SESSION['userId']);
         $currentMonth = $_POST['currentMonth'];
-        //$incomesByCategories = Incomes::fetchIncomesCategory($user, $currentMonth);
-        //$incomesAll = Incomes::fetchAllIncomes($user, $currentMonth);
-        $incomes = Incomes::fetchIncomes($user, $currentMonth);
+        $incomes = Incomes::fetchIncomes($currentMonth);
 
 
         //trzeba pobrać:
