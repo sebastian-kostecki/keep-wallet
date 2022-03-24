@@ -98,7 +98,7 @@ class Expenditure extends \Core\Model
 
         $sql = "SELECT expense_user.name, expenses.amount, expenses.date_of_expense, expenses.expense_comment, pm.name as payment_method 
                 FROM expenses_category_assigned_to_users as expense_user INNER JOIN expenses ON expenses.expense_category_assigned_to_user_id = expense_user.id INNER JOIN payment_methods_assigned_to_users as pm ON pm.id = expenses.payment_method_assigned_to_user_id 
-                WHERE expenses.user_id = :userId AND date_of_expense BETWEEN :firstDay AND :endDay ORDER BY expenses.date_of_expense";
+                WHERE expenses.user_id = :userId AND date_of_expense BETWEEN :firstDay AND :lastDay ORDER BY expenses.date_of_expense";
 
         $db = static::getDataBase();
         $query = $db->prepare($sql);

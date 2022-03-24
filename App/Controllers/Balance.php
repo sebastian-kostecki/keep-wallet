@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Models\Expenditure;
 use App\Models\Incomes;
 use App\Models\Revenue;
 use Core\View;
@@ -13,7 +14,7 @@ class Balance extends Authenticated
     {
         $currentMonth = $_POST['currentMonth'];
         $incomes = Revenue::fetchIncomes($currentMonth);
-
+        $expenses = Expenditure::fetchExpenses($currentMonth);
 
         //trzeba pobrać:
         //kategorie do wyświetlenia raze z sumami ich wartości
@@ -21,7 +22,8 @@ class Balance extends Authenticated
         //sumę wszystkich wydatków oraz przychodów
 
         View::renderTemplate('Balance/currentMonth.html', [
-            'incomes' => $incomes
+            'incomes' => $incomes,
+            'expenses' => $expenses
         ]);
     }
 }
