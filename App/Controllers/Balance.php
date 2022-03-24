@@ -15,16 +15,15 @@ class Balance extends Authenticated
         //$incomesByCategories = Incomes::fetchIncomesCategory($user, $currentMonth);
         //$incomesAll = Incomes::fetchAllIncomes($user, $currentMonth);
         $incomes = Incomes::fetchIncomes($user, $currentMonth);
-        var_dump($incomes);
+
 
         //trzeba pobrać:
         //kategorie do wyświetlenia raze z sumami ich wartości
         //wszystkie wydatki i przychody
         //sumę wszystkich wydatków oraz przychodów
 
-        // View::renderTemplate('Balance/currentMonth.html', [
-        //     'incomesCategories' => $incomesByCategories,
-        //     'incomesAll' => $incomesAll
-        // ]);
+        View::renderTemplate('Balance/currentMonth.html', [
+            'incomes' => $incomes
+        ]);
     }
 }
