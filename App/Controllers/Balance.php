@@ -21,4 +21,15 @@ class Balance extends Authenticated
             'expenses' => $expenses
         ]);
     }
+
+    public function selectAction()
+    {
+        $period = $_POST['balancePeriod'];
+        $incomes = Revenue::fetchIncomes($period);
+        $expenses = Expenditure::fetchExpenses($period);
+        View::renderTemplate('Balance/balance.html', [
+            'incomes' => $incomes,
+            'expenses' => $expenses
+        ]);
+    }
 }

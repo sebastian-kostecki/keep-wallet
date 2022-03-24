@@ -56,7 +56,7 @@ const endDate = document.querySelector('#endDate');
 const selectDateButton = document.querySelector('#selectDate');
 
 selectDateButton.addEventListener('click', function () {
-    selectDatePeriod[3].value = '3-' + startDate.value + '-' + endDate.value;
+    selectDatePeriod[3].value = startDate.value + '-' + endDate.value;
     selectDatePeriod[3].innerText = convertDate(startDate.value) + ' - ' + convertDate(endDate.value);
     myModal.toggle();
     chosenPeriodForm.submit();
