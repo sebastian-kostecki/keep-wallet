@@ -60,7 +60,7 @@
                 </thead>
                 <tbody>
                     {% for incomeByCategory in incomes %}
-                    <tr>
+                    <tr class="category-row">
                         <td colspan="2" class="title-item text-start ps-1">{{ incomeByCategory.name }}</td>
                         <td class="text-end pe-1">{{ incomeByCategory.total }} zł</td>
                     </tr>
@@ -91,7 +91,7 @@
                 </thead>
                 <tbody>
                     {% for expenseByCategory in expenses %}
-                    <tr>
+                    <tr class="category-row">
                         <td colspan="3" class="title-item expense-name text-start ps-1">{{ expenseByCategory.name }}
                         </td>
                         <td class="expense-cash text-end pe-1">{{ expenseByCategory.total }} zł</td>

@@ -254,6 +254,16 @@ option,
     color: #293241;
 }
 
+.category-row {
+    pointer-events: all;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.category-row:hover {
+    background-color: rgba(255,255,255, 0.1);
+}
+
 @media (max-width: 1400px) {
     .nav-link {
         font-size: 1rem;
