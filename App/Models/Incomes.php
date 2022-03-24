@@ -7,6 +7,7 @@ use PDO;
 class Incomes extends \Core\Model
 {
     public $errors = [];
+    public $incomes = [];
 
     public function __construct($data = [])
     {
@@ -94,7 +95,21 @@ class Incomes extends \Core\Model
         $query->bindValue(':lastDay', $lastDay, PDO::PARAM_STR);
         $query->execute();
 
-        $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
         return $query->fetchAll();
+    }
+
+    public static function fetchIncomes($user, $period)
+    {
+        $incomesByCategory = static::fetchIncomesCategory($user, $period);
+        $incomesAll = static::fetchAllIncomes($user, $period);
+
+        foreach ($incomesByCategory as $incomeByCategory) {
+            foreach ($incomesAll as $income) {
+                if ($incomeByCategory->name == $income['name']) {
+                    $incomeByCategory->incomes[] = $income;
+                }
+            }
+        }
+        return $incomesByCategory;
     }
 }
