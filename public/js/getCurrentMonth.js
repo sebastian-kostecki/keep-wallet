@@ -1,4 +1,4 @@
-const currentMonthInput = document.querySelector("#currentMonth");
+const currentMonthInput = document.querySelector("#chosenPeriod");
 const currentData = new Date();
 
 const getCurrentMonthPeriod = () => {
