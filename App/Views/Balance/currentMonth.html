@@ -68,14 +68,14 @@
                     <tr class="fw-light border-top-0 extensively">
                         <td class="text-end pe-1">{{ income.income_comment }}</td>
                         <td class="income-date text-end pe-1">{{ income.date_of_income }}</td>
-                        <td class="text-end pe-1 ">{{ income.amount }} zł</td>
+                        <td class="text-end pe-1 income-amount">{{ income.amount }} zł</td>
                     </tr>
                     {% endfor %}
                     {% endfor %}
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="3" class="text-end pe-1">0 zł</th>
+                        <th colspan="3" id="incomes-sum" class="text-end pe-1"></th>
                     </tr>
                 </tfoot>
             </table>
@@ -94,21 +94,21 @@
                     <tr>
                         <td colspan="3" class="title-item expense-name text-start ps-1">{{ expenseByCategory.name }}
                         </td>
-                        <td class="expense-amount text-end pe-1">{{ expenseByCategory.total }} zł</td>
+                        <td class="text-end pe-1">{{ expenseByCategory.total }} zł</td>
                     </tr>
                     {% for expense in expenseByCategory.incomes %}
                     <tr class="fw-light border-top-0 extensively">
                         <td class="text-end pe-1">{{ expense.expense_comment }}</td>
                         <td class="text-end pe-1">{{ expense.payment_method }}</td>
                         <td class="income-date text-end pe-1">{{ expense.date_of_expense }}</td>
-                        <td class="text-end pe-1 ">{{ expense.amount }} zł</td>
+                        <td class="text-end pe-1 expense-amount">{{ expense.amount }} zł</td>
                     </tr>
                     {% endfor %}
                     {% endfor %}
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="4" class="text-end pe-1">156,65 zł</th>
+                        <th colspan="4" id="expenses-sum" class="text-end pe-1"></th>
                     </tr>
                 </tfoot>
             </table>
@@ -132,4 +132,5 @@
 
     {% block footer %}
     <script src="/js/showModalPeriod.js"></script>
+    <script src="\js\balanceCalculations.js"></script>
     {% endblock %}
