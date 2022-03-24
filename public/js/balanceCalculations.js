@@ -17,3 +17,6 @@ for (const expense of expensesAmount) {
 }
 
 expensesSum.innerText = sumExpenses.toFixed(2) + " zł";
+
+const balanceSum = document.querySelector('#balance-sum');
+balanceSum.innerText = (sumIncomes - sumExpenses).toFixed(2);
