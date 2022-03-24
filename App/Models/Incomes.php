@@ -57,4 +57,24 @@ class Incomes extends \Core\Model
             $this->errors[]  = 'Komentarz może zawierać maksymalnie 100 znaków';
         }
     }
+
+    public static function fetchIncomesCategory($user, $period)
+    {
+        $firstDay = substr($period, 0, 10);
+        $lastDay = substr($period, 11);
+
+        $sql = "SELECT incomes_category_assigned_to_users.name, SUM(incomes.amount) 
+                FROM incomes INNER JOIN incomes_category_assigned_to_users 
+                WHERE incomes.user_id = :userId AND incomes.income_category_assigned_to_user_id = incomes_category_assigned_to_users.id AND date_of_income BETWEEN :firstDay AND :lastDay GROUP BY incomes.income_category_assigned_to_user_id";
+
+        $db = static::getDataBase();
+        $query = $db->prepare($sql);
+        $query->bindValue(':userId', $user->id, PDO::PARAM_INT);
+        $query->bindValue(':firstDay', $firstDay, PDO::PARAM_STR);
+        $query->bindValue(':lastDay', $lastDay, PDO::PARAM_STR);
+        $query->execute();
+
+        $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        return $query->fetchAll();
+    }
 }
