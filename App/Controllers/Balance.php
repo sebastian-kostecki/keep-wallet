@@ -11,6 +11,12 @@ class Balance extends Authenticated
         $currentMonth = $_POST['currentMonth'];
         $firstDay = substr($currentMonth, 0, 10);
         $lastDay = substr($currentMonth, 11);
-        //View::renderTemplate('Balance/currentMonth.html');
+
+        //trzeba pobrać:
+            //kategorie do wyświetlenia raze z sumami ich wartości
+            //wszystkie wydatki i przychody
+            //sumę wszystkich wydatków oraz przychodów
+
+        View::renderTemplate('Balance/currentMonth.html');
     }
 }
