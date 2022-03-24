@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Flash;
 use App\Models\IncomeCategory;
 use App\Models\User;
-use App\Models\Incomes;
+use App\Models\Revenue;
 use Core\View;
 
 class Income extends Authenticated
@@ -21,7 +21,7 @@ class Income extends Authenticated
 
     public function saveAction()
     {
-        $income = new Incomes($_POST);
+        $income = new Revenue($_POST);
         if ($income->save()) {
             Flash::addMessage('Dodano nowy przychód');
             $this->redirect('/menu');

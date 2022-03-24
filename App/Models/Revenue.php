@@ -4,7 +4,7 @@ namespace App\Models;
 
 use PDO;
 
-class Incomes extends \Core\Model
+class Revenue extends \Core\Model
 {
     public $errors = [];
     public $incomes = [];
@@ -59,7 +59,7 @@ class Incomes extends \Core\Model
         }
     }
 
-    public static function fetchIncomesCategory($period)
+    protected static function fetchIncomesCategory($period)
     {
         $firstDay = substr($period, 0, 10);
         $lastDay = substr($period, 11);
@@ -79,7 +79,7 @@ class Incomes extends \Core\Model
         return $query->fetchAll();
     }
 
-    public static function fetchAllIncomes($period)
+    protected static function fetchAllIncomes($period)
     {
         $firstDay = substr($period, 0, 10);
         $lastDay = substr($period, 11);

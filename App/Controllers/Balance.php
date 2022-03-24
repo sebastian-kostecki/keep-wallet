@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Incomes;
+use App\Models\Revenue;
 use Core\View;
 use App\Models\User;
 
@@ -11,7 +12,7 @@ class Balance extends Authenticated
     public function currentMonthAction()
     {
         $currentMonth = $_POST['currentMonth'];
-        $incomes = Incomes::fetchIncomes($currentMonth);
+        $incomes = Revenue::fetchIncomes($currentMonth);
 
 
         //trzeba pobrać:
