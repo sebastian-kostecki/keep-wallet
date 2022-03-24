@@ -65,7 +65,7 @@
                         <td class="text-end pe-1">{{ incomeByCategory.total }} zł</td>
                     </tr>
                     {% for income in incomeByCategory.incomes %}
-                    <tr class="fw-light border-top-0 extensively">
+                    <tr class="fw-light border-top-0 extensively budget-item-details">
                         <td class="text-end pe-1">{{ income.income_comment }}</td>
                         <td class="income-date text-end pe-1">{{ income.date_of_income }}</td>
                         <td class="text-end pe-1 income-amount">{{ income.amount }} zł</td>
@@ -97,7 +97,7 @@
                         <td class="expense-cash text-end pe-1">{{ expenseByCategory.total }} zł</td>
                     </tr>
                     {% for expense in expenseByCategory.incomes %}
-                    <tr class="fw-light border-top-0 extensively">
+                    <tr class="fw-light border-top-0 extensively budget-item-details">
                         <td class="text-end pe-1">{{ expense.expense_comment }}</td>
                         <td class="text-end pe-1">{{ expense.payment_method }}</td>
                         <td class="income-date text-end pe-1">{{ expense.date_of_expense }}</td>
@@ -133,4 +133,5 @@
     <script src="\js\displayBalanceInfo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="\js\pieChart.js"></script>
+    <script src="\js\hideShowBalanceRow.js"></script>
     {% endblock %}
