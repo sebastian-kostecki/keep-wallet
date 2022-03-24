@@ -16,12 +16,7 @@ class Balance extends Authenticated
         $incomes = Revenue::fetchIncomes($currentMonth);
         $expenses = Expenditure::fetchExpenses($currentMonth);
 
-        //trzeba pobrać:
-        //kategorie do wyświetlenia raze z sumami ich wartości
-        //wszystkie wydatki i przychody
-        //sumę wszystkich wydatków oraz przychodów
-
-        View::renderTemplate('Balance/currentMonth.html', [
+        View::renderTemplate('Balance/balance.html', [
             'incomes' => $incomes,
             'expenses' => $expenses
         ]);
