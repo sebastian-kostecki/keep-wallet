@@ -66,7 +66,7 @@ class Incomes extends \Core\Model
 
         $sql = "SELECT incomes.user_id, incomes_category_assigned_to_users.name, SUM(incomes.amount) as total
                 FROM incomes INNER JOIN incomes_category_assigned_to_users 
-                WHERE incomes.user_id = :userId AND incomes.income_category_assigned_to_user_id = incomes_category_assigned_to_users.id AND date_of_income BETWEEN :firstDay AND :lastDay GROUP BY incomes.income_category_assigned_to_user_id";
+                WHERE incomes.user_id = :userId AND incomes.income_category_assigned_to_user_id = incomes_category_assigned_to_users.id AND date_of_income BETWEEN :firstDay AND :lastDay GROUP BY incomes.income_category_assigned_to_user_id ORDER BY total DESC";
 
         $db = static::getDataBase();
         $query = $db->prepare($sql);
