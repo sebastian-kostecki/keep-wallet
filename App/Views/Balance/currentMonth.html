@@ -64,12 +64,17 @@
                         <td colspan="2" class="title-item text-start ps-1">{{ category.name }}</td>
                         <td class="text-end pe-1">{{ category.total }} zł</td>
                     </tr>
-                    {% endfor %}
+
+                    {% for income in incomesAll %}
+                    {% if income.name == category.name %}
                     <tr class="fw-light border-top-0 extensively">
-                        <td class="text-end pe-1"></td>
-                        <td class="income-date text-end pe-1">23.03.2022</td>
-                        <td class="text-end pe-1 ">2300 zł</td>
+                        <td class="text-end pe-1">{{ income.income_comment }}</td>
+                        <td class="income-date text-end pe-1">{{ income.date_of_income }}</td>
+                        <td class="text-end pe-1 ">{{ income.amount }} zł</td>
                     </tr>
+                    {% endif %}
+                    {% endfor %}
+                    {% endfor %}
                 </tbody>
                 <tfoot>
                     <tr>

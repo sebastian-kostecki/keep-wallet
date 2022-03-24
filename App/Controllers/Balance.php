@@ -13,6 +13,7 @@ class Balance extends Authenticated
         $user = User::findByID($_SESSION['userId']);
         $currentMonth = $_POST['currentMonth'];
         $incomesByCategories = Incomes::fetchIncomesCategory($user, $currentMonth);
+        $incomesAll = Incomes::fetchAllIncomes($user, $currentMonth);
 
         //trzeba pobrać:
         //kategorie do wyświetlenia raze z sumami ich wartości
@@ -20,7 +21,8 @@ class Balance extends Authenticated
         //sumę wszystkich wydatków oraz przychodów
 
         View::renderTemplate('Balance/currentMonth.html', [
-            'incomesCategories' => $incomesByCategories
+            'incomesCategories' => $incomesByCategories,
+            'incomesAll' => $incomesAll
         ]);
     }
 }
