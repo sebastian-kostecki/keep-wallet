@@ -12,10 +12,10 @@
             name="choosePeriod">
             <select id="choosePeriod" class="form-select text-center period-balance border-0" name="chosenPeriod"
                 onchange="sendSelectValue()">
-                <option selected>Bieżący miesiąc</option>
-                <option>Poprzedni miesiąc</option>
-                <option>Bieżący rok</option>
-                <option>Niestandardowy</option>
+                <option {% if selectPeriod=='currentMonth' %} selected {% endif %}>Bieżący miesiąc</option>
+                <option {% if selectPeriod=='previousMonth' %} selected {% endif %}>Poprzedni miesiąc</option>
+                <option {% if selectPeriod=='currentYear' %} selected {% endif %}>Bieżący rok</option>
+                <option {% if selectPeriod=='nonStandard' %} selected {% endif %}>Niestandardowy</option>
             </select>
             <input type="hidden" name="selectPeriod" id="selectPeriod">
         </form>

@@ -67,6 +67,7 @@ selectDateButton.addEventListener('click', function () {
     selectDatePeriod[3].value = startDate.value + '-' + endDate.value;
     selectDatePeriod[3].innerText = convertDate(startDate.value) + ' - ' + convertDate(endDate.value);
     myModal.toggle();
+    selectPeriod.value = 'nonStandard';
     chosenPeriodForm.submit();
 })
 
