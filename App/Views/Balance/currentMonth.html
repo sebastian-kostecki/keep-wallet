@@ -59,10 +59,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for category in incomesCategories %}
                     <tr>
-                        <td colspan="2" class="title-item text-start ps-1">Wynagrodzenie</td>
-                        <td class="text-end pe-1">2300 zł</td>
+                        <td colspan="2" class="title-item text-start ps-1">{{ category.name }}</td>
+                        <td class="text-end pe-1">{{ category.total }} zł</td>
                     </tr>
+                    {% endfor %}
                     <tr class="fw-light border-top-0 extensively">
                         <td class="text-end pe-1"></td>
                         <td class="income-date text-end pe-1">23.03.2022</td>
