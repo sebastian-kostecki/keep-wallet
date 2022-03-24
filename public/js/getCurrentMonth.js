@@ -11,3 +11,6 @@ const getCurrentMonthPeriod = () => {
 }
 
 currentMonthInput.value = getCurrentMonthPeriod();
+
+const selectPeriodCurrent = document.querySelector('#selectPeriodCurrent');
+selectPeriodCurrent.value = "currentMonth";

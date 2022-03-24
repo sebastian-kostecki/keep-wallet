@@ -36,10 +36,18 @@ const myModal = new bootstrap.Modal(document.getElementById('periodModal'), {
     keyboard: false
 })
 const chosenPeriodForm = document.querySelector('#choosePeriod');
+const selectPeriod = document.querySelector('#selectPeriod');
 
 const sendSelectValue = () => {
     showModal();
-    if ((selectDatePeriod.value == selectDatePeriod[0].value) || (selectDatePeriod.value == selectDatePeriod[1].value) || (selectDatePeriod.value == selectDatePeriod[2].value)) {
+    if (selectDatePeriod.value == selectDatePeriod[0].value) {
+        selectPeriod.value = 'currentMonth';
+        chosenPeriodForm.submit();
+    } else if (selectDatePeriod.value == selectDatePeriod[1].value) {
+        selectPeriod.value = 'previousMonth';
+        chosenPeriodForm.submit();
+    } else if (selectDatePeriod.value == selectDatePeriod[2].value) {
+        selectPeriod.value = 'currentYear';
         chosenPeriodForm.submit();
     }
 }
