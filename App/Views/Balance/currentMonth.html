@@ -94,7 +94,7 @@
                     <tr>
                         <td colspan="3" class="title-item expense-name text-start ps-1">{{ expenseByCategory.name }}
                         </td>
-                        <td class="text-end pe-1">{{ expenseByCategory.total }} zł</td>
+                        <td class="expense-cash text-end pe-1">{{ expenseByCategory.total }} zł</td>
                     </tr>
                     {% for expense in expenseByCategory.incomes %}
                     <tr class="fw-light border-top-0 extensively">
@@ -131,4 +131,6 @@
     <script src="/js/showModalPeriod.js"></script>
     <script src="\js\balanceCalculations.js"></script>
     <script src="\js\displayBalanceInfo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="\js\pieChart.js"></script>
     {% endblock %}
