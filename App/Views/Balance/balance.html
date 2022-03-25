@@ -15,7 +15,13 @@
                 <option {% if selectPeriod=='currentMonth' %} selected {% endif %}>Bieżący miesiąc</option>
                 <option {% if selectPeriod=='previousMonth' %} selected {% endif %}>Poprzedni miesiąc</option>
                 <option {% if selectPeriod=='currentYear' %} selected {% endif %}>Bieżący rok</option>
-                <option {% if selectPeriod=='nonStandard' %} selected {% endif %}>Niestandardowy</option>
+                <option {% if selectPeriod=='nonStandard' %} selected {% endif %}>
+                    {% if selectPeriod=='nonStandard' %}
+                    {{ chosenPeriod }}
+                    {% else %}
+                    Niestandardowy
+                    {% endif %}
+                </option>
             </select>
             <input type="hidden" name="selectPeriod" id="selectPeriod">
         </form>

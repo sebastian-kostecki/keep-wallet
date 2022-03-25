@@ -21,7 +21,8 @@ class Balance extends Authenticated
         View::renderTemplate('Balance/balance.html', [
             'incomes' => $incomes,
             'expenses' => $expenses,
-            'selectPeriod' => $selectPeriod
+            'selectPeriod' => $selectPeriod,
+            'chosenPeriod' => $chosenPeriod
         ]);
     }
 }
