@@ -204,7 +204,7 @@ td {
 }
 
 tbody tr {
-    border-top: 1px solid rgba(255,255,255, 0.2);
+    border-top: 2px solid rgba(255,255,255, 0.1);
 }
 
 tbody tr:first-of-type {
