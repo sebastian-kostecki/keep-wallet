@@ -77,4 +77,14 @@ const convertDate = (inputFormat) => {
     return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join('.')
 }
 
-//chosenPeriodForm.addEventListener('onchange', sendSelectValue());
+const convertDisplayDate = (inputDate) => {
+    let beginning = inputDate.slice(0, 10);
+    let end = inputDate.slice(11);
+    beginning = convertDate(beginning);
+    end = convertDate(end);
+    return beginning + ' - ' + end;
+}
+
+if (selectDatePeriod[3].selected == true) {
+    selectDatePeriod[3].innerText = convertDisplayDate(selectDatePeriod[3].innerText.trim())
+}
