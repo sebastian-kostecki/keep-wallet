@@ -3,10 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\Expenditure;
-use App\Models\Incomes;
 use App\Models\Revenue;
 use Core\View;
-use App\Models\User;
 
 class Balance extends Authenticated
 {
