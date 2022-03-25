@@ -30,3 +30,8 @@ for (let row of rows) {
     })
 }
 
+for (let i = 0; i < budgetItems.length; i++) {
+    if (i % 2 == 1) {
+        budgetItems[i].style.borderBottom = "1px solid rgba(255, 255, 255, 0.1";
+    }
+}
