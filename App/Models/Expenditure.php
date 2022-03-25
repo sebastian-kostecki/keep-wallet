@@ -78,7 +78,7 @@ class Expenditure extends \Core\Model
 
         $sql = "SELECT expenses_category_assigned_to_users.name, SUM(expenses.amount) as total
         FROM expenses INNER JOIN expenses_category_assigned_to_users 
-        WHERE expenses.user_id = :userId AND expenses.expense_category_assigned_to_user_id = expenses_category_assigned_to_users.id AND date_of_expense BETWEEN :firstDay AND :lastDay GROUP BY expenses.expense_category_assigned_to_user_id";
+        WHERE expenses.user_id = :userId AND expenses.expense_category_assigned_to_user_id = expenses_category_assigned_to_users.id AND date_of_expense BETWEEN :firstDay AND :lastDay GROUP BY expenses.expense_category_assigned_to_user_id ORDER BY total DESC";
 
         $db = static::getDataBase();
         $query = $db->prepare($sql);
