@@ -26,12 +26,30 @@ for (let row of rows) {
                 elementToDisplay.style.display = 'table-row';
             }
         }
-
     })
+
+    let lineFromRow = row.innerText.split('\t');
+    //lineFromRow[0] -> to nazwa klasy ze spacjami
+
+    let words = lineFromRow[0].split(' ');
+
+    let className = "";
+    for (let word of words) {
+        className += "." + word;
+    }
+
+    const elementsToDisplay = document.querySelectorAll(className);
+    for (let i = 0; i < elementsToDisplay.length; i++) {
+        if ((i % 4 == 2) || (i % 4 == 3)) {
+            elementsToDisplay[i].style.backgroundColor = "rgba(255, 255, 255, 0.05)";
+        }
+    }
+
 }
 
-for (let i = 0; i < budgetItems.length; i++) {
-    if (i % 2 == 1) {
-        budgetItems[i].style.borderBottom = "1px solid rgba(255, 255, 255, 0.1";
-    }
-}
+// for (let i = 0; i < budgetItems.length; i++) {
+//     if (i % 2 == 1) {
+//         budgetItems[i].style.borderBottom = "1px solid rgba(255, 255, 255, 0.1";
+//     }
+// }
+
