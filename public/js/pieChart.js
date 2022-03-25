@@ -15,16 +15,19 @@ const data = {
     datasets: [{
         label: 'My First dataset',
         backgroundColor: [
-            '#f94144',
-            '#f3722c',
-            '#f8961e',
-            '#f9844a',
-            '#f9c74f',
-            '#90be6d',
-            '#43aa8b',
-            '#4d908e',
-            '#577590',
-            '#277da1'
+            '#9DD9E2',
+            '#C3A1C1',
+            '#F7F5B0',
+            '#FCC4B0',
+            '#BBD5D3',
+            '#F4ABBA',
+            '#F2E2BA',
+            '#E7CBDB',
+            '#F6918A',
+            '#82C9C7',
+            '#E7E4DE',
+            '#55C4C5',
+            '#FBC19C'
         ],
         data: expensesAmounts,
     }]
