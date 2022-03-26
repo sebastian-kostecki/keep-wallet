@@ -9,7 +9,7 @@ use App\Models\PaymentMethod;
 use Core\View;
 use App\Flash;
 
-class Expense extends \Core\Controller
+class Expense extends Authenticated
 {
     public function newAction()
     {
