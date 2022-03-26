@@ -17,11 +17,9 @@ class Balance extends Authenticated
 
         $incomesUserGroupByCategories = UserIncomes::getUserIncomesGroupByCategories($chosenPeriod);
         $allUserIncomes = UserIncomes::getAllUserIncomes($chosenPeriod);
+
         $expensesUserGroupByCategories = UserExpenses::getUserExpensesGroupByCategories($chosenPeriod);
         $allUseExpenses = UserExpenses::getAllUserExpenses($chosenPeriod);
-
-        $incomes = Revenue::fetchIncomes($chosenPeriod);
-        $expenses = Expenditure::fetchExpenses($chosenPeriod);
 
         View::renderTemplate('Balance/balance.html', [
             'incomesGroupByCategories' => $incomesUserGroupByCategories,
