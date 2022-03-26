@@ -17,21 +17,21 @@
 <body>
     <div class="container-fluid pt-lg-2">
         <header class="row header mt-lg-2 me-lg-2">
-            <div class="col-2 position-relative content-logo">
+            <div class="col-2 position-relative content-logo pb-2">
                 <img src="/img/icon-content.png" alt=""
                     class="img-fluid p-4 m-2 position-absolute top-50 start-50 translate-middle">
             </div>
-            <div class="col-5 border-bottom p-0 content-title pb-2">
-                <h1 class="display-5">{% block pageTitle %} {% endblock %}</h1>
+            <div class="col-5 border-bottom p-0 content-title">
+                {% block pageTitle %} {% endblock %}
             </div>
-            <div class="col-3 position-relative border-bottom content-user">
+            <div class="col-3 position-relative border-bottom content-user pb-2">
                 <div
                     class="position-absolute top-50 start-50 translate-middle border py-1 px-3 rounded-pill content-user-pill w-auto d-flex align-items-center justify-content-center">
                     <i class="fas fa-user me-2 fs-4 d-inline-block"></i>
                     <p class="fs-4 fw-light m-0 d-inline-block">{{ currentUser.name }}</p>
                 </div>
             </div>
-            <div class="col-2 border-bottom d-flex align-items-center justify-content-end content-logout">
+            <div class="col-2 border-bottom d-flex align-items-center justify-content-end content-logout pb-2">
                 <a href="#" class="content-link d-inline-block mx-3"><i class="fas fa-cog fs-1"></i></a>
                 <a href="/logout" class="content-link d-inline-block mx-3"><i class="fas fa-power-off fs-1"></i></a>
             </div>
@@ -57,7 +57,12 @@
                                     wydatek</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mb-3" href="#"><i class="fas fa-table me-3"></i>Przeglądaj bilans</a>
+                                <form action="/balance/show" method="post">
+                                    <input type="hidden" name="chosenPeriod" id="chosenPeriod">
+                                    <input type="hidden" name="selectPeriod" id="selectPeriodCurrent">
+                                    <button type="submit" class="nav-link mb-3 btn btn-link border-0"><i
+                                            class="fas fa-table me-3"></i>Przeglądaj bilans</button>
+                                </form>
                             </li>
                             <li class="nav-item nav-mobile">
                                 <a class="nav-link mb-3" href="#"><i class="fas fa-cog me-3"></i>Ustawienia</a>
@@ -87,7 +92,7 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script defer src="/js/all.js"></script>
     <script src="/js/bootstrap.js"></script>
-
+    <script src="/js/getCurrentMonth.js"></script>
     {% block footer %}
     {% endblock %}
 </body>

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use PDO;
 
-class Expenditure extends \Core\Model
+class Expenses extends \Core\Model
 {
     public function __construct($data = [])
     {

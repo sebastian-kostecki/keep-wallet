@@ -1,0 +1,153 @@
+{% extends "baseApp.html" %}
+
+{% block title %}Przeglądaj bilans{% endblock %}
+
+{% block pageTitle %}
+<div class="container-fluid">
+    <div class="row justify-content-between mb-0">
+        <div class="col-12 col-lg-7 ps-0">
+            <h1 class="display-6">Przeglądaj bilans</h1>
+        </div>
+        <form id="choosePeriod" class="col-12 col-lg-5 d-flex align-items-center pe-lg-0 mb-3 mb-lg-0" method="post"
+            name="choosePeriod">
+            <select id="choosePeriod" class="form-select text-center period-balance border-0" name="chosenPeriod"
+                onchange="sendSelectValue()">
+                <option {% if selectPeriod=='currentMonth' %} selected {% endif %}>Bieżący miesiąc</option>
+                <option {% if selectPeriod=='previousMonth' %} selected {% endif %}>Poprzedni miesiąc</option>
+                <option {% if selectPeriod=='currentYear' %} selected {% endif %}>Bieżący rok</option>
+                <option {% if selectPeriod=='nonStandard' %} selected {% endif %}>
+                    {% if selectPeriod=='nonStandard' %}
+                    {{ chosenPeriod }}
+                    {% else %}
+                    Niestandardowy
+                    {% endif %}
+                </option>
+            </select>
+            <input type="hidden" name="selectPeriod" id="selectPeriod">
+        </form>
+        <div class="modal fade" id="periodModal" tabindex="-1" aria-labelledby="periodModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Wybierz przedział czasowy</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-flex flex-column flex-lg-row">
+                        <div class="my-1 d-flex justify-content-between d-lg-block">
+                            <label class="fw-bold" for="startDate">Początek</label>
+                            <input type="date" name="startDate" id="startDate">
+                        </div>
+                        <div class="ms-0 ms-lg-1 my-1 d-flex justify-content-between d-lg-block">
+                            <label class="fw-bold" for="endDate">Koniec</label>
+                            <input type="date" name="endDate" id="endDate">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zamknij</button>
+                        <button id="selectDate" type="button" class="btn button-normal">Wybierz</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid p-0">
+    <div class="row justify-content-center w-100 me-0">
+        <div class="col-12 col-lg-4 my-2">
+            <h2 class="balance-heading text-center fs-3 fw-light">Przychody</h2>
+            <table class="balance-table w-100">
+                <thead>
+                    <tr>
+                        <th class="text-start ps-1">Kategoria</th>
+                        <th class="text-end pe-1">Kwota</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for incomeByCategory in incomesGroupByCategories %}
+                    <tr class="category-row">
+                        <td class="title-item text-start ps-1">{{ incomeByCategory.name }}</td>
+                        <td class="text-end pe-1">{{ incomeByCategory.total }} zł</td>
+                    </tr>
+                    {% for income in allIncomes %}
+                    {% if income.name == incomeByCategory.name %}
+                    <tr class="fw-light border-top-0 extensively budget-item-details {{ incomeByCategory.name }}">
+                        <td class="budget-item-date text-end pe-1">{{ income.date_of_income }}</td>
+                        <td rowspan="2" class="text-end pe-1 income-amount">{{ income.amount }} zł</td>
+                    </tr>
+                    <tr class="fw-light border-top-0 extensively budget-item-details {{ incomeByCategory.name }}">
+                        <td class="text-end pe-1">{{ income.income_comment }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="2" id="incomes-sum" class="text-end pe-1"></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="col-12 col-lg-4 my-2">
+            <h2 class="balance-heading text-center fs-3 fw-light">Wydatki</h2>
+            <table class="w-100 balance-table">
+                <thead>
+                    <tr>
+                        <th colspan="2" class="text-start ps-1">Kategoria</th>
+                        <th class="text-end pe-1">Kwota</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for expenseByCategory in expensesGroupByCategories %}
+                    <tr class="category-row">
+                        <td colspan="2" class="title-item expense-name text-start ps-1">{{ expenseByCategory.name }}
+                        </td>
+                        <td class="expense-cash text-end pe-1">{{ expenseByCategory.total }} zł</td>
+                    </tr>
+                    {% for expense in allExpenses %}
+                    {% if expenseByCategory.name == expense.name %}
+                    <tr class="fw-light border-top-0 extensively budget-item-details {{ expenseByCategory.name }}">
+                        <td class="text-end pe-1">{{ expense.payment_method }}</td>
+                        <td class="budget-item-date text-end pe-1">{{ expense.date_of_expense }}</td>
+                        <td rowspan="2" class="text-end pe-1 expense-amount">{{ expense.amount }} zł</td>
+                    </tr>
+                    <tr class="fw-light border-top-0 extensively budget-item-details {{ expenseByCategory.name }}">
+                        <td colspan="2" class="text-end pe-1">{{ expense.expense_comment }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="4" id="expenses-sum" class="text-end pe-1"></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="col-12 col-lg-4 my-2">
+            <h2 class="balance-heading text-center fs-3 fw-light">Wykres wydatków</h2>
+            <div>
+                <canvas id="expensesChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="row footer me-4 px-2 d-flex justify-content-between balance-info">
+        <p class="display-6 balance-heading w-auto p-0 py-2 m-0 text-uppercase fw-bold">Saldo wynosi: <span
+                id="balance-sum">0</span> zł</p>
+        <p class="display-6 balance-heading w-auto text-end p-2 m-0 rounded balance-text"></p>
+    </div>
+    {% endblock %}
+
+    {% block footer %}
+    <script src="/js/showModalPeriod.js"></script>
+    <script src="\js\balanceCalculations.js"></script>
+    <script src="\js\displayBalanceInfo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="\js\pieChart.js"></script>
+    <script src="\js\hideShowBalanceRow.js"></script>
+    <script src="\js\formatDate.js"></script>
+    {% endblock %}

@@ -7,6 +7,7 @@ use PDO;
 class Incomes extends \Core\Model
 {
     public $errors = [];
+    public $incomes = [];
 
     public function __construct($data = [])
     {
