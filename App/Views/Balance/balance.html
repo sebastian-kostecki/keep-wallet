@@ -66,12 +66,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for incomeByCategory in incomes %}
+                    {% for incomeByCategory in incomesGroupByCategories %}
                     <tr class="category-row">
                         <td class="title-item text-start ps-1">{{ incomeByCategory.name }}</td>
                         <td class="text-end pe-1">{{ incomeByCategory.total }} zł</td>
                     </tr>
-                    {% for income in incomeByCategory.incomes %}
+                    {% for income in allUserIncomes %}
+                    {% if income.name == incomeByCategory.name %}
                     <tr class="fw-light border-top-0 extensively budget-item-details {{ incomeByCategory.name }}">
                         <td class="budget-item-date text-end pe-1">{{ income.date_of_income }}</td>
                         <td rowspan="2" class="text-end pe-1 income-amount">{{ income.amount }} zł</td>
@@ -79,6 +80,7 @@
                     <tr class="fw-light border-top-0 extensively budget-item-details {{ incomeByCategory.name }}">
                         <td class="text-end pe-1">{{ income.income_comment }}</td>
                     </tr>
+                    {% endif %}
                     {% endfor %}
                     {% endfor %}
                 </tbody>
