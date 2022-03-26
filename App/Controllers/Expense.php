@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-use App\Models\Expenditure;
+use App\Models\Expenses;
 use App\Models\User;
 use App\Models\ExpenseCategory;
 use App\Models\PaymentMethod;
@@ -24,7 +24,7 @@ class Expense extends \Core\Controller
 
     public function saveAction()
     {
-        $expense = new Expenditure($_POST);
+        $expense = new Expenses($_POST);
         if ($expense->save()) {
             Flash::addMessage('Dodano nowy wydatek');
             $this->redirect('/menu');
