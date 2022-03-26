@@ -12,6 +12,7 @@ body {
 .button-normal {
     color: #fff;
     background-color: #ee6c4d;
+    transition: 0.5s;
 }
 
 .button-normal:hover {
@@ -23,6 +24,7 @@ body {
     color: #ee6c4d;
     border: 1px solid #ee6c4d;
     background-color: transparent;
+    transition: 0.5s;
 }
 
 .button-outline:hover {
@@ -278,6 +280,10 @@ option,
     .category-label,
     .budget-item-btn {
         font-size: 1rem !important;
+    }
+
+    .home-list {
+        font-size: 1.5rem !important;
     }
 }
 
