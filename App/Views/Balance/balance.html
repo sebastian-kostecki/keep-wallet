@@ -71,7 +71,7 @@
                         <td class="title-item text-start ps-1">{{ incomeByCategory.name }}</td>
                         <td class="text-end pe-1">{{ incomeByCategory.total }} zł</td>
                     </tr>
-                    {% for income in allUserIncomes %}
+                    {% for income in allIncomes %}
                     {% if income.name == incomeByCategory.name %}
                     <tr class="fw-light border-top-0 extensively budget-item-details {{ incomeByCategory.name }}">
                         <td class="budget-item-date text-end pe-1">{{ income.date_of_income }}</td>
@@ -101,13 +101,14 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for expenseByCategory in expenses %}
+                    {% for expenseByCategory in expensesGroupByCategories %}
                     <tr class="category-row">
                         <td colspan="2" class="title-item expense-name text-start ps-1">{{ expenseByCategory.name }}
                         </td>
                         <td class="expense-cash text-end pe-1">{{ expenseByCategory.total }} zł</td>
                     </tr>
-                    {% for expense in expenseByCategory.incomes %}
+                    {% for expense in allExpenses %}
+                    {% if expenseByCategory.name == expense.name %}
                     <tr class="fw-light border-top-0 extensively budget-item-details {{ expenseByCategory.name }}">
                         <td class="text-end pe-1">{{ expense.payment_method }}</td>
                         <td class="budget-item-date text-end pe-1">{{ expense.date_of_expense }}</td>
@@ -116,6 +117,7 @@
                     <tr class="fw-light border-top-0 extensively budget-item-details {{ expenseByCategory.name }}">
                         <td colspan="2" class="text-end pe-1">{{ expense.expense_comment }}</td>
                     </tr>
+                    {% endif %}
                     {% endfor %}
                     {% endfor %}
                 </tbody>

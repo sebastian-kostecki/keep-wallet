@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\Expenditure;
 use App\Models\Revenue;
+use App\Models\UserExpenses;
 use App\Models\UserIncomes;
 use Core\View;
 
@@ -16,14 +17,17 @@ class Balance extends Authenticated
 
         $incomesUserGroupByCategories = UserIncomes::getUserIncomesGroupByCategories($chosenPeriod);
         $allUserIncomes = UserIncomes::getAllUserIncomes($chosenPeriod);
+        $expensesUserGroupByCategories = UserExpenses::getUserExpensesGroupByCategories($chosenPeriod);
+        $allUseExpenses = UserExpenses::getAllUserExpenses($chosenPeriod);
 
         $incomes = Revenue::fetchIncomes($chosenPeriod);
         $expenses = Expenditure::fetchExpenses($chosenPeriod);
 
         View::renderTemplate('Balance/balance.html', [
             'incomesGroupByCategories' => $incomesUserGroupByCategories,
-            'allUserIncomes' => $allUserIncomes,
-            'expenses' => $expenses,
+            'allIncomes' => $allUserIncomes,
+            'expensesGroupByCategories' => $expensesUserGroupByCategories,
+            'allExpenses' => $allUseExpenses,
             'selectPeriod' => $selectPeriod,
             'chosenPeriod' => $chosenPeriod
         ]);
