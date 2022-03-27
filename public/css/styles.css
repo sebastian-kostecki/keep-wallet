@@ -172,10 +172,6 @@ a.forgot-password:hover {
     color:rgba(255,255,255, 0.55);
 }
 
-.nav-mobile {
-    display: none;
-}
-
 .content-user-pill {
     border-color: #ee6c4d !important;
 }
@@ -312,10 +308,6 @@ option,
         width: 100%;
         background-color: #293241 !important;
         --bs-bg-opacity: 1;
-    }
-
-    .nav-mobile {
-        display: list-item;
     }
 
     .content-main {
