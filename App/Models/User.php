@@ -29,14 +29,16 @@ class User extends \Core\Model
             $hashed_token = $token->getHash($token);
             $this->activation_token = $token->getValue();
 
-            $db = static::getDataBase();
+            $sql = 'INSERT INTO users (name, password, email, activation_hash) 
+                    VALUES (:name, :password, :email, :hashed_token)';
 
-            $newUserQuery = $db->prepare('INSERT INTO users (name, password, email, activation_hash) VALUES (:name, :password, :email, :hashed_token)');
-            $newUserQuery->bindValue(':name', $this->name, PDO::PARAM_STR);
-            $newUserQuery->bindValue(':password', $password_hash, PDO::PARAM_STR);
-            $newUserQuery->bindValue(':email', $this->email, PDO::PARAM_STR);
-            $newUserQuery->bindValue(':hashed_token', $hashed_token, PDO::PARAM_STR);
-            $newUserQuery->execute();
+            $db = static::getDataBase();
+            $query = $db->prepare($sql);
+            $query->bindValue(':name', $this->name, PDO::PARAM_STR);
+            $query->bindValue(':password', $password_hash, PDO::PARAM_STR);
+            $query->bindValue(':email', $this->email, PDO::PARAM_STR);
+            $query->bindValue(':hashed_token', $hashed_token, PDO::PARAM_STR);
+            $query->execute();
 
             $db->query("INSERT INTO expenses_category_assigned_to_users (user_id, name, icon) SELECT users.id, expenses_category_default.name, expenses_category_default.icon  FROM expenses_category_default CROSS JOIN users WHERE users.id = (SELECT id FROM users WHERE name = '{$this->name}')");
             $db->query("INSERT INTO incomes_category_assigned_to_users (user_id, name, icon) SELECT users.id, incomes_category_default.name, incomes_category_default.icon FROM incomes_category_default CROSS JOIN users WHERE users.id = (SELECT id FROM users WHERE name = '{$this->name}')");
@@ -107,8 +109,12 @@ class User extends \Core\Model
 
     public static function findByEmail($email)
     {
+        $sql = 'SELECT * 
+                FROM users 
+                WHERE email = :email';
+
         $db = static::getDataBase();
-        $query = $db->prepare('SELECT * FROM users WHERE email = :email');
+        $query = $db->prepare($sql);
         $query->bindValue(':email', $email, PDO::PARAM_STR);
         $query->execute();
 
@@ -118,8 +124,12 @@ class User extends \Core\Model
 
     public static function findByName($name)
     {
+        $sql = 'SELECT * 
+                FROM users 
+                WHERE name = :name';
+
         $db = static::getDataBase();
-        $query = $db->prepare('SELECT * FROM users WHERE name = :name');
+        $query = $db->prepare($sql);
         $query->bindValue(':name', $name, PDO::PARAM_STR);
         $query->execute();
 
@@ -129,8 +139,12 @@ class User extends \Core\Model
 
     public static function findByID($id)
     {
+        $sql = 'SELECT * 
+                FROM users 
+                WHERE id = :id';
+
         $db = static::getDataBase();
-        $query = $db->prepare('SELECT * FROM users WHERE id = :id');
+        $query = $db->prepare($sql);
         $query->bindValue(':id', $id, PDO::PARAM_INT);
         $query->execute();
 
@@ -143,8 +157,12 @@ class User extends \Core\Model
         $token = new Token($token);
         $hashed_token = $token->getHash();
 
+        $sql = 'SELECT * 
+                FROM users 
+                WHERE password_reset_hash = :token_hash';
+
         $db = static::getDataBase();
-        $query = $db->prepare('SELECT * FROM users WHERE password_reset_hash = :token_hash');
+        $query = $db->prepare($sql);
         $query->bindValue(':token_hash', $hashed_token, PDO::PARAM_STR);
         $query->execute();
         $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
@@ -172,11 +190,14 @@ class User extends \Core\Model
         $token = new Token($userToken);
         $hashed_token = $token->getHash($token);
 
-        $db = static::getDataBase();
-        $stmt = $db->prepare('UPDATE users SET is_active = 1, activation_hash = null WHERE activation_hash = :hashed_token');
-        $stmt->bindValue(':hashed_token', $hashed_token, PDO::PARAM_STR);
+        $sql = 'UPDATE users SET is_active = 1, activation_hash = null 
+                WHERE activation_hash = :hashed_token';
 
-        $stmt->execute();
+        $db = static::getDataBase();
+        $query = $db->prepare($sql);
+        $query->bindValue(':hashed_token', $hashed_token, PDO::PARAM_STR);
+
+        $query->execute();
     }
 
     public static function authenticate($login, $password)
@@ -233,8 +254,12 @@ class User extends \Core\Model
 
         $expiry_timestamp = time() + 60 * 60 * 2;
 
+        $sql = 'UPDATE users 
+                SET password_reset_hash = :token_hash, password_reset_expiry = :expires_at 
+                WHERE id = :id';
+
         $db = static::getDataBase();
-        $query = $db->prepare('UPDATE users SET password_reset_hash = :token_hash, password_reset_expiry = :expires_at WHERE id = :id');
+        $query = $db->prepare($sql);
         $query->bindValue(':token_hash', $hashed_token, PDO::PARAM_STR);
         $query->bindValue(':expires_at', date('Y-m-d H:i:s', $expiry_timestamp), PDO::PARAM_STR);
         $query->bindValue(':id', $this->id, PDO::PARAM_INT);
@@ -260,8 +285,10 @@ class User extends \Core\Model
         if (empty($this->errors)) {
             $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
 
+            $sql = 'UPDATE users SET password = :password_hash, password_reset_hash = NULL, password_reset_expiry = NULL WHERE id = :id';
+
             $db = static::getDataBase();
-            $query = $db->prepare('UPDATE users SET password = :password_hash, password_reset_hash = NULL, password_reset_expiry = NULL WHERE id = :id');
+            $query = $db->prepare($sql);
             $query->bindValue(':id', $this->id, PDO::PARAM_INT);
             $query->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
 
