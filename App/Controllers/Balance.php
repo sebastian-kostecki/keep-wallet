@@ -2,8 +2,6 @@
 
 namespace App\Controllers;
 
-use App\Models\Expenditure;
-use App\Models\Revenue;
 use App\Models\UserExpenses;
 use App\Models\UserIncomes;
 use Core\View;
