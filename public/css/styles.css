@@ -284,17 +284,14 @@ option,
 }
 
 @media (max-width: 575px) {
-    .home-content,
-    .content-logo {
+    .home-content {
         width: 100% !important;
     }
 
-    .content-logo {
-        height: 10vh;
-    }
 
     .content-user,
-    .content-logout {
+    .content-logout,
+    .content-logo {
         display: none !important;
     }
 
@@ -302,7 +299,7 @@ option,
         width: 100%;
         border-bottom: 0 !important;
         text-align: center;
-        margin-top: 3rem;
+        margin-top: 1rem;
     }
 
     .content-title h1 {
