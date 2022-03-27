@@ -330,4 +330,10 @@ option,
         background-color: #00000054;
         margin-bottom: 0;
     }
+
+    .balance-info {
+        margin: 0;
+        width: 100%;
+        text-align: center;
+    }
 }
