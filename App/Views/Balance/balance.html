@@ -5,7 +5,7 @@
 {% block pageTitle %}
 <div class="container-fluid">
     <div class="row justify-content-between mb-0">
-        <div class="col-12 col-lg-7 ps-0">
+        <div class="col-12 col-lg-7 px-0">
             <h1 class="display-6">Przeglądaj bilans</h1>
         </div>
         <form id="choosePeriod" class="col-12 col-lg-5 d-flex align-items-center pe-lg-0 mb-3 mb-lg-0" method="post"
@@ -55,8 +55,8 @@
 
 {% block body %}
 <div class="container-fluid p-0">
-    <div class="row justify-content-center w-100 me-0">
-        <div class="col-12 col-lg-4 my-2">
+    <div class="row justify-content-center w-100 mx-0">
+        <div class="col-12 col-lg-4 my-2 ps-xl-0">
             <h2 class="balance-heading text-center fs-3 fw-light">Przychody</h2>
             <table class="balance-table w-100">
                 <thead>
@@ -135,10 +135,10 @@
             </div>
         </div>
     </div>
-    <div class="row footer me-4 px-2 d-flex justify-content-between balance-info">
-        <p class="display-6 balance-heading w-auto p-0 py-2 m-0 text-uppercase fw-bold">Saldo wynosi: <span
+    <div class="row footer me-4 px-2 d-flex justify-content-lg-between justify-content-center balance-info">
+        <p class="display-6 balance-heading w-auto p-0 py-2 m-0 text-uppercase fw-bold text-center">Saldo wynosi: <span
                 id="balance-sum">0</span> zł</p>
-        <p class="display-6 balance-heading w-auto text-end p-2 m-0 rounded balance-text"></p>
+        <p class="display-6 balance-heading w-auto text-center p-2 m-0 rounded balance-text"></p>
     </div>
     {% endblock %}
 

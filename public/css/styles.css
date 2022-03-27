@@ -12,6 +12,7 @@ body {
 .button-normal {
     color: #fff;
     background-color: #ee6c4d;
+    transition: 0.5s;
 }
 
 .button-normal:hover {
@@ -23,6 +24,7 @@ body {
     color: #ee6c4d;
     border: 1px solid #ee6c4d;
     background-color: transparent;
+    transition: 0.5s;
 }
 
 .button-outline:hover {
@@ -170,10 +172,6 @@ a.forgot-password:hover {
     color:rgba(255,255,255, 0.55);
 }
 
-.nav-mobile {
-    display: none;
-}
-
 .content-user-pill {
     border-color: #ee6c4d !important;
 }
@@ -184,10 +182,19 @@ a.forgot-password:hover {
 
 .budget-item, 
 .budget-item::placeholder, 
-.balance, 
-.form-select, 
+.balance,  
 .form-label-budget-item {
     color: #e0fbfc;
+}
+
+.form-select,
+.form-select option {
+    color: rgba(255,255,255, 0.55);
+    background: rgb(84, 91, 103);
+}
+
+.form-select:hover {
+    background: rgb(115, 124, 138);
 }
 
 .balance-table {
@@ -279,6 +286,10 @@ option,
     .budget-item-btn {
         font-size: 1rem !important;
     }
+
+    .home-list {
+        font-size: 1.5rem !important;
+    }
 }
 
 @media (max-width: 575px) {
@@ -286,16 +297,18 @@ option,
         width: 100% !important;
     }
 
-    .content-logo,
+
     .content-user,
-    .content-logout {
+    .content-logout,
+    .content-logo {
         display: none !important;
     }
 
     .content-title {
         width: 100%;
+        border-bottom: 0 !important;
         text-align: center;
-        margin-top: 3rem;
+        margin-top: 1rem;
     }
 
     .content-title h1 {
@@ -304,12 +317,9 @@ option,
 
     .content-nav {
         width: 100%;
-        background-color: #293241 !important;
+        /* background-color: inherit !important; */
+        background: linear-gradient(#00000054,#293241);
         --bs-bg-opacity: 1;
-    }
-
-    .nav-mobile {
-        display: list-item;
     }
 
     .content-main {
@@ -318,5 +328,20 @@ option,
 
     .form-label {
         text-align: center;
+    }
+
+    .alert {
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    .header {
+        background-color: #00000054;
+        margin-bottom: 0;
+    }
+
+    .balance-info {
+        margin: 0;
+        width: 100%;
     }
 }
