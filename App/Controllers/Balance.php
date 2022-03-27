@@ -30,4 +30,9 @@ class Balance extends Authenticated
             'chosenPeriod' => $chosenPeriod
         ]);
     }
+
+    public function selectAction()
+    {
+        
+    }
 }
