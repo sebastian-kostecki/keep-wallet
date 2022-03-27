@@ -10,6 +10,14 @@ use Core\View;
 
 class Balance extends Authenticated
 {
+    public function selectAction()
+    {
+        $_SESSION['chosenPeriod'] = $_POST['chosenPeriod'];
+        $_SESSION['nameSelectedPeriod'] = $_POST['selectPeriod'];
+
+        $this->redirect('/balance/show');
+    }
+
     public function showAction()
     {
         $incomesUserGroupByCategories = UserIncomes::getUserIncomesGroupByCategories();
@@ -26,13 +34,5 @@ class Balance extends Authenticated
             'selectPeriod' => $_SESSION['nameSelectedPeriod'],
             'chosenPeriod' => $_SESSION['chosenPeriod']
         ]);
-    }
-
-    public function selectAction()
-    {
-        $_SESSION['chosenPeriod'] = $_POST['chosenPeriod'];
-        $_SESSION['nameSelectedPeriod'] = $_POST['selectPeriod'];
-
-        $this->redirect('/balance/show');
     }
 }
