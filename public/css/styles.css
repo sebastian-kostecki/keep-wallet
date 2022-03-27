@@ -182,10 +182,13 @@ a.forgot-password:hover {
 
 .budget-item, 
 .budget-item::placeholder, 
-.balance, 
-.form-select, 
+.balance,  
 .form-label-budget-item {
     color: #e0fbfc;
+}
+
+.form-select {
+    color:rgba(255,255,255, 0.55);
 }
 
 .balance-table {
