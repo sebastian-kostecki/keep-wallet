@@ -190,7 +190,11 @@ a.forgot-password:hover {
 .form-select,
 .form-select option {
     color: rgba(255,255,255, 0.55);
-    background: #545B67;
+    background: rgb(84, 91, 103);
+}
+
+.form-select:hover {
+    background: rgb(115, 124, 138);
 }
 
 .balance-table {
