@@ -8,8 +8,8 @@
         <div class="col-12 col-lg-7 px-0">
             <h1 class="display-6">Przeglądaj bilans</h1>
         </div>
-        <form id="choosePeriod" class="col-12 col-lg-5 d-flex align-items-center pe-lg-0 mb-3 mb-lg-0" method="post"
-            name="choosePeriod">
+        <form id="choosePeriod" class="col-12 col-lg-5 d-flex align-items-center pe-lg-0 mb-3 mb-lg-0"
+            action="/balance/select" method="post" name="choosePeriod">
             <select id="choosePeriod" class="form-select text-center period-balance border-0" name="chosenPeriod"
                 onchange="sendSelectValue()">
                 <option {% if selectPeriod=='currentMonth' %} selected {% endif %}>Bieżący miesiąc</option>

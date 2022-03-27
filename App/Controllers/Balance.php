@@ -10,24 +10,29 @@ use Core\View;
 
 class Balance extends Authenticated
 {
+    public function selectAction()
+    {
+        $_SESSION['chosenPeriod'] = $_POST['chosenPeriod'];
+        $_SESSION['nameSelectedPeriod'] = $_POST['selectPeriod'];
+
+        $this->redirect('/balance/show');
+    }
+
     public function showAction()
     {
-        $chosenPeriod = $_POST['chosenPeriod'];
-        $selectPeriod = $_POST['selectPeriod'];
+        $incomesUserGroupByCategories = UserIncomes::getUserIncomesGroupByCategories();
+        $allUserIncomes = UserIncomes::getAllUserIncomes();
 
-        $incomesUserGroupByCategories = UserIncomes::getUserIncomesGroupByCategories($chosenPeriod);
-        $allUserIncomes = UserIncomes::getAllUserIncomes($chosenPeriod);
-
-        $expensesUserGroupByCategories = UserExpenses::getUserExpensesGroupByCategories($chosenPeriod);
-        $allUseExpenses = UserExpenses::getAllUserExpenses($chosenPeriod);
+        $expensesUserGroupByCategories = UserExpenses::getUserExpensesGroupByCategories();
+        $allUseExpenses = UserExpenses::getAllUserExpenses();
 
         View::renderTemplate('Balance/balance.html', [
             'incomesGroupByCategories' => $incomesUserGroupByCategories,
             'allIncomes' => $allUserIncomes,
             'expensesGroupByCategories' => $expensesUserGroupByCategories,
             'allExpenses' => $allUseExpenses,
-            'selectPeriod' => $selectPeriod,
-            'chosenPeriod' => $chosenPeriod
+            'selectPeriod' => $_SESSION['nameSelectedPeriod'],
+            'chosenPeriod' => $_SESSION['chosenPeriod']
         ]);
     }
 }
