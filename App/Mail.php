@@ -9,7 +9,6 @@ use PHPMailer\PHPMailer\Exception;
 
 class Mail
 {
-
     public static function sendMail($recipient, $subject, $htmlContent, $txtContent)
     {
         $mail = new PHPMailer(true);

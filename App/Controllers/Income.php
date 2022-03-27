@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Flash;
 use App\Models\IncomeCategory;
-use App\Models\User;
 use App\Models\Incomes;
 use Core\View;
 
@@ -12,8 +11,7 @@ class Income extends Authenticated
 {
     public function newAction()
     {
-        $user = User::findByID($_SESSION['userId']);
-        $userIncomeCategories = IncomeCategory::findCategories($user);
+        $userIncomeCategories = IncomeCategory::findCategories();
         View::renderTemplate('Income/new.html', [
             'incomeCategories' => $userIncomeCategories
         ]);
@@ -26,8 +24,7 @@ class Income extends Authenticated
             Flash::addMessage('Dodano nowy przychód');
             $this->redirect('/menu');
         } else {
-            $user = User::findByID($_SESSION['userId']);
-            $userIncomeCategories = IncomeCategory::findCategories($user);
+            $userIncomeCategories = IncomeCategory::findCategories();
             View::renderTemplate('Income/new.html', [
                 'income' => $income,
                 'incomeCategories' => $userIncomeCategories

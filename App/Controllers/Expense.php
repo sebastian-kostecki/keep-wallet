@@ -3,7 +3,6 @@
 namespace App\Controllers;
 
 use App\Models\Expenses;
-use App\Models\User;
 use App\Models\ExpenseCategory;
 use App\Models\PaymentMethod;
 use Core\View;
@@ -13,9 +12,8 @@ class Expense extends Authenticated
 {
     public function newAction()
     {
-        $user = User::findByID($_SESSION['userId']);
-        $expenseCategories = ExpenseCategory::findCategories($user);
-        $paymentMethods = PaymentMethod::findPaymentMethods($user);
+        $expenseCategories = ExpenseCategory::findCategories();
+        $paymentMethods = PaymentMethod::findPaymentMethods();
         View::renderTemplate('Expense/new.html', [
             'expenseCategories' => $expenseCategories,
             'paymentMethods' => $paymentMethods
@@ -29,9 +27,8 @@ class Expense extends Authenticated
             Flash::addMessage('Dodano nowy wydatek');
             $this->redirect('/menu');
         } else {
-            $user = User::findByID($_SESSION['userId']);
-            $expenseCategories = ExpenseCategory::findCategories($user);
-            $paymentMethods = PaymentMethod::findPaymentMethods($user);
+            $expenseCategories = ExpenseCategory::findCategories();
+            $paymentMethods = PaymentMethod::findPaymentMethods();
             View::renderTemplate('Expense/new.html', [
                 'expense' => $expense,
                 'expenseCategories' => $expenseCategories,
