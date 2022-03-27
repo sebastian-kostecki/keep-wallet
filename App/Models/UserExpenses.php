@@ -6,10 +6,10 @@ use PDO;
 
 class UserExpenses extends \Core\Model
 {
-    public static function getUserExpensesGroupByCategories($period)
+    public static function getUserExpensesGroupByCategories()
     {
-        $firstDay = substr($period, 0, 10);
-        $lastDay = substr($period, 11);
+        $firstDay = substr($_SESSION['chosenPeriod'], 0, 10);
+        $lastDay = substr($_SESSION['chosenPeriod'], 11);
 
         $sql = "SELECT expenses_category_assigned_to_users.name, SUM(expenses.amount) as total
         FROM expenses INNER JOIN expenses_category_assigned_to_users 
@@ -26,10 +26,10 @@ class UserExpenses extends \Core\Model
         return $query->fetchAll();
     }
 
-    public static function getAllUserExpenses($period)
+    public static function getAllUserExpenses()
     {
-        $firstDay = substr($period, 0, 10);
-        $lastDay = substr($period, 11);
+        $firstDay = substr($_SESSION['chosenPeriod'], 0, 10);
+        $lastDay = substr($_SESSION['chosenPeriod'], 11);
 
         $sql = "SELECT expense_user.name, expenses.amount, expenses.date_of_expense, expenses.expense_comment, pm.name as payment_method 
                 FROM expenses_category_assigned_to_users as expense_user INNER JOIN expenses ON expenses.expense_category_assigned_to_user_id = expense_user.id INNER JOIN payment_methods_assigned_to_users as pm ON pm.id = expenses.payment_method_assigned_to_user_id 

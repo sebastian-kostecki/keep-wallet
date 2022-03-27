@@ -6,10 +6,10 @@ use PDO;
 
 class UserIncomes extends \Core\Model
 {
-    public static function getUserIncomesGroupByCategories($period)
+    public static function getUserIncomesGroupByCategories()
     {
-        $firstDay = substr($period, 0, 10);
-        $lastDay = substr($period, 11);
+        $firstDay = substr($_SESSION['chosenPeriod'], 0, 10);
+        $lastDay = substr($_SESSION['chosenPeriod'], 11);
 
         $sql = "SELECT incomes.user_id, incomes_category_assigned_to_users.name, SUM(incomes.amount) as total
                 FROM incomes INNER JOIN incomes_category_assigned_to_users 
@@ -26,10 +26,10 @@ class UserIncomes extends \Core\Model
         return $query->fetchAll();
     }
 
-    public static function getAllUserIncomes($period)
+    public static function getAllUserIncomes()
     {
-        $firstDay = substr($period, 0, 10);
-        $lastDay = substr($period, 11);
+        $firstDay = substr($_SESSION['chosenPeriod'], 0, 10);
+        $lastDay = substr($_SESSION['chosenPeriod'], 11);
 
         $sql = "SELECT income_user.name, incomes.amount, incomes.date_of_income, incomes.income_comment 
                 FROM incomes INNER JOIN incomes_category_assigned_to_users as income_user 
