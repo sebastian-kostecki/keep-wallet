@@ -20,7 +20,7 @@ class User extends \Core\Model
 
     public function saveUser()
     {
-        $this->validateNewUser();
+        $this->validateUser();
 
         if (empty($this->errors)) {
             $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
@@ -47,7 +47,7 @@ class User extends \Core\Model
         return false;
     }
 
-    public function validateNewUser()
+    public function validateUser()
     {
         if ($this->name == '') {
             $this->errors[] = 'Wpisz imię';
@@ -255,7 +255,7 @@ class User extends \Core\Model
     public function resetPassword($password)
     {
         $this->password = $password;
-        $this->validateNewUser();
+        $this->validateUser();
 
         if (empty($this->errors)) {
             $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
