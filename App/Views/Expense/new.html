@@ -12,11 +12,12 @@
         <div class="col-12 col-sm-6 pe-sm-1 mb-2">
             <h2 class="form-label form-label-budget-item fw-light fs-4">Kwota</h2>
             <input type="number" id="amount" name="amount" class="budget-item form-control border-0 fs-6" required
-                placeholder="0">
+                placeholder="0" value="{{ expense.amount }}">
         </div>
         <div class="col-12 col-sm-6 ps-sm-1 mb-2">
             <h2 class="form-label form-label-budget-item fw-light fs-4">Data</h2>
-            <input type="date" id="date" name="date" class="budget-item form-control border-0 fs-6" required>
+            <input type="date" id="date" name="date" class="budget-item form-control border-0 fs-6"
+                value="{{ expense.date_of_expense }}" required>
         </div>
     </div>
     <div class="row mt-1">
