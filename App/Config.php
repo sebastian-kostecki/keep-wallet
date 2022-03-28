@@ -15,6 +15,6 @@ class Config
 
     const EMAIL_HOST = 'smtp.gmail.com';
     const EMAIL_PORT = 587;
-    const EMAIL_USER = 'sebastian.kostecki.programista@gmail.com';
-    const EMAIL_PASSWORD = 'Dominik14!';
+    const EMAIL_USER = '@gmail.com';
+    const EMAIL_PASSWORD = '';
 }
