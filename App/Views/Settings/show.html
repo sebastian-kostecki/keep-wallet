@@ -39,9 +39,28 @@
             <h2 class="fs-5 mt-3 ps-4">Dodaj kategorie</h2>
             <form action="" class="input-group ps-4 w-50">
                 <input type="text" class="form-control settings-input border-0 w-50">
-                <button class="btn button-outline px-3 text-uppercase fw-bold">Wybierz ikonę</button>
+                <button type="button" class="btn button-outline px-3 text-uppercase fw-bold" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal">Wybierz ikonę</button>
                 <button type="submit" class="btn button-normal px-3 text-uppercase fw-bold me-2">Dodaj</button>
             </form>
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn button-outline" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn button-normal">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <h2 class="fs-5 mt-3 ps-4">Zmień kategorie</h2>
             <form action="" class="input-group ps-4 w-50">
                 {% for category in incomeCategories %}
