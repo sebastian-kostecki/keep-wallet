@@ -13,7 +13,7 @@
         <div class="settings-form change-username">
             <form action="" class="input-group">
                 <input type="text" class="form-control settings-input border-0">
-                <button type="submit" class="btn button-normal px-3 text-uppercase fw-bold">Zapisz</button>
+                <button type="submit" class="btn button-normal px-3 text-uppercase fw-bold me-2">Zapisz</button>
             </form>
         </div>
     </div>
@@ -22,7 +22,8 @@
         <div class="settings-form change-password">
             <form action="" class="input-group">
                 <input id="password-input" type="password" class="form-control settings-input border-0">
-                <button type="submit" class="btn button-normal px-3 text-uppercase fw-bold rounded-end">Zapisz</button>
+                <button type="submit"
+                    class="btn button-normal px-3 text-uppercase fw-bold rounded-end me-2">Zapisz</button>
                 <button type="button"
                     class="hidden-password settings-hidden me-2 p-2 fs-4 position-absolute top-0 end-0"><i
                         class="fas fa-eye-slash"></i></button>
@@ -33,15 +34,34 @@
         </div>
     </div>
     <div class="mb-3 py-2">
-        <h1 id="change-incomes-category" class="setting-list fs-5">Zmień kategorie wydatków</h1>
-        <div class="settings-form change-incomes-category ms-4">
-            <h2 class="fs-5 mt-3">Dodaj kategorie</h2>
-            <form action="" class="input-group w-50">
-                <input type="text" class="form-control settings-input border-0">
-                <button type="submit" class="btn button-normal px-3 text-uppercase fw-bold">Dodaj</button>
+        <h1 id="change-incomes-category" class="setting-list fs-5">Zmień kategorie przychodów</h1>
+        <div class="settings-form change-incomes-category">
+            <h2 class="fs-5 mt-3 ps-4">Dodaj kategorie</h2>
+            <form action="" class="input-group ps-4 w-50">
+                <input type="text" class="form-control settings-input border-0 w-50">
+                <button class="btn button-outline px-3 text-uppercase fw-bold">Wybierz ikonę</button>
+                <button type="submit" class="btn button-normal px-3 text-uppercase fw-bold me-2">Dodaj</button>
             </form>
-            <h2 class="fs-5 mt-3">Zmień kategorie</h2>
-            <h2 class="fs-5 mt-3">Usuń kategorie</h2>
+            <h2 class="fs-5 mt-3 ps-4">Zmień kategorie</h2>
+            <form action="" class="input-group ps-4 w-50">
+                {% for category in incomeCategories %}
+                <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                    <div>
+                        <input type="radio" class="form-check-input" name="incomeCategory" id="{{ category.id }}"
+                            value="{{ category.id }}">
+                        <label for="{{ category.id }}"
+                            class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
+                            role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name }}</label>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="input-group w-100 me-2">
+                    <input type="text" class="form-control settings-input border-0">
+                    <button class="btn button-outline px-3 text-uppercase fw-bold">Wybierz ikonę</button>
+                    <button type="submit" class="btn button-normal px-3 text-uppercase fw-bold">Zapisz</button>
+                </div>
+            </form>
+            <h2 class="fs-5 mt-3 ps-4">Usuń kategorie</h2>
         </div>
     </div>
     <div id="" class="setting-list mb-3 py-2">
