@@ -24,4 +24,9 @@ class Settings extends Authenticated
             'icons' => $icons
         ]);
     }
+
+    public function addIncomeCategoryAction()
+    {
+        var_dump($_POST);
+    }
 }
