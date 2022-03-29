@@ -292,6 +292,10 @@ option,
     color: #e0fbfc;
 }
 
+.settings-form {
+    display: none;
+}
+
 .settings-hidden,
 .settings-showed {
     padding: 0 !important;

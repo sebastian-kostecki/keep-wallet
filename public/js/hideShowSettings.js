@@ -3,12 +3,15 @@ const settingsForm = document.querySelectorAll('.settings-form');
 
 for (let legend of settingList) {
     legend.addEventListener('click', function () {
-        for (let form of settingsForm) {
-            if (legend.id == form.id && form.style.display == 'flex') {
-                form.style.display = 'none';
-            } else {
-                form.style.display = 'flex';
-            }
+        let classForm = '.' + legend.id;
+        let form = document.querySelector(classForm);
+
+
+        if (form.style.display === 'block') {
+            form.style.display = 'none';
+        } else {
+            form.style.display = 'block';
         }
+
     })
 };
