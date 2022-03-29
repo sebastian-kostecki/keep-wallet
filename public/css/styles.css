@@ -292,6 +292,13 @@ option,
     color: #e0fbfc;
 }
 
+.settings-hidden,
+.settings-showed {
+    padding: 0 !important;
+    margin-top: 2px!important;
+    right: 90px !important;
+}
+
 @media (max-width: 1400px) {
     .nav-link {
         font-size: 1rem;
