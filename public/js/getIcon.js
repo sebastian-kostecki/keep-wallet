@@ -1,5 +1,6 @@
 const iconButton = document.querySelector('#chosen-icon-button');
-const chosenIcon = document.querySelector('.chosen-icon-input');
+const chosenButton = document.querySelector('.button-chosen-icon');
+const chosenIcon = document.querySelectorAll('.chosen-icon-input');
 const hiddenInputs = document.querySelectorAll('.chosen-icon-input-value');
 
 const myModal = new bootstrap.Modal(document.getElementById('choiceIncomeIcon'), {
@@ -7,11 +8,8 @@ const myModal = new bootstrap.Modal(document.getElementById('choiceIncomeIcon'),
 })
 
 iconButton.addEventListener('click', function () {
-    for (let hiddenInput of hiddenInputs) {
-        if (chosenIcon.value != NULL) {
-            hiddenInput.value = chosenIcon.value;
-            console.log(hiddenInput.value);
-            myModal.toggle();
-        }
-    }
+    hiddenInputs.value = document.querySelector('.chosen-icon-input:checked').value;
+    chosenButton.innerHTML = '<i class="' + hiddenInputs.value + ' me-2">';
+    console.log(hiddenInputs.value);
+    myModal.toggle();
 })
