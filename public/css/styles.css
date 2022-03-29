@@ -276,6 +276,16 @@ option,
     display: none;
 }
 
+.setting-list {
+    pointer-events:all;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.setting-list:hover {
+    color:#ffffff8c;
+}
+
 @media (max-width: 1400px) {
     .nav-link {
         font-size: 1rem;
