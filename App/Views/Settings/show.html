@@ -190,15 +190,25 @@
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Wybierz ikonę</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    ...
+                    <div class="container-fluid">
+                        {% for icon in icons %}
+                        <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                            <input type="radio" class="form-check-input" name="icon" id="{{ icon.icon }}"
+                                value="{{ icon.icon }}" required>
+                            <label for="{{ icon.icon }}"
+                                class="form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-1"
+                                role="button"><i class="{{ icon.icon }} me-2"></i></label>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn button-outline" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn button-normal">Save changes</button>
+                    <button type="button" class="btn button-outline" data-bs-dismiss="modal">Zamknij</button>
+                    <button type="button" class="btn button-normal">Wybierz</button>
                 </div>
             </div>
         </div>
