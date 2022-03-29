@@ -7,18 +7,18 @@
 {% endblock %}
 
 {% block body %}
-<ul class="list-unstyled fs-5 me-3">
-    <li class="mb-3 py-2 w-50">
-        <legend id="change-username" class="setting-list fs-5">Zmień nazwę użytkownika</legend>
+<div class="fs-5 me-3">
+    <div class="w-50">
+        <legend id="change-username" class="setting-list fs-5 mb-3 py-2 ">Zmień nazwę użytkownika</legend>
         <div class="settings-form change-username">
             <form action="" class="input-group">
                 <input type="text" class="form-control settings-input border-0">
                 <button type="submit" class="btn button-normal px-3 text-uppercase fw-bold">Zapisz</button>
             </form>
         </div>
-    </li>
-    <li class="mb-3 py-2 w-50">
-        <legend id="change-password" class="setting-list fs-5">Zmień hasło</legend>
+    </div>
+    <div class="w-50">
+        <legend id="change-password" class="setting-list fs-5 mb-3 py-2">Zmień hasło</legend>
         <div class="settings-form change-password">
             <form action="" class="input-group">
                 <input id="password-input" type="password" class="form-control settings-input border-0">
@@ -31,11 +31,17 @@
                     <i class="fas fa-eye"></i></button>
             </form>
         </div>
-    </li>
-    <li id="change-incomes-category" class="setting-list mb-3 py-2">Zmień kategorie przychodu</li>
-    <li id="change-expenses-category" class="setting-list mb-3 py-2">Zmień kategorie wydatków</li>
-    <li id="change-payment-methods" class="setting-list mb-3 py-2">Zmień sposoby płatności</li>
-</ul>
+    </div>
+    <div id="change-incomes-category" class="setting-list">
+        <legend id="change-incomes-category" class="setting-list fs-5  mb-3 py-2">Zmień kategorię wydatków</legend>
+    </div>
+    <div id="" class="setting-list mb-3 py-2">
+        <legend id="change-expenses-category" class="setting-list fs-5  mb-3 py-2">Zmień kategorie wydatków</legend>
+    </div>
+    <div id="change-expenses-category" class="setting-list mb-3 py-2">
+        <legend id="" class="setting-list fs-5  mb-3 py-2">Zmień sposoby płatności</legend>
+    </div>
+</div>
 {% endblock %}
 
 {% block footer %}
