@@ -38,7 +38,7 @@
         <div class="settings-form change-incomes-category">
             <h2 class="fs-5 mt-3 ps-4">Dodaj kategorie</h2>
             <form action="" class="input-group ps-4 w-50">
-                <input type="text" class="form-control settings-input border-0 w-50">
+                <input type="text" class="form-control settings-input border-0">
                 <button type="button" class="btn button-outline px-3 text-uppercase fw-bold" data-bs-toggle="modal"
                     data-bs-target="#exampleModal">Wybierz ikonę</button>
                 <button type="submit" class="btn button-normal px-3 text-uppercase fw-bold me-2">Dodaj</button>
@@ -81,6 +81,23 @@
                 </div>
             </form>
             <h2 class="fs-5 mt-3 ps-4">Usuń kategorie</h2>
+            <form action="" class="input-group ps-4 w-50">
+                {% for category in incomeCategories %}
+                <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                    <div>
+                        <input type="radio" class="form-check-input" name="incomeCategory" id="{{ category.id }}"
+                            value="{{ category.id }}">
+                        <label for="{{ category.id }}"
+                            class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
+                            role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name }}</label>
+                    </div>
+                </div>
+                {% endfor %}
+                <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                    <button type="submit"
+                        class="btn button-normal px-3 py-2 text-uppercase fw-bold w-100 fs-6">Usuń</button>
+                </div>
+            </form>
         </div>
     </div>
     <div id="" class="setting-list mb-3 py-2">
