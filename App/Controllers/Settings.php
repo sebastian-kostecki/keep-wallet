@@ -6,6 +6,7 @@ use Core\View;
 use App\Models\IncomeCategory;
 use App\Models\ExpenseCategory;
 use App\Models\PaymentMethod;
+use App\Models\Icon;
 
 class Settings extends Authenticated
 {
@@ -14,11 +15,13 @@ class Settings extends Authenticated
         $userIncomeCategories = IncomeCategory::findCategories();
         $expenseCategories = ExpenseCategory::findCategories();
         $paymentMethods = PaymentMethod::findPaymentMethods();
+        $icons = Icon::getIcons();
 
         View::renderTemplate('Settings/show.html', [
             'incomeCategories' => $userIncomeCategories,
             'expenseCategories' => $expenseCategories,
-            'paymentMethods' => $paymentMethods
+            'paymentMethods' => $paymentMethods,
+            'icons' => $icons
         ]);
     }
 }
