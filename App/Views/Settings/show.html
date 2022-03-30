@@ -48,13 +48,13 @@
                     <button type="submit" class="btn button-normal px-3 text-uppercase fw-bold me-2">Dodaj</button>
                 </form>
                 <h2 class="fs-5 mt-3 ps-4">Zmień kategorie</h2>
-                <form action="" class="input-group ps-4">
+                <form action="/settings/change-income-category" method="post" class="input-group ps-4">
                     {% for category in incomeCategories %}
                     <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
                         <div>
-                            <input type="radio" class="form-check-input" name="incomeCategory" id="1{{ category.name }}"
-                                value="{{ category.id }}">
-                            <label for="1{{ category.name }}"
+                            <input type="radio" class="form-check-input" name="oldIncomeCategory"
+                                id="0{{ category.name }}" value="{{ category.id }}">
+                            <label for="0{{ category.name }}"
                                 class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
                                 role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name }}</label>
                         </div>
@@ -64,7 +64,7 @@
                         <button type="button" class="btn button-chosen-icon px-3 fw-light" data-bs-toggle="modal"
                             data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
                         <input class="chosen-icon-input-value" type="hidden" name="icon">
-                        <input type="text" class="form-control settings-input border-0">
+                        <input type="text" class="form-control settings-input border-0" name="newCategoryName">
                         <button type="submit" class="btn button-normal px-3 text-uppercase fw-bold">Zapisz</button>
                     </div>
                 </form>
