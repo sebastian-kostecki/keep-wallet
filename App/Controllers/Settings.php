@@ -44,4 +44,9 @@ class Settings extends Authenticated
     {
         var_dump($_POST);
     }
+
+    public function deleteIncomeCategoryAction()
+    {
+        var_dump($_POST);
+    }
 }

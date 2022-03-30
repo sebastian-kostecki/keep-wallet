@@ -70,12 +70,13 @@
                     </div>
                 </form>
                 <h2 class="fs-5 mt-3 ps-4">Usuń kategorie</h2>
-                <form action="" class="input-group ps-4">
+                <h3 class="fs-6 fw-light mt-1 ps-4">Wybierz kategorie do usunięcia</h3>
+                <form action="/settings/delete-income-category" method="post" class="input-group ps-4">
                     {% for category in incomeCategories %}
                     <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
                         <div>
-                            <input type="checkbox" class="form-check-input select-delete-category" name="incomeCategory"
-                                id="{{ category.name }}" value="{{ category.id }}">
+                            <input type="checkbox" class="form-check-input select-delete-category"
+                                name="incomeCategoryToDelete[]" id="{{ category.name }}" value="{{ category.id }}">
                             <label for="{{ category.name }}"
                                 class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
                                 role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name }}</label>
