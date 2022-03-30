@@ -25,6 +25,11 @@ class Settings extends Authenticated
         ]);
     }
 
+    public function changeName()
+    {
+        var_dump($_POST);
+    }
+
     public function addIncomeCategoryAction()
     {
         var_dump($_POST);
