@@ -10,7 +10,7 @@ const myModal = new bootstrap.Modal(document.getElementById('choiceIncomeIcon'),
 iconButton.addEventListener('click', function () {
     for (let hiddenInput of hiddenInputs) {
         hiddenInput.value = document.querySelector('.chosen-icon-input:checked').value;
-        chosenButton.innerHTML = '<i class="' + hiddenInput.value + ' me-2">';
+        chosenButton.innerHTML = '<i class="' + hiddenInput.value + '">';
     }
 
     console.log(hiddenInputs.value);
