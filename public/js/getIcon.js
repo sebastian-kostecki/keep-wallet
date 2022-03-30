@@ -1,18 +1,35 @@
-const iconButton = document.querySelector('#button-chosen-icon-in-modal');
-const chosenButton = document.querySelector('.button-chosen-icon');
-const chosenIcon = document.querySelectorAll('.chosen-icon-input');
+const buttonChosenIconInModal = document.querySelector('#button-chosen-icon-in-modal');
+const iconCheckButtons = document.querySelectorAll('.button-chosen-icon');
+const chosenIcon = document.querySelectorAll('.selected-icon-in-modal');
 const hiddenInputs = document.querySelectorAll('.chosen-icon-input-value');
 
 const myModal = new bootstrap.Modal(document.getElementById('choiceIncomeIcon'), {
     keyboard: false
 })
 
-iconButton.addEventListener('click', function () {
-    for (let hiddenInput of hiddenInputs) {
-        hiddenInput.value = document.querySelector('.chosen-icon-input:checked').value;
-        chosenButton.innerHTML = '<i class="' + hiddenInput.value + '">';
-    }
 
-    console.log(hiddenInputs.value);
-    myModal.toggle();
-})
+
+
+for (let iconCheckButton of iconCheckButtons) {
+    iconCheckButton.addEventListener('click', function () {
+
+        //działa tylko dla wybranego buttona
+        buttonChosenIconInModal.addEventListener('click', function () {
+            let chosenIcon = document.querySelector('.selected-icon-in-modal:checked').value;
+            iconCheckButton.innerHTML = '<i class="' + chosenIcon + '">';
+            myModal.toggle();
+        })
+
+        //let chosenIcon = document.querySelector('.selected-icon-in-modal:checked').value;
+
+        //iconCheckButton.innerHTML = '<i class="' + chosenIcon + '">';
+
+        //console.log(hiddenInput.value);
+        //myModal.toggle();
+    })
+
+
+}
+
+
+

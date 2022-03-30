@@ -61,9 +61,9 @@
                     </div>
                     {% endfor %}
                     <div class="input-group w-100 me-2">
+                        <button type="button" class="btn button-chosen-icon px-3 fw-light" data-bs-toggle="modal"
+                            data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
                         <input type="text" class="form-control settings-input border-0">
-                        <button type="button" class="btn button-outline px-3 text-uppercase fw-bold"
-                            data-bs-toggle="modal" data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
                         <button type="submit" class="btn button-normal px-3 text-uppercase fw-bold">Zapisz</button>
                     </div>
                 </form>
@@ -199,7 +199,7 @@
                     <div class="container-fluid">
                         {% for icon in icons %}
                         <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                            <input type="radio" class="form-check-input chosen-icon-input" name="icon"
+                            <input type="radio" class="form-check-input selected-icon-in-modal" name="icon"
                                 id="{{ icon.icon }}" value="{{ icon.icon }}" required>
                             <label for="{{ icon.icon }}"
                                 class="form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-1"
