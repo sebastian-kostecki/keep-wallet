@@ -30,6 +30,12 @@ class Settings extends Authenticated
         var_dump($_POST);
     }
 
+    public function changePassword()
+    {
+        var_dump($_POST);
+    }
+
+
     public function addIncomeCategoryAction()
     {
         var_dump($_POST);
