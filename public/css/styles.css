@@ -305,7 +305,7 @@ option,
 .settings-showed {
     padding: 0 !important;
     margin-top: 2px!important;
-    right: 90px !important;
+    right: 100px !important;
 }
 
 @media (max-width: 1400px) {
