@@ -236,7 +236,10 @@ tbody tr:first-of-type {
 }
 
 [type="radio"]:checked,
-[type="radio"]:not(:checked){
+[type="radio"]:not(:checked),
+[type="checkbox"]:checked,
+[type="checkbox"]:not(:checked)
+{
 	position: absolute;
 	left: -9999px;
 	width: 0;
