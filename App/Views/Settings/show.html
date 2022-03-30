@@ -22,8 +22,9 @@
         <div class="py-2 mb-3">
             <h1 id="change-password" class="setting-list fs-5">Zmień hasło</h1>
             <div class="settings-form change-password">
-                <form action="" class="input-group">
-                    <input id="password-input" type="password" class="form-control settings-input border-0">
+                <form action="/settings/change-password" method="post" class="input-group">
+                    <input id="password-input" type="password" class="form-control settings-input border-0"
+                        name="password" placeholder="Wpisz nowe hasło">
                     <button type="submit"
                         class="btn button-normal px-3 text-uppercase fw-bold rounded-end me-2">Zapisz</button>
                     <button type="button"
