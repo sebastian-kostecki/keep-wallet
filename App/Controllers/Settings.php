@@ -25,18 +25,22 @@ class Settings extends Authenticated
         ]);
     }
 
-    public function changeName()
+    public function changeNameAction()
     {
         var_dump($_POST);
     }
 
-    public function changePassword()
+    public function changePasswordAction()
     {
         var_dump($_POST);
     }
-
 
     public function addIncomeCategoryAction()
+    {
+        var_dump($_POST);
+    }
+
+    public function changeIncomeCategoryAction()
     {
         var_dump($_POST);
     }
