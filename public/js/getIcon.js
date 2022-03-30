@@ -1,4 +1,4 @@
-const iconButton = document.querySelector('#chosen-icon-button');
+const iconButton = document.querySelector('#button-chosen-icon-in-modal');
 const chosenButton = document.querySelector('.button-chosen-icon');
 const chosenIcon = document.querySelectorAll('.chosen-icon-input');
 const hiddenInputs = document.querySelectorAll('.chosen-icon-input-value');
