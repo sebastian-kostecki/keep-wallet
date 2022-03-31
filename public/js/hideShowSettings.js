@@ -12,6 +12,5 @@ for (let legend of settingList) {
         } else {
             form.style.display = 'block';
         }
-
     })
 };
