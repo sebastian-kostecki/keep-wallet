@@ -184,7 +184,7 @@
                 <div class="pb-2">
                     <h2 id="add-payment-method" class="setting-list fs-5 mt-3 ps-4">Dodaj</h2>
                     <div class="settings-form add-payment-method">
-                        <form action="/settings/add-expense-category" method="post" class="input-group ps-4">
+                        <form action="/settings/add-payment-method" method="post" class="input-group ps-4">
                             <button type="button" class="btn button-chosen-icon px-3 fw-light" data-bs-toggle="modal"
                                 data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
                             <input class="chosen-icon-input-value" type="hidden" name="icon">
@@ -200,7 +200,7 @@
                         <h3 class="fs-6 fw-light mt-1 ps-4">Wybierz sposób płatności do zmiany oraz zmień jej ikonę i
                             nazwę
                         </h3>
-                        <form action="/settings/change-expense-category" method="post" class="input-group ps-4">
+                        <form action="/settings/change-payment-method" method="post" class="input-group ps-4">
                             {% for category in paymentMethods %}
                             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
                                 <div>
@@ -229,7 +229,7 @@
                     <h2 id="delete-payment-method" class="setting-list fs-5 mt-3 ps-4 pb-1">Usuń</h2>
                     <div class="settings-form delete-payment-method">
                         <h3 class="fs-6 fw-light mt-1 ps-4">Wybierz sposób płatności do usunięcia</h3>
-                        <form action="/settings/delete-expense-category" method="post" class="input-group ps-4">
+                        <form action="/settings/delete-payment-method" method="post" class="input-group ps-4">
                             {% for category in paymentMethods %}
                             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
                                 <div>

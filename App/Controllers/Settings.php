@@ -64,4 +64,19 @@ class Settings extends Authenticated
     {
         var_dump($_POST);
     }
+
+    public function addPaymentMethodAction()
+    {
+        var_dump($_POST);
+    }
+
+    public function changePaymentMethodAction()
+    {
+        var_dump($_POST);
+    }
+
+    public function deletePaymentMethodAction()
+    {
+        var_dump($_POST);
+    }
 }
