@@ -49,4 +49,19 @@ class Settings extends Authenticated
     {
         var_dump($_POST);
     }
+
+    public function addExpenseCategoryAction()
+    {
+        var_dump($_POST);
+    }
+
+    public function changeExpenseCategoryAction()
+    {
+        var_dump($_POST);
+    }
+
+    public function deleteExpenseCategoryAction()
+    {
+        var_dump($_POST);
+    }
 }
