@@ -288,6 +288,10 @@ option,
     display: none;
 }
 
+.settings-container {
+    color:rgba(255,255,255, 0.55);
+}
+
 .setting-list {
     pointer-events:all;
     cursor: pointer;
@@ -295,7 +299,7 @@ option,
 }
 
 .setting-list:hover {
-    color:#ffffff8c;
+    color:#e0fbfc;
 }
 
 .settings-form,
