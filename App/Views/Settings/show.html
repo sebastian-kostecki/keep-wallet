@@ -113,7 +113,7 @@
                 <div class="pb-2">
                     <h2 id="add-expense-category" class="setting-list fs-5 mt-3 ps-4">Dodaj kategorie</h2>
                     <div class="settings-form add-expense-category">
-                        <form action="/settings/add-income-category" method="post" class="input-group ps-4">
+                        <form action="/settings/add-expense-category" method="post" class="input-group ps-4">
                             <button type="button" class="btn button-chosen-icon px-3 fw-light" data-bs-toggle="modal"
                                 data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
                             <input class="chosen-icon-input-value" type="hidden" name="icon">
@@ -128,7 +128,7 @@
                     <div class="settings-form change-expense-category">
                         <h3 class="fs-6 fw-light mt-1 ps-4">Wybierz kategorię do zmiany oraz zmień jej ikonę i nazwę
                         </h3>
-                        <form action="/settings/change-income-category" method="post" class="input-group ps-4">
+                        <form action="/settings/change-expense-category" method="post" class="input-group ps-4">
                             {% for category in expenseCategories %}
                             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
                                 <div>
@@ -156,7 +156,7 @@
                     <h2 id="delete-expense-category" class="setting-list fs-5 mt-3 ps-4 pb-1">Usuń kategorie</h2>
                     <div class="settings-form delete-expense-category">
                         <h3 class="fs-6 fw-light mt-1 ps-4">Wybierz kategorie do usunięcia</h3>
-                        <form action="/settings/delete-income-category" method="post" class="input-group ps-4">
+                        <form action="/settings/delete-expense-category" method="post" class="input-group ps-4">
                             {% for category in expenseCategories %}
                             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
                                 <div>
