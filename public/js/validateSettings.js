@@ -40,6 +40,14 @@ for (let form of forms) {
                     minlength: 'Hasło musi zawierać przynajmniej 8 znaków'
                 }
             },
+            errorPlacement: function (error, element) {
+                if (element.attr("name") == "name")
+                    error.insertAfter("#submit-change-name");
+                else {
+                    error.insertAfter(element);
+                }
+
+            },
         });
     });
 }

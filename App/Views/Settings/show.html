@@ -13,9 +13,10 @@
             <h1 id="change-username" class="setting-list fs-5">Zmień nazwę użytkownika</h1>
             <div class="settings-form change-username">
                 <form action="/settings/change-name" method="post" class="input-group single-form">
-                    <input type="text" class="form-control settings-input border-0" name="name"
+                    <input type="text" class="form-control settings-input border-0 p-2" name="name"
                         placeholder="Wpisz nową nazwę użytkownika">
-                    <button type="submit" class="btn button-normal px-3 text-uppercase fw-bold me-2">Zapisz</button>
+                    <button id="submit-change-name" type="submit"
+                        class="btn button-normal px-3 text-uppercase fw-bold me-2">Zapisz</button>
                 </form>
             </div>
         </div>
