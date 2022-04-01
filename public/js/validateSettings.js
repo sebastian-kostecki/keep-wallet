@@ -5,14 +5,12 @@ for (let form of forms) {
         $(form).validate({
             rules: {
                 name: {
-                    required: true,
                     validName: true,
                     minlength: 3,
                     maxlength: 50,
                     remote: '/account/validate-name'
                 },
                 password: {
-                    required: true,
                     minlength: 8,
                     isLetterInPassword: true,
                     isDigitInPassword: true
@@ -33,10 +31,12 @@ for (let form of forms) {
             errorPlacement: function (error, element) {
                 if (element.attr("name") == "name")
                     error.insertAfter("#submit-change-name");
+                else if (element.attr("name") == "password") {
+                    error.insertAfter("#submit-change-password");
+                }
                 else {
                     error.insertAfter(element);
                 }
-
             },
         });
     });
