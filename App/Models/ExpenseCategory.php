@@ -9,8 +9,8 @@ class ExpenseCategory extends \Core\Model
     public static function findCategories()
     {
         $sql = "SELECT * 
-                FROM expenses_category_assigned_to_users 
-                WHERE user_id = :userId";
+                FROM expenses_category_assigned_to_users NATURAL JOIN icons
+                WHERE expenses_category_assigned_to_users.user_id = :userId";
 
         $db = static::getDataBase();
         $query = $db->prepare($sql);
