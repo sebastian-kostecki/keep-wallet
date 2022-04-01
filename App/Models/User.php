@@ -40,13 +40,52 @@ class User extends \Core\Model
             $query->bindValue(':hashed_token', $hashed_token, PDO::PARAM_STR);
             $query->execute();
 
-            $db->query("INSERT INTO expenses_category_assigned_to_users (user_id, name, icon) SELECT users.id, expenses_category_default.name, expenses_category_default.icon  FROM expenses_category_default CROSS JOIN users WHERE users.id = (SELECT id FROM users WHERE name = '{$this->name}')");
-            $db->query("INSERT INTO incomes_category_assigned_to_users (user_id, name, icon) SELECT users.id, incomes_category_default.name, incomes_category_default.icon FROM incomes_category_default CROSS JOIN users WHERE users.id = (SELECT id FROM users WHERE name = '{$this->name}')");
-            $db->query("INSERT INTO payment_methods_assigned_to_users (user_id, name, icon) SELECT users.id, payment_methods_default.name, payment_methods_default.icon FROM payment_methods_default CROSS JOIN users WHERE users.id = (SELECT id FROM users WHERE name = '{$this->name}')");
+            $this->createIncomeCategoriesAssignedToUser();
+            $this->createExpenseCategoriesAssignedToUser();
+            $this->createPaymentMethodsAssignedToUser();
 
             return true;
         }
         return false;
+    }
+
+    protected function createIncomeCategoriesAssignedToUser()
+    {
+        $sql = "INSERT INTO incomes_category_assigned_to_users (user_id, name, icon_id) 
+                SELECT users.id, incomes_category_default.name, incomes_category_default.icon_id 
+                FROM incomes_category_default CROSS JOIN users 
+                WHERE users.id = (SELECT id FROM users WHERE name = :name)";
+
+        $db = static::getDataBase();
+        $query = $db->prepare($sql);
+        $query->bindValue(':name', $this->name, PDO::PARAM_STR);
+        $query->execute();
+    }
+
+    protected function createExpenseCategoriesAssignedToUser()
+    {
+        $sql = "INSERT INTO expenses_category_assigned_to_users (user_id, name, icon_id) 
+                SELECT users.id, expenses_category_default.name, expenses_category_default.icon_id  
+                FROM expenses_category_default CROSS JOIN users 
+                WHERE users.id = (SELECT id FROM users WHERE name = :name)";
+
+        $db = static::getDataBase();
+        $query = $db->prepare($sql);
+        $query->bindValue(':name', $this->name, PDO::PARAM_STR);
+        $query->execute();
+    }
+
+    protected function createPaymentMethodsAssignedToUser()
+    {
+        $sql = "INSERT INTO payment_methods_assigned_to_users (user_id, name, icon_id) 
+                SELECT users.id, payment_methods_default.name, payment_methods_default.icon_id 
+                FROM payment_methods_default CROSS JOIN users 
+                WHERE users.id = (SELECT id FROM users WHERE name = :name)";
+
+        $db = static::getDataBase();
+        $query = $db->prepare($sql);
+        $query->bindValue(':name', $this->name, PDO::PARAM_STR);
+        $query->execute();
     }
 
     public function validateUser()
