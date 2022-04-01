@@ -9,8 +9,8 @@ class PaymentMethod extends \Core\Model
     public static function findPaymentMethods()
     {
         $sql = "SELECT * 
-                FROM payment_methods_assigned_to_users 
-                WHERE user_id = :userId";
+                FROM payment_methods_assigned_to_users NATURAL JOIN icons
+                WHERE payment_methods_assigned_to_users.user_id = :userId";
 
         $db = static::getDataBase();
         $query = $db->prepare($sql);
