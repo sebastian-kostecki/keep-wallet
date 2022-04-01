@@ -11,11 +11,6 @@ for (let form of forms) {
                     maxlength: 50,
                     remote: '/account/validate-name'
                 },
-                email: {
-                    required: true,
-                    email: true,
-                    remote: '/account/validate-email'
-                },
                 password: {
                     required: true,
                     minlength: 8,
@@ -29,11 +24,6 @@ for (let form of forms) {
                     minlength: 'Imię powinno zawierać co najmniej 3 znaki',
                     maxlength: 'Imię może zawierać maksymalnie 50 znaków',
                     remote: 'Podane imię jest zajęte'
-                },
-                email: {
-                    required: 'Wpisz email',
-                    email: 'Wpisz poprawny email',
-                    remote: 'Podany email jest zajęty'
                 },
                 password: {
                     required: 'Wpisz hasło',
