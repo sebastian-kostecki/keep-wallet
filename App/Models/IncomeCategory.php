@@ -9,8 +9,8 @@ class IncomeCategory extends \Core\Model
     public static function findCategories()
     {
         $sql = "SELECT * 
-                FROM incomes_category_assigned_to_users 
-                WHERE user_id = :userId";
+                FROM incomes_category_assigned_to_users NATURAL JOIN icons
+                WHERE incomes_category_assigned_to_users.user_id = :userId";
 
         $db = static::getDataBase();
         $query = $db->prepare($sql);
