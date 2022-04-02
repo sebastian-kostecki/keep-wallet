@@ -3,6 +3,7 @@ const forms = document.querySelectorAll('.single-form');
 for (let form of forms) {
     $(document).ready(function () {
         $(form).validate({
+            ignore: [],
             rules: {
                 name: {
                     validName: true,
@@ -16,7 +17,6 @@ for (let form of forms) {
                     isDigitInPassword: true
                 },
                 icon: {
-                    required: true,
                     isIconSelect: true
                 },
                 nameCategory: {
@@ -56,8 +56,8 @@ for (let form of forms) {
                 else if (element.attr("name") == "password") {
                     error.insertAfter("#submit-change-password");
                 }
-                else if (element.attr("name") == "nameCategory") {
-                    error.insertAfter(element.next());
+                else if ((element.attr("name") == "nameCategory") || element.attr("name") == "icon") {
+                    error.insertAfter(element.siblings().last());
                 }
                 else if ((element.attr("name") == "oldCategory") || (element.attr("name") == "categoryToDelete[]")) {
                     error.insertAfter(element.parent().nextAll().last());
@@ -110,10 +110,10 @@ $.validator.addMethod('isDigitInPassword',
 
 $.validator.addMethod('isIconSelect',
     function (value, element, param) {
-        if (value == "") {
-            return false;
+        if (value != "") {
+            return true;
         }
-        return true;
+        return false;
     },
     'Wybierz ikonę'
 )

@@ -15,6 +15,3 @@ for (let iconCheckButton of iconCheckButtons) {
         })
     })
 }
-
-
-
