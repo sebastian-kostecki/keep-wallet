@@ -11,6 +11,12 @@ for (let iconCheckButton of iconCheckButtons) {
             let chosenIcon = document.querySelector('.selected-icon-in-modal:checked');
             iconCheckButton.innerHTML = '<i class="' + chosenIcon.value + '">';
             iconCheckButton.nextElementSibling.value = chosenIcon.value;
+
+            const error = document.querySelector('#icon-error');
+            if (error.style.display = 'inline-block') {
+                error.style.display = 'none';
+            }
+
             myModal.toggle();
         })
     })

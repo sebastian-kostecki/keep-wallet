@@ -133,3 +133,4 @@ $.validator.addMethod('isIconSelect',
     },
     'Wybierz ikonę'
 )
+
