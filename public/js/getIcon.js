@@ -15,6 +15,8 @@ for (let iconCheckButton of iconCheckButtons) {
             const error = document.querySelector('#icon-error');
             if (error.style.display = 'inline-block') {
                 error.style.display = 'none';
+            } else {
+                error.style.display = 'inline-block';
             }
 
             myModal.toggle();

@@ -6,12 +6,14 @@ for (let form of forms) {
             ignore: [],
             rules: {
                 name: {
+                    required: true,
                     validName: true,
                     minlength: 3,
                     maxlength: 50,
                     remote: '/account/validate-name'
                 },
                 password: {
+                    required: true,
                     minlength: 8,
                     isLetterInPassword: true,
                     isDigitInPassword: true
