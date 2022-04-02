@@ -17,6 +17,7 @@ for (let form of forms) {
                     isDigitInPassword: true
                 },
                 icon: {
+                    required: true,
                     isIconSelect: true
                 },
                 nameCategory: {
@@ -39,6 +40,9 @@ for (let form of forms) {
                 password: {
                     required: 'Wpisz hasło',
                     minlength: 'Hasło musi zawierać przynajmniej 8 znaków'
+                },
+                icon: {
+                    required: "Wybierz ikonę"
                 },
                 nameCategory: {
                     required: 'Wpisz nazwę kategorii'
