@@ -24,6 +24,9 @@ for (let form of forms) {
                 },
                 oldCategory: {
                     required: true
+                },
+                categoryToDelete: {
+                    required: true
                 }
             },
             messages: {
@@ -41,7 +44,10 @@ for (let form of forms) {
                     required: 'Wpisz nazwę kategorii'
                 },
                 oldCategory: {
-                    required: 'Wybierz kategorię'
+                    required: 'Wybierz kategorię do zmiany'
+                },
+                "categoryToDelete[]": {
+                    required: 'Wybierz kategorię do usunięcia'
                 }
             },
             errorPlacement: function (error, element) {
@@ -53,7 +59,7 @@ for (let form of forms) {
                 else if (element.attr("name") == "nameCategory") {
                     error.insertAfter(element.next());
                 }
-                else if (element.attr("name") == "oldCategory") {
+                else if ((element.attr("name") == "oldCategory") || (element.attr("name") == "categoryToDelete[]")) {
                     error.insertAfter(element.parent().nextAll().last());
                 }
                 else {

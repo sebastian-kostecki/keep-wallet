@@ -63,14 +63,12 @@
                             class="input-group ps-4 single-form">
                             {% for category in incomeCategories %}
                             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-
                                 <input type="radio" class="form-check-input" name="oldCategory"
                                     id="0{{ category.name }}" value="{{ category.id }}" required>
                                 <label for="0{{ category.name }}"
                                     class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
                                     role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name
                                     }}</label>
-
                             </div>
                             {% endfor %}
                             <div class="input-group w-100 me-2">
@@ -93,14 +91,13 @@
                             class="input-group ps-4 single-form">
                             {% for category in incomeCategories %}
                             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                                <div>
-                                    <input type="checkbox" class="form-check-input select-delete-category"
-                                        name="categoryToDelete[]" id="{{ category.name }}" value="{{ category.id }}">
-                                    <label for="{{ category.name }}"
-                                        class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
-                                        role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name
-                                        }}</label>
-                                </div>
+                                <input type="checkbox" class="form-check-input select-delete-category"
+                                    name="categoryToDelete[]" id="{{ category.name }}" value="{{ category.id }}"
+                                    required>
+                                <label for="{{ category.name }}"
+                                    class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
+                                    role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name
+                                    }}</label>
                             </div>
                             {% endfor %}
                             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
