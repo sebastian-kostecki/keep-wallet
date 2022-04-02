@@ -14,6 +14,13 @@ for (let form of forms) {
                     minlength: 8,
                     isLetterInPassword: true,
                     isDigitInPassword: true
+                },
+                icon: {
+                    required: true,
+                    isIconSelect: true
+                },
+                category: {
+                    required: true
                 }
             },
             messages: {
@@ -26,6 +33,9 @@ for (let form of forms) {
                 password: {
                     required: 'Wpisz hasło',
                     minlength: 'Hasło musi zawierać przynajmniej 8 znaków'
+                },
+                category: {
+                    required: 'Wpisz nazwę kategorii'
                 }
             },
             errorPlacement: function (error, element) {
@@ -33,6 +43,9 @@ for (let form of forms) {
                     error.insertAfter("#submit-change-name");
                 else if (element.attr("name") == "password") {
                     error.insertAfter("#submit-change-password");
+                }
+                else if (element.attr("name") == "category") {
+                    error.insertAfter(element.next());
                 }
                 else {
                     error.insertAfter(element);
@@ -78,4 +91,14 @@ $.validator.addMethod('isDigitInPassword',
         return true;
     },
     'Hasło powinno zawierać przynajmniej jedną cyfrę'
+)
+
+$.validator.addMethod('isIconSelect',
+    function (value, element, param) {
+        if (value == "") {
+            return false;
+        }
+        return true;
+    },
+    'Wybierz ikonę'
 )
