@@ -19,7 +19,10 @@ for (let form of forms) {
                     required: true,
                     isIconSelect: true
                 },
-                category: {
+                nameCategory: {
+                    required: true
+                },
+                oldCategory: {
                     required: true
                 }
             },
@@ -34,8 +37,11 @@ for (let form of forms) {
                     required: 'Wpisz hasło',
                     minlength: 'Hasło musi zawierać przynajmniej 8 znaków'
                 },
-                category: {
+                nameCategory: {
                     required: 'Wpisz nazwę kategorii'
+                },
+                oldCategory: {
+                    required: 'Wybierz kategorię'
                 }
             },
             errorPlacement: function (error, element) {
@@ -44,8 +50,11 @@ for (let form of forms) {
                 else if (element.attr("name") == "password") {
                     error.insertAfter("#submit-change-password");
                 }
-                else if (element.attr("name") == "category") {
+                else if (element.attr("name") == "nameCategory") {
                     error.insertAfter(element.next());
+                }
+                else if (element.attr("name") == "oldCategory") {
+                    error.insertAfter(element.parent().nextAll().last());
                 }
                 else {
                     error.insertAfter(element);
