@@ -28,7 +28,13 @@ for (let form of forms) {
                 },
                 categoryToDelete: {
                     required: true
-                }
+                },
+                paymentMethod: {
+                    required: true
+                },
+                oldPaymentMethod: {
+                    required: true
+                },
             },
             messages: {
                 name: {
@@ -52,7 +58,13 @@ for (let form of forms) {
                 },
                 "categoryToDelete[]": {
                     required: 'Wybierz kategorię do usunięcia'
-                }
+                },
+                paymentMethod: {
+                    required: 'Wpisz nazwę sposobu płatności'
+                },
+                oldPaymentMethod: {
+                    required: "Wybierz sposób płatności do zmiany"
+                },
             },
             errorPlacement: function (error, element) {
                 if (element.attr("name") == "name")
@@ -60,10 +72,10 @@ for (let form of forms) {
                 else if (element.attr("name") == "password") {
                     error.insertAfter("#submit-change-password");
                 }
-                else if ((element.attr("name") == "nameCategory") || element.attr("name") == "icon") {
+                else if ((element.attr("name") == "nameCategory") || (element.attr("name") == "icon") || (element.attr("name") == "paymentMethod")) {
                     error.insertAfter(element.siblings().last());
                 }
-                else if ((element.attr("name") == "oldCategory") || (element.attr("name") == "categoryToDelete[]")) {
+                else if ((element.attr("name") == "oldCategory") || (element.attr("name") == "categoryToDelete[]") || (element.attr("name") == "oldPaymentMethod")) {
                     error.insertAfter(element.parent().nextAll().last());
                 }
                 else {

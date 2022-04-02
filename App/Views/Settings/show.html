@@ -191,8 +191,9 @@
                         <form action="/settings/add-payment-method" method="post" class="input-group ps-4 single-form">
                             <button type="button" class="btn button-chosen-icon px-3 fw-light" data-bs-toggle="modal"
                                 data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
-                            <input class="chosen-icon-input-value" type="hidden" name="icon">
-                            <input type="text" class="form-control settings-input border-0" name="paymentMethod">
+                            <input class="chosen-icon-input-value" type="hidden" name="icon" required>
+                            <input type="text" class="form-control settings-input border-0" name="paymentMethod"
+                                required>
                             <button type="submit"
                                 class="btn button-normal px-3 text-uppercase fw-bold me-2">Dodaj</button>
                         </form>
@@ -208,22 +209,20 @@
                             class="input-group ps-4 single-form">
                             {% for category in paymentMethods %}
                             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                                <div>
-                                    <input type="radio" class="form-check-input" name="oldPaymentMethod"
-                                        id="0{{ category.name }}" value="{{ category.id }}">
-                                    <label for="0{{ category.name }}"
-                                        class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
-                                        role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name
-                                        }}</label>
-                                </div>
+                                <input type="radio" class="form-check-input" name="oldPaymentMethod"
+                                    id="0{{ category.name }}" value="{{ category.id }}" required>
+                                <label for="0{{ category.name }}"
+                                    class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
+                                    role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name
+                                    }}</label>
                             </div>
                             {% endfor %}
                             <div class="input-group w-100 me-2">
                                 <button type="button" class="btn button-chosen-icon px-3 fw-light"
                                     data-bs-toggle="modal" data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
-                                <input class="chosen-icon-input-value" type="hidden" name="icon">
-                                <input type="text" class="form-control settings-input border-0"
-                                    name="newPaymentMethodName">
+                                <input class="chosen-icon-input-value" type="hidden" name="icon" required>
+                                <input type="text" class="form-control settings-input border-0" name="paymentMethod"
+                                    required>
                                 <button type="submit"
                                     class="btn button-normal px-3 text-uppercase fw-bold">Zapisz</button>
                             </div>
@@ -238,14 +237,13 @@
                             class="input-group ps-4 single-form">
                             {% for category in paymentMethods %}
                             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                                <div>
-                                    <input type="checkbox" class="form-check-input select-delete-category"
-                                        name="categoryToDelete[]" id="{{ category.name }}" value="{{ category.id }}">
-                                    <label for="{{ category.name }}"
-                                        class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
-                                        role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name
-                                        }}</label>
-                                </div>
+                                <input type="checkbox" class="form-check-input select-delete-category"
+                                    name="categoryToDelete[]" id="{{ category.name }}" value="{{ category.id }}"
+                                    required>
+                                <label for="{{ category.name }}"
+                                    class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
+                                    role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name
+                                    }}</label>
                             </div>
                             {% endfor %}
                             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
