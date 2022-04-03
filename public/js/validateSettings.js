@@ -1,9 +1,22 @@
 const forms = document.querySelectorAll('.single-form');
 
+const submitFormsButtons = document.querySelectorAll('button[type=submit]');
+const confirmModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {
+    keyboard: false
+})
+const confirmButton = document.querySelector('#confirm-changes-button');
+
 for (let form of forms) {
     $(document).ready(function () {
         $(form).validate({
             ignore: [],
+            submitHandler: function (f, event) {
+                confirmModal.toggle();
+                confirmButton.addEventListener('click', function () {
+                    confirmModal.toggle();
+                    f.submit();
+                })
+            },
             rules: {
                 name: {
                     required: true,
