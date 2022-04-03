@@ -58,8 +58,11 @@ class Settings extends Authenticated
         $incomeCategory = new IncomeCategory($_POST);
 
         if ($incomeCategory->save()) {
-            Flash::addMessage("Dodałeś nową kategorię wydatku");
+            Flash::addMessage("Dodałeś nową kategorię przychodów");
             $this->redirect('/menu');
+        } else {
+            Flash::addMessage("Nieudane dodanie nowej kategorii przychodów", Flash::DANGER);
+            $this->redirect('/settings');
         }
     }
 
