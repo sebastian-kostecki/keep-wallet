@@ -55,7 +55,12 @@ class Settings extends Authenticated
 
     public function addIncomeCategoryAction()
     {
-        var_dump($_POST);
+        $incomeCategory = new IncomeCategory($_POST);
+
+        if ($incomeCategory->save()) {
+            Flash::addMessage("Dodałeś nową kategorię wydatku");
+            $this->redirect('/menu');
+        }
     }
 
     public function changeIncomeCategoryAction()
