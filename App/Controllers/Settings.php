@@ -68,7 +68,14 @@ class Settings extends Authenticated
 
     public function changeIncomeCategoryAction()
     {
-        var_dump($_POST);
+        $incomeCategory = new IncomeCategory($_POST);
+        if ($incomeCategory->change()) {
+            Flash::addMessage("Zmieniłeś kategorię przychodu");
+            $this->redirect('/menu');
+        } else {
+            Flash::addMessage("Nieudana zmiana kategorii przychodów", Flash::DANGER);
+            $this->redirect('/settings');
+        }
     }
 
     public function deleteIncomeCategoryAction()
