@@ -335,4 +335,25 @@ class User extends \Core\Model
         }
         return false;
     }
+
+    public function changeName($name)
+    {
+        $this->name = $name;
+        $this->validateUser();
+
+        if (empty($this->errors)) {
+
+            $sql = 'UPDATE users 
+                    SET name = :name
+                    WHERE id = :id';
+
+            $db = static::getDataBase();
+            $query = $db->prepare($sql);
+            $query->bindValue(':id', $this->id, PDO::PARAM_INT);
+            $query->bindValue(':name', $this->name, PDO::PARAM_STR);
+
+            return $query->execute();
+        }
+        return false;
+    }
 }

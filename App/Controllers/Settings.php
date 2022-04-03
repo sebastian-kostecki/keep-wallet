@@ -7,6 +7,8 @@ use App\Models\IncomeCategory;
 use App\Models\ExpenseCategory;
 use App\Models\PaymentMethod;
 use App\Models\Icon;
+use App\Models\User;
+use App\Flash;
 
 class Settings extends Authenticated
 {
@@ -27,7 +29,15 @@ class Settings extends Authenticated
 
     public function changeNameAction()
     {
-        var_dump($_POST);
+        $user = User::findByID($_SESSION['userId']);
+
+        if ($user->changeName($_POST['name'])) {
+            Flash::addMessage("Zmieniłeś nazwę użytkownika");
+            $this->redirect('/menu');
+        } else {
+            Flash::addMessage("Nieudana zmiana nazwy użytkownika", Flash::DANGER);
+            $this->redirect('/settings');
+        }
     }
 
     public function changePasswordAction()
