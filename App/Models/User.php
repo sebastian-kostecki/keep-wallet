@@ -356,4 +356,26 @@ class User extends \Core\Model
         }
         return false;
     }
+
+    public function changePassword($password)
+    {
+        $this->password = $password;
+        $this->validateUser();
+
+        if (empty($this->errors)) {
+            $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
+
+            $sql = 'UPDATE users 
+                    SET password = :password_hash
+                    WHERE id = :id';
+
+            $db = static::getDataBase();
+            $query = $db->prepare($sql);
+            $query->bindValue(':id', $this->id, PDO::PARAM_INT);
+            $query->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
+
+            return $query->execute();
+        }
+        return false;
+    }
 }

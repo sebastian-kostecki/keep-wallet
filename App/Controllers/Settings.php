@@ -42,7 +42,15 @@ class Settings extends Authenticated
 
     public function changePasswordAction()
     {
-        var_dump($_POST);
+        $user = User::findByID($_SESSION['userId']);
+
+        if ($user->changePassword($_POST['password'])) {
+            Flash::addMessage("Zmieniłeś hasło");
+            $this->redirect('/menu');
+        } else {
+            Flash::addMessage("Nieudana zmiana hasła", Flash::DANGER);
+            $this->redirect('/settings');
+        }
     }
 
     public function addIncomeCategoryAction()
