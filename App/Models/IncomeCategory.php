@@ -58,27 +58,6 @@ class IncomeCategory extends BudgetCategory
         return false;
     }
 
-    public function delete()
-    {
-        foreach ($this->categoryToDelete as $categoryId) {
-            if (static::assignDeletedCategoriesIncomesToOtherIncomes($categoryId)) {
-                $sql = 'DELETE FROM incomes_category_assigned_to_users 
-                        WHERE id = :idCategory';
-
-                $db = static::getDataBase();
-                $query = $db->prepare($sql);
-
-                $query->bindValue(':idCategory', $categoryId, PDO::PARAM_INT);
-                if (!($query->execute())) {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        }
-        return true;
-    }
-
     protected static function assignDeletedCategoriesIncomesToOtherIncomes($categoryId)
     {
         $sql = 'UPDATE incomes
@@ -91,5 +70,26 @@ class IncomeCategory extends BudgetCategory
         $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
         $query->bindValue(':idDeletedCategory', $categoryId, PDO::PARAM_INT);
         return $query->execute();
+    }
+
+    public static function remove($categoriesToDelete)
+    {
+        foreach ($categoriesToDelete as $categoryToDelete) {
+            if (static::assignDeletedCategoriesIncomesToOtherIncomes($categoryToDelete)) {
+                $sql = 'DELETE FROM incomes_category_assigned_to_users 
+                        WHERE id = :idCategory';
+
+                $db = static::getDataBase();
+                $query = $db->prepare($sql);
+
+                $query->bindValue(':idCategory', $categoryToDelete, PDO::PARAM_INT);
+                if ($query->execute() == false) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        return true;
     }
 }
