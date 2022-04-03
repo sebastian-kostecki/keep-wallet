@@ -12,12 +12,8 @@ for (let iconCheckButton of iconCheckButtons) {
             iconCheckButton.innerHTML = '<i class="' + chosenIcon.value + '">';
             iconCheckButton.nextElementSibling.value = chosenIcon.value;
 
-            const error = document.querySelector('#icon-error');
-            if (error.style.display = 'inline-block') {
-                error.style.display = 'none';
-            } else {
-                error.style.display = 'inline-block';
-            }
+            let validator = $($(iconCheckButton).parent().parent()).validate();
+            validator.element($(iconCheckButton).next());
 
             myModal.toggle();
         })

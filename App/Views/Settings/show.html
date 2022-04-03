@@ -44,13 +44,15 @@
                     <h2 id="add-income-category" class="setting-list fs-5 mt-3 ps-4">Dodaj</h2>
                     <div class="settings-form add-income-category pb-2">
                         <form action="/settings/add-income-category" method="post" class="input-group ps-4 single-form">
-                            <button type="button" class="btn button-chosen-icon px-3 fw-light" data-bs-toggle="modal"
-                                data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
-                            <input class="chosen-icon-input-value" type="hidden" name="icon">
-                            <input type="text" class="form-control settings-input border-0" name="nameCategory"
-                                required>
-                            <button type="submit"
-                                class="btn button-normal px-3 text-uppercase fw-bold me-2">Dodaj</button>
+                            <div class="input-group">
+                                <button type="button" class="btn button-chosen-icon px-3 fw-light"
+                                    data-bs-toggle="modal" data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
+                                <input class="chosen-icon-input-value" type="hidden" name="icon" required>
+                                <input type="text" class="form-control settings-input border-0" name="nameCategory"
+                                    required>
+                                <button type="submit"
+                                    class="btn button-normal px-3 text-uppercase fw-bold me-2">Dodaj</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -74,7 +76,7 @@
                             <div class="input-group w-100 me-2">
                                 <button type="button" class="btn button-chosen-icon px-3 fw-light"
                                     data-bs-toggle="modal" data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
-                                <input class="chosen-icon-input-value" type="hidden" name="icon">
+                                <input class="chosen-icon-input-value" type="hidden" name="icon" required>
                                 <input type="text" class="form-control settings-input border-0" name="nameCategory"
                                     required>
                                 <button type="submit"
@@ -117,13 +119,15 @@
                     <div class="settings-form add-expense-category pb-2">
                         <form action="/settings/add-expense-category" method="post"
                             class="input-group ps-4 single-form">
-                            <button type="button" class="btn button-chosen-icon px-3 fw-light" data-bs-toggle="modal"
-                                data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
-                            <input class="chosen-icon-input-value" type="hidden" name="icon" required>
-                            <input type="text" class="form-control settings-input border-0" name="nameCategory"
-                                required>
-                            <button type="submit"
-                                class="btn button-normal px-3 text-uppercase fw-bold me-2">Dodaj</button>
+                            <div class="input-group">
+                                <button type="button" class="btn button-chosen-icon px-3 fw-light"
+                                    data-bs-toggle="modal" data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
+                                <input class="chosen-icon-input-value" type="hidden" name="icon" required>
+                                <input type="text" class="form-control settings-input border-0" name="nameCategory"
+                                    required>
+                                <button type="submit"
+                                    class="btn button-normal px-3 text-uppercase fw-bold me-2">Dodaj</button>
+                            </div>
                         </form>
                     </div>
                 </div>
@@ -189,13 +193,15 @@
                     <h2 id="add-payment-method" class="setting-list fs-5 mt-3 ps-4">Dodaj</h2>
                     <div class="settings-form add-payment-method pb-2">
                         <form action="/settings/add-payment-method" method="post" class="input-group ps-4 single-form">
-                            <button type="button" class="btn button-chosen-icon px-3 fw-light" data-bs-toggle="modal"
-                                data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
-                            <input class="chosen-icon-input-value" type="hidden" name="icon" required>
-                            <input type="text" class="form-control settings-input border-0" name="paymentMethod"
-                                required>
-                            <button type="submit"
-                                class="btn button-normal px-3 text-uppercase fw-bold me-2">Dodaj</button>
+                            <div class="input-group">
+                                <button type="button" class="btn button-chosen-icon px-3 fw-light"
+                                    data-bs-toggle="modal" data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
+                                <input class="chosen-icon-input-value" type="hidden" name="icon" required>
+                                <input type="text" class="form-control settings-input border-0" name="paymentMethod"
+                                    required>
+                                <button type="submit"
+                                    class="btn button-normal px-3 text-uppercase fw-bold me-2">Dodaj</button>
+                            </div>
                         </form>
                     </div>
                 </div>
