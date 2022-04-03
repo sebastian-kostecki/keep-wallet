@@ -57,4 +57,21 @@ class IncomeCategory extends BudgetCategory
         }
         return false;
     }
+
+    public function delete()
+    {
+        foreach ($this->categoryToDelete as $category) {
+            $sql = 'DELETE FROM incomes_category_assigned_to_users 
+                    WHERE id = :idCategory';
+
+            $db = static::getDataBase();
+            $query = $db->prepare($sql);
+
+            $query->bindValue(':idCategory', $category, PDO::PARAM_INT);
+            if (!($query->execute())) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

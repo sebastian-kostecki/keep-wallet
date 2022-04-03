@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-abstract class BudgetCategory extends \Core\Model
+class BudgetCategory extends \Core\Model
 {
     public $errors = [];
 

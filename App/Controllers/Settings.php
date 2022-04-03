@@ -80,7 +80,15 @@ class Settings extends Authenticated
 
     public function deleteIncomeCategoryAction()
     {
-        var_dump($_POST);
+        $incomeCategoryToDelete = new IncomeCategory($_POST);
+
+        if ($incomeCategoryToDelete->delete()) {
+            Flash::addMessage("Usunąłeś wybranego kategorie przychodów");
+            $this->redirect('/menu');
+        } else {
+            Flash::addMessage("Nieudane usunięcie kategorii przychodów", Flash::DANGER);
+            $this->redirect('/settings');
+        }
     }
 
     public function addExpenseCategoryAction()
