@@ -19,8 +19,7 @@ for (let form of forms) {
                     isDigitInPassword: true
                 },
                 icon: {
-                    required: true,
-                    isIconSelect: true
+                    required: true
                 },
                 nameCategory: {
                     required: true
@@ -88,10 +87,8 @@ for (let form of forms) {
     });
 }
 
-
-
 $.validator.addMethod('validName',
-    function (value, element, param) {
+    function (value) {
         if (value != '') {
             if (value.match(/.*[$&+,:;=?[\]@#|{}'<>.^*()%!-/]+.*/i)) {
                 return false;
@@ -103,7 +100,7 @@ $.validator.addMethod('validName',
 )
 
 $.validator.addMethod('isLetterInPassword',
-    function (value, element, param) {
+    function (value) {
         if (value != '') {
             if (value.match(/.*[a-z]+.*/i) == null) {
                 return false;
@@ -115,7 +112,7 @@ $.validator.addMethod('isLetterInPassword',
 )
 
 $.validator.addMethod('isDigitInPassword',
-    function (value, element, param) {
+    function (value) {
         if (value != '') {
             if (value.match(/.*\d+.*/) == null) {
                 return false;
@@ -124,15 +121,5 @@ $.validator.addMethod('isDigitInPassword',
         return true;
     },
     'Hasło powinno zawierać przynajmniej jedną cyfrę'
-)
-
-$.validator.addMethod('isIconSelect',
-    function (value, element, param) {
-        if (value != "") {
-            return true;
-        }
-        return false;
-    },
-    'Wybierz ikonę'
 )
 

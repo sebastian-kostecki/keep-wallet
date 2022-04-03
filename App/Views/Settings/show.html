@@ -43,6 +43,7 @@
                 <div>
                     <h2 id="add-income-category" class="setting-list fs-5 mt-3 ps-4">Dodaj</h2>
                     <div class="settings-form add-income-category pb-2">
+                        <h3 class="fs-6 fw-light mt-1 ps-4">Wybierz ikonę oraz wpisz nazwę nowej kategorii</h3>
                         <form action="/settings/add-income-category" method="post" class="input-group ps-4 single-form">
                             <div class="input-group">
                                 <button type="button" class="btn button-chosen-icon px-3 fw-light"
@@ -117,6 +118,7 @@
                 <div>
                     <h2 id="add-expense-category" class="setting-list fs-5 mt-3 ps-4">Dodaj</h2>
                     <div class="settings-form add-expense-category pb-2">
+                        <h3 class="fs-6 fw-light mt-1 ps-4">Wybierz ikonę oraz wpisz nazwę nowej kategorii</h3>
                         <form action="/settings/add-expense-category" method="post"
                             class="input-group ps-4 single-form">
                             <div class="input-group">
@@ -192,6 +194,7 @@
                 <div>
                     <h2 id="add-payment-method" class="setting-list fs-5 mt-3 ps-4">Dodaj</h2>
                     <div class="settings-form add-payment-method pb-2">
+                        <h3 class="fs-6 fw-light mt-1 ps-4">Wybierz ikonę oraz wpisz nazwę nowego sposobu płatności</h3>
                         <form action="/settings/add-payment-method" method="post" class="input-group ps-4 single-form">
                             <div class="input-group">
                                 <button type="button" class="btn button-chosen-icon px-3 fw-light"
@@ -238,7 +241,7 @@
                 <div>
                     <h2 id="delete-payment-method" class="setting-list fs-5 mt-3 ps-4 pb-1">Usuń</h2>
                     <div class="settings-form delete-payment-method">
-                        <h3 class="fs-6 fw-light mt-1 ps-4">Wybierz sposób płatności do usunięcia</h3>
+                        <h3 class="fs-6 fw-light mt-1 ps-4">Wybierz sposoby płatności do usunięcia</h3>
                         <form action="/settings/delete-payment-method" method="post"
                             class="input-group ps-4 single-form">
                             {% for category in paymentMethods %}
@@ -294,7 +297,6 @@
 
 {% block footer %}
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
-<script src="/js/validateIncome.js"></script>
 <script src="/js/hideShowPassword.js"></script>
 <script src="/js/hideShowSettings.js"></script>
 <script src="\js\getIcon.js"></script>
