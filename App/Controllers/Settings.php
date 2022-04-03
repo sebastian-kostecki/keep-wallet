@@ -83,7 +83,7 @@ class Settings extends Authenticated
         $categoriesToDelete = $_POST['categoryToDelete'];
 
         if (IncomeCategory::remove($categoriesToDelete)) {
-            Flash::addMessage("Usunąłeś wybrane kategorie przychodów");
+            Flash::addMessage("Usunąłeś kategorię przychodów");
             $this->redirect('/menu');
         } else {
             Flash::addMessage("Nieudane usunięcie kategorii przychodów", Flash::DANGER);
@@ -93,7 +93,15 @@ class Settings extends Authenticated
 
     public function addExpenseCategoryAction()
     {
-        var_dump($_POST);
+        $expenseCategory = new ExpenseCategory($_POST);
+
+        if ($expenseCategory->save()) {
+            Flash::addMessage("Dodałeś nową kategorię wydatków");
+            $this->redirect('/menu');
+        } else {
+            Flash::addMessage("Nieudane dodanie nowej kategorii wydatków", Flash::DANGER);
+            $this->redirect('/settings');
+        }
     }
 
     public function changeExpenseCategoryAction()
