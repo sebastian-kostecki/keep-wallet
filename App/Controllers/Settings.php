@@ -106,7 +106,15 @@ class Settings extends Authenticated
 
     public function changeExpenseCategoryAction()
     {
-        var_dump($_POST);
+        $expenseCategory = new ExpenseCategory($_POST);
+
+        if ($expenseCategory->change()) {
+            Flash::addMessage("Zmieniłeś kategorię wydatków");
+            $this->redirect('/menu');
+        } else {
+            Flash::addMessage("Nieudana zmiana kategorii wydatków", Flash::DANGER);
+            $this->redirect('/settings');
+        }
     }
 
     public function deleteExpenseCategoryAction()
