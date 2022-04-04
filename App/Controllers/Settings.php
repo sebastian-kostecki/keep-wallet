@@ -119,7 +119,15 @@ class Settings extends Authenticated
 
     public function deleteExpenseCategoryAction()
     {
-        var_dump($_POST);
+        $categoriesToDelete = $_POST['categoryToDelete'];
+
+        if (ExpenseCategory::remove($categoriesToDelete)) {
+            Flash::addMessage("Usunąłeś kategorie wydatków");
+            $this->redirect('/menu');
+        } else {
+            Flash::addMessage("Nieudane usunięcie kategorii wydatków", Flash::DANGER);
+            $this->redirect('/settings');
+        }
     }
 
     public function addPaymentMethodAction()
