@@ -6,6 +6,8 @@ use PDO;
 
 class PaymentMethod extends BudgetCategory
 {
+    protected const NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS = "payment_methods_assigned_to_users";
+
     public static function findPaymentMethods()
     {
         $sql = "SELECT * 
@@ -19,22 +21,6 @@ class PaymentMethod extends BudgetCategory
 
         $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
         return $query->fetchAll();
-    }
-
-    public function save()
-    {
-        if (empty($this->errors)) {
-            $sql = "INSERT INTO payment_methods_assigned_to_users
-                    VALUES (NULL, :userId, :namePaymentMethod, (SELECT icon_id FROM icons WHERE icon = :nameIcon))";
-
-            $db = static::getDataBase();
-            $query = $db->prepare($sql);
-            $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
-            $query->bindValue(':namePaymentMethod', $this->name, PDO::PARAM_STR);
-            $query->bindValue(':nameIcon', $this->icon, PDO::PARAM_STR);
-            return $query->execute();
-        }
-        return false;
     }
 
     public function change()

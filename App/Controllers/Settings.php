@@ -80,7 +80,7 @@ class Settings extends Authenticated
 
     public function deleteIncomeCategoryAction()
     {
-        $categoriesToDelete = $_POST['categoryToDelete'];
+        $categoriesToDelete = $_POST['categoriesToDelete'];
 
         if (IncomeCategory::remove($categoriesToDelete)) {
             Flash::addMessage("Usunąłeś kategorię przychodów");
@@ -119,7 +119,7 @@ class Settings extends Authenticated
 
     public function deleteExpenseCategoryAction()
     {
-        $categoriesToDelete = $_POST['categoryToDelete'];
+        $categoriesToDelete = $_POST['categoriesToDelete'];
 
         if (ExpenseCategory::remove($categoriesToDelete)) {
             Flash::addMessage("Usunąłeś kategorie wydatków");

@@ -6,6 +6,8 @@ use PDO;
 
 class ExpenseCategory extends BudgetCategory
 {
+    protected const NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS = "expenses_category_assigned_to_users";
+
     public static function findCategories()
     {
         $sql = "SELECT * 
@@ -21,21 +23,7 @@ class ExpenseCategory extends BudgetCategory
         return $query->fetchAll();
     }
 
-    public function save()
-    {
-        if (empty($this->errors)) {
-            $sql = "INSERT INTO expenses_category_assigned_to_users
-                    VALUES (NULL, :userId, :nameCategory, (SELECT icon_id FROM icons WHERE icon = :nameIcon))";
-
-            $db = static::getDataBase();
-            $query = $db->prepare($sql);
-            $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
-            $query->bindValue(':nameCategory', $this->name, PDO::PARAM_STR);
-            $query->bindValue(':nameIcon', $this->icon, PDO::PARAM_STR);
-            return $query->execute();
-        }
-        return false;
-    }
+    
 
     public function change()
     {
