@@ -158,6 +158,8 @@ class Settings extends Authenticated
 
     public function deletePaymentMethodAction()
     {
-        var_dump($_POST);
+        $categoriesToDelete = new PaymentMethod($_POST);
+        $categoriesToDelete->delete();
+        //var_dump($categoriesToDelete);
     }
 }
