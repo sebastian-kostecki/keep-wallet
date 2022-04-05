@@ -132,7 +132,15 @@ class Settings extends Authenticated
 
     public function addPaymentMethodAction()
     {
-        var_dump($_POST);
+        $paymentMethod = new PaymentMethod($_POST);
+
+        if ($paymentMethod->save()) {
+            Flash::addMessage("Dodałeś nowy sposób płatności");
+            $this->redirect('/menu');
+        } else {
+            Flash::addMessage("Nieudane dodanie nowego sposobu płatności", Flash::DANGER);
+            $this->redirect('/settings');
+        }
     }
 
     public function changePaymentMethodAction()
