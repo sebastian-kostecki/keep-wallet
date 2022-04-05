@@ -23,29 +23,6 @@ class ExpenseCategory extends BudgetCategory
         return $query->fetchAll();
     }
 
-    
-
-    public function change()
-    {
-        $this->validate();
-
-        if (empty($this->errors)) {
-
-            $sql = 'UPDATE expenses_category_assigned_to_users 
-                    SET name = :nameCategory, icon_id = (SELECT icon_id FROM icons WHERE icon = :nameIcon)
-                    WHERE id = :idOldCategory';
-
-            $db = static::getDataBase();
-            $query = $db->prepare($sql);
-
-            $query->bindValue(':nameCategory', $this->name, PDO::PARAM_STR);
-            $query->bindValue(':nameIcon', $this->icon, PDO::PARAM_STR);
-            $query->bindValue(':idOldCategory', $this->oldCategory, PDO::PARAM_INT);
-            return $query->execute();
-        }
-        return false;
-    }
-
     protected static function assignDeletedCategoriesExpensesToOtherExpenses($categoryId)
     {
         $sql = 'UPDATE expenses

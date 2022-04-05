@@ -49,4 +49,25 @@ class BudgetCategory extends \Core\Model
         }
         return false;
     }
+
+    public function change()
+    {
+        $this->validate();
+
+        if (empty($this->errors)) {
+
+            $sql = "UPDATE {$this->getName()}
+                    SET name = :nameCategory, icon_id = (SELECT icon_id FROM icons WHERE icon = :nameIcon)
+                    WHERE id = :idPreviousCategory";
+
+            $db = static::getDataBase();
+            $query = $db->prepare($sql);
+
+            $query->bindValue(':nameCategory', $this->name, PDO::PARAM_STR);
+            $query->bindValue(':nameIcon', $this->icon, PDO::PARAM_STR);
+            $query->bindValue(':idPreviousCategory', $this->previousCategory, PDO::PARAM_INT);
+            return $query->execute();
+        }
+        return false;
+    }
 }
