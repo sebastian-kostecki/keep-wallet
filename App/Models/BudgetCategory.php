@@ -15,7 +15,7 @@ class BudgetCategory extends \Core\Model
 
     public function validate()
     {
-        if ($this->nameCategory == '') {
+        if ($this->name == '') {
             $this->errors[] = 'Wpisz nazwę kategorii';
         }
 

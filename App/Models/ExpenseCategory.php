@@ -30,7 +30,7 @@ class ExpenseCategory extends BudgetCategory
             $db = static::getDataBase();
             $query = $db->prepare($sql);
             $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
-            $query->bindValue(':nameCategory', $this->nameCategory, PDO::PARAM_STR);
+            $query->bindValue(':nameCategory', $this->name, PDO::PARAM_STR);
             $query->bindValue(':nameIcon', $this->icon, PDO::PARAM_STR);
             return $query->execute();
         }
@@ -50,7 +50,7 @@ class ExpenseCategory extends BudgetCategory
             $db = static::getDataBase();
             $query = $db->prepare($sql);
 
-            $query->bindValue(':nameCategory', $this->nameCategory, PDO::PARAM_STR);
+            $query->bindValue(':nameCategory', $this->name, PDO::PARAM_STR);
             $query->bindValue(':nameIcon', $this->icon, PDO::PARAM_STR);
             $query->bindValue(':idOldCategory', $this->oldCategory, PDO::PARAM_INT);
             return $query->execute();

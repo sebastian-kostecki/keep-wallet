@@ -145,7 +145,15 @@ class Settings extends Authenticated
 
     public function changePaymentMethodAction()
     {
-        var_dump($_POST);
+        $paymentMethod = new PaymentMethod($_POST);
+
+        if ($paymentMethod->change()) {
+            Flash::addMessage("Zmieniłeś wybrany sposób płatności");
+            $this->redirect('/menu');
+        } else {
+            Flash::addMessage("Nieudana zmiana sposobu płatności", Flash::DANGER);
+            $this->redirect('/settings');
+        }
     }
 
     public function deletePaymentMethodAction()
