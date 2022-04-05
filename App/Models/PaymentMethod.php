@@ -99,14 +99,30 @@ class PaymentMethod extends BudgetCategory
     public function delete()
     {
         foreach ($this->categoriesToDelete as $category) {
-            $sql = 'DELETE FROM payment_methods_assigned_to_users 
-            WHERE id = :idCategory';
+            if (static::assingItemDeletedCategoryToOthers($category)) {
+                $sql = 'DELETE FROM payment_methods_assigned_to_users 
+                WHERE id = :idCategory';
 
-            $db = static::getDataBase();
-            $query = $db->prepare($sql);
+                $db = static::getDataBase();
+                $query = $db->prepare($sql);
 
-            $query->bindValue(':idCategory', $category, PDO::PARAM_INT);
-            $query->execute();
+                $query->bindValue(':idCategory', $category, PDO::PARAM_INT);
+                $query->execute();
+            }
         }
+    }
+
+    protected static function assingItemDeletedCategoryToOthers($deletedCategory)
+    {
+        $sql = 'UPDATE expenses
+                SET payment_method_assigned_to_user_id = (SELECT id FROM payment_methods_assigned_to_users WHERE name = "Inny" AND user_id = :userId)
+                WHERE payment_method_assigned_to_user_id = :idDeletedCategory';
+
+        $db = static::getDataBase();
+        $query = $db->prepare($sql);
+
+        $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+        $query->bindValue(':idDeletedCategory', $deletedCategory, PDO::PARAM_INT);
+        return $query->execute();
     }
 }
