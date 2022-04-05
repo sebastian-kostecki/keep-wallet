@@ -7,6 +7,9 @@ use PDO;
 class ExpenseCategory extends BudgetCategory
 {
     protected const NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS = "expenses_category_assigned_to_users";
+    protected const NAME_COLUMN_WITH_BUDGET_ITEMS_ASSIGNED_TO_USER_ID = "expense_category_assigned_to_user_id";
+    protected const NAME_TABLE_WITH_BUDGET_ITEMS = "expenses";
+    protected const NAME_CATEGORY_WITH_ASSIGNED_BUDGET_ITEMS_AFTER_REMOVED_CATEGORY = "Inne wydatki";
 
     public static function findCategories()
     {
@@ -21,40 +24,5 @@ class ExpenseCategory extends BudgetCategory
 
         $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
         return $query->fetchAll();
-    }
-
-    protected static function assignDeletedCategoriesExpensesToOtherExpenses($categoryId)
-    {
-        $sql = 'UPDATE expenses
-                SET expense_category_assigned_to_user_id = (SELECT id FROM expenses_category_assigned_to_users WHERE name = "Inne przychody" AND user_id = :userId)
-                WHERE expense_category_assigned_to_user_id = :idDeletedCategory';
-
-        $db = static::getDataBase();
-        $query = $db->prepare($sql);
-
-        $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
-        $query->bindValue(':idDeletedCategory', $categoryId, PDO::PARAM_INT);
-        return $query->execute();
-    }
-
-    public static function remove($categoriesToDelete)
-    {
-        foreach ($categoriesToDelete as $categoryToDelete) {
-            if (static::assignDeletedCategoriesExpensesToOtherExpenses($categoryToDelete)) {
-                $sql = 'DELETE FROM expenses_category_assigned_to_users 
-                        WHERE id = :idCategory';
-
-                $db = static::getDataBase();
-                $query = $db->prepare($sql);
-
-                $query->bindValue(':idCategory', $categoryToDelete, PDO::PARAM_INT);
-                if ($query->execute() == false) {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        }
-        return true;
     }
 }

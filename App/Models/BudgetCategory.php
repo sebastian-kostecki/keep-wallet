@@ -7,6 +7,10 @@ use PDO;
 class BudgetCategory extends \Core\Model
 {
     protected const NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS = "";
+    protected const NAME_COLUMN_WITH_BUDGET_ITEMS_ASSIGNED_TO_USER_ID = "";
+    protected const NAME_TABLE_WITH_BUDGET_ITEMS = "";
+    protected const NAME_CATEGORY_WITH_ASSIGNED_BUDGET_ITEMS_AFTER_REMOVED_CATEGORY = "";
+
     public $errors = [];
 
     public function __construct($data = [])
@@ -16,9 +20,24 @@ class BudgetCategory extends \Core\Model
         }
     }
 
-    public function getName(): string
+    public function getNameTableWithBudgetItemsAssignedToUsers(): string
     {
         return static::NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS;
+    }
+
+    public function getNameTableWithBudgetItems(): string
+    {
+        return static::NAME_TABLE_WITH_BUDGET_ITEMS;
+    }
+
+    public function getCategoryWithAssignedBudgetItemsAfterRemovecCategory(): string
+    {
+        return static::NAME_CATEGORY_WITH_ASSIGNED_BUDGET_ITEMS_AFTER_REMOVED_CATEGORY;
+    }
+
+    public function getNameColumnWithBudgetItemsAssignedToUserId(): string
+    {
+        return static::NAME_COLUMN_WITH_BUDGET_ITEMS_ASSIGNED_TO_USER_ID;
     }
 
     public function validate()
@@ -35,7 +54,7 @@ class BudgetCategory extends \Core\Model
     public function save()
     {
         if (empty($this->errors)) {
-            $sql = "INSERT INTO {$this->getName()}
+            $sql = "INSERT INTO {$this->getNameTableWithBudgetItemsAssignedToUsers()}
                     VALUES (NULL, :userId, :nameCategory, (SELECT icon_id FROM icons WHERE icon = :nameIcon))";
 
             $db = static::getDataBase();
@@ -56,7 +75,7 @@ class BudgetCategory extends \Core\Model
 
         if (empty($this->errors)) {
 
-            $sql = "UPDATE {$this->getName()}
+            $sql = "UPDATE {$this->getNameTableWithBudgetItemsAssignedToUsers()}
                     SET name = :nameCategory, icon_id = (SELECT icon_id FROM icons WHERE icon = :nameIcon)
                     WHERE id = :idPreviousCategory";
 
@@ -69,5 +88,30 @@ class BudgetCategory extends \Core\Model
             return $query->execute();
         }
         return false;
+    }
+
+    public function delete()
+    {
+        foreach ($this->categoriesToDelete as $category) {
+            $sql = "DELETE FROM {$this->getNameTableWithBudgetItemsAssignedToUsers()} 
+                    WHERE id = :idCategory;
+                    
+                    UPDATE {$this->getNameTableWithBudgetItems()}
+                    SET {$this->getNameColumnWithBudgetItemsAssignedToUserId()} = 
+                        (SELECT id 
+                        FROM {$this->getNameTableWithBudgetItemsAssignedToUsers()}  
+                        WHERE name = {$this->getCategoryWithAssignedBudgetItemsAfterRemovecCategory()} AND user_id = :userId)
+                    WHERE  {$this->getNameColumnWithBudgetItemsAssignedToUserId()} = :idCategory";
+
+            $db = static::getDataBase();
+            $query = $db->prepare($sql);
+
+            $query->bindValue(':idCategory', $category, PDO::PARAM_INT);
+            $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+            if ($query->execute() == false) {
+                return false;
+            };
+        }
+        return true;
     }
 }

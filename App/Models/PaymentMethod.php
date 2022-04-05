@@ -7,6 +7,9 @@ use PDO;
 class PaymentMethod extends BudgetCategory
 {
     protected const NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS = "payment_methods_assigned_to_users";
+    protected const NAME_COLUMN_WITH_BUDGET_ITEMS_ASSIGNED_TO_USER_ID = "payment_method_assigned_to_user_id";
+    protected const NAME_TABLE_WITH_BUDGET_ITEMS = "expenses";
+    protected const NAME_CATEGORY_WITH_ASSIGNED_BUDGET_ITEMS_AFTER_REMOVED_CATEGORY = "Inny";
 
     public static function findPaymentMethods()
     {
@@ -23,61 +26,42 @@ class PaymentMethod extends BudgetCategory
         return $query->fetchAll();
     }
 
-    public static function remove($paymentMehodsToDelete)
-    {
-        foreach ($paymentMehodsToDelete as $paymentMethodToDelete) {
-            if (static::assignDeletedCategoriesIncomesToOtherIncomes($paymentMethodToDelete)) {
-                $sql = 'DELETE FROM payment_methods_assigned_to_users 
-                        WHERE id = :idCategory';
+    // public static function remove($paymentMehodsToDelete)
+    // {
+    //     foreach ($paymentMehodsToDelete as $paymentMethodToDelete) {
+    //         if (static::assignDeletedCategoriesIncomesToOtherIncomes($paymentMethodToDelete)) {
+    //             $sql = 'DELETE FROM payment_methods_assigned_to_users 
+    //                     WHERE id = :idCategory';
 
-                $db = static::getDataBase();
-                $query = $db->prepare($sql);
+    //             $db = static::getDataBase();
+    //             $query = $db->prepare($sql);
 
-                $query->bindValue(':idCategory', $paymentMethodToDelete, PDO::PARAM_INT);
-                if ($query->execute() == false) {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        }
-        return true;
-    }
+    //             $query->bindValue(':idCategory', $paymentMethodToDelete, PDO::PARAM_INT);
+    //             if ($query->execute() == false) {
+    //                 return false;
+    //             }
+    //         } else {
+    //             return false;
+    //         }
+    //     }
+    //     return true;
+    // }
 
-    protected static function assignDeletedCategoriesIncomesToOtherIncomes($categoryId)
-    {
-        $sql = 'UPDATE expenses
-                SET payment_method_assigned_to_user_id = (SELECT id FROM incomes_category_assigned_to_users WHERE name = "Inne przychody" AND user_id = :userId)
-                WHERE income_category_assigned_to_user_id = :idDeletedCategory';
+    // protected static function assignDeletedCategoriesIncomesToOtherIncomes($categoryId)
+    // {
+    //     $sql = 'UPDATE expenses
+    //             SET payment_method_assigned_to_user_id = (SELECT id FROM incomes_category_assigned_to_users WHERE name = "Inne przychody" AND user_id = :userId)
+    //             WHERE income_category_assigned_to_user_id = :idDeletedCategory';
 
-        $db = static::getDataBase();
-        $query = $db->prepare($sql);
+    //     $db = static::getDataBase();
+    //     $query = $db->prepare($sql);
 
-        $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
-        $query->bindValue(':idDeletedCategory', $categoryId, PDO::PARAM_INT);
-        return $query->execute();
-    }
+    //     $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+    //     $query->bindValue(':idDeletedCategory', $categoryId, PDO::PARAM_INT);
+    //     return $query->execute();
+    // }
 
-
-
-
-    public function delete()
-    {
-        foreach ($this->categoriesToDelete as $category) {
-            if (static::assingItemDeletedCategoryToOthers($category)) {
-                $sql = 'DELETE FROM payment_methods_assigned_to_users 
-                WHERE id = :idCategory';
-
-                $db = static::getDataBase();
-                $query = $db->prepare($sql);
-
-                $query->bindValue(':idCategory', $category, PDO::PARAM_INT);
-                $query->execute();
-            }
-        }
-    }
-
-    protected static function assingItemDeletedCategoryToOthers($deletedCategory)
+    protected static function assignContentOfDeletedCategoryToOthers($deletedCategory)
     {
         $sql = 'UPDATE expenses
                 SET payment_method_assigned_to_user_id = (SELECT id FROM payment_methods_assigned_to_users WHERE name = "Inny" AND user_id = :userId)
