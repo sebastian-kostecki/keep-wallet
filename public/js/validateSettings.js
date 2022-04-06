@@ -37,18 +37,12 @@ for (let form of forms) {
                 nameCategory: {
                     required: true
                 },
-                oldCategory: {
+                previousCategory: {
                     required: true
                 },
-                categoryToDelete: {
+                "categoriesToDelete[]": {
                     required: true
-                },
-                paymentMethod: {
-                    required: true
-                },
-                oldPaymentMethod: {
-                    required: true
-                },
+                }
             },
             messages: {
                 name: {
@@ -67,18 +61,12 @@ for (let form of forms) {
                 nameCategory: {
                     required: 'Wpisz nazwę kategorii'
                 },
-                oldCategory: {
+                previousCategory: {
                     required: 'Wybierz kategorię do zmiany'
                 },
                 "categoriesToDelete[]": {
                     required: 'Wybierz kategorię do usunięcia'
-                },
-                paymentMethod: {
-                    required: 'Wpisz nazwę sposobu płatności'
-                },
-                oldPaymentMethod: {
-                    required: "Wybierz sposób płatności do zmiany"
-                },
+                }
             },
             errorPlacement: function (error, element) {
                 if (element.attr("name") == "name")
@@ -86,10 +74,10 @@ for (let form of forms) {
                 else if (element.attr("name") == "password") {
                     error.insertAfter("#submit-change-password");
                 }
-                else if ((element.attr("name") == "nameCategory") || (element.attr("name") == "icon") || (element.attr("name") == "paymentMethod")) {
+                else if ((element.attr("name") == "nameCategory") || (element.attr("name") == "icon")) {
                     error.insertAfter(element.siblings().last());
                 }
-                else if ((element.attr("name") == "oldCategory") || (element.attr("name") == "categoriesToDelete[]") || (element.attr("name") == "oldPaymentMethod")) {
+                else if ((element.attr("name") == "oldCategory") || (element.attr("name") == "categoriesToDelete[]") || (element.attr("name") == "previousCategory")) {
                     error.insertAfter(element.parent().nextAll().last());
                 }
                 else {
