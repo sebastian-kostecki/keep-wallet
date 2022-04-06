@@ -4,12 +4,9 @@ namespace App\Models;
 
 use PDO;
 
-class BudgetCategory extends \Core\Model
+abstract class BudgetCategory extends \Core\Model
 {
     protected const NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS = "";
-    protected const NAME_COLUMN_WITH_BUDGET_ITEMS_ASSIGNED_TO_USER_ID = "";
-    protected const NAME_TABLE_WITH_BUDGET_ITEMS = "";
-    protected const NAME_CATEGORY_WITH_ASSIGNED_BUDGET_ITEMS_AFTER_REMOVED_CATEGORY = "";
 
     public $errors = [];
 
@@ -25,20 +22,12 @@ class BudgetCategory extends \Core\Model
         return static::NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS;
     }
 
-    public function getNameTableWithBudgetItems(): string
+    static function A($category)
     {
-        return static::NAME_TABLE_WITH_BUDGET_ITEMS;
+        static::assignContentOfDeletedCategoryToOthers($category);
     }
 
-    public function getCategoryWithAssignedBudgetItemsAfterRemovecCategory(): string
-    {
-        return static::NAME_CATEGORY_WITH_ASSIGNED_BUDGET_ITEMS_AFTER_REMOVED_CATEGORY;
-    }
-
-    public function getNameColumnWithBudgetItemsAssignedToUserId(): string
-    {
-        return static::NAME_COLUMN_WITH_BUDGET_ITEMS_ASSIGNED_TO_USER_ID;
-    }
+    abstract static function assignContentOfDeletedCategoryToOthers($category);
 
     public function validate()
     {
@@ -93,21 +82,14 @@ class BudgetCategory extends \Core\Model
     public function delete()
     {
         foreach ($this->categoriesToDelete as $category) {
+            static::assignContentOfDeletedCategoryToOthers($category);
             $sql = "DELETE FROM {$this->getNameTableWithBudgetItemsAssignedToUsers()} 
-                    WHERE id = :idCategory;
-                    
-                    UPDATE {$this->getNameTableWithBudgetItems()}
-                    SET {$this->getNameColumnWithBudgetItemsAssignedToUserId()} = 
-                        (SELECT id 
-                        FROM {$this->getNameTableWithBudgetItemsAssignedToUsers()}  
-                        WHERE name = {$this->getCategoryWithAssignedBudgetItemsAfterRemovecCategory()} AND user_id = :userId)
-                    WHERE  {$this->getNameColumnWithBudgetItemsAssignedToUserId()} = :idCategory";
+                WHERE id = :idCategory";
 
             $db = static::getDataBase();
             $query = $db->prepare($sql);
 
             $query->bindValue(':idCategory', $category, PDO::PARAM_INT);
-            $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
             if ($query->execute() == false) {
                 return false;
             };

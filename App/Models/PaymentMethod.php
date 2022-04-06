@@ -7,9 +7,6 @@ use PDO;
 class PaymentMethod extends BudgetCategory
 {
     protected const NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS = "payment_methods_assigned_to_users";
-    protected const NAME_COLUMN_WITH_BUDGET_ITEMS_ASSIGNED_TO_USER_ID = "payment_method_assigned_to_user_id";
-    protected const NAME_TABLE_WITH_BUDGET_ITEMS = "expenses";
-    protected const NAME_CATEGORY_WITH_ASSIGNED_BUDGET_ITEMS_AFTER_REMOVED_CATEGORY = "Inny";
 
     public static function findPaymentMethods()
     {
@@ -24,6 +21,19 @@ class PaymentMethod extends BudgetCategory
 
         $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
         return $query->fetchAll();
+    }
+
+    public static function assignContentOfDeletedCategoryToOthers($deletedCategory)
+    {
+        $sql = 'UPDATE expenses
+                SET payment_method_assigned_to_user_id = (SELECT id FROM payment_methods_assigned_to_users WHERE name = "Inny" AND user_id = :userId)
+                WHERE payment_method_assigned_to_user_id = :idDeletedCategory';
+
+        $db = static::getDataBase();
+        $query = $db->prepare($sql);
+        $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+        $query->bindValue(':idDeletedCategory', $deletedCategory, PDO::PARAM_INT);
+        $query->execute();
     }
 
     // public static function remove($paymentMehodsToDelete)
@@ -60,18 +70,4 @@ class PaymentMethod extends BudgetCategory
     //     $query->bindValue(':idDeletedCategory', $categoryId, PDO::PARAM_INT);
     //     return $query->execute();
     // }
-
-    protected static function assignContentOfDeletedCategoryToOthers($deletedCategory)
-    {
-        $sql = 'UPDATE expenses
-                SET payment_method_assigned_to_user_id = (SELECT id FROM payment_methods_assigned_to_users WHERE name = "Inny" AND user_id = :userId)
-                WHERE payment_method_assigned_to_user_id = :idDeletedCategory';
-
-        $db = static::getDataBase();
-        $query = $db->prepare($sql);
-
-        $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
-        $query->bindValue(':idDeletedCategory', $deletedCategory, PDO::PARAM_INT);
-        return $query->execute();
-    }
 }
