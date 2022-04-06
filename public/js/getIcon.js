@@ -19,14 +19,3 @@ for (let iconCheckButton of iconCheckButtons) {
         })
     })
 }
-
-const categoriesToChange = document.querySelectorAll('.category-to-change');
-for (let category of categoriesToChange) {
-    category.addEventListener('click', function () {
-        let icon = category.nextElementSibling.childNodes[1].textContent.slice(1, -29);
-        let name = category.nextElementSibling.innerText;
-
-        category.parentElement.parentElement.lastElementChild.firstElementChild.innerHTML = icon;
-        category.parentElement.parentElement.lastElementChild.firstElementChild.nextElementSibling.nextElementSibling.value = name.toLowerCase();
-    })
-}
