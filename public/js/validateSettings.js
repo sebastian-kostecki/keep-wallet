@@ -70,7 +70,7 @@ for (let form of forms) {
                 oldCategory: {
                     required: 'Wybierz kategorię do zmiany'
                 },
-                "categoryToDelete[]": {
+                "categoriesToDelete[]": {
                     required: 'Wybierz kategorię do usunięcia'
                 },
                 paymentMethod: {
@@ -89,7 +89,7 @@ for (let form of forms) {
                 else if ((element.attr("name") == "nameCategory") || (element.attr("name") == "icon") || (element.attr("name") == "paymentMethod")) {
                     error.insertAfter(element.siblings().last());
                 }
-                else if ((element.attr("name") == "oldCategory") || (element.attr("name") == "categoryToDelete[]") || (element.attr("name") == "oldPaymentMethod")) {
+                else if ((element.attr("name") == "oldCategory") || (element.attr("name") == "categoriesToDelete[]") || (element.attr("name") == "oldPaymentMethod")) {
                     error.insertAfter(element.parent().nextAll().last());
                 }
                 else {
