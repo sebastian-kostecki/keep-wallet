@@ -65,7 +65,7 @@
                             class="input-group ps-4 single-form">
                             {% for category in incomeCategories %}
                             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                                <input type="radio" class="form-check-input category-to-change" name="oldCategory"
+                                <input type="radio" class="form-check-input category-to-change" name="previousCategory"
                                     id="0{{ category.name }}" value="{{ category.id }}" required>
                                 <label for="0{{ category.name }}"
                                     class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
@@ -93,7 +93,7 @@
                             {% for category in incomeCategories %}
                             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
                                 <input type="checkbox" class="form-check-input select-delete-category"
-                                    name="categoryToDelete[]" id="{{ category.name }}" value="{{ category.id }}"
+                                    name="categoriesToDelete[]" id="{{ category.name }}" value="{{ category.id }}"
                                     required>
                                 <label for="{{ category.name }}"
                                     class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
@@ -139,7 +139,7 @@
                             class="input-group ps-4 single-form">
                             {% for category in expenseCategories %}
                             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                                <input type="radio" class="form-check-input category-to-change" name="oldCategory"
+                                <input type="radio" class="form-check-input category-to-change" name="previousCategory"
                                     id="0{{ category.name }}" value="{{ category.id }}" required>
                                 <label for="0{{ category.name }}"
                                     class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
@@ -167,7 +167,7 @@
                             {% for category in expenseCategories %}
                             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
                                 <input type="checkbox" class="form-check-input select-delete-category"
-                                    name="categoryToDelete[]" id="{{ category.name }}" value="{{ category.id }}"
+                                    name="categoriesToDelete[]" id="{{ category.name }}" value="{{ category.id }}"
                                     required>
                                 <label for="{{ category.name }}"
                                     class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
@@ -213,7 +213,7 @@
                             class="input-group ps-4 single-form">
                             {% for category in paymentMethods %}
                             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                                <input type="radio" class="form-check-input category-to-change" name="oldPaymentMethod"
+                                <input type="radio" class="form-check-input category-to-change" name="previousCategory"
                                     id="0{{ category.name }}" value="{{ category.id }}" required>
                                 <label for="0{{ category.name }}"
                                     class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"

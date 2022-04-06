@@ -6,6 +6,8 @@ use PDO;
 
 class ExpenseCategory extends BudgetCategory
 {
+    protected const NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS = "expenses_category_assigned_to_users";
+
     public static function findCategories()
     {
         $sql = "SELECT * 
@@ -21,75 +23,16 @@ class ExpenseCategory extends BudgetCategory
         return $query->fetchAll();
     }
 
-    public function save()
-    {
-        if (empty($this->errors)) {
-            $sql = "INSERT INTO expenses_category_assigned_to_users
-                    VALUES (NULL, :userId, :nameCategory, (SELECT icon_id FROM icons WHERE icon = :nameIcon))";
-
-            $db = static::getDataBase();
-            $query = $db->prepare($sql);
-            $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
-            $query->bindValue(':nameCategory', $this->name, PDO::PARAM_STR);
-            $query->bindValue(':nameIcon', $this->icon, PDO::PARAM_STR);
-            return $query->execute();
-        }
-        return false;
-    }
-
-    public function change()
-    {
-        $this->validate();
-
-        if (empty($this->errors)) {
-
-            $sql = 'UPDATE expenses_category_assigned_to_users 
-                    SET name = :nameCategory, icon_id = (SELECT icon_id FROM icons WHERE icon = :nameIcon)
-                    WHERE id = :idOldCategory';
-
-            $db = static::getDataBase();
-            $query = $db->prepare($sql);
-
-            $query->bindValue(':nameCategory', $this->name, PDO::PARAM_STR);
-            $query->bindValue(':nameIcon', $this->icon, PDO::PARAM_STR);
-            $query->bindValue(':idOldCategory', $this->oldCategory, PDO::PARAM_INT);
-            return $query->execute();
-        }
-        return false;
-    }
-
-    protected static function assignDeletedCategoriesExpensesToOtherExpenses($categoryId)
+    public static function assignContentOfDeletedCategoryToOthers($deletedCategory)
     {
         $sql = 'UPDATE expenses
-                SET expense_category_assigned_to_user_id = (SELECT id FROM expenses_category_assigned_to_users WHERE name = "Inne przychody" AND user_id = :userId)
+                SET expense_category_assigned_to_user_id = (SELECT id FROM expenses_category_assigned_to_users WHERE name = "Inne wydatki" AND user_id = :userId)
                 WHERE expense_category_assigned_to_user_id = :idDeletedCategory';
 
         $db = static::getDataBase();
         $query = $db->prepare($sql);
-
         $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
-        $query->bindValue(':idDeletedCategory', $categoryId, PDO::PARAM_INT);
-        return $query->execute();
-    }
-
-    public static function remove($categoriesToDelete)
-    {
-        foreach ($categoriesToDelete as $categoryToDelete) {
-            if (static::assignDeletedCategoriesExpensesToOtherExpenses($categoryToDelete)) {
-                $sql = 'DELETE FROM expenses_category_assigned_to_users 
-                        WHERE id = :idCategory';
-
-                $db = static::getDataBase();
-                $query = $db->prepare($sql);
-
-                $query->bindValue(':idCategory', $categoryToDelete, PDO::PARAM_INT);
-                if ($query->execute() == false) {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        }
-        return true;
+        $query->bindValue(':idDeletedCategory', $deletedCategory, PDO::PARAM_INT);
+        $query->execute();
     }
 }

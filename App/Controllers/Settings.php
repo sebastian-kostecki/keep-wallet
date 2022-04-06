@@ -80,9 +80,9 @@ class Settings extends Authenticated
 
     public function deleteIncomeCategoryAction()
     {
-        $categoriesToDelete = $_POST['categoryToDelete'];
+        $categoriesToDelete = new IncomeCategory($_POST);
 
-        if (IncomeCategory::remove($categoriesToDelete)) {
+        if ($categoriesToDelete->delete()) {
             Flash::addMessage("Usunąłeś kategorię przychodów");
             $this->redirect('/menu');
         } else {
@@ -119,9 +119,9 @@ class Settings extends Authenticated
 
     public function deleteExpenseCategoryAction()
     {
-        $categoriesToDelete = $_POST['categoryToDelete'];
+        $categoriesToDelete = new ExpenseCategory($_POST);
 
-        if (ExpenseCategory::remove($categoriesToDelete)) {
+        if ($categoriesToDelete->delete()) {
             Flash::addMessage("Usunąłeś kategorie wydatków");
             $this->redirect('/menu');
         } else {
@@ -158,8 +158,14 @@ class Settings extends Authenticated
 
     public function deletePaymentMethodAction()
     {
-        $categoriesToDelete = new PaymentMethod($_POST);
-        $categoriesToDelete->delete();
-        //var_dump($categoriesToDelete);
+        $paymentMethodsToDelete = new PaymentMethod($_POST);
+
+        if ($paymentMethodsToDelete->delete()) {
+            Flash::addMessage("Usunąłeś sposoby płatności");
+            $this->redirect('/menu');
+        } else {
+            Flash::addMessage("Nieudane usunięcie sposobów płatności", Flash::DANGER);
+            $this->redirect('/settings');
+        }
     }
 }
