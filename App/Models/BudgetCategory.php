@@ -22,10 +22,6 @@ abstract class BudgetCategory extends \Core\Model
         return static::NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS;
     }
 
-    static function A($category)
-    {
-        static::assignContentOfDeletedCategoryToOthers($category);
-    }
 
     abstract static function assignContentOfDeletedCategoryToOthers($category);
 
@@ -49,7 +45,7 @@ abstract class BudgetCategory extends \Core\Model
             $db = static::getDataBase();
             $query = $db->prepare($sql);
             $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
-            $query->bindValue(':nameCategory', $this->name, PDO::PARAM_STR);
+            $query->bindValue(':nameCategory', $this->nameCategory, PDO::PARAM_STR);
             $query->bindValue(':nameIcon', $this->icon, PDO::PARAM_STR);
 
             var_dump($query);
@@ -71,7 +67,7 @@ abstract class BudgetCategory extends \Core\Model
             $db = static::getDataBase();
             $query = $db->prepare($sql);
 
-            $query->bindValue(':nameCategory', $this->name, PDO::PARAM_STR);
+            $query->bindValue(':nameCategory', $this->nameCategory, PDO::PARAM_STR);
             $query->bindValue(':nameIcon', $this->icon, PDO::PARAM_STR);
             $query->bindValue(':idPreviousCategory', $this->previousCategory, PDO::PARAM_INT);
             return $query->execute();

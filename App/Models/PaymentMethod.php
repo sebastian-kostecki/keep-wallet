@@ -35,39 +35,4 @@ class PaymentMethod extends BudgetCategory
         $query->bindValue(':idDeletedCategory', $deletedCategory, PDO::PARAM_INT);
         $query->execute();
     }
-
-    // public static function remove($paymentMehodsToDelete)
-    // {
-    //     foreach ($paymentMehodsToDelete as $paymentMethodToDelete) {
-    //         if (static::assignDeletedCategoriesIncomesToOtherIncomes($paymentMethodToDelete)) {
-    //             $sql = 'DELETE FROM payment_methods_assigned_to_users 
-    //                     WHERE id = :idCategory';
-
-    //             $db = static::getDataBase();
-    //             $query = $db->prepare($sql);
-
-    //             $query->bindValue(':idCategory', $paymentMethodToDelete, PDO::PARAM_INT);
-    //             if ($query->execute() == false) {
-    //                 return false;
-    //             }
-    //         } else {
-    //             return false;
-    //         }
-    //     }
-    //     return true;
-    // }
-
-    // protected static function assignDeletedCategoriesIncomesToOtherIncomes($categoryId)
-    // {
-    //     $sql = 'UPDATE expenses
-    //             SET payment_method_assigned_to_user_id = (SELECT id FROM incomes_category_assigned_to_users WHERE name = "Inne przychody" AND user_id = :userId)
-    //             WHERE income_category_assigned_to_user_id = :idDeletedCategory';
-
-    //     $db = static::getDataBase();
-    //     $query = $db->prepare($sql);
-
-    //     $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
-    //     $query->bindValue(':idDeletedCategory', $categoryId, PDO::PARAM_INT);
-    //     return $query->execute();
-    // }
 }
