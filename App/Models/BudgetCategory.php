@@ -17,7 +17,7 @@ abstract class BudgetCategory extends \Core\Model
         }
     }
 
-    public function getNameTableWithBudgetItemsAssignedToUsers(): string
+    public static function getNameTableWithBudgetItemsAssignedToUsers(): string
     {
         return static::NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS;
     }
@@ -27,13 +27,28 @@ abstract class BudgetCategory extends \Core\Model
 
     public function validate()
     {
-        if ($this->name == '') {
+        if ($this->nameCategory == '') {
             $this->errors[] = 'Wpisz nazwę kategorii';
         }
 
         if ($this->icon == '') {
             $this->errors[] = 'Wybierz ikonę';
         }
+    }
+
+    public static function findCategories()
+    {
+        $sql = "SELECT * 
+                FROM " . static::getNameTableWithBudgetItemsAssignedToUsers() . " NATURAL JOIN icons
+                WHERE " . static::getNameTableWithBudgetItemsAssignedToUsers() . ".user_id = :userId";
+
+        $db = static::getDataBase();
+        $query = $db->prepare($sql);
+        $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+        $query->execute();
+
+        $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        return $query->fetchAll();
     }
 
     public function save()

@@ -13,7 +13,7 @@ class Expense extends Authenticated
     public function newAction()
     {
         $expenseCategories = ExpenseCategory::findCategories();
-        $paymentMethods = PaymentMethod::findPaymentMethods();
+        $paymentMethods = PaymentMethod::findCategories();
         View::renderTemplate('Expense/new.html', [
             'expenseCategories' => $expenseCategories,
             'paymentMethods' => $paymentMethods
@@ -28,7 +28,7 @@ class Expense extends Authenticated
             $this->redirect('/menu');
         } else {
             $expenseCategories = ExpenseCategory::findCategories();
-            $paymentMethods = PaymentMethod::findPaymentMethods();
+            $paymentMethods = PaymentMethod::findCategories();
             View::renderTemplate('Expense/new.html', [
                 'expense' => $expense,
                 'expenseCategories' => $expenseCategories,

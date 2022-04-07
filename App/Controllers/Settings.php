@@ -16,7 +16,7 @@ class Settings extends Authenticated
     {
         $userIncomeCategories = IncomeCategory::findCategories();
         $expenseCategories = ExpenseCategory::findCategories();
-        $paymentMethods = PaymentMethod::findPaymentMethods();
+        $paymentMethods = PaymentMethod::findCategories();
         $icons = Icon::getIcons();
 
         View::renderTemplate('Settings/show.html', [
