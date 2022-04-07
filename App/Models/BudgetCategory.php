@@ -63,7 +63,6 @@ abstract class BudgetCategory extends \Core\Model
             $query->bindValue(':nameCategory', $this->nameCategory, PDO::PARAM_STR);
             $query->bindValue(':nameIcon', $this->icon, PDO::PARAM_STR);
 
-            var_dump($query);
             return $query->execute();
         }
         return false;
