@@ -1,3 +1,4 @@
 App/Config.php
 composer.*
 vendor/
+.vscode/
