@@ -27,6 +27,10 @@ abstract class BudgetCategory extends \Core\Model
 
     public function validate()
     {
+        if ($this->previousCategory == '') {
+            $this->errors[] = 'Wybierz kategorię do zmiany';
+        }
+
         if ($this->nameCategory == '') {
             $this->errors[] = 'Wpisz nazwę kategorii';
         }
