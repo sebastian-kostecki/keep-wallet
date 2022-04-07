@@ -1,0 +1,322 @@
+{% extends "baseApp.html" %}
+
+{% block title %}Ustawienia{% endblock %}
+
+{% block pageTitle %}
+<h1 class="display-6">Ustawienia</h1>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid settings-container p-1 p-lg-0 fs-5 me-3">
+    <div class="col-12 col-lg-9 col-xl-6">
+        <div class="py-2 mb-3">
+            <h1 id="change-username" class="setting-list fs-5">Zmień nazwę użytkownika</h1>
+            <div class="settings-form change-username">
+                <form action="/settings/change-name" method="post" class="input-group single-form">
+                    <input type="text" class="form-control settings-input border-0 p-2" name="name"
+                        placeholder="Wpisz nową nazwę użytkownika">
+                    <button id="submit-change-name" type="submit"
+                        class="btn button-normal button-settings px-3 text-uppercase fw-bold me-2">Zapisz</button>
+                </form>
+            </div>
+        </div>
+        <div class="py-2 mb-3">
+            <h1 id="change-password" class="setting-list fs-5">Zmień hasło</h1>
+            <div class="settings-form change-password">
+                <form action="/settings/change-password" method="post" class="input-group single-form">
+                    <input id="password-input" type="password" class="form-control settings-input border-0"
+                        name="password" placeholder="Wpisz nowe hasło">
+                    <button id="submit-change-password" type="submit"
+                        class="btn button-normal button-settings px-3 text-uppercase fw-bold rounded-end me-2">Zapisz</button>
+                    <button type="button"
+                        class="hidden-password settings-hidden me-2 p-2 fs-4 position-absolute top-0 end-0"><i
+                            class="fas fa-eye-slash"></i></button>
+                    <button type="button"
+                        class="showed-password settings-showed me-2 p-2 fs-4 position-absolute top-0 end-0">
+                        <i class="fas fa-eye"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="mb-3 py-2">
+            <h1 id="change-incomes-category" class="setting-list fs-5">Zmień kategorie przychodów</h1>
+            <div class="settings-form change-incomes-category">
+                <div>
+                    <h2 id="add-income-category" class="setting-list fs-5 mt-3 ps-lg-4">Dodaj</h2>
+                    <div class="settings-form add-income-category pb-2">
+                        <h3 class="fs-6 fw-light mt-1 ps-lg-4">Wybierz ikonę oraz wpisz nazwę nowej kategorii</h3>
+                        <form action="/settings/add-income-category" method="post"
+                            class="input-group ps-lg-4 single-form">
+                            <div class="input-group">
+                                <button type="button" class="btn button-chosen-icon px-3 fw-light"
+                                    data-bs-toggle="modal" data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
+                                <input class="chosen-icon-input-value" type="hidden" name="icon" required>
+                                <input type="text" class="form-control settings-input-icon border-0" name="nameCategory"
+                                    required>
+                                <button type="submit"
+                                    class="btn button-normal button-settings px-3 text-uppercase fw-bold me-2">Dodaj</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div>
+                    <h2 id="change-income-category" class="setting-list fs-5 mt-3 ps-lg-4 pb-1">Zmień</h2>
+                    <div class="settings-form change-income-category pb-2">
+                        <h3 class="fs-6 fw-light mt-1 ps-lg-4">Wybierz kategorię do zmiany oraz zmień jej ikonę i nazwę
+                        </h3>
+                        <form action="/settings/change-income-category" method="post"
+                            class="input-group ps-lg-4 single-form">
+                            {% for category in incomeCategories %}
+                            <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                                <input type="radio" class="form-check-input category-to-change" name="previousCategory"
+                                    id="0{{ category.name }}" value="{{ category.id }}" required>
+                                <label for="0{{ category.name }}"
+                                    class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
+                                    role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name
+                                    }}</label>
+                            </div>
+                            {% endfor %}
+                            <div class="input-group w-100 me-2">
+                                <button type="button" class="btn button-chosen-icon px-3 fw-light"
+                                    data-bs-toggle="modal" data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
+                                <input class="chosen-icon-input-value" type="hidden" name="icon" required>
+                                <input type="text" class="form-control settings-input-icon border-0" name="nameCategory"
+                                    required>
+                                <button type="submit"
+                                    class="btn button-normal button-settings px-3 text-uppercase fw-bold">Zapisz</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div>
+                    <h2 id="delete-income-category" class="setting-list fs-5 mt-3 ps-lg-4 pb-1">Usuń</h2>
+                    <div class="settings-form delete-income-category">
+                        <h3 class="fs-6 fw-light mt-1 ps-lg-4">Wybierz kategorie do usunięcia</h3>
+                        <form action="/settings/delete-income-category" method="post"
+                            class="input-group ps-lg-4 single-form">
+                            {% for category in incomeCategories %}
+                            <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                                <input type="checkbox" class="form-check-input select-delete-category"
+                                    name="categoriesToDelete[]" id="{{ category.name }}" value="{{ category.id }}"
+                                    required>
+                                <label for="{{ category.name }}"
+                                    class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
+                                    role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name
+                                    }}</label>
+                            </div>
+                            {% endfor %}
+                            <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                                <button type="submit"
+                                    class="btn button-normal px-3 py-2 text-uppercase fw-bold w-100 fs-6">Usuń</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3 py-2">
+            <h1 id="change-expenses-category" class="setting-list fs-5">Zmień kategorie wydatków</h1>
+            <div class="settings-form change-expenses-category">
+                <div>
+                    <h2 id="add-expense-category" class="setting-list fs-5 mt-3 ps-lg-4">Dodaj</h2>
+                    <div class="settings-form add-expense-category pb-2">
+                        <h3 class="fs-6 fw-light mt-1 ps-lg-4">Wybierz ikonę oraz wpisz nazwę nowej kategorii</h3>
+                        <form action="/settings/add-expense-category" method="post"
+                            class="input-group ps-lg-4 single-form">
+                            <div class="input-group">
+                                <button type="button" class="btn button-chosen-icon px-3 fw-light"
+                                    data-bs-toggle="modal" data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
+                                <input class="chosen-icon-input-value" type="hidden" name="icon" required>
+                                <input type="text" class="form-control settings-input border-0" name="nameCategory"
+                                    required>
+                                <button type="submit"
+                                    class="btn button-normal button-settings px-3 text-uppercase fw-bold me-2">Dodaj</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div>
+                    <h2 id="change-expense-category" class="setting-list fs-5 mt-3 ps-lg-4 pb-1">Zmień</h2>
+                    <div class="settings-form change-expense-category pb-2">
+                        <h3 class="fs-6 fw-light mt-1 ps-lg-4">Wybierz kategorię do zmiany oraz zmień jej ikonę i nazwę
+                        </h3>
+                        <form action="/settings/change-expense-category" method="post"
+                            class="input-group ps-lg-4 single-form">
+                            {% for category in expenseCategories %}
+                            <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                                <input type="radio" class="form-check-input category-to-change" name="previousCategory"
+                                    id="0{{ category.name }}" value="{{ category.id }}" required>
+                                <label for="0{{ category.name }}"
+                                    class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
+                                    role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name
+                                    }}</label>
+                            </div>
+                            {% endfor %}
+                            <div class="input-group w-100 me-2">
+                                <button type="button" class="btn button-chosen-icon px-3 fw-light"
+                                    data-bs-toggle="modal" data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
+                                <input class="chosen-icon-input-value" type="hidden" name="icon" required>
+                                <input type="text" class="form-control settings-input-icon border-0" name="nameCategory"
+                                    required>
+                                <button type="submit"
+                                    class="btn button-normal button-settings px-3 text-uppercase fw-bold">Zapisz</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div>
+                    <h2 id="delete-expense-category" class="setting-list fs-5 mt-3 ps-lg-4 pb-1">Usuń</h2>
+                    <div class="settings-form delete-expense-category">
+                        <h3 class="fs-6 fw-light mt-1 ps-lg-4">Wybierz kategorie do usunięcia</h3>
+                        <form action="/settings/delete-expense-category" method="post"
+                            class="input-group ps-lg-4 single-form">
+                            {% for category in expenseCategories %}
+                            <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                                <input type="checkbox" class="form-check-input select-delete-category"
+                                    name="categoriesToDelete[]" id="{{ category.name }}" value="{{ category.id }}"
+                                    required>
+                                <label for="{{ category.name }}"
+                                    class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
+                                    role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name
+                                    }}</label>
+                            </div>
+                            {% endfor %}
+                            <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                                <button type="submit"
+                                    class="btn button-normal px-3 py-2 text-uppercase fw-bold w-100 fs-6">Usuń</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mb-3 py-2">
+            <h1 id="change-payment-methods" class="setting-list fs-5">Zmień sposoby płatności</h1>
+            <div class="settings-form change-payment-methods">
+                <div>
+                    <h2 id="add-payment-method" class="setting-list fs-5 mt-3 ps-lg-4">Dodaj</h2>
+                    <div class="settings-form add-payment-method pb-2">
+                        <h3 class="fs-6 fw-light mt-1 ps-lg-4">Wybierz ikonę oraz wpisz nazwę nowego sposobu płatności
+                        </h3>
+                        <form action="/settings/add-payment-method" method="post"
+                            class="input-group ps-lg-4 single-form">
+                            <div class="input-group">
+                                <button type="button" class="btn button-chosen-icon px-3 fw-light"
+                                    data-bs-toggle="modal" data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
+                                <input class="chosen-icon-input-value" type="hidden" name="icon" required>
+                                <input type="text" class="form-control settings-input border-0" name="nameCategory"
+                                    required>
+                                <button type="submit"
+                                    class="btn button-normal button-settings px-3 text-uppercase fw-bold me-2">Dodaj</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div>
+                    <h2 id="change-payment-method" class="setting-list fs-5 mt-3 ps-lg-4 pb-1">Zmień</h2>
+                    <div class="settings-form change-payment-method pb-2">
+                        <h3 class="fs-6 fw-light mt-1 ps-lg-4">Wybierz sposób płatności do zmiany oraz zmień jej ikonę i
+                            nazwę
+                        </h3>
+                        <form action="/settings/change-payment-method" method="post"
+                            class="input-group ps-lg-4 single-form">
+                            {% for category in paymentMethods %}
+                            <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                                <input type="radio" class="form-check-input category-to-change" name="previousCategory"
+                                    id="0{{ category.name }}" value="{{ category.id }}" required>
+                                <label for="0{{ category.name }}"
+                                    class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
+                                    role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name
+                                    }}</label>
+                            </div>
+                            {% endfor %}
+                            <div class="input-group w-100 me-2">
+                                <button type="button" class="btn button-chosen-icon px-3 fw-light"
+                                    data-bs-toggle="modal" data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
+                                <input class="chosen-icon-input-value" type="hidden" name="icon" required>
+                                <input type="text" class="form-control settings-input-icon border-0" name="nameCategory"
+                                    required>
+                                <button type="submit"
+                                    class="btn button-normal button-settings px-3 text-uppercase fw-bold">Zapisz</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div>
+                    <h2 id="delete-payment-method" class="setting-list fs-5 mt-3 ps-lg-4 pb-1">Usuń</h2>
+                    <div class="settings-form delete-payment-method">
+                        <h3 class="fs-6 fw-light mt-1 ps-lg-4">Wybierz sposoby płatności do usunięcia</h3>
+                        <form action="/settings/delete-payment-method" method="post"
+                            class="input-group ps-lg-4 single-form">
+                            {% for category in paymentMethods %}
+                            <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                                <input type="checkbox" class="form-check-input select-delete-category"
+                                    name="categoriesToDelete[]" id="{{ category.name }}" value="{{ category.id }}"
+                                    required>
+                                <label for="{{ category.name }}"
+                                    class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
+                                    role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name
+                                    }}</label>
+                            </div>
+                            {% endfor %}
+                            <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                                <button type="submit"
+                                    class="btn button-normal px-3 py-2 text-uppercase fw-bold w-100 fs-6">Usuń</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="choiceIncomeIcon" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Wybierz ikonę</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid p-0 ps-3">
+                        {% for icon in icons %}
+                        <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                            <input type="radio" class="form-check-input selected-icon-in-modal" name="icon"
+                                id="{{ icon.icon }}" value="{{ icon.icon }}" required>
+                            <label for="{{ icon.icon }}"
+                                class="form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-1"
+                                role="button"><i class="{{ icon.icon }} me-2"></i></label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn button-outline" data-bs-dismiss="modal">Zamknij</button>
+                    <button id="button-chosen-icon-in-modal" type="button" class="btn button-normal">Wybierz</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Potwierdź zmianę</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn button-outline" data-bs-dismiss="modal">Zamknij</button>
+                    <button id="confirm-changes-button" type="button" class="btn button-normal">Potwierdź</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+<script src="/js/hideShowPassword.js"></script>
+<script src="/js/hideShowSettings.js"></script>
+<script src="\js\getIcon.js"></script>
+<script src="\js\validateSettings.js"></script>
+{% endblock %}
