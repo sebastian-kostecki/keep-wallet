@@ -33,39 +33,39 @@ body {
 }
 
 .button-chosen-icon {
-    color:#e0fbfc;
-    background-color:rgba(255,255,255, 0.15);
+    color: #e0fbfc;
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
 .button-chosen-icon:hover {
-    background-color: rgba(255,255,255, 0.55);
+    background-color: rgba(255, 255, 255, 0.55);
 }
 
-.input-group-text  {
-    background-color: rgba(255,255,255, 0.1);
+.input-group-text {
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .form-control,
 .form-select {
-    background-color: rgba(255,255,255, 0.15);
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
 .form-control:hover,
 .form-control:focus,
 .form-select:hover {
-    background-color: rgba(255,255,255, 0.2);
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
+input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus {
-  -webkit-text-fill-color: white;
-  -webkit-box-shadow: 0 0 0px 1000px transparent inset;
-  box-shadow: 0px 0px 0px 1000px transparent;
-  transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset;
+    box-shadow: 0px 0px 0px 1000px transparent;
+    transition: background-color 5000s ease-in-out 0s;
 }
 
 .change-form {
@@ -110,13 +110,13 @@ li.error {
 
 .form-check {
     position: relative;
-  }
-  
+}
+
 input[type=checkbox] {
     width: 20px;
     height: 20px;
-  }
-  
+}
+
 #rememberMe:checked+label::before {
     content: "";
     display: block;
@@ -129,19 +129,19 @@ input[type=checkbox] {
     background-color: #ee6c4d;
     border-radius: 2px;
     border: 1px solid rgb(150 150 150 / 30%);
-  }
-  
+}
+
 #rememberMe:checked+label::after {
     content: url('data:image/svg+xml; utf8, <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="white" viewBox="0 0 24 24"><path d="M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z"/></svg>');
     display: block;
     position: absolute;
     left: 3px;
     top: 4px;
-  }
+}
 
 .form-check-label {
     margin-top: 1px;
-  }
+}
 
 .forgot-password {
     margin-top: 1px;
@@ -157,7 +157,7 @@ a.forgot-password:hover {
 }
 
 .nav-link {
-    color:rgba(255,255,255, 0.55);
+    color: rgba(255, 255, 255, 0.55);
     transition: all 1s;
     font-size: 1.25rem;
 }
@@ -169,7 +169,7 @@ a.forgot-password:hover {
 }
 
 .content-link {
-    color:rgba(255,255,255, 0.55);
+    color: rgba(255, 255, 255, 0.55);
     transition: all 0.5s;
 }
 
@@ -179,7 +179,7 @@ a.forgot-password:hover {
 }
 
 .header {
-    color:rgba(255,255,255, 0.55);
+    color: rgba(255, 255, 255, 0.55);
 }
 
 .content-user-pill {
@@ -190,16 +190,16 @@ a.forgot-password:hover {
     width: 98%;
 }
 
-.budget-item, 
-.budget-item::placeholder, 
-.balance,  
+.budget-item,
+.budget-item::placeholder,
+.balance,
 .form-label-budget-item {
     color: #e0fbfc;
 }
 
 .form-select,
 .form-select option {
-    color: rgba(255,255,255, 0.55);
+    color: rgba(255, 255, 255, 0.55);
     background: rgb(84, 91, 103);
 }
 
@@ -208,12 +208,12 @@ a.forgot-password:hover {
 }
 
 .balance-table {
-    color: rgba(255,255,255, 0.55);
+    color: rgba(255, 255, 255, 0.55);
 }
 
 .balance-heading {
     font-size: 1.75rem;
-    color:#e0fbfc;
+    color: #e0fbfc;
 }
 
 td {
@@ -221,40 +221,41 @@ td {
 }
 
 tbody tr {
-    border-top: 1px solid rgba(255,255,255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 tbody tr:first-of-type {
     border: none;
 }
 
-.balance-table thead, .balance-table tfoot {
-    background-color: rgba(255,255,255, 0.2);
+.balance-table thead,
+.balance-table tfoot {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
-#date:focus, #amount:focus {
-    color:#e0fbfc;
+#date:focus,
+#amount:focus {
+    color: #e0fbfc;
 }
 
 [type="radio"]:checked,
 [type="radio"]:not(:checked),
 .select-delete-category:checked,
-.select-delete-category:not(:checked)
-{
-	position: absolute;
-	left: -9999px;
-	width: 0;
-	height: 0;
-	visibility: hidden;
+.select-delete-category:not(:checked) {
+    position: absolute;
+    left: -9999px;
+    width: 0;
+    height: 0;
+    visibility: hidden;
 }
 
 .category-label {
-    background-color: rgba(255,255,255, 0.15);
+    background-color: rgba(255, 255, 255, 0.15);
     color: #e0fbfc;
     transition: 300ms;
 }
 
-.form-check-input:checked + .form-check-label {
+.form-check-input:checked+.form-check-label {
     background-color: #98c1d9;
 
 }
@@ -285,26 +286,28 @@ option,
 }
 
 .budget-item-details {
-    color: rgba(255,255,255, 0.4);
+    color: rgba(255, 255, 255, 0.4);
     display: none;
 }
 
 .settings-container {
-    color:rgba(255,255,255, 0.55);
+    color: rgba(255, 255, 255, 0.55);
 }
 
 .setting-list {
-    pointer-events:all;
+    pointer-events: all;
     cursor: pointer;
     transition: 0.2s;
 }
 
 .setting-list:hover {
-    color:#e0fbfc;
+    color: #e0fbfc;
 }
 
 .settings-input,
-.settings-input:focus {
+.settings-input:focus,
+.settings-input-icon,
+.settings-input-icon:focus {
     color: #e0fbfc;
 }
 
@@ -315,7 +318,7 @@ option,
 .settings-hidden,
 .settings-showed {
     padding: 0 !important;
-    margin-top: 2px!important;
+    margin-top: 2px !important;
     right: 100px !important;
 }
 
@@ -361,7 +364,7 @@ option,
     .content-nav {
         width: 100%;
         /* background-color: inherit !important; */
-        background: linear-gradient(#00000054,#293241);
+        background: linear-gradient(#00000054, #293241);
         --bs-bg-opacity: 1;
     }
 
@@ -386,5 +389,32 @@ option,
     .balance-info {
         margin: 0;
         width: 100%;
+    }
+
+    .setting-list {
+        text-align: center;
+    }
+
+    .button-chosen-icon {
+        width: 30% !important;
+    }
+
+    .button-settings {
+        width: 100% !important;
+        margin: 0.5rem 0 !important;
+        border-radius: .25rem !important;
+    }
+
+    .settings-input {
+        border-radius: .25rem !important;
+    }
+
+    .settings-input-icon {
+        border-radius: 0 .25rem .25rem 0 !important;
+    }
+
+    .settings-hidden,
+    .settings-showed {
+        right: 2px !important;
     }
 }

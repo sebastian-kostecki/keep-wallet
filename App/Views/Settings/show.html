@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block body %}
-<div class="container-fluid settings-container p-lg-0 fs-5 me-3">
+<div class="container-fluid settings-container p-1 p-lg-0 fs-5 me-3">
     <div class="col-12 col-lg-9 col-xl-6">
         <div class="py-2 mb-3">
             <h1 id="change-username" class="setting-list fs-5">Zmień nazwę użytkownika</h1>
@@ -16,7 +16,7 @@
                     <input type="text" class="form-control settings-input border-0 p-2" name="name"
                         placeholder="Wpisz nową nazwę użytkownika">
                     <button id="submit-change-name" type="submit"
-                        class="btn button-normal px-3 text-uppercase fw-bold me-2">Zapisz</button>
+                        class="btn button-normal button-settings px-3 text-uppercase fw-bold me-2">Zapisz</button>
                 </form>
             </div>
         </div>
@@ -27,7 +27,7 @@
                     <input id="password-input" type="password" class="form-control settings-input border-0"
                         name="password" placeholder="Wpisz nowe hasło">
                     <button id="submit-change-password" type="submit"
-                        class="btn button-normal px-3 text-uppercase fw-bold rounded-end me-2">Zapisz</button>
+                        class="btn button-normal button-settings px-3 text-uppercase fw-bold rounded-end me-2">Zapisz</button>
                     <button type="button"
                         class="hidden-password settings-hidden me-2 p-2 fs-4 position-absolute top-0 end-0"><i
                             class="fas fa-eye-slash"></i></button>
@@ -41,29 +41,30 @@
             <h1 id="change-incomes-category" class="setting-list fs-5">Zmień kategorie przychodów</h1>
             <div class="settings-form change-incomes-category">
                 <div>
-                    <h2 id="add-income-category" class="setting-list fs-5 mt-3 ps-4">Dodaj</h2>
+                    <h2 id="add-income-category" class="setting-list fs-5 mt-3 ps-lg-4">Dodaj</h2>
                     <div class="settings-form add-income-category pb-2">
-                        <h3 class="fs-6 fw-light mt-1 ps-4">Wybierz ikonę oraz wpisz nazwę nowej kategorii</h3>
-                        <form action="/settings/add-income-category" method="post" class="input-group ps-4 single-form">
+                        <h3 class="fs-6 fw-light mt-1 ps-lg-4">Wybierz ikonę oraz wpisz nazwę nowej kategorii</h3>
+                        <form action="/settings/add-income-category" method="post"
+                            class="input-group ps-lg-4 single-form">
                             <div class="input-group">
                                 <button type="button" class="btn button-chosen-icon px-3 fw-light"
                                     data-bs-toggle="modal" data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
                                 <input class="chosen-icon-input-value" type="hidden" name="icon" required>
-                                <input type="text" class="form-control settings-input border-0" name="nameCategory"
+                                <input type="text" class="form-control settings-input-icon border-0" name="nameCategory"
                                     required>
                                 <button type="submit"
-                                    class="btn button-normal px-3 text-uppercase fw-bold me-2">Dodaj</button>
+                                    class="btn button-normal button-settings px-3 text-uppercase fw-bold me-2">Dodaj</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div>
-                    <h2 id="change-income-category" class="setting-list fs-5 mt-3 ps-4 pb-1">Zmień</h2>
+                    <h2 id="change-income-category" class="setting-list fs-5 mt-3 ps-lg-4 pb-1">Zmień</h2>
                     <div class="settings-form change-income-category pb-2">
-                        <h3 class="fs-6 fw-light mt-1 ps-4">Wybierz kategorię do zmiany oraz zmień jej ikonę i nazwę
+                        <h3 class="fs-6 fw-light mt-1 ps-lg-4">Wybierz kategorię do zmiany oraz zmień jej ikonę i nazwę
                         </h3>
                         <form action="/settings/change-income-category" method="post"
-                            class="input-group ps-4 single-form">
+                            class="input-group ps-lg-4 single-form">
                             {% for category in incomeCategories %}
                             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
                                 <input type="radio" class="form-check-input category-to-change" name="previousCategory"
@@ -78,20 +79,20 @@
                                 <button type="button" class="btn button-chosen-icon px-3 fw-light"
                                     data-bs-toggle="modal" data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
                                 <input class="chosen-icon-input-value" type="hidden" name="icon" required>
-                                <input type="text" class="form-control settings-input border-0" name="nameCategory"
+                                <input type="text" class="form-control settings-input-icon border-0" name="nameCategory"
                                     required>
                                 <button type="submit"
-                                    class="btn button-normal px-3 text-uppercase fw-bold">Zapisz</button>
+                                    class="btn button-normal button-settings px-3 text-uppercase fw-bold">Zapisz</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div>
-                    <h2 id="delete-income-category" class="setting-list fs-5 mt-3 ps-4 pb-1">Usuń</h2>
+                    <h2 id="delete-income-category" class="setting-list fs-5 mt-3 ps-lg-4 pb-1">Usuń</h2>
                     <div class="settings-form delete-income-category">
-                        <h3 class="fs-6 fw-light mt-1 ps-4">Wybierz kategorie do usunięcia</h3>
+                        <h3 class="fs-6 fw-light mt-1 ps-lg-4">Wybierz kategorie do usunięcia</h3>
                         <form action="/settings/delete-income-category" method="post"
-                            class="input-group ps-4 single-form">
+                            class="input-group ps-lg-4 single-form">
                             {% for category in incomeCategories %}
                             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
                                 <input type="checkbox" class="form-check-input select-delete-category"
@@ -116,11 +117,11 @@
             <h1 id="change-expenses-category" class="setting-list fs-5">Zmień kategorie wydatków</h1>
             <div class="settings-form change-expenses-category">
                 <div>
-                    <h2 id="add-expense-category" class="setting-list fs-5 mt-3 ps-4">Dodaj</h2>
+                    <h2 id="add-expense-category" class="setting-list fs-5 mt-3 ps-lg-4">Dodaj</h2>
                     <div class="settings-form add-expense-category pb-2">
-                        <h3 class="fs-6 fw-light mt-1 ps-4">Wybierz ikonę oraz wpisz nazwę nowej kategorii</h3>
+                        <h3 class="fs-6 fw-light mt-1 ps-lg-4">Wybierz ikonę oraz wpisz nazwę nowej kategorii</h3>
                         <form action="/settings/add-expense-category" method="post"
-                            class="input-group ps-4 single-form">
+                            class="input-group ps-lg-4 single-form">
                             <div class="input-group">
                                 <button type="button" class="btn button-chosen-icon px-3 fw-light"
                                     data-bs-toggle="modal" data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
@@ -128,18 +129,18 @@
                                 <input type="text" class="form-control settings-input border-0" name="nameCategory"
                                     required>
                                 <button type="submit"
-                                    class="btn button-normal px-3 text-uppercase fw-bold me-2">Dodaj</button>
+                                    class="btn button-normal button-settings px-3 text-uppercase fw-bold me-2">Dodaj</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div>
-                    <h2 id="change-expense-category" class="setting-list fs-5 mt-3 ps-4 pb-1">Zmień</h2>
+                    <h2 id="change-expense-category" class="setting-list fs-5 mt-3 ps-lg-4 pb-1">Zmień</h2>
                     <div class="settings-form change-expense-category pb-2">
-                        <h3 class="fs-6 fw-light mt-1 ps-4">Wybierz kategorię do zmiany oraz zmień jej ikonę i nazwę
+                        <h3 class="fs-6 fw-light mt-1 ps-lg-4">Wybierz kategorię do zmiany oraz zmień jej ikonę i nazwę
                         </h3>
                         <form action="/settings/change-expense-category" method="post"
-                            class="input-group ps-4 single-form">
+                            class="input-group ps-lg-4 single-form">
                             {% for category in expenseCategories %}
                             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
                                 <input type="radio" class="form-check-input category-to-change" name="previousCategory"
@@ -154,20 +155,20 @@
                                 <button type="button" class="btn button-chosen-icon px-3 fw-light"
                                     data-bs-toggle="modal" data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
                                 <input class="chosen-icon-input-value" type="hidden" name="icon" required>
-                                <input type="text" class="form-control settings-input border-0" name="nameCategory"
+                                <input type="text" class="form-control settings-input-icon border-0" name="nameCategory"
                                     required>
                                 <button type="submit"
-                                    class="btn button-normal px-3 text-uppercase fw-bold">Zapisz</button>
+                                    class="btn button-normal button-settings px-3 text-uppercase fw-bold">Zapisz</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div>
-                    <h2 id="delete-expense-category" class="setting-list fs-5 mt-3 ps-4 pb-1">Usuń</h2>
+                    <h2 id="delete-expense-category" class="setting-list fs-5 mt-3 ps-lg-4 pb-1">Usuń</h2>
                     <div class="settings-form delete-expense-category">
-                        <h3 class="fs-6 fw-light mt-1 ps-4">Wybierz kategorie do usunięcia</h3>
+                        <h3 class="fs-6 fw-light mt-1 ps-lg-4">Wybierz kategorie do usunięcia</h3>
                         <form action="/settings/delete-expense-category" method="post"
-                            class="input-group ps-4 single-form">
+                            class="input-group ps-lg-4 single-form">
                             {% for category in expenseCategories %}
                             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
                                 <input type="checkbox" class="form-check-input select-delete-category"
@@ -192,10 +193,12 @@
             <h1 id="change-payment-methods" class="setting-list fs-5">Zmień sposoby płatności</h1>
             <div class="settings-form change-payment-methods">
                 <div>
-                    <h2 id="add-payment-method" class="setting-list fs-5 mt-3 ps-4">Dodaj</h2>
+                    <h2 id="add-payment-method" class="setting-list fs-5 mt-3 ps-lg-4">Dodaj</h2>
                     <div class="settings-form add-payment-method pb-2">
-                        <h3 class="fs-6 fw-light mt-1 ps-4">Wybierz ikonę oraz wpisz nazwę nowego sposobu płatności</h3>
-                        <form action="/settings/add-payment-method" method="post" class="input-group ps-4 single-form">
+                        <h3 class="fs-6 fw-light mt-1 ps-lg-4">Wybierz ikonę oraz wpisz nazwę nowego sposobu płatności
+                        </h3>
+                        <form action="/settings/add-payment-method" method="post"
+                            class="input-group ps-lg-4 single-form">
                             <div class="input-group">
                                 <button type="button" class="btn button-chosen-icon px-3 fw-light"
                                     data-bs-toggle="modal" data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
@@ -203,19 +206,19 @@
                                 <input type="text" class="form-control settings-input border-0" name="nameCategory"
                                     required>
                                 <button type="submit"
-                                    class="btn button-normal px-3 text-uppercase fw-bold me-2">Dodaj</button>
+                                    class="btn button-normal button-settings px-3 text-uppercase fw-bold me-2">Dodaj</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div>
-                    <h2 id="change-payment-method" class="setting-list fs-5 mt-3 ps-4 pb-1">Zmień</h2>
+                    <h2 id="change-payment-method" class="setting-list fs-5 mt-3 ps-lg-4 pb-1">Zmień</h2>
                     <div class="settings-form change-payment-method pb-2">
-                        <h3 class="fs-6 fw-light mt-1 ps-4">Wybierz sposób płatności do zmiany oraz zmień jej ikonę i
+                        <h3 class="fs-6 fw-light mt-1 ps-lg-4">Wybierz sposób płatności do zmiany oraz zmień jej ikonę i
                             nazwę
                         </h3>
                         <form action="/settings/change-payment-method" method="post"
-                            class="input-group ps-4 single-form">
+                            class="input-group ps-lg-4 single-form">
                             {% for category in paymentMethods %}
                             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
                                 <input type="radio" class="form-check-input category-to-change" name="previousCategory"
@@ -230,20 +233,20 @@
                                 <button type="button" class="btn button-chosen-icon px-3 fw-light"
                                     data-bs-toggle="modal" data-bs-target="#choiceIncomeIcon">Wybierz ikonę</button>
                                 <input class="chosen-icon-input-value" type="hidden" name="icon" required>
-                                <input type="text" class="form-control settings-input border-0" name="nameCategory"
+                                <input type="text" class="form-control settings-input-icon border-0" name="nameCategory"
                                     required>
                                 <button type="submit"
-                                    class="btn button-normal px-3 text-uppercase fw-bold">Zapisz</button>
+                                    class="btn button-normal button-settings px-3 text-uppercase fw-bold">Zapisz</button>
                             </div>
                         </form>
                     </div>
                 </div>
                 <div>
-                    <h2 id="delete-payment-method" class="setting-list fs-5 mt-3 ps-4 pb-1">Usuń</h2>
+                    <h2 id="delete-payment-method" class="setting-list fs-5 mt-3 ps-lg-4 pb-1">Usuń</h2>
                     <div class="settings-form delete-payment-method">
-                        <h3 class="fs-6 fw-light mt-1 ps-4">Wybierz sposoby płatności do usunięcia</h3>
+                        <h3 class="fs-6 fw-light mt-1 ps-lg-4">Wybierz sposoby płatności do usunięcia</h3>
                         <form action="/settings/delete-payment-method" method="post"
-                            class="input-group ps-4 single-form">
+                            class="input-group ps-lg-4 single-form">
                             {% for category in paymentMethods %}
                             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
                                 <input type="checkbox" class="form-check-input select-delete-category"
@@ -273,7 +276,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="container-fluid">
+                    <div class="container-fluid p-0 ps-3">
                         {% for icon in icons %}
                         <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
                             <input type="radio" class="form-check-input selected-icon-in-modal" name="icon"
