@@ -11,14 +11,32 @@
     <div class="col-12">
 
         {# tutaj wpisuje nowy kod #}
-        <div class="py-2 mb-3 me-3">
-            <h1 id="user-settings" class="setting-list fs-5">Użytkownik</h1>
-            <div class="user-settings settings-form">
+        <div class="py-2 mb-1 me-3">
+            <div id="user-settings" class="setting-list p-2 rounded">
+                <h1 class="fs-5 m-0">Użytkownik</h1>
+
+            </div>
+            <div class="user-settings settings-form mt-2">
                 <form action="" method="post" class="single-form">
-                    <input class="settings-input form-control border-0 p-2 mb-2" type="text"
-                        placeholder="Wpisz nową nazwę użytkownika">
-                    <input class="settings-input form-control border-0 p-2 mb-2" type="password"
-                        placeholder="Wpisz nowe hasło">
+                    <div class="input-group mb-2">
+                        <span class="input-group-text border-0 px-3 py-2" id="basic-addon1"><i
+                                class="fas fa-user"></i></span>
+                        <input type="text" class="form-control border-0 p-2 ms-0 text-white"
+                            placeholder="Zmień nazwę użytkownika" name="login" autofocus required>
+                    </div>
+                    <div class="input-group mb-2 border-0">
+                        <span class="input-group-text border-0 px-3 py-2" id="basic-addon3"><i
+                                class="fas fa-lock"></i></span>
+                        <input type="password" id="password-input"
+                            class="form-control border-0 p-2 ms-0 text-white rounded-end" placeholder="Zmień hasło"
+                            aria-label="Hasło" aria-describedby="basic-addon3" name="password" required>
+                        <button type="button"
+                            class="hidden-password settings-hidden me-2 p-2 fs-4 position-absolute top-0 end-0"><i
+                                class="fas fa-eye-slash"></i></button>
+                        <button type="button"
+                            class="showed-password settings-showed me-2 p-2 fs-4 position-absolute top-0 end-0">
+                            <i class="fas fa-eye"></i></button>
+                    </div>
                     <button type="submit"
                         class="btn button-normal border-0 px-3 py-2 text-uppercase fw-bold w-100">Zapisz</button>
                 </form>
@@ -26,34 +44,6 @@
         </div>
         {# koniec nowego kodu #}
 
-        <div class="py-2 mb-3">
-            <h1 id="change-username" class="setting-list fs-5">Zmień nazwę użytkownika</h1>
-            <div class="settings-form change-username">
-                <form action="/settings/change-name" method="post" class="input-group single-form">
-                    <input type="text" class="form-control settings-input border-0 p-2" name="name"
-                        placeholder="Wpisz nową nazwę użytkownika">
-                    <button id="submit-change-name" type="submit"
-                        class="btn button-normal button-settings px-3 text-uppercase fw-bold me-2">Zapisz</button>
-                </form>
-            </div>
-        </div>
-        <div class="py-2 mb-3">
-            <h1 id="change-password" class="setting-list fs-5">Zmień hasło</h1>
-            <div class="settings-form change-password">
-                <form action="/settings/change-password" method="post" class="input-group single-form">
-                    <input id="password-input" type="password" class="form-control settings-input border-0"
-                        name="password" placeholder="Wpisz nowe hasło">
-                    <button id="submit-change-password" type="submit"
-                        class="btn button-normal button-settings px-3 text-uppercase fw-bold rounded-end me-2">Zapisz</button>
-                    <button type="button"
-                        class="hidden-password settings-hidden me-2 p-2 fs-4 position-absolute top-0 end-0"><i
-                            class="fas fa-eye-slash"></i></button>
-                    <button type="button"
-                        class="showed-password settings-showed me-2 p-2 fs-4 position-absolute top-0 end-0">
-                        <i class="fas fa-eye"></i></button>
-                </form>
-            </div>
-        </div>
         <div class="mb-3 py-2">
             <h1 id="change-incomes-category" class="setting-list fs-5">Zmień kategorie przychodów</h1>
             <div class="settings-form change-incomes-category">
