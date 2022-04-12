@@ -8,7 +8,24 @@
 
 {% block body %}
 <div class="container-fluid settings-container p-1 p-lg-0 fs-5 me-3">
-    <div class="col-12 col-lg-9 col-xl-6">
+    <div class="col-12">
+
+        {# tutaj wpisuje nowy kod #}
+        <div class="py-2 mb-3 me-3">
+            <h1 id="user-settings" class="setting-list fs-5">Użytkownik</h1>
+            <div class="user-settings settings-form">
+                <form action="" method="post" class="single-form">
+                    <input class="settings-input form-control border-0 p-2 mb-2" type="text"
+                        placeholder="Wpisz nową nazwę użytkownika">
+                    <input class="settings-input form-control border-0 p-2 mb-2" type="password"
+                        placeholder="Wpisz nowe hasło">
+                    <button type="submit"
+                        class="btn button-normal border-0 px-3 py-2 text-uppercase fw-bold w-100">Zapisz</button>
+                </form>
+            </div>
+        </div>
+        {# koniec nowego kodu #}
+
         <div class="py-2 mb-3">
             <h1 id="change-username" class="setting-list fs-5">Zmień nazwę użytkownika</h1>
             <div class="settings-form change-username">
