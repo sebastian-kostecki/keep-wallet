@@ -3,7 +3,8 @@ $(document).ready(function () {
         rules: {
             amount: {
                 required: true,
-                validAmount: true
+                validAmount: true,
+                step: false
             },
             date: {
                 required: true
@@ -18,7 +19,8 @@ $(document).ready(function () {
         messages: {
             amount: {
                 required: 'Wpisz kwotę',
-                number: 'Kwota jest nieprawidłowa'
+                number: 'Kwota jest nieprawidłowa',
+                step: 'Kwota jest nieprawidłowa'
             },
             date: {
                 required: 'Wybierz datę'
