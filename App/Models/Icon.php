@@ -8,7 +8,7 @@ class Icon extends \Core\Model
 {
     public static function getIcons()
     {
-        $sql = "SELECT icon 
+        $sql = "SELECT * 
                 FROM icons";
 
         $db = static::getDataBase();
