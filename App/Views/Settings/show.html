@@ -9,39 +9,60 @@
 {% block body %}
 <div class="container-fluid settings-container p-1 p-lg-0 fs-5 me-3">
     <div class="col-12">
-
-        {# tutaj wpisuje nowy kod #}
-        <div class="py-2 mb-1 me-3">
-            <div id="user-settings" class="setting-list p-2 rounded">
-                <h1 class="fs-5 m-0">Użytkownik</h1>
-
+        <ul class="p-0">
+            {# tutaj wpisuje nowy kod #}
+            <div class="py-2 mb-1 me-3">
+                <div id="user-settings" class="setting-list p-2 rounded">
+                    <li class="fs-5 m-0">Użytkownik</li>
+                </div>
+                <div class="user-settings settings-form mt-2">
+                    <form action="" method="post" class="single-form">
+                        <div class="input-group mb-2">
+                            <span class="input-group-text border-0 px-3 py-2" id="basic-addon1"><i
+                                    class="fas fa-user"></i></span>
+                            <input type="text" class="form-control border-0 p-2 ms-0 text-white"
+                                placeholder="Zmień nazwę użytkownika" name="login" autofocus required>
+                        </div>
+                        <div class="input-group mb-2 border-0">
+                            <span class="input-group-text border-0 px-3 py-2" id="basic-addon3"><i
+                                    class="fas fa-lock"></i></span>
+                            <input type="password" id="password-input"
+                                class="form-control border-0 p-2 ms-0 text-white rounded-end" placeholder="Zmień hasło"
+                                aria-label="Hasło" aria-describedby="basic-addon3" name="password" required>
+                            <button type="button"
+                                class="hidden-password settings-hidden me-2 p-2 fs-4 position-absolute top-0 end-0"><i
+                                    class="fas fa-eye-slash"></i></button>
+                            <button type="button"
+                                class="showed-password settings-showed me-2 p-2 fs-4 position-absolute top-0 end-0">
+                                <i class="fas fa-eye"></i></button>
+                        </div>
+                        <button type="submit"
+                            class="btn button-normal border-0 px-3 py-2 text-uppercase fw-bold w-100">Zapisz</button>
+                    </form>
+                </div>
             </div>
-            <div class="user-settings settings-form mt-2">
-                <form action="" method="post" class="single-form">
-                    <div class="input-group mb-2">
-                        <span class="input-group-text border-0 px-3 py-2" id="basic-addon1"><i
-                                class="fas fa-user"></i></span>
-                        <input type="text" class="form-control border-0 p-2 ms-0 text-white"
-                            placeholder="Zmień nazwę użytkownika" name="login" autofocus required>
-                    </div>
-                    <div class="input-group mb-2 border-0">
-                        <span class="input-group-text border-0 px-3 py-2" id="basic-addon3"><i
-                                class="fas fa-lock"></i></span>
-                        <input type="password" id="password-input"
-                            class="form-control border-0 p-2 ms-0 text-white rounded-end" placeholder="Zmień hasło"
-                            aria-label="Hasło" aria-describedby="basic-addon3" name="password" required>
-                        <button type="button"
-                            class="hidden-password settings-hidden me-2 p-2 fs-4 position-absolute top-0 end-0"><i
-                                class="fas fa-eye-slash"></i></button>
-                        <button type="button"
-                            class="showed-password settings-showed me-2 p-2 fs-4 position-absolute top-0 end-0">
-                            <i class="fas fa-eye"></i></button>
-                    </div>
-                    <button type="submit"
-                        class="btn button-normal border-0 px-3 py-2 text-uppercase fw-bold w-100">Zapisz</button>
-                </form>
+            <div class="py-2 mb-1 me-3">
+                <div id="incomes-category-settings" class="setting-list p-2 rounded">
+                    <li class="fs-5 m-0">Kategorie przychodów</li>
+                </div>
+                <div class="incomes-category-settings settings-form mt-2">
+                </div>
             </div>
-        </div>
+            <div class="py-2 mb-1 me-3">
+                <div id="expenses-category-settings" class="setting-list p-2 rounded">
+                    <li class="fs-5 m-0">Kategorie wydatków</li>
+                </div>
+                <div class="expenses-category-settings settings-form mt-2">
+                </div>
+            </div>
+            <div class="py-2 mb-1 me-3">
+                <div id="payment-methods-settings" class="setting-list p-2 rounded">
+                    <li class="fs-5 m-0">Sposoby płatności</li>
+                </div>
+                <div class="payment-methods-settings settings-form mt-2">
+                </div>
+            </div>
+        </ul>
         {# koniec nowego kodu #}
 
         <div class="mb-3 py-2">
