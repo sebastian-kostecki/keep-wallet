@@ -30,7 +30,7 @@ class Settings extends Authenticated
     public function changeUserDataAction()
     {
         $user = User::findByID($_SESSION['userId']);
-       
+
         if ($user->changeUserData($_POST) && empty($_POST['login'])) {
             Flash::addMessage("Zmieniłeś hasło");
             $this->redirect('/menu');
@@ -42,6 +42,19 @@ class Settings extends Authenticated
             $this->redirect('/menu');
         } else {
             Flash::addMessage("Nieudana zmiana danych użytkownika", Flash::DANGER);
+            $this->redirect('/settings');
+        }
+    }
+
+    public function addIncomeCategoryAction()
+    {
+        $incomeCategory = new IncomeCategory($_POST);
+
+        if ($incomeCategory->save()) {
+            Flash::addMessage("Dodałeś nową kategorię przychodów");
+            $this->redirect('/menu');
+        } else {
+            Flash::addMessage("Nieudane dodanie nowej kategorii przychodów", Flash::DANGER);
             $this->redirect('/settings');
         }
     }
