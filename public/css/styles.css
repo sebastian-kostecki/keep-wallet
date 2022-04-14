@@ -299,7 +299,7 @@ option,
     color: #293241;
     pointer-events: all;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.5s;
 }
 
 .setting-list:hover {

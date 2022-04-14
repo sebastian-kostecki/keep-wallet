@@ -27,41 +27,21 @@ class Settings extends Authenticated
         ]);
     }
 
-    public function changeNameAction()
+    public function changeUserDataAction()
     {
         $user = User::findByID($_SESSION['userId']);
-
-        if ($user->changeName($_POST['name'])) {
-            Flash::addMessage("Zmieniłeś nazwę użytkownika");
-            $this->redirect('/menu');
-        } else {
-            Flash::addMessage("Nieudana zmiana nazwy użytkownika", Flash::DANGER);
-            $this->redirect('/settings');
-        }
-    }
-
-    public function changePasswordAction()
-    {
-        $user = User::findByID($_SESSION['userId']);
-
-        if ($user->changePassword($_POST['password'])) {
+       
+        if ($user->changeUserData($_POST) && empty($_POST['login'])) {
             Flash::addMessage("Zmieniłeś hasło");
             $this->redirect('/menu');
-        } else {
-            Flash::addMessage("Nieudana zmiana hasła", Flash::DANGER);
-            $this->redirect('/settings');
-        }
-    }
-
-    public function addIncomeCategoryAction()
-    {
-        $incomeCategory = new IncomeCategory($_POST);
-
-        if ($incomeCategory->save()) {
-            Flash::addMessage("Dodałeś nową kategorię przychodów");
+        } else if ($user->changeUserData($_POST) && empty($_POST['password'])) {
+            Flash::addMessage("Zmieniłeś nazwę użytkownika");
+            $this->redirect('/menu');
+        } else if ($user->changeUserData($_POST)) {
+            Flash::addMessage("Zmieniłeś hasło i nazwę użytkownika");
             $this->redirect('/menu');
         } else {
-            Flash::addMessage("Nieudane dodanie nowej kategorii przychodów", Flash::DANGER);
+            Flash::addMessage("Nieudana zmiana danych użytkownika", Flash::DANGER);
             $this->redirect('/settings');
         }
     }
