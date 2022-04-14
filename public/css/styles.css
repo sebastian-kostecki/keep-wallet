@@ -324,6 +324,10 @@ option,
     margin-top: 2px !important;
 }
 
+.settings-icon-for-name-category {
+    width: 25px !important;
+}
+
 .fa-angle-up {
     display: none;
 }

@@ -48,7 +48,9 @@
             </div>
             <div class="py-1 mb-1 me-3">
                 <div id="incomes-category-settings" class="setting-list p-2 rounded">
-                    <li class="fs-5 m-0 position-relative"><i class="fas fa-bookmark me-2"></i>Kategorie przychodów
+                    <li class="fs-5 m-0 position-relative">
+                        <i class="fas fa-bookmark me-2"></i>
+                        <span>Kategorie przychodów</span>
                         <div class="position-absolute top-50 end-0 translate-middle-y pe-2">
                             <i class="fas fa-angle-down"></i>
                             <i class="fas fa-angle-up"></i>
@@ -60,7 +62,7 @@
                         {% for category in incomeCategories %}
                         <li
                             class="category-of-settings category-label text-uppercase rounded w-100 position-relative fs-6 mb-2 py-2 px-3">
-                            <i class="{{ category.icon }} me-2"></i>{{ category.name }}
+                            <i class="{{ category.icon }} me-2 settings-icon-for-name-category"></i>{{ category.name }}
                             <div class="position-absolute top-50 end-0 translate-middle-y pe-2">
                                 <i class="fas fa-pen bg-success p-1 fs-4 rounded"></i>
                                 <i class="fas fa-trash-alt ms-2 bg-danger p-1 fs-4 rounded"></i>
@@ -75,7 +77,9 @@
             </div>
             <div class="py-1 mb-1 me-3">
                 <div id="expenses-category-settings" class="setting-list p-2 rounded">
-                    <li class="fs-5 m-0 position-relative"><i class="fas fa-bookmark me-2"></i>Kategorie wydatków
+                    <li class="fs-5 m-0 position-relative">
+                        <i class="fas fa-bookmark me-2"></i>
+                        <span>Kategorie wydatków</span>
                         <div class="position-absolute top-50 end-0 translate-middle-y pe-2">
                             <i class="fas fa-angle-down"></i>
                             <i class="fas fa-angle-up"></i>
@@ -87,7 +91,7 @@
                         {% for category in expenseCategories %}
                         <li
                             class="category-of-settings category-label text-uppercase rounded w-100 position-relative fs-6 mb-2 py-2 px-3">
-                            <i class="{{ category.icon }} me-2"></i>{{ category.name }}
+                            <i class="{{ category.icon }} me-2 settings-icon-for-name-category"></i>{{ category.name }}
                             <div class="position-absolute top-50 end-0 translate-middle-y pe-2">
                                 <i class="fas fa-pen bg-success p-1 fs-4 rounded"></i>
                                 <i class="fas fa-trash-alt ms-2 bg-danger p-1 fs-4 rounded"></i>
@@ -102,7 +106,9 @@
             </div>
             <div class="py-1 mb-1 me-3">
                 <div id="payment-methods-settings" class="setting-list p-2 rounded">
-                    <li class="fs-5 m-0 position-relative"><i class="fas fa-credit-card me-2"></i>Sposoby płatności
+                    <li class="fs-5 m-0 position-relative">
+                        <i class="fas fa-credit-card me-2"></i>
+                        <span>Sposoby płatności</span>
                         <div class="position-absolute top-50 end-0 translate-middle-y pe-2">
                             <i class="fas fa-angle-down"></i>
                             <i class="fas fa-angle-up"></i>
@@ -114,7 +120,7 @@
                         {% for category in paymentMethods %}
                         <li
                             class="category-of-settings category-label text-uppercase rounded w-100 position-relative fs-6 mb-2 py-2 px-3">
-                            <i class="{{ category.icon }} me-2"></i>{{ category.name }}
+                            <i class="{{ category.icon }} me-2 settings-icon-for-name-category"></i>{{ category.name }}
                             <div class="position-absolute top-50 end-0 translate-middle-y pe-2">
                                 <i class="fas fa-pen bg-success p-1 fs-4 rounded"></i>
                                 <i class="fas fa-trash-alt ms-2 bg-danger p-1 fs-4 rounded"></i>
