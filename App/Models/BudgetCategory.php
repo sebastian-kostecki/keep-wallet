@@ -95,19 +95,28 @@ abstract class BudgetCategory extends \Core\Model
 
     public function delete()
     {
-        foreach ($this->categoriesToDelete as $category) {
-            static::assignContentOfDeletedCategoryToOthers($category);
-            $sql = "DELETE FROM {$this->getNameTableWithBudgetItemsAssignedToUsers()} 
+        $sql = "DELETE FROM {$this->getNameTableWithBudgetItemsAssignedToUsers()} 
                 WHERE id = :idCategory";
 
-            $db = static::getDataBase();
-            $query = $db->prepare($sql);
+        $db = static::getDataBase();
+        $query = $db->prepare($sql);
 
-            $query->bindValue(':idCategory', $category, PDO::PARAM_INT);
-            if ($query->execute() == false) {
-                return false;
-            };
-        }
-        return true;
+        $query->bindValue(':idCategory', $this->id, PDO::PARAM_INT);
+        return $query->execute();
+
+        // foreach ($this->categoriesToDelete as $category) {
+        //     static::assignContentOfDeletedCategoryToOthers($category);
+        // $sql = "DELETE FROM {$this->getNameTableWithBudgetItemsAssignedToUsers()} 
+        //         WHERE id = :idCategory";
+
+        // $db = static::getDataBase();
+        // $query = $db->prepare($sql);
+
+        // $query->bindValue(':idCategory', $category, PDO::PARAM_INT);
+        // if ($query->execute() == false) {
+        //     return false;
+        // };
+        // }
+        // return true;
     }
 }

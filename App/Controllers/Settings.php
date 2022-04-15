@@ -73,9 +73,9 @@ class Settings extends Authenticated
 
     public function deleteIncomeCategoryAction()
     {
-        $categoriesToDelete = new IncomeCategory($_POST);
+        $categoryToDelete = new IncomeCategory($_POST);
 
-        if ($categoriesToDelete->delete()) {
+        if ($categoryToDelete->delete()) {
             Flash::addMessage("Usunąłeś kategorię przychodów");
             $this->redirect('/menu');
         } else {
@@ -112,10 +112,10 @@ class Settings extends Authenticated
 
     public function deleteExpenseCategoryAction()
     {
-        $categoriesToDelete = new ExpenseCategory($_POST);
+        $categoryToDelete = new ExpenseCategory($_POST);
 
-        if ($categoriesToDelete->delete()) {
-            Flash::addMessage("Usunąłeś kategorie wydatków");
+        if ($categoryToDelete->delete()) {
+            Flash::addMessage("Usunąłeś kategorię wydatków");
             $this->redirect('/menu');
         } else {
             Flash::addMessage("Nieudane usunięcie kategorii wydatków", Flash::DANGER);
@@ -151,13 +151,13 @@ class Settings extends Authenticated
 
     public function deletePaymentMethodAction()
     {
-        $paymentMethodsToDelete = new PaymentMethod($_POST);
+        $paymentMethodToDelete = new PaymentMethod($_POST);
 
-        if ($paymentMethodsToDelete->delete()) {
-            Flash::addMessage("Usunąłeś sposoby płatności");
+        if ($paymentMethodToDelete->delete()) {
+            Flash::addMessage("Usunąłeś sposob płatności");
             $this->redirect('/menu');
         } else {
-            Flash::addMessage("Nieudane usunięcie sposobów płatności", Flash::DANGER);
+            Flash::addMessage("Nieudane usunięcie sposobu płatności", Flash::DANGER);
             $this->redirect('/settings');
         }
     }
