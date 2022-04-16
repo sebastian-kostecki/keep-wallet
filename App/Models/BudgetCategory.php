@@ -7,6 +7,9 @@ use PDO;
 abstract class BudgetCategory extends \Core\Model
 {
     protected const NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS = "";
+    protected const NAME_TABLE_WITH_BUDGET_ITEMS = "";
+    protected const NAME_COLUMN_WITH_CATEGORY_ASSIGNED_TO_USER_ID = "";
+    protected const NAME_CATEGORY_WHICH_ASSIGN_BUDGET_ITEMS_FROM_REMOVED_CATEGORY = "";
 
     public $errors = [];
 
@@ -17,13 +20,25 @@ abstract class BudgetCategory extends \Core\Model
         }
     }
 
-    public static function getNameTableWithBudgetItemsAssignedToUsers(): string
+    protected static function getNameTableWithBudgetItemsAssignedToUsers(): string
     {
         return static::NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS;
     }
 
+    protected static function getNameTableWithBudgetItems(): string
+    {
+        return static::NAME_TABLE_WITH_BUDGET_ITEMS;
+    }
 
-    abstract static function assignContentOfDeletedCategoryToOthers($category);
+    protected static function getNameColumnWithCategoryAssignedToUserId(): string
+    {
+        return static::NAME_COLUMN_WITH_CATEGORY_ASSIGNED_TO_USER_ID;
+    }
+
+    protected static function getCategoryWhichAssignBudgetItemsFromRemovedCategory(): string
+    {
+        return static::NAME_CATEGORY_WHICH_ASSIGN_BUDGET_ITEMS_FROM_REMOVED_CATEGORY;
+    }
 
     public function validate()
     {
@@ -95,28 +110,21 @@ abstract class BudgetCategory extends \Core\Model
 
     public function delete()
     {
-        $sql = "DELETE FROM {$this->getNameTableWithBudgetItemsAssignedToUsers()} 
+        $sql = "UPDATE {$this->getNameTableWithBudgetItems()}
+                SET {$this->getNameColumnWithCategoryAssignedToUserId()} = 
+                    (SELECT id 
+                    FROM {$this->getNameTableWithBudgetItemsAssignedToUsers()} 
+                    WHERE name = '{$this->getCategoryWhichAssignBudgetItemsFromRemovedCategory()}' AND user_id = :userId)
+                WHERE {$this->getNameColumnWithCategoryAssignedToUserId()} = :idCategory;
+                
+                DELETE FROM {$this->getNameTableWithBudgetItemsAssignedToUsers()} 
                 WHERE id = :idCategory";
 
         $db = static::getDataBase();
         $query = $db->prepare($sql);
 
+        $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
         $query->bindValue(':idCategory', $this->id, PDO::PARAM_INT);
         return $query->execute();
-
-        // foreach ($this->categoriesToDelete as $category) {
-        //     static::assignContentOfDeletedCategoryToOthers($category);
-        // $sql = "DELETE FROM {$this->getNameTableWithBudgetItemsAssignedToUsers()} 
-        //         WHERE id = :idCategory";
-
-        // $db = static::getDataBase();
-        // $query = $db->prepare($sql);
-
-        // $query->bindValue(':idCategory', $category, PDO::PARAM_INT);
-        // if ($query->execute() == false) {
-        //     return false;
-        // };
-        // }
-        // return true;
     }
 }
