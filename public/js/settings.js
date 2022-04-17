@@ -40,7 +40,7 @@ for (let button of buttonsRemovingElement) {
         modalRemoveElement.toggle();
         setActionInForm(button, formRemove);
         setChosenCategoryIdInHiddenInput(button, inputWithCategoryIdToRemove);
-        sendForm(formRemove);
+        sendRemoveForm(formRemove);
     })
 }
 
@@ -74,19 +74,6 @@ const clearCategoryNameInput = () => {
     categoryNameInput.value = '';
 }
 
-const sendForm = (form) => {
-    const buttonsConfirmModal = document.querySelectorAll('.button-confirm-modal');
-    for (let button of buttonsConfirmModal) {
-        button.addEventListener('click', function () {
-            let validator = $($(button).parent().parent().find('#form-add-change-category')).validate();
-            if (validator.form()) {
-                form.submit();
-            }
-
-        })
-    }
-}
-
 const sendAddChangeForm = (form) => {
     const button = document.querySelector('#button-add-change');
     button.addEventListener('click', function () {
@@ -97,3 +84,11 @@ const sendAddChangeForm = (form) => {
 
     })
 }
+
+const sendRemoveForm = (form) => {
+    const button = document.querySelector('#button-remove');
+    button.addEventListener('click', function () {
+        form.submit();
+    })
+}
+
