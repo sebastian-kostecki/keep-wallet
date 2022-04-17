@@ -63,7 +63,3 @@ $.validator.addMethod('validAmount',
     },
     'Kwota jest nieprawidłowa'
 )
-
-$.validator.setDefaults({
-    debug: true
-});

@@ -295,13 +295,16 @@ option,
 }
 
 .setting-list {
+    background-color: rgba(255, 255, 255, 0.55);
+    color: #293241;
     pointer-events: all;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.5s;
 }
 
 .setting-list:hover {
-    color: #e0fbfc;
+    /* color: #e0fbfc; */
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
 .settings-input,
@@ -319,7 +322,14 @@ option,
 .settings-showed {
     padding: 0 !important;
     margin-top: 2px !important;
-    right: 100px !important;
+}
+
+.settings-icon-for-name-category {
+    width: 25px !important;
+}
+
+.fa-angle-up {
+    display: none;
 }
 
 @media (max-width: 1400px) {
@@ -389,10 +399,6 @@ option,
     .balance-info {
         margin: 0;
         width: 100%;
-    }
-
-    .setting-list {
-        text-align: center;
     }
 
     .button-chosen-icon {

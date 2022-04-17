@@ -27,30 +27,20 @@ class Settings extends Authenticated
         ]);
     }
 
-    public function changeNameAction()
+    public function changeUserDataAction()
     {
         $user = User::findByID($_SESSION['userId']);
 
-        if ($user->changeName($_POST['name'])) {
-            Flash::addMessage("Zmieniłeś nazwę użytkownika");
-            $this->redirect('/menu');
-        } else {
-            Flash::addMessage("Nieudana zmiana nazwy użytkownika", Flash::DANGER);
-            $this->redirect('/settings');
-        }
-    }
-
-    public function changePasswordAction()
-    {
-        $user = User::findByID($_SESSION['userId']);
-
-        if ($user->changePassword($_POST['password'])) {
+        if ($user->changeUserData($_POST) && empty($_POST['name'])) {
             Flash::addMessage("Zmieniłeś hasło");
-            $this->redirect('/menu');
+        } else if ($user->changeUserData($_POST) && empty($_POST['password'])) {
+            Flash::addMessage("Zmieniłeś nazwę użytkownika");
+        } else if ($user->changeUserData($_POST)) {
+            Flash::addMessage("Zmieniłeś hasło i nazwę użytkownika");
         } else {
-            Flash::addMessage("Nieudana zmiana hasła", Flash::DANGER);
-            $this->redirect('/settings');
+            Flash::addMessage("Nieudana zmiana danych użytkownika", Flash::DANGER);
         }
+        $this->redirect('/settings');
     }
 
     public function addIncomeCategoryAction()
@@ -59,11 +49,10 @@ class Settings extends Authenticated
 
         if ($incomeCategory->save()) {
             Flash::addMessage("Dodałeś nową kategorię przychodów");
-            $this->redirect('/menu');
         } else {
             Flash::addMessage("Nieudane dodanie nowej kategorii przychodów", Flash::DANGER);
-            $this->redirect('/settings');
         }
+        $this->redirect('/settings');
     }
 
     public function changeIncomeCategoryAction()
@@ -71,24 +60,22 @@ class Settings extends Authenticated
         $incomeCategory = new IncomeCategory($_POST);
         if ($incomeCategory->change()) {
             Flash::addMessage("Zmieniłeś kategorię przychodu");
-            $this->redirect('/menu');
         } else {
             Flash::addMessage("Nieudana zmiana kategorii przychodów", Flash::DANGER);
-            $this->redirect('/settings');
         }
+        $this->redirect('/settings');
     }
 
     public function deleteIncomeCategoryAction()
     {
-        $categoriesToDelete = new IncomeCategory($_POST);
+        $categoryToDelete = new IncomeCategory($_POST);
 
-        if ($categoriesToDelete->delete()) {
+        if ($categoryToDelete->delete()) {
             Flash::addMessage("Usunąłeś kategorię przychodów");
-            $this->redirect('/menu');
         } else {
             Flash::addMessage("Nieudane usunięcie kategorii przychodów", Flash::DANGER);
-            $this->redirect('/settings');
         }
+        $this->redirect('/settings');
     }
 
     public function addExpenseCategoryAction()
@@ -97,11 +84,10 @@ class Settings extends Authenticated
 
         if ($expenseCategory->save()) {
             Flash::addMessage("Dodałeś nową kategorię wydatków");
-            $this->redirect('/menu');
         } else {
             Flash::addMessage("Nieudane dodanie nowej kategorii wydatków", Flash::DANGER);
-            $this->redirect('/settings');
         }
+        $this->redirect('/settings');
     }
 
     public function changeExpenseCategoryAction()
@@ -110,24 +96,22 @@ class Settings extends Authenticated
 
         if ($expenseCategory->change()) {
             Flash::addMessage("Zmieniłeś kategorię wydatków");
-            $this->redirect('/menu');
         } else {
             Flash::addMessage("Nieudana zmiana kategorii wydatków", Flash::DANGER);
-            $this->redirect('/settings');
         }
+        $this->redirect('/settings');
     }
 
     public function deleteExpenseCategoryAction()
     {
-        $categoriesToDelete = new ExpenseCategory($_POST);
+        $categoryToDelete = new ExpenseCategory($_POST);
 
-        if ($categoriesToDelete->delete()) {
-            Flash::addMessage("Usunąłeś kategorie wydatków");
-            $this->redirect('/menu');
+        if ($categoryToDelete->delete()) {
+            Flash::addMessage("Usunąłeś kategorię wydatków");
         } else {
             Flash::addMessage("Nieudane usunięcie kategorii wydatków", Flash::DANGER);
-            $this->redirect('/settings');
         }
+        $this->redirect('/settings');
     }
 
     public function addPaymentMethodAction()
@@ -136,11 +120,10 @@ class Settings extends Authenticated
 
         if ($paymentMethod->save()) {
             Flash::addMessage("Dodałeś nowy sposób płatności");
-            $this->redirect('/menu');
         } else {
             Flash::addMessage("Nieudane dodanie nowego sposobu płatności", Flash::DANGER);
-            $this->redirect('/settings');
         }
+        $this->redirect('/settings');
     }
 
     public function changePaymentMethodAction()
@@ -149,23 +132,21 @@ class Settings extends Authenticated
 
         if ($paymentMethod->change()) {
             Flash::addMessage("Zmieniłeś wybrany sposób płatności");
-            $this->redirect('/menu');
         } else {
             Flash::addMessage("Nieudana zmiana sposobu płatności", Flash::DANGER);
-            $this->redirect('/settings');
         }
+        $this->redirect('/settings');
     }
 
     public function deletePaymentMethodAction()
     {
-        $paymentMethodsToDelete = new PaymentMethod($_POST);
+        $paymentMethodToDelete = new PaymentMethod($_POST);
 
-        if ($paymentMethodsToDelete->delete()) {
-            Flash::addMessage("Usunąłeś sposoby płatności");
-            $this->redirect('/menu');
+        if ($paymentMethodToDelete->delete()) {
+            Flash::addMessage("Usunąłeś sposob płatności");
         } else {
-            Flash::addMessage("Nieudane usunięcie sposobów płatności", Flash::DANGER);
-            $this->redirect('/settings');
+            Flash::addMessage("Nieudane usunięcie sposobu płatności", Flash::DANGER);
         }
+        $this->redirect('/settings');
     }
 }

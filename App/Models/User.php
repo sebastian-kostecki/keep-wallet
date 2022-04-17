@@ -336,42 +336,29 @@ class User extends \Core\Model
         return false;
     }
 
-    public function changeName($name)
+    public function changeUserData()
     {
-        $this->name = $name;
-        $this->validateUser();
-
-        if (empty($this->errors)) {
-
-            $sql = 'UPDATE users 
-                    SET name = :name
-                    WHERE id = :id';
-
-            $db = static::getDataBase();
-            $query = $db->prepare($sql);
-            $query->bindValue(':id', $this->id, PDO::PARAM_INT);
-            $query->bindValue(':name', $this->name, PDO::PARAM_STR);
-
-            return $query->execute();
+        if (!empty($_POST['name'])) {
+            $this->name = $_POST['name'];
         }
-        return false;
-    }
 
-    public function changePassword($password)
-    {
-        $this->password = $password;
+        if (!empty($_POST['password'])) {
+            $this->password = $_POST['password'];
+        }
+
         $this->validateUser();
 
         if (empty($this->errors)) {
             $password_hash = password_hash($this->password, PASSWORD_DEFAULT);
 
             $sql = 'UPDATE users 
-                    SET password = :password_hash
+                    SET name = :name, password = :password_hash
                     WHERE id = :id';
 
             $db = static::getDataBase();
             $query = $db->prepare($sql);
             $query->bindValue(':id', $this->id, PDO::PARAM_INT);
+            $query->bindValue(':name', $this->name, PDO::PARAM_STR);
             $query->bindValue(':password_hash', $password_hash, PDO::PARAM_STR);
 
             return $query->execute();
