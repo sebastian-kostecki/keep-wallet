@@ -31,7 +31,7 @@ class Settings extends Authenticated
     {
         $user = User::findByID($_SESSION['userId']);
 
-        if ($user->changeUserData($_POST) && empty($_POST['login'])) {
+        if ($user->changeUserData($_POST) && empty($_POST['name'])) {
             Flash::addMessage("Zmieniłeś hasło");
             $this->redirect('/menu');
         } else if ($user->changeUserData($_POST) && empty($_POST['password'])) {

@@ -22,13 +22,13 @@
                     </li>
                 </div>
                 <div class="user-settings settings-form mt-2">
-                    <form action="/settings/change-user-data" method="post" class="single-form">
+                    <form id="change-user-data" action="/settings/change-user-data" method="post" class="single-form">
                         <div class="input-group mb-2">
                             <span class="input-group-text border-0 px-3 py-2"><i class="fas fa-user"></i></span>
                             <input type="text" class="form-control border-0 p-2 ms-0 text-white"
-                                placeholder="Zmień nazwę użytkownika" name="login">
+                                placeholder="Zmień nazwę użytkownika" name="name">
                         </div>
-                        <div class="input-group mb-2 border-0">
+                        <div id="change-password" class="input-group mb-2 border-0">
                             <span class="input-group-text border-0 px-3 py-2"><i class="fas fa-lock"></i></span>
                             <input type="password" id="password-input"
                                 class="form-control border-0 p-2 ms-0 text-white rounded-end" placeholder="Zmień hasło"
@@ -160,69 +160,70 @@
                 </div>
             </div>
         </ul>
-    <div class="modal fade" id="modalCreateChangeCategory" tabindex="-1" aria-labelledby="modal-create-change-category"
-        aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalAddElementLabel">Wybierz ikonę oraz nazwę</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container-fluid p-0">
-                        <form id="form-add-change-category" method="post">
-                            <div class="d-flex flex-wrap">
-                                {% for icon in icons %}
-                                <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                                    <input type="radio" class="form-check-input icon-to-chosen-in-modal" name="icon"
-                                        id="{{ icon.icon }}" value="{{ icon.icon }}" required>
-                                    <label for="{{ icon.icon }}"
-                                        class="form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-2"
-                                        role="button"><i class="{{ icon.icon }} me-2"></i></label>
+        <div class="modal fade" id="modalCreateChangeCategory" tabindex="-1"
+            aria-labelledby="modal-create-change-category" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalAddElementLabel">Wybierz ikonę oraz nazwę</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid p-0">
+                            <form id="form-add-change-category" method="post">
+                                <div class="d-flex flex-wrap">
+                                    {% for icon in icons %}
+                                    <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                                        <input type="radio" class="form-check-input icon-to-chosen-in-modal" name="icon"
+                                            id="{{ icon.icon }}" value="{{ icon.icon }}" required>
+                                        <label for="{{ icon.icon }}"
+                                            class="form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-2"
+                                            role="button"><i class="{{ icon.icon }} me-2"></i></label>
+                                    </div>
+                                    {% endfor %}
                                 </div>
-                                {% endfor %}
-                            </div>
-                            <div>
-                                <input id="previousCategoryId" type="hidden" name="previousCategory">
-                                <input type="text" class="form-control" name="nameCategory" placeholder="Wpisz nazwę">
-                            </div>
-                        </form>
+                                <div>
+                                    <input id="previousCategoryId" type="hidden" name="previousCategory">
+                                    <input type="text" class="form-control" name="nameCategory"
+                                        placeholder="Wpisz nazwę">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn button-outline" data-bs-dismiss="modal">Zamknij</button>
+                        <button type="button" class="button-confirm-modal btn button-normal">Zapisz</button>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn button-outline" data-bs-dismiss="modal">Zamknij</button>
-                    <button type="button" class="button-confirm-modal btn button-normal">Zapisz</button>
+            </div>
+        </div>
+        <div class="modal fade" id="confirmRemoving" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Czy na pewno chcesz usunąć?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="" method="post">
+                            <input id="categoryIdToRemove" type="hidden" name="id">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn button-outline" data-bs-dismiss="modal">Zamknij</button>
+                        <button type="button" class="button-confirm-modal btn button-normal">Potwierdź</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="modal fade" id="confirmRemoving" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Czy na pewno chcesz usunąć?</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="" method="post">
-                        <input id="categoryIdToRemove" type="hidden" name="id">
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn button-outline" data-bs-dismiss="modal">Zamknij</button>
-                    <button type="button" class="button-confirm-modal btn button-normal">Potwierdź</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-{% endblock %}
+    {% endblock %}
 
-{% block footer %}
-<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
-<script src="/js/hideShowPassword.js"></script>
-<script src="/js/hideShowSettings.js"></script>
-<script src="\js\validateSettings.js"></script>
-<script src="/js/settings.js"></script>
-{% endblock %}
+    {% block footer %}
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+    <script src="/js/hideShowPassword.js"></script>
+    <script src="/js/hideShowSettings.js"></script>
+    <script src="\js\validateSettings.js"></script>
+    <script src="/js/settings.js"></script>
+    {% endblock %}

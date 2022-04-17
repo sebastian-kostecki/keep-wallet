@@ -338,8 +338,8 @@ class User extends \Core\Model
 
     public function changeUserData()
     {
-        if (!empty($_POST['login'])) {
-            $this->name = $_POST['login'];
+        if (!empty($_POST['name'])) {
+            $this->name = $_POST['name'];
         }
 
         if (!empty($_POST['password'])) {
