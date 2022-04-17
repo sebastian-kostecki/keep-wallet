@@ -10,7 +10,7 @@
 <div class="container-fluid settings-container p-1 p-lg-0 fs-5 me-3">
     <div class="col-12">
         <ul class="p-0">
-            <div class="pt-2 pb-1 mb-1 me-3">
+            <div class="pt-2 pb-1 mb-1 me-lg-3 me-0">
                 <div id="user-settings" class="setting-list p-2 rounded">
                     <li class="fs-5 m-0 position-relative">
                         <i class="fas fa-user me-2"></i>
@@ -45,7 +45,7 @@
                     </form>
                 </div>
             </div>
-            <div class="py-1 mb-1 me-3">
+            <div class="py-1 mb-1 me-lg-3 me-0">
                 <div id="incomes-category-settings" class="setting-list p-2 rounded">
                     <li class="fs-5 m-0 position-relative">
                         <i class="fas fa-bookmark me-2"></i>
@@ -83,7 +83,7 @@
                     </button>
                 </div>
             </div>
-            <div class="py-1 mb-1 me-3">
+            <div class="py-1 mb-1 me-lg-3 me-0">
                 <div id="expenses-category-settings" class="setting-list p-2 rounded">
                     <li class="fs-5 m-0 position-relative">
                         <i class="fas fa-bookmark me-2"></i>
@@ -121,7 +121,7 @@
                     </button>
                 </div>
             </div>
-            <div class="py-1 mb-1 me-3">
+            <div class="py-1 mb-1 me-lg-3 me-0">
                 <div id="payment-methods-settings" class="setting-list p-2 rounded">
                     <li class="fs-5 m-0 position-relative">
                         <i class="fas fa-credit-card me-2"></i>
@@ -183,16 +183,17 @@
                                     {% endfor %}
                                 </div>
                                 <div>
-                                    <input id="previousCategoryId" type="hidden" name="previousCategory">
+                                    <input id="previousCategoryId" type="hidden" name="previousCategory" required>
                                     <input type="text" class="form-control" name="nameCategory"
-                                        placeholder="Wpisz nazwę">
+                                        placeholder="Wpisz nazwę" required>
                                 </div>
                             </form>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn button-outline" data-bs-dismiss="modal">Zamknij</button>
-                        <button type="button" class="button-confirm-modal btn button-normal">Zapisz</button>
+                        <button id="button-add-change" type="button"
+                            class="button-confirm-modal btn button-normal">Zapisz</button>
                     </div>
                 </div>
             </div>

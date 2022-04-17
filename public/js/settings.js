@@ -9,7 +9,8 @@ for (let button of buttonsAddingNewElement) {
         modalCreateAndChangeElement.toggle();
         setActionInForm(button, form);
         clearChosenRadioInputs();
-        sendForm(form);
+        clearCategoryNameInput();
+        sendAddChangeForm(form);
     })
 }
 
@@ -21,7 +22,8 @@ for (let button of buttonsChangingElement) {
         setActionInForm(button, form);
         setChosenCategoryIdInHiddenInput(button, hiddenInputPreviousCategory);
         setIconChoosingElement(button);
-        sendForm(form);
+        clearCategoryNameInput();
+        sendAddChangeForm(form);
     })
 }
 
@@ -67,11 +69,31 @@ const clearChosenRadioInputs = () => {
     }
 }
 
+const clearCategoryNameInput = () => {
+    const categoryNameInput = document.querySelector('[name="nameCategory"]');
+    categoryNameInput.value = '';
+}
+
 const sendForm = (form) => {
     const buttonsConfirmModal = document.querySelectorAll('.button-confirm-modal');
     for (let button of buttonsConfirmModal) {
         button.addEventListener('click', function () {
-            form.submit();
+            let validator = $($(button).parent().parent().find('#form-add-change-category')).validate();
+            if (validator.form()) {
+                form.submit();
+            }
+
         })
     }
+}
+
+const sendAddChangeForm = (form) => {
+    const button = document.querySelector('#button-add-change');
+    button.addEventListener('click', function () {
+        let validator = $($(button).parent().parent().find('#form-add-change-category')).validate();
+        if (validator.form()) {
+            form.submit();
+        }
+
+    })
 }
