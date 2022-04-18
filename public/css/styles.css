@@ -328,6 +328,16 @@ option,
     width: 25px !important;
 }
 
+.button-change-budget-item {
+    width: 60px;
+    height: 24px;
+}
+
+.button-form-change-budget-item {
+    display: none;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
 .fa-angle-up {
     display: none;
 }

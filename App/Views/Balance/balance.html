@@ -77,8 +77,15 @@
                         <td rowspan="2">
                             <button id="income-id-{{income.id }}"
                                 class="button-change-budget-item btn p-0 text-white-50 border-0">
-                                <i class="fas fa-pen ms-1 p-1 fs-4 rounded align-middle"></i>
                             </button>
+                            <form action="">
+                                <input type="hidden" name="incomeId">
+                                <input type="hidden" name="amount">
+                                <input type="hidden" name="date">
+                                <input type="hidden" name="comment">
+                                <button type="submit"
+                                    class="button-form-change-budget-item btn ms-1 p-1 text-white-50 border-1 rounded">Zmień</button>
+                            </form>
                         </td>
                         <td class="budget-item-date income-id-{{income.id }} text-end pe-1">{{ income.date_of_income }}
                         </td>
