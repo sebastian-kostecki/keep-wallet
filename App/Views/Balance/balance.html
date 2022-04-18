@@ -61,19 +61,20 @@
             <table class="balance-table w-100">
                 <thead>
                     <tr>
-                        <th class="text-start ps-1">Kategoria</th>
+                        <th colspan="2" class="text-start ps-1">Kategoria</th>
                         <th class="text-end pe-1">Kwota</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for incomeByCategory in incomesGroupByCategories %}
                     <tr class="category-row">
-                        <td class="title-item text-start ps-1">{{ incomeByCategory.name }}</td>
+                        <td colspan="2" class="title-item text-start ps-1">{{ incomeByCategory.name }}</td>
                         <td class="text-end pe-1">{{ incomeByCategory.total }} zł</td>
                     </tr>
                     {% for income in allIncomes %}
                     {% if income.name == incomeByCategory.name %}
                     <tr class="fw-light border-top-0 extensively budget-item-details {{ incomeByCategory.name }}">
+                        <td rowspan="2"><button>Zmień</button></td>
                         <td class="budget-item-date text-end pe-1">{{ income.date_of_income }}</td>
                         <td rowspan="2" class="text-end pe-1 income-amount">{{ income.amount }} zł</td>
                     </tr>
@@ -86,7 +87,7 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th colspan="2" id="incomes-sum" class="text-end pe-1"></th>
+                        <th colspan="3" id="incomes-sum" class="text-end pe-1"></th>
                     </tr>
                 </tfoot>
             </table>
