@@ -69,7 +69,7 @@
                     {% for incomeByCategory in incomesGroupByCategories %}
                     <tr class="category-row">
                         <td colspan="2" class="title-item text-start ps-1">{{ incomeByCategory.name }}</td>
-                        <td class="text-end pe-1">{{ incomeByCategory.total }} zł</td>
+                        <td class="text-end pe-1 income-amount">{{ incomeByCategory.total }} zł</td>
                     </tr>
                     {% for income in allIncomes %}
                     {% if income.name == incomeByCategory.name %}
@@ -80,7 +80,7 @@
                             </button>
                         </td>
                         <td class="budget-item-date text-end pe-1">{{ income.date_of_income }}</td>
-                        <td rowspan="2" class="text-end pe-1 income-amount">{{ income.amount }} zł</td>
+                        <td rowspan="2" class="text-end pe-1">{{ income.amount }} zł</td>
                     </tr>
                     <tr class="fw-light border-top-0 extensively budget-item-details {{ incomeByCategory.name }}">
                         <td class="text-end pe-1">{{ income.income_comment }}</td>
@@ -110,14 +110,14 @@
                     <tr class="category-row">
                         <td colspan="2" class="title-item expense-name text-start ps-1">{{ expenseByCategory.name }}
                         </td>
-                        <td class="expense-cash text-end pe-1">{{ expenseByCategory.total }} zł</td>
+                        <td class="expense-cash text-end pe-1 expense-amount">{{ expenseByCategory.total }} zł</td>
                     </tr>
                     {% for expense in allExpenses %}
                     {% if expenseByCategory.name == expense.name %}
                     <tr class="fw-light border-top-0 extensively budget-item-details {{ expenseByCategory.name }}">
                         <td class="text-end pe-1">{{ expense.payment_method }}</td>
                         <td class="budget-item-date text-end pe-1">{{ expense.date_of_expense }}</td>
-                        <td rowspan="2" class="text-end pe-1 expense-amount">{{ expense.amount }} zł</td>
+                        <td rowspan="2" class="text-end pe-1">{{ expense.amount }} zł</td>
                     </tr>
                     <tr class="fw-light border-top-0 extensively budget-item-details {{ expenseByCategory.name }}">
                         <td colspan="2" class="text-end pe-1">{{ expense.expense_comment }}</td>
