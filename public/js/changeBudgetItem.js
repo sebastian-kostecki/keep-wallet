@@ -42,6 +42,7 @@ for (let button of buttons) {
             let chosenTableDatas = document.querySelectorAll(classNameForTableData);
             for (let td of chosenTableDatas) {
                 td.contentEditable = 'true';
+
                 if (td.classList[0] == 'budget-item-comment') {
                     if (td.textContent == '') {
                         td.textContent = 'Komentarz';
@@ -64,6 +65,9 @@ for (let button of buttons) {
                 }
             }
 
+            let rememberedAmount = button.parentElement.parentElement.nextElementSibling.nextElementSibling.textContent;
+            let rememberedDate = button.parentElement.parentElement.nextElementSibling.textContent;
+            let rememberedComment = button.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild.textContent;
 
             button.hidden = true;
             button.nextElementSibling.hidden = true;
@@ -79,6 +83,18 @@ for (let button of buttons) {
                 for (let td of chosenTableDatas) {
                     td.contentEditable = 'false';
                 }
+
+                button.parentElement.parentElement.nextElementSibling.nextElementSibling.textContent = rememberedAmount;
+                button.parentElement.parentElement.nextElementSibling.textContent = rememberedDate;
+                button.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild.textContent = rememberedComment;
+                if (button.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild.textContent != 'Komentarz') {
+                    button.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild.style.color = 'inherit';
+                } else {
+                    button.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild.style.display = 'none';
+                }
+
+
+
                 button.hidden = false;
                 button.nextElementSibling.hidden = false;
                 e.preventDefault();
