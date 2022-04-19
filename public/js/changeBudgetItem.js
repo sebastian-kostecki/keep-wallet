@@ -1,3 +1,8 @@
+const modalRemoveElement = new bootstrap.Modal(document.getElementById('confirmRemoving'), {
+    keyboard: false
+})
+const buttonConfirmRemove = document.querySelector('#button-remove');
+
 const buttons = document.querySelectorAll('.button-change-budget-item');
 const buttonsChangingBudgetItems = document.querySelectorAll('.button-form-change-budget-item');
 
@@ -60,11 +65,15 @@ for (let button of buttons) {
     })
 
     button.nextElementSibling.addEventListener('click', function () {
-        button.parentElement.nextElementSibling.action = '/' + button.nextElementSibling.classList[0].slice(0, 6) + '/remove';
-        assignTableCellToInputs(button.parentElement.nextElementSibling);
-        button.parentElement.nextElementSibling.submit();
-
+        modalRemoveElement.toggle();
     })
+
+    buttonConfirmRemove.addEventListener('click', function () {
+        this.nextElementSibling.action = '/' + button.nextElementSibling.classList[0].slice(0, 6) + '/remove';
+        this.nextElementSibling.firstElementChild.value = button.classList[0].slice(10);
+        this.nextElementSibling.submit();
+    })
+
 
     button.parentElement.parentElement.parentElement.addEventListener('mouseenter', function () {
         if (isButtonsNotShowing()) {
@@ -76,7 +85,6 @@ for (let button of buttons) {
         button.parentElement.style.display = 'none';
     })
 }
-
 
 
 

@@ -169,6 +169,26 @@
                 id="balance-sum">0</span> zł</p>
         <p class="display-6 balance-heading w-auto text-center p-2 m-0 rounded balance-text"></p>
     </div>
+    <div class="modal fade" id="confirmRemoving" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Czy na pewno chcesz usunąć?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn button-outline" data-bs-dismiss="modal">Zamknij</button>
+                    <button id="button-remove" type="button"
+                        class="button-confirm-modal btn button-normal">Potwierdź</button>
+                    <form action="" method="post">
+                        <input type="hidden" name="id">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     {% endblock %}
 
     {% block footer %}
