@@ -328,9 +328,10 @@ option,
     width: 25px !important;
 }
 
-.button-change-budget-item {
+.table-data-with-buttons {
+    display: table-cell;
     width: 60px;
-    height: 24px;
+    height: 26px;
 }
 
 .button-form-change-budget-item {

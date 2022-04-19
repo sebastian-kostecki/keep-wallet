@@ -74,11 +74,11 @@
                     {% for income in allIncomes %}
                     {% if income.name == incomeByCategory.name %}
                     <tr class="fw-light border-top-0 extensively budget-item-details {{ incomeByCategory.name }}">
-                        <td rowspan="2">
+                        <td rowspan="2" class="table-data-with-buttons">
                             <button id="income-id-{{income.id }}"
                                 class="button-change-budget-item btn p-0 text-white-50 border-0">
                             </button>
-                            <form action="">
+                            <form action="" method="post" class="d-flex">
                                 <input type="hidden" name="incomeId">
                                 <input type="hidden" name="amount">
                                 <input type="hidden" name="date">

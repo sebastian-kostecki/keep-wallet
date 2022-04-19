@@ -31,7 +31,7 @@ for (let button of buttons) {
 
     button.parentElement.parentElement.addEventListener('mouseenter', function () {
         if (isButtonsNotShowing()) {
-            button.innerHTML = '<i class="fas fa-pen ms-1 fs-6"></i>';
+            button.innerHTML = '<i class="fas fa-pen ms-2 fs-6"></i>';
         }
     })
 
