@@ -42,7 +42,29 @@ for (let button of buttons) {
             let chosenTableDatas = document.querySelectorAll(classNameForTableData);
             for (let td of chosenTableDatas) {
                 td.contentEditable = 'true';
+                if (td.classList[0] == 'budget-item-comment') {
+                    if (td.textContent == '') {
+                        td.textContent = 'Komentarz';
+                        td.style.color = 'rgba(255,255,255,0.15)';
+                    }
+
+                    td.addEventListener('focus', function () {
+                        if (td.textContent == 'Komentarz') {
+                            td.textContent = '';
+                            td.style.color = 'inherit';
+                        }
+                    })
+
+                    td.addEventListener('blur', function () {
+                        if (td.textContent == '') {
+                            td.textContent = 'Komentarz';
+                            td.style.color = 'rgba(255,255,255,0.15)';
+                        }
+                    })
+                }
             }
+
+
             button.hidden = true;
             button.nextElementSibling.hidden = true;
             let buttonAbortingBudgetItem = button.parentElement.nextElementSibling.lastElementChild;
