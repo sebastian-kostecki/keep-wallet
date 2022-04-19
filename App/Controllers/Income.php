@@ -31,4 +31,17 @@ class Income extends Authenticated
             ]);
         }
     }
+
+    public function changeAction()
+    {
+        $income = new Incomes($_POST);
+        if ($income->change()) {
+            Flash::addMessage('Zmieniono wybrany przychód');
+            $this->redirect('/balance/show');
+        } else {
+            Flash::addMessage('Nieudana zmiana przychodu', Flash::DANGER);
+            $this->redirect('/balance/show');
+            //var_dump($income);
+        }
+    }
 }
