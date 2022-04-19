@@ -28,17 +28,27 @@ for (let button of buttons) {
         }
     })
 
-
     button.parentElement.parentElement.addEventListener('mouseenter', function () {
         if (isButtonsNotShowing()) {
             button.innerHTML = '<i class="fas fa-pen ms-2 fs-6"></i>';
         }
     })
 
-
-
     button.parentElement.parentElement.addEventListener('mouseleave', function () {
         button.innerHTML = '';
     })
 }
 
+const formsChangingBudgetItems = document.querySelectorAll('.form-change-budget-item');
+for (let form of formsChangingBudgetItems) {
+    form.addEventListener('submit', function () {
+        let incomeId = form.previousElementSibling.id.slice(10);
+        let incomeDate = form.parentElement.nextElementSibling.textContent;
+        let incomeAmount = form.parentElement.nextElementSibling.nextElementSibling.textContent.slice(0, -3);
+        let incomeComment = form.parentElement.parentElement.nextElementSibling.firstElementChild.textContent;
+        form.children.id.value = incomeId;
+        form.children.date.value = incomeDate;
+        form.children.amount.value = incomeAmount;
+        form.children.comment.value = incomeComment;
+    })
+}
