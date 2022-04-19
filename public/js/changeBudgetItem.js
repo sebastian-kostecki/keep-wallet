@@ -14,14 +14,15 @@ const isButtonsNotShowing = () => {
 for (let button of buttons) {
     button.addEventListener('click', function (e) {
         if (isButtonsNotShowing()) {
-            let classNameForTableData = 'td.' + button.id;
+            let classNameForTableData = 'td.' + button.classList[0];
             let chosenTableDatas = document.querySelectorAll(classNameForTableData);
             for (let td of chosenTableDatas) {
                 td.contentEditable = 'true';
             }
             button.hidden = true;
-            let buttonAbortingBudgetItem = button.nextElementSibling.lastElementChild;
-            let buttonChangingBudgetItem = button.nextElementSibling.lastElementChild.previousElementSibling;
+            button.nextElementSibling.hidden = true;
+            let buttonAbortingBudgetItem = button.parentElement.nextElementSibling.lastElementChild;
+            let buttonChangingBudgetItem = button.parentElement.nextElementSibling.lastElementChild.previousElementSibling;
 
             buttonAbortingBudgetItem.style.display = 'inline-block';
             buttonChangingBudgetItem.style.display = 'inline-block';
@@ -33,19 +34,20 @@ for (let button of buttons) {
                     td.contentEditable = 'false';
                 }
                 button.hidden = false;
+                button.nextElementSibling.hidden = false;
                 e.preventDefault();
             })
         }
     })
 
-    button.parentElement.parentElement.addEventListener('mouseenter', function () {
+    button.parentElement.parentElement.parentElement.addEventListener('mouseenter', function () {
         if (isButtonsNotShowing()) {
-            button.innerHTML = '<i class="fas fa-pen ms-2 fs-6"></i>';
+            button.parentElement.style.display = 'block';
         }
     })
 
-    button.parentElement.parentElement.addEventListener('mouseleave', function () {
-        button.innerHTML = '';
+    button.parentElement.parentElement.parentElement.addEventListener('mouseleave', function () {
+        button.parentElement.style.display = 'none';
     })
 }
 
@@ -61,7 +63,7 @@ const formatDate = (date) => {
 const formsChangingBudgetItems = document.querySelectorAll('.form-change-budget-item');
 for (let form of formsChangingBudgetItems) {
     form.addEventListener('submit', function () {
-        let incomeId = form.previousElementSibling.id.slice(10);
+        let incomeId = form.previousElementSibling.firstElementChild.classList[0].slice(10);
         let incomeDate = formatDate(form.parentElement.nextElementSibling.textContent);
         let incomeAmount = form.parentElement.nextElementSibling.nextElementSibling.textContent.slice(0, -3);
         let incomeComment = form.parentElement.parentElement.nextElementSibling.firstElementChild.textContent;

@@ -343,6 +343,7 @@ option,
     line-height: 1;
 }
 
+.buttons-change-budget-item,
 .fa-angle-up {
     display: none;
 }
