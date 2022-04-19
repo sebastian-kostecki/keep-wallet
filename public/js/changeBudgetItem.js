@@ -25,6 +25,16 @@ for (let button of buttons) {
 
             buttonAbortingBudgetItem.style.display = 'inline-block';
             buttonChangingBudgetItem.style.display = 'inline-block';
+
+            buttonAbortingBudgetItem.addEventListener('click', function (e) {
+                buttonAbortingBudgetItem.style.display = 'none';
+                buttonChangingBudgetItem.style.display = 'none';
+                for (let td of chosenTableDatas) {
+                    td.contentEditable = 'false';
+                }
+                button.hidden = false;
+                e.preventDefault();
+            })
         }
     })
 
