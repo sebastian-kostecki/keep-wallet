@@ -67,8 +67,6 @@ class Incomes extends \Core\Model
             $sql = "UPDATE incomes
                     SET amount = :amount, date_of_income = :date, income_comment = :comment
                     WHERE id = :id";
-            // $sql = "INSERT INTO incomes 
-            //         VALUES (NULL, :userId, :category, :amount, :date, :comment)";
 
             $db = static::getDataBase();
             $query = $db->prepare($sql);
@@ -79,5 +77,16 @@ class Incomes extends \Core\Model
             return $query->execute();
         }
         return false;
+    }
+
+    public function remove()
+    {
+        $sql = "DELETE FROM incomes
+                WHERE id = :id";
+
+        $db = static::getDataBase();
+        $query = $db->prepare($sql);
+        $query->bindValue(':id', $this->id, PDO::PARAM_INT);
+        return $query->execute();
     }
 }

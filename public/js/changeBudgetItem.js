@@ -10,6 +10,25 @@ const isButtonsNotShowing = () => {
     return true;
 }
 
+const formatDate = (date) => {
+    let day = parseInt(date.slice(0, 2)) + 1;
+    let month = parseInt(date.slice(3, 5)) - 1;
+    let year = date.slice(6);
+    let cleanDate = new Date(year, month, day);
+    return cleanDate.toISOString().slice(0, 10);
+}
+
+const assignTableCellToInputs = (form) => {
+    let incomeId = form.previousElementSibling.firstElementChild.classList[0].slice(10);
+    let incomeDate = formatDate(form.parentElement.nextElementSibling.textContent);
+    let incomeAmount = form.parentElement.nextElementSibling.nextElementSibling.textContent.slice(0, -3);
+    let incomeComment = form.parentElement.parentElement.nextElementSibling.firstElementChild.textContent;
+    form.children.id.value = incomeId;
+    form.children.date.value = incomeDate;
+    form.children.amount.value = incomeAmount;
+    form.children.comment.value = incomeComment;
+}
+
 
 for (let button of buttons) {
     button.addEventListener('click', function (e) {
@@ -40,6 +59,13 @@ for (let button of buttons) {
         }
     })
 
+    button.nextElementSibling.addEventListener('click', function () {
+        button.parentElement.nextElementSibling.action = '/' + button.nextElementSibling.classList[0].slice(0, 6) + '/remove';
+        assignTableCellToInputs(button.parentElement.nextElementSibling);
+        button.parentElement.nextElementSibling.submit();
+
+    })
+
     button.parentElement.parentElement.parentElement.addEventListener('mouseenter', function () {
         if (isButtonsNotShowing()) {
             button.parentElement.style.display = 'block';
@@ -52,13 +78,7 @@ for (let button of buttons) {
 }
 
 
-const formatDate = (date) => {
-    let day = parseInt(date.slice(0, 2)) + 1;
-    let month = parseInt(date.slice(3, 5)) - 1;
-    let year = date.slice(6);
-    let cleanDate = new Date(year, month, day);
-    return cleanDate.toISOString().slice(0, 10);
-}
+
 
 const formsChangingBudgetItems = document.querySelectorAll('.form-change-budget-item');
 for (let form of formsChangingBudgetItems) {
@@ -73,3 +93,4 @@ for (let form of formsChangingBudgetItems) {
         form.children.comment.value = incomeComment;
     })
 }
+

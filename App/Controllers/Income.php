@@ -44,4 +44,16 @@ class Income extends Authenticated
             //var_dump($income);
         }
     }
+
+    public function removeAction()
+    {
+        $income = new Incomes($_POST);
+        if ($income->remove()) {
+            Flash::addMessage('Usunięto wybrany przychód');
+            $this->redirect('/balance/show');
+        } else {
+            Flash::addMessage('Nieudane usunięcie przychodu', Flash::DANGER);
+            $this->redirect('/balance/show');
+        }
+    }
 }
