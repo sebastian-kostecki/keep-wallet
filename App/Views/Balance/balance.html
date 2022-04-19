@@ -74,7 +74,7 @@
                     {% for income in allIncomes %}
                     {% if income.name == incomeByCategory.name %}
                     <tr class="fw-light border-top-0 extensively budget-item-details {{ incomeByCategory.name }}">
-                        <td rowspan="2" class="table-data-with-buttons">
+                        <td rowspan="2" class="table-data-with-buttons w-25">
                             <button id="income-id-{{income.id }}"
                                 class="button-change-budget-item btn p-0 text-white-50 border-0">
                             </button>
@@ -93,9 +93,10 @@
                                 </button>
                             </form>
                         </td>
-                        <td class="budget-item-date income-id-{{income.id }} text-end pe-1">{{ income.date_of_income }}
+                        <td class="budget-item-date income-id-{{income.id }} text-end pe-1 w-50">{{
+                            income.date_of_income }}
                         </td>
-                        <td rowspan="2" class="budget-item-amount income-id-{{income.id }} text-end pe-1">{{
+                        <td rowspan="2" class="budget-item-amount income-id-{{income.id }} text-end pe-1 w-25">{{
                             income.amount }} zł</td>
                     </tr>
                     <tr class="fw-light border-top-0 extensively budget-item-details {{ incomeByCategory.name }}">
