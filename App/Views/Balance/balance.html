@@ -76,15 +76,16 @@
                     <tr class="budget-item fw-light border-top-0 budget-item-details {{ incomeByCategory.name }}">
                         <td rowspan="2" class="table-data-with-buttons w-25">
                             <div class="buttons-change-budget-item">
-                                <button
-                                    class="income-id-{{income.id }} button-change-budget-item btn ms-2 p-0 text-white-50 border-0"><i
-                                        class="fas fa-pen"></i>
+                                <button class="button-change-budget-item btn ms-2 p-0 text-white-50 border-0">
+                                    <i class="fas fa-pen"></i>
                                 </button>
-                                <button class="income-id-{{income.id }} btn p-0 ms-2 text-danger border-0">
+                                <button
+                                    class="income-id-{{ income.id }} button-remove btn p-0 ms-2 text-danger border-0">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
-                            <form action="/income/change" method="post" class="form-change-budget-item d-flex">
+                            <form action="/income/change" method="post"
+                                class="income-id-{{income.id }} form-change-budget-item d-flex">
                                 <input type="hidden" name="id">
                                 <input type="hidden" name="amount">
                                 <input type="hidden" name="date">
@@ -99,14 +100,14 @@
                                 </button>
                             </form>
                         </td>
-                        <td class="budget-item-date income-id-{{income.id }} text-end pe-1 w-50">{{
+                        <td class="budget-item-date text-end pe-1 w-50">{{
                             income.date_of_income }}
                         </td>
-                        <td rowspan="2" class="budget-item-amount income-id-{{income.id }} text-end pe-1 w-25">{{
+                        <td rowspan="2" class="budget-item-amount text-end pe-1 w-25">{{
                             income.amount }} zł</td>
                     </tr>
                     <tr class="fw-light border-top-0 extensively budget-item-details {{ incomeByCategory.name }}">
-                        <td class="budget-item-comment income-id-{{income.id }} text-end pe-1">{{ income.income_comment
+                        <td class="budget-item-comment text-end pe-1">{{ income.income_comment
                             }}</td>
                     </tr>
                     {% endif %}
@@ -182,7 +183,7 @@
                     <button type="button" class="btn button-outline" data-bs-dismiss="modal">Zamknij</button>
                     <button id="button-remove" type="button"
                         class="button-confirm-modal btn button-normal">Potwierdź</button>
-                    <form action="" method="post">
+                    <form id="form-remove" method="post">
                         <input type="hidden" name="id">
                     </form>
                 </div>

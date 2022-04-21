@@ -35,6 +35,7 @@ class Income extends Authenticated
     public function changeAction()
     {
         $income = new Incomes($_POST);
+
         if ($income->change()) {
             Flash::addMessage('Zmieniono wybrany przychód');
             $this->redirect('/balance/show');
