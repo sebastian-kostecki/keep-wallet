@@ -1,10 +1,4 @@
-const modalRemoveElement = new bootstrap.Modal(document.getElementById('confirmRemoving'), {
-    keyboard: false
-})
-
-const buttons = document.querySelectorAll('.button-change-budget-item');
 const buttonsChangingBudgetItems = document.querySelectorAll('.button-form-change-budget-item');
-
 const checkIsOtherChangeButtonsHidden = () => {
     for (let button of buttonsChangingBudgetItems) {
         if (button.style.display == 'inline-block') {
@@ -22,125 +16,6 @@ const formatDate = (date) => {
     return cleanDate.toISOString().slice(0, 10);
 }
 
-const assignTableCellToInputs = (form) => {
-    let incomeId = form.previousElementSibling.firstElementChild.classList[0].slice(10);
-    let incomeDate = formatDate(form.parentElement.nextElementSibling.textContent);
-    let incomeAmount = form.parentElement.nextElementSibling.nextElementSibling.textContent.slice(0, -3);
-    let incomeComment = form.parentElement.parentElement.nextElementSibling.firstElementChild.textContent;
-    form.children.id.value = incomeId;
-    form.children.date.value = incomeDate;
-    form.children.amount.value = incomeAmount;
-    form.children.comment.value = incomeComment;
-}
-
-
-// for (let button of buttons) {
-//     button.addEventListener('click', function (e) {
-//         if (isButtonsNotShowing()) {
-//             let classNameForTableData = 'td.' + button.classList[0];
-//             let chosenTableDatas = document.querySelectorAll(classNameForTableData);
-//             for (let td of chosenTableDatas) {
-//                 td.contentEditable = 'true';
-
-//                 if (td.classList[0] == 'budget-item-comment') {
-//                     if (td.textContent == '') {
-//                         td.textContent = 'Komentarz';
-//                         td.style.color = 'rgba(255,255,255,0.15)';
-//                     }
-
-//                     td.addEventListener('focus', function () {
-//                         if (td.textContent == 'Komentarz') {
-//                             td.textContent = '';
-//                             td.style.color = 'inherit';
-//                         }
-//                     })
-
-//                     td.addEventListener('blur', function () {
-//                         if (td.textContent == '') {
-//                             td.textContent = 'Komentarz';
-//                             td.style.color = 'rgba(255,255,255,0.15)';
-//                         }
-//                     })
-//                 }
-//             }
-
-//             let rememberedAmount = button.parentElement.parentElement.nextElementSibling.nextElementSibling.textContent;
-//             let rememberedDate = button.parentElement.parentElement.nextElementSibling.textContent;
-//             let rememberedComment = button.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild.textContent;
-
-//             button.hidden = true;
-//             button.nextElementSibling.hidden = true;
-//             let buttonAbortingBudgetItem = button.parentElement.nextElementSibling.lastElementChild;
-//             let buttonChangingBudgetItem = button.parentElement.nextElementSibling.lastElementChild.previousElementSibling;
-
-//             buttonAbortingBudgetItem.style.display = 'inline-block';
-//             buttonChangingBudgetItem.style.display = 'inline-block';
-
-//             buttonAbortingBudgetItem.addEventListener('click', function (e) {
-//                 buttonAbortingBudgetItem.style.display = 'none';
-//                 buttonChangingBudgetItem.style.display = 'none';
-//                 for (let td of chosenTableDatas) {
-//                     td.contentEditable = 'false';
-//                 }
-
-//                 button.parentElement.parentElement.nextElementSibling.nextElementSibling.textContent = rememberedAmount;
-//                 button.parentElement.parentElement.nextElementSibling.textContent = rememberedDate;
-//                 button.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild.textContent = rememberedComment;
-//                 if (button.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild.textContent != 'Komentarz') {
-//                     button.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild.style.color = 'inherit';
-//                 } else {
-//                     button.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild.style.display = 'none';
-//                 }
-
-
-
-//                 button.hidden = false;
-//                 button.nextElementSibling.hidden = false;
-//                 e.preventDefault();
-//             })
-//         }
-//     })
-
-//     button.nextElementSibling.addEventListener('click', function () {
-//         modalRemoveElement.toggle();
-//     })
-
-//     buttonConfirmRemove.addEventListener('click', function () {
-//         this.nextElementSibling.action = '/' + button.nextElementSibling.classList[0].slice(0, 6) + '/remove';
-//         this.nextElementSibling.firstElementChild.value = button.classList[0].slice(10);
-//         this.nextElementSibling.submit();
-//     })
-
-
-//     button.parentElement.parentElement.parentElement.addEventListener('mouseenter', function () {
-//         if (isButtonsNotShowing()) {
-//             button.parentElement.style.display = 'block';
-//         }
-//     })
-
-//     button.parentElement.parentElement.parentElement.addEventListener('mouseleave', function () {
-//         button.parentElement.style.display = 'none';
-//     })
-// }
-
-
-
-// const formsChangingBudgetItems = document.querySelectorAll('.form-change-budget-item');
-// for (let form of formsChangingBudgetItems) {
-//     form.addEventListener('submit', function () {
-//         let incomeId = form.previousElementSibling.firstElementChild.classList[0].slice(10);
-//         let incomeDate = formatDate(form.parentElement.nextElementSibling.textContent);
-//         let incomeAmount = form.parentElement.nextElementSibling.nextElementSibling.textContent.slice(0, -3);
-//         let incomeComment = form.parentElement.parentElement.nextElementSibling.firstElementChild.textContent;
-//         form.children.id.value = incomeId;
-//         form.children.date.value = incomeDate;
-//         form.children.amount.value = incomeAmount;
-//         form.children.comment.value = incomeComment;
-//     })
-// }
-
-
-//nowy kod
 const showAndHideChangeAndRemoveButton = (firstRow) => {
     let secondRow = firstRow.nextElementSibling;
     firstRow.addEventListener('mouseenter', function () {
@@ -162,7 +37,7 @@ const showAndHideChangeAndRemoveButton = (firstRow) => {
 }
 
 const showAndHideCommentPlaceholder = (element) => {
-    if (element.textContent == '') {
+    if (element.textContent == '' || element.textContent == 'Komentarz') {
         element.textContent = 'Komentarz';
         element.style.color = 'rgba(255,255,255,0.15)';
     }
@@ -187,6 +62,7 @@ const makeTableCellsEditable = (element) => {
     date.contentEditable = 'true';
     amount.contentEditable = 'true';
     comment.contentEditable = 'true';
+    comment.style.display = 'table-cell';
     showAndHideCommentPlaceholder(comment);
 }
 
@@ -199,9 +75,9 @@ const makeTableCellsNotEditable = (element) => {
     comment.contentEditable = 'false';
 }
 
-const hideChangeAndRemoveButtons = (changeButton) => {
-    changeButton.hidden = true;
-    changeButton.nextElementSibling.hidden = true;
+const hideChangeAndRemoveButtons = (element) => {
+    element.hidden = true;
+    element.nextElementSibling.hidden = true;
 }
 
 const showChangeAndRemoveButtons = (element) => {
@@ -278,9 +154,11 @@ const assignRememberedCells = (obj, button) => {
 const rowOfBudgetItems = document.querySelectorAll('.budget-item');
 for (let budgetItem of rowOfBudgetItems) {
     showAndHideChangeAndRemoveButton(budgetItem);
+}
 
-    let changeButton = budgetItem.firstElementChild.firstElementChild.firstElementChild;
-    changeButton.addEventListener('click', function (event) {
+const buttonsChangeBudgetItem = document.querySelectorAll('.button-change-budget-item');
+for (let button of buttonsChangeBudgetItem) {
+    button.addEventListener('click', function () {
         if (checkIsOtherChangeButtonsHidden()) {
             makeTableCellsEditable(this);
             hideChangeAndRemoveButtons(this);
@@ -288,9 +166,11 @@ for (let budgetItem of rowOfBudgetItems) {
             rememberChangingCells(rememberedCells, this);
         }
     })
+}
 
-    let confirmChangesButton = budgetItem.firstElementChild.firstElementChild.nextElementSibling.lastElementChild.previousElementSibling;
-    confirmChangesButton.addEventListener('click', function () {
+const buttonsConfirmChangeBudgetItem = document.querySelectorAll('.button-confirm-change');
+for (let button of buttonsConfirmChangeBudgetItem) {
+    button.addEventListener('click', function () {
         let form = this.parentElement;
         assignId(form);
         assignDate(form);
@@ -298,9 +178,11 @@ for (let budgetItem of rowOfBudgetItems) {
         assignComment(form);
         form.submit();
     })
+}
 
-    let abortChangesButton = budgetItem.firstElementChild.firstElementChild.nextElementSibling.lastElementChild;
-    abortChangesButton.addEventListener('click', function (event) {
+const buttonsAbortChangeBudgetItem = document.querySelectorAll('.button-abort-change');
+for (let button of buttonsAbortChangeBudgetItem) {
+    button.addEventListener('click', function (event) {
         hideConfirmAndAbortButtons(this);
         showChangeAndRemoveButtons(this);
         makeTableCellsNotEditable(this);
@@ -309,6 +191,9 @@ for (let budgetItem of rowOfBudgetItems) {
     })
 }
 
+const modalRemoveElement = new bootstrap.Modal(document.getElementById('confirmRemoving'), {
+    keyboard: false
+})
 const buttonsRemoveBudgetItem = document.querySelectorAll('.button-remove');
 const buttonConfirmRemove = document.querySelector('#button-remove');
 const formRemoveBudgetItem = document.querySelector('#form-remove');
@@ -322,5 +207,4 @@ for (let button of buttonsRemoveBudgetItem) {
             formRemoveBudgetItem.submit();
         })
     })
-
 }
