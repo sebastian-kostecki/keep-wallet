@@ -36,4 +36,30 @@ class Expense extends Authenticated
             ]);
         }
     }
+
+    public function changeAction()
+    {
+        $expense = new Expenses($_POST);
+
+        if ($expense->change()) {
+            Flash::addMessage('Zmieniono wybrany wydatek');
+            $this->redirect('/balance/show');
+        } else {
+            Flash::addMessage('Nieudana zmiana wydatku', Flash::DANGER);
+            $this->redirect('/balance/show');
+        }
+    }
+
+    public function removeAction()
+    {
+        $expense = new Expenses($_POST);
+
+        if ($expense->remove()) {
+            Flash::addMessage('Usunięto wybrany wydatek');
+            $this->redirect('/balance/show');
+        } else {
+            Flash::addMessage('Nieudane usunięcie wydatku', Flash::DANGER);
+            $this->redirect('/balance/show');
+        }
+    }
 }

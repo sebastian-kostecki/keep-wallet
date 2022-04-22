@@ -348,6 +348,18 @@ option,
     display: none;
 }
 
+.table-data-with-buttons,
+.budget-item-amount,
+.budget-item-payment-method,
+#expenses-table .budget-item-date {
+    max-width: 25%;
+}
+
+.budget-item-comment,
+#incomes-table .budget-item-date {
+    max-width: 50%;
+}
+
 @media (max-width: 1400px) {
     .nav-link {
         font-size: 1rem;

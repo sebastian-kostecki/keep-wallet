@@ -42,7 +42,6 @@ class Income extends Authenticated
         } else {
             Flash::addMessage('Nieudana zmiana przychodu', Flash::DANGER);
             $this->redirect('/balance/show');
-            //var_dump($income);
         }
     }
 

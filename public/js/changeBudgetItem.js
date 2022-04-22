@@ -55,100 +55,139 @@ const showAndHideCommentPlaceholder = (element) => {
     })
 }
 
-const makeTableCellsEditable = (element) => {
-    let date = element.parentElement.parentElement.nextElementSibling;
-    let amount = element.parentElement.parentElement.parentElement.lastElementChild;
-    let comment = element.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild;
+const makeTableCellsEditable = (button) => {
+    let firstRow = button.parentElement.parentElement.parentElement;
+    let date = firstRow.querySelector('.budget-item-date');
+    let amount = firstRow.querySelector('.budget-item-amount');
+    let paymentMethod = firstRow.querySelector('.budget-item-payment-method');
+    let comment = firstRow.nextElementSibling.firstElementChild;
     date.contentEditable = 'true';
     amount.contentEditable = 'true';
+    if (paymentMethod != null) {
+        paymentMethod.contentEditable = 'true';
+    }
     comment.contentEditable = 'true';
     comment.style.display = 'table-cell';
     showAndHideCommentPlaceholder(comment);
 }
 
-const makeTableCellsNotEditable = (element) => {
-    let date = element.parentElement.parentElement.nextElementSibling;
-    let amount = element.parentElement.parentElement.parentElement.lastElementChild;
-    let comment = element.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild;
+const makeTableCellsNotEditable = (button) => {
+    let firstRow = button.parentElement.parentElement.parentElement;
+    let date = firstRow.querySelector('.budget-item-date');
+    let amount = firstRow.querySelector('.budget-item-amount');
+    let paymentMethod = firstRow.querySelector('.budget-item-payment-method');
+    let comment = firstRow.nextElementSibling.firstElementChild;
     date.contentEditable = 'false';
     amount.contentEditable = 'false';
+    if (paymentMethod != null) {
+        paymentMethod.contentEditable = 'false';
+    }
     comment.contentEditable = 'false';
 }
 
-const hideChangeAndRemoveButtons = (element) => {
-    element.hidden = true;
-    element.nextElementSibling.hidden = true;
+const hideChangeAndRemoveButtons = (changeButton) => {
+    let abortButton = changeButton.nextElementSibling;
+    changeButton.hidden = true;
+    abortButton.hidden = true;
 }
 
-const showChangeAndRemoveButtons = (element) => {
-    element.parentElement.previousElementSibling.firstElementChild.hidden = false;
-    element.parentElement.previousElementSibling.lastElementChild.hidden = false;
+const showChangeAndRemoveButtons = (abortChangeButton) => {
+    let changeButton = abortChangeButton.parentElement.previousElementSibling.firstElementChild;
+    let removeButton = abortChangeButton.parentElement.previousElementSibling.lastElementChild;
+    changeButton.hidden = false;
+    removeButton.hidden = false;
 }
 
 const showConfirmAndAbortButtons = (changeButton) => {
-    changeButton.parentElement.nextElementSibling.lastElementChild.style.display = 'inline-block';
-    changeButton.parentElement.nextElementSibling.lastElementChild.previousElementSibling.style.display = 'inline-block';
+    let abortButton = changeButton.parentElement.nextElementSibling.lastElementChild;
+    let confirmChangeButton = changeButton.parentElement.nextElementSibling.lastElementChild.previousElementSibling;
+    abortButton.style.display = 'inline-block';
+    confirmChangeButton.style.display = 'inline-block';
 }
 
-const hideConfirmAndAbortButtons = (element) => {
-    element.style.display = 'none';
-    element.previousElementSibling.style.display = 'none';
+const hideConfirmAndAbortButtons = (abortChangeButton) => {
+    let confirmChangeButton = abortChangeButton.previousElementSibling;
+    abortChangeButton.style.display = 'none';
+    confirmChangeButton.style.display = 'none';
 }
 
 const assignId = (form) => {
-    let incomeId = form.classList[0].slice(10);
-    form.children.id.value = incomeId;
+    let id = form.classList[0].slice(3);
+    form.children.id.value = id;
 }
 
 const assignDate = (form) => {
-    let incomeDate = formatDate(form.parentElement.nextElementSibling.textContent);
-    form.children.date.value = incomeDate;
+    let budgetItemDate = form.parentElement.parentElement.querySelector('.budget-item-date');
+    let date = formatDate(budgetItemDate.textContent);
+    form.children.date.value = date;
 }
 
 const assignAmount = (form) => {
-    let incomeAmount = form.parentElement.parentElement.lastElementChild.textContent.slice(0, -3);
-    form.children.amount.value = incomeAmount;
+    let budgetItemAmount = form.parentElement.parentElement.querySelector('.budget-item-amount');
+    let amount = budgetItemAmount.textContent.slice(0, -3);
+    form.children.amount.value = amount;
+}
+
+const assignPaymentMethod = (form) => {
+    let expensePaymentMethod = form.parentElement.parentElement.querySelector('.budget-item-payment-method');
+    if (expensePaymentMethod != null) {
+        let paymentMethod = expensePaymentMethod.textContent;
+        form.children.paymentMethod.value = paymentMethod;
+    }
 }
 
 const assignComment = (form) => {
-    let incomeComment = form.parentElement.parentElement.nextElementSibling.firstElementChild.textContent;
-    if (incomeComment != 'Komentarz') {
-        form.children.comment.value = incomeComment;
+    let budgetItemComment = form.parentElement.parentElement.nextElementSibling.firstElementChild;
+    let comment = budgetItemComment.textContent;
+    if (comment != 'Komentarz') {
+        form.children.comment.value = comment;
     } else {
         form.children.comment.value = '';
     }
 }
 
 let rememberedCells = {
-    rememberedDate: 0,
-    rememberedAmount: 0,
-    rememberedComment: 0
+    rememberedDate: '',
+    rememberedAmount: '',
+    rememberedPaymentMethod: '',
+    rememberedComment: ''
 }
 
-const rememberChangingCells = (obj, button) => {
-    let incomeAmount = button.parentElement.parentElement.parentElement.lastElementChild;
-    let incomeDate = button.parentElement.parentElement.nextElementSibling;
-    let incomeComment = button.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild;
-    obj.rememberedAmount = incomeAmount.textContent;
-    obj.rememberedDate = incomeDate.textContent;
-    obj.rememberedComment = incomeComment.textContent;
-}
-
-const assignRememberedCells = (obj, button) => {
-    let incomeAmount = button.parentElement.parentElement.parentElement.lastElementChild;
-    let incomeDate = button.parentElement.parentElement.nextElementSibling;
-    let incomeComment = button.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild;
-    incomeAmount.textContent = obj.rememberedAmount;
-    incomeDate.textContent = obj.rememberedDate;
-    incomeComment.textContent = obj.rememberedComment;
-    if (incomeComment.textContent != 'Komentarz') {
-        incomeComment.style.color = 'inherit';
-    } else {
-        incomeComment.style.display = 'none';
+const rememberChangingCells = (obj, changeButton) => {
+    let firstRow = changeButton.parentElement.parentElement.parentElement;
+    let budgetItemAmount = firstRow.querySelector('.budget-item-amount');
+    let budgetItemDate = firstRow.querySelector('.budget-item-date');
+    let budgetItemPaymentMethod = firstRow.querySelector('.budget-item-payment-method');
+    let budgetItemComment = changeButton.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild;
+    obj.rememberedAmount = budgetItemAmount.textContent;
+    obj.rememberedDate = budgetItemDate.textContent;
+    obj.rememberedComment = budgetItemComment.textContent;
+    if (budgetItemPaymentMethod != null) {
+        obj.rememberedPaymentMethod = budgetItemPaymentMethod.textContent;
     }
-    obj.rememberedAmount = 0;
-    obj.rememberedDate = 0;
-    obj.rememberedComment = 0;
+}
+
+const assignRememberedCells = (obj, abortChangeButton) => {
+    let firstRow = abortChangeButton.parentElement.parentElement.parentElement;
+    let budgetItemAmount = firstRow.querySelector('.budget-item-amount');
+    let budgetItemDate = firstRow.querySelector('.budget-item-date');
+    let budgetItemPaymentMethod = firstRow.querySelector('.budget-item-payment-method');
+    let budgetItemComment = abortChangeButton.parentElement.parentElement.parentElement.nextElementSibling.firstElementChild;
+    budgetItemAmount.textContent = obj.rememberedAmount;
+    obj.rememberedAmount = '';
+    budgetItemDate.textContent = obj.rememberedDate;
+    obj.rememberedDate = '';
+    if (budgetItemPaymentMethod != null) {
+        budgetItemPaymentMethod.textContent = obj.rememberedPaymentMethod;
+        obj.rememberedPaymentMethod = '';
+    }
+    budgetItemComment.textContent = obj.rememberedComment;
+    if (budgetItemComment.textContent != 'Komentarz') {
+        budgetItemComment.style.color = 'inherit';
+    } else {
+        budgetItemComment.style.display = 'none';
+    }
+    obj.rememberedComment = '';
 }
 
 const rowOfBudgetItems = document.querySelectorAll('.budget-item');
@@ -175,6 +214,7 @@ for (let button of buttonsConfirmChangeBudgetItem) {
         assignId(form);
         assignDate(form);
         assignAmount(form);
+        assignPaymentMethod(form);
         assignComment(form);
         form.submit();
     })
@@ -202,8 +242,8 @@ for (let button of buttonsRemoveBudgetItem) {
         modalRemoveElement.toggle();
 
         buttonConfirmRemove.addEventListener('click', function () {
-            formRemoveBudgetItem.action = '/' + button.classList[0].slice(0, 6) + '/remove';
-            formRemoveBudgetItem.firstElementChild.value = button.classList[0].slice(10);
+            formRemoveBudgetItem.action = '/' + button.classList[0].slice(0, -5) + '/remove';
+            formRemoveBudgetItem.firstElementChild.value = button.classList[0].slice(-1);
             formRemoveBudgetItem.submit();
         })
     })
