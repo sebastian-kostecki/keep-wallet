@@ -111,40 +111,40 @@ const hideConfirmAndAbortButtons = (abortChangeButton) => {
     confirmChangeButton.style.display = 'none';
 }
 
-const assignId = (form) => {
-    let id = form.classList[0].slice(3);
-    form.children.id.value = id;
-}
+// const assignId = (form) => {
+//     let id = form.classList[0].slice(3);
+//     form.children.id.value = id;
+// }
 
-const assignDate = (form) => {
-    let budgetItemDate = form.parentElement.parentElement.querySelector('.budget-item-date');
-    let date = formatDate(budgetItemDate.textContent);
-    form.children.date.value = date;
-}
+// const assignDate = (form) => {
+//     let budgetItemDate = form.parentElement.parentElement.querySelector('.budget-item-date');
+//     let date = formatDate(budgetItemDate.textContent);
+//     form.children.date.value = date;
+// }
 
-const assignAmount = (form) => {
-    let budgetItemAmount = form.parentElement.parentElement.querySelector('.budget-item-amount');
-    let amount = budgetItemAmount.textContent.slice(0, -3);
-    form.children.amount.value = amount;
-}
+// const assignAmount = (form) => {
+//     let budgetItemAmount = form.parentElement.parentElement.querySelector('.budget-item-amount');
+//     let amount = budgetItemAmount.textContent.slice(0, -3);
+//     form.children.amount.value = amount;
+// }
 
-const assignPaymentMethod = (form) => {
-    let expensePaymentMethod = form.parentElement.parentElement.querySelector('.budget-item-payment-method');
-    if (expensePaymentMethod != null) {
-        let paymentMethod = expensePaymentMethod.textContent;
-        form.children.paymentMethod.value = paymentMethod;
-    }
-}
+// const assignPaymentMethod = (form) => {
+//     let expensePaymentMethod = form.parentElement.parentElement.querySelector('.budget-item-payment-method');
+//     if (expensePaymentMethod != null) {
+//         let paymentMethod = expensePaymentMethod.textContent;
+//         form.children.paymentMethod.value = paymentMethod;
+//     }
+// }
 
-const assignComment = (form) => {
-    let budgetItemComment = form.parentElement.parentElement.nextElementSibling.firstElementChild;
-    let comment = budgetItemComment.textContent;
-    if (comment != 'Komentarz') {
-        form.children.comment.value = comment;
-    } else {
-        form.children.comment.value = '';
-    }
-}
+// const assignComment = (form) => {
+//     let budgetItemComment = form.parentElement.parentElement.nextElementSibling.firstElementChild;
+//     let comment = budgetItemComment.textContent;
+//     if (comment != 'Komentarz') {
+//         form.children.comment.value = comment;
+//     } else {
+//         form.children.comment.value = '';
+//     }
+// }
 
 let rememberedCells = {
     rememberedDate: '',
@@ -190,6 +190,32 @@ const assignRememberedCells = (obj, abortChangeButton) => {
     obj.rememberedComment = '';
 }
 
+
+
+
+const assignValuesFromTableToModal = (changeButton) => {
+    let firstRow = changeButton.parentElement.parentElement.parentElement;
+    let modalForm = document.querySelector('#form-change-income');
+    assignId(firstRow, modalForm);
+    assignDate(firstRow, modalForm);
+}
+
+const assignId = (firstRow, modalForm) => {
+    let idInput = modalForm.querySelector('#id');
+    idInput.value = firstRow.classList[6].slice(10);
+}
+
+const assignDate = (firstRow, modalForm) => {
+    let dateInput = modalForm.querySelector('#date');
+    let dateCell = firstRow.querySelector('.budget-item-date');
+    dateInput.value = formatDate(dateCell.textContent);
+    console.log(dateCell);
+    console.log(dateInput);
+}
+
+
+
+
 //ma działać - DZIAŁA
 const rowOfBudgetItems = document.querySelectorAll('.budget-item');
 for (let budgetItem of rowOfBudgetItems) {
@@ -207,6 +233,8 @@ for (let button of buttonsChangeBudgetItem) {
     button.addEventListener('click', function () {
         if (checkIsOtherChangeButtonsHidden()) {
             modalChangeElement.toggle();
+            assignValuesFromTableToModal(button);
+
             //makeTableCellsEditable(this);
             //hideChangeAndRemoveButtons(this);
             //showConfirmAndAbortButtons(this);

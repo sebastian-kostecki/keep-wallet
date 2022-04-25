@@ -73,7 +73,8 @@
                     </tr>
                     {% for income in allIncomes %}
                     {% if income.name == incomeByCategory.name %}
-                    <tr class="budget-item fw-light border-top-0 budget-item-details {{ incomeByCategory.name }}">
+                    <tr
+                        class="budget-item fw-light border-top-0 budget-item-details {{ incomeByCategory.name }} income-id-{{ income.id }}">
                         <td rowspan="2" class="table-data-with-buttons w-25">
                             <div class="buttons-change-budget-item">
                                 <button class="button-change-budget-item btn ms-2 p-0 text-white-50 border-0">
@@ -216,8 +217,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/income/change" method="POST" class="budget-form form-income container-fluid ps-lg-0">
-                        <input type="hidden" name="id">
+                    <form action="/income/change" method="POST" id="form-change-income"
+                        class="budget-form form-income container-fluid ps-lg-0">
+                        <input type="hidden" name="id" id="id">
                         <div class="row mb-3">
                             <div class="col-12 col-sm-6 pe-sm-1 mb-2">
                                 <label for="amount" class="form-label form-label-budget-item fs-4 text-dark">Kwota
