@@ -12,7 +12,7 @@ $(document).ready(function () {
             paymentMethod: {
                 required: true
             },
-            expenseCategory: {
+            category: {
                 required: true
             },
             comment: {
@@ -31,7 +31,7 @@ $(document).ready(function () {
             paymentMethod: {
                 required: 'Wybierz sposób płatności'
             },
-            expenseCategory: {
+            category: {
                 required: 'Wybierz kategorię wydatku'
             },
             comment: {
@@ -39,7 +39,7 @@ $(document).ready(function () {
             }
         },
         errorPlacement: function (error, element) {
-            if (element.attr("name") == "expenseCategory")
+            if (element.attr("name") == "category")
                 error.insertAfter("#comment");
             else if (element.attr("name") == "paymentMethod") {
                 error.insertAfter("#paymentMethods");
