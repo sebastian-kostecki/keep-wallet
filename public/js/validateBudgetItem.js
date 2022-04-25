@@ -34,7 +34,7 @@ for (let form of forms) {
                     required: 'Wybierz sposób płatności'
                 },
                 category: {
-                    required: 'Wybierz kategorię wydatku'
+                    required: 'Wybierz kategorię'
                 },
                 comment: {
                     maxlength: 'Komentarz może zawierać maksymalnie 100 znaków'
@@ -59,7 +59,7 @@ for (let form of forms) {
 
 
 $.validator.addMethod('validAmount',
-    function (value, element, param) {
+    function (value) {
         value *= 1000;
         if (value % 10 == 0 && value > 0) {
             return true;

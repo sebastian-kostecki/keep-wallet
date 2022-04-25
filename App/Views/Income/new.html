@@ -29,7 +29,7 @@
         <div class="col-12 p-0 justify-content-center d-flex flex-wrap">
             {% for category in incomeCategories %}
             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                <input type="radio" class="form-check-input" name="incomeCategory" id="{{ category.id }}"
+                <input type="radio" class="form-check-input" name="category" id="{{ category.id }}"
                     value="{{ category.id }}" required>
                 <label for="{{ category.id }}"
                     class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
@@ -66,5 +66,5 @@
 {% block footer %}
 <script src="/js/getCurrentDate.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
-<script src="/js/validateIncome.js"></script>
+<script src="/js/validateBudgetItem.js"></script>
 {% endblock %}
