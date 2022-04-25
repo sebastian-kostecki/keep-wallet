@@ -140,7 +140,9 @@
                             </div>
                             </form>
                         </td>
-                        <td class="budget-item-payment-method text-end pe-1 w-25">{{ expense.payment_method }}</td>
+                        <td
+                            class="budget-item-payment-method payment-method-id-{{ expense.payment_method_assigned_to_user_id }} text-end pe-1 w-25">
+                            {{ expense.payment_method }}</td>
                         <td class="budget-item-date text-end pe-1 w-50">{{ expense.date_of_expense }} </td>
                         <td rowspan="2" class="budget-item-amount text-end pe-1 w-25">{{ expense.amount }} zł</td>
                     </tr>

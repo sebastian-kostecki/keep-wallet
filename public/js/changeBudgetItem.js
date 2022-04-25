@@ -29,6 +29,7 @@ const assignValuesFromTableToModal = (changeButton, modal) => {
     assignDate(firstRow, modalForm);
     assignAmount(firstRow, modalForm);
     assignCategory(firstRow, modalForm);
+    assignPaymentMethod(firstRow, modalForm);
     assignComment(firstRow, modalForm);
 }
 
@@ -52,8 +53,6 @@ const assignAmount = (firstRow, modalForm) => {
 const assignCategory = (firstRow, modalForm) => {
     let categoryInputs = modalForm.querySelectorAll('[name="category"]');
     for (let input of categoryInputs) {
-        console.log(input.id.slice(7));
-        console.log(firstRow.classList[4].slice(12));
         if (input.id.slice(7) == firstRow.classList[4].slice(12)) {
             input.checked = 'true';
         }
@@ -64,6 +63,18 @@ const assignComment = (firstRow, modalForm) => {
     let commentInput = modalForm.querySelector('#comment');
     let commentCell = firstRow.nextElementSibling.querySelector('.budget-item-comment');
     commentInput.value = commentCell.textContent;
+}
+
+const assignPaymentMethod = (firstRow, modalForm) => {
+    let paymentMethodInputs = modalForm.querySelectorAll('[name="paymentMethod"]');
+    let paymentMethodCell = firstRow.querySelector('.budget-item-payment-method');
+    if (paymentMethodInputs.length != 0) {
+        for (let input of paymentMethodInputs) {
+            if (input.id.slice(3) == paymentMethodCell.classList[1].slice(18)) {
+                input.checked = 'true';
+            }
+        }
+    }
 }
 
 
