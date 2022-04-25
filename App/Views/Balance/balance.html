@@ -84,20 +84,6 @@
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
-                            <form action="/income/change" method="post"
-                                class="id-{{income.id }} form-change-budget-item d-flex">
-                                <input type="hidden" name="id">
-                                <input type="hidden" name="amount">
-                                <input type="hidden" name="date">
-                                <input type="hidden" name="comment">
-                                <button type="submit"
-                                    class="button-form-change-budget-item button-confirm-change btn ms-1 p-1 text-white bg-success rounded border-0">
-                                    <i class="fas fa-check fs-6"></i>
-                                </button>
-                                <button type="button"
-                                    class="button-form-change-budget-item button-abort-change btn ms-1 p-1 text-white bg-danger rounded border-0">
-                                    <i class="fas fa-times fs-6"></i>
-                                </button>
                             </form>
                         </td>
                         <td class="budget-item-date text-end pe-1 w-50">{{
