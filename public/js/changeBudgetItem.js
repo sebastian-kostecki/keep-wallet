@@ -1,14 +1,10 @@
 const showAndHideChangeAndRemoveButton = (firstRow) => {
     let secondRow = firstRow.nextElementSibling;
     firstRow.addEventListener('mouseenter', function () {
-        if (checkIsOtherChangeButtonsHidden()) {
-            this.firstElementChild.firstElementChild.style.display = 'block';
-        }
+        this.firstElementChild.firstElementChild.style.display = 'block';
     })
     secondRow.addEventListener('mouseenter', function () {
-        if (checkIsOtherChangeButtonsHidden()) {
-            this.previousElementSibling.firstElementChild.firstElementChild.style.display = 'block';
-        }
+        this.previousElementSibling.firstElementChild.firstElementChild.style.display = 'block';
     })
     firstRow.addEventListener('mouseleave', function () {
         this.firstElementChild.firstElementChild.style.display = 'none';
@@ -109,7 +105,7 @@ for (let button of buttonsRemoveBudgetItem) {
 
         buttonConfirmRemove.addEventListener('click', function () {
             formRemoveBudgetItem.action = '/' + button.classList[0].slice(0, -5) + '/remove';
-            formRemoveBudgetItem.firstElementChild.value = button.classList[0].slice(-1);
+            formRemoveBudgetItem.firstElementChild.value = button.classList[0].slice(10);
             formRemoveBudgetItem.submit();
         })
     })
