@@ -116,7 +116,11 @@ const buttonsConfirmModal = document.querySelectorAll('.button-confirm-modal');
 for (let button of buttonsConfirmModal) {
     button.addEventListener('click', function () {
         let form = button.parentElement.previousElementSibling.firstElementChild;
-        form.submit();
+        //form.submit();
+        let validator = $(form).validate();
+        if (validator.form()) {
+            form.submit();
+        }
     })
 }
 
