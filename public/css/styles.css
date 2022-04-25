@@ -360,8 +360,8 @@ option,
 }
 
 .balance-label-modal {
-    color: #ee6c4d;
-    border: 1px solid #ee6c4d;
+    color: inherit;
+    border: 1px solid inherit;
     background-color: transparent;
     transition: 0.5s;
 }
