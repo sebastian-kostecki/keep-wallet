@@ -74,7 +74,7 @@
                     {% for income in allIncomes %}
                     {% if income.name == incomeByCategory.name %}
                     <tr
-                        class="budget-item fw-light border-top-0 budget-item-details {{ incomeByCategory.name }} income-id-{{ income.id }}">
+                        class="budget-item fw-light border-top-0 budget-item-details category-id-{{ income.income_category_assigned_to_user_id }} income-id-{{ income.id }} {{ incomeByCategory.name }}">
                         <td rowspan="2" class="table-data-with-buttons w-25">
                             <div class="buttons-change-budget-item">
                                 <button class="button-change-budget-item btn ms-2 p-0 text-white-50 border-0">

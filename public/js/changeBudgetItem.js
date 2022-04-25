@@ -199,11 +199,12 @@ const assignValuesFromTableToModal = (changeButton) => {
     assignId(firstRow, modalForm);
     assignDate(firstRow, modalForm);
     assignAmount(firstRow, modalForm);
+    assignCategory(firstRow, modalForm);
 }
 
 const assignId = (firstRow, modalForm) => {
     let idInput = modalForm.querySelector('#id');
-    idInput.value = firstRow.classList[6].slice(10);
+    idInput.value = firstRow.classList[5].slice(10);
 }
 
 const assignDate = (firstRow, modalForm) => {
@@ -218,6 +219,16 @@ const assignAmount = (firstRow, modalForm) => {
     amountInput.value = amountCell.textContent.slice(0, -3);
 }
 
+const assignCategory = (firstRow, modalForm) => {
+    let categoryInputs = modalForm.querySelectorAll('.form-check-input');
+    for (let input of categoryInputs) {
+        console.log(input.id);
+        console.log(firstRow.classList[4].slice(12));
+        if (input.id == firstRow.classList[4].slice(12)) {
+            input.checked = 'true';
+        }
+    }
+}
 
 
 
