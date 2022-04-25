@@ -22,9 +22,9 @@ const formatDate = (date) => {
     return cleanDate.toISOString().slice(0, 10);
 }
 
-const assignValuesFromTableToModal = (changeButton) => {
+const assignValuesFromTableToModal = (changeButton, modal) => {
     let firstRow = changeButton.parentElement.parentElement.parentElement;
-    let modalForm = document.querySelector('#form-change-income');
+    let modalForm = modal.querySelector('.budget-form');
     assignId(firstRow, modalForm);
     assignDate(firstRow, modalForm);
     assignAmount(firstRow, modalForm);
@@ -50,9 +50,11 @@ const assignAmount = (firstRow, modalForm) => {
 }
 
 const assignCategory = (firstRow, modalForm) => {
-    let categoryInputs = modalForm.querySelectorAll('.form-check-input');
+    let categoryInputs = modalForm.querySelectorAll('[name="category"]');
     for (let input of categoryInputs) {
-        if (input.id == firstRow.classList[4].slice(12)) {
+        console.log(input.id.slice(7));
+        console.log(firstRow.classList[4].slice(12));
+        if (input.id.slice(7) == firstRow.classList[4].slice(12)) {
             input.checked = 'true';
         }
     }
@@ -75,23 +77,25 @@ for (let budgetItem of rowOfBudgetItems) {
 //ma wywołac odpowiedni modal
 const modalChangeIncome = new bootstrap.Modal(document.getElementById('changeIncomeModal'), {
     keyboard: false
-})
+});
+const modalChangeIncomeElement = document.querySelector('#changeIncomeModal');
 const buttonsChangeIncome = document.querySelectorAll('.button-change-income');
 for (let button of buttonsChangeIncome) {
     button.addEventListener('click', function () {
         modalChangeIncome.toggle();
-        assignValuesFromTableToModal(button);
+        assignValuesFromTableToModal(button, modalChangeIncomeElement);
     })
 }
 
 const modalChangeExpense = new bootstrap.Modal(document.getElementById('changeExpenseModal'), {
     keyboard: false
 })
+const modalChangeExpenseElement = document.querySelector('#changeExpenseModal');
 const buttonsChangeExpense = document.querySelectorAll('.button-change-expense');
 for (let button of buttonsChangeExpense) {
     button.addEventListener('click', function () {
         modalChangeExpense.toggle();
-        assignValuesFromTableToModal(button);
+        assignValuesFromTableToModal(button, modalChangeExpenseElement);
     })
 }
 

@@ -127,7 +127,7 @@
                     {% for expense in allExpenses %}
                     {% if expenseByCategory.name == expense.name %}
                     <tr
-                        class="budget-item fw-light border-top-0 budget-item-details category-id-{{ expense.income_category_assigned_to_user_id }} expens-id-{{ expense.id }} {{ expenseByCategory.name }}">
+                        class="budget-item fw-light border-top-0 budget-item-details category-id-{{ expense.expense_category_assigned_to_user_id }} expens-id-{{ expense.id }} {{ expenseByCategory.name }}">
                         <td rowspan="2" class="table-data-with-buttons w-25">
                             <div class="buttons-change-budget-item">
                                 <button class="button-change-expense btn ms-2 p-0 text-white-50 border-0">
@@ -228,8 +228,8 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="changeIncomeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade change-modal" id="changeIncomeModal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -238,7 +238,7 @@
                 </div>
                 <div class="modal-body">
                     <form action="/income/change" method="POST" id="form-change-income"
-                        class="budget-form form-income container-fluid ps-lg-0">
+                        class="budget-form container-fluid ps-lg-0">
                         <input type="hidden" name="id" id="id">
                         <div class="row mb-3">
                             <div class="col-12 col-sm-6 pe-sm-1 mb-2">
@@ -261,9 +261,9 @@
                             <div class="col-12 p-0 justify-content-center d-flex flex-wrap">
                                 {% for category in incomeCategories %}
                                 <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                                    <input type="radio" class="form-check-input" name="category" id="{{ category.id }}"
-                                        value="{{ category.id }}" required>
-                                    <label for="{{ category.id }}"
+                                    <input type="radio" class="form-check-input" name="category"
+                                        id="income-{{ category.id }}" value="{{ category.id }}" required>
+                                    <label for="income-{{ category.id }}"
                                         class="balance-label-modal category-label form-check-label text-uppercase px-3 py-2 border border-1 rounded w-100 text-center fs-6"
                                         role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name
                                         }}</label>
@@ -292,8 +292,8 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="changeExpenseModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade change-modal" id="changeExpenseModal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -301,8 +301,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/expense/change" method="POST" id="form-change-expense"
-                        class="budget-form form-income container-fluid ps-lg-0">
+                    <form action="/expense/change" method="POST" class="budget-form container-fluid ps-lg-0">
                         <input type="hidden" name="id" id="id">
                         <div class="row mb-3">
                             <div class="col-12 col-sm-6 pe-sm-1 mb-2">
@@ -347,8 +346,8 @@
                                 {% for category in expenseCategories %}
                                 <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
                                     <input type="radio" class="form-check-input" name="category"
-                                        id="expense-{{ category.id }}" value="{{ category.id }}" required>
-                                    <label for="expense-{{ category.id }}"
+                                        id="expens-{{ category.id }}" value="{{ category.id }}" required>
+                                    <label for="expens-{{ category.id }}"
                                         class="balance-label-modal category-label form-check-label text-uppercase px-3 py-2 border border-1 rounded w-100 text-center fs-6"
                                         role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name
                                         }}</label>
