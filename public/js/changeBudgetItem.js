@@ -73,17 +73,29 @@ for (let budgetItem of rowOfBudgetItems) {
 
 //do zmiany
 //ma wywołac odpowiedni modal
-const modalChangeElement = new bootstrap.Modal(document.getElementById('changeIncomeModal'), {
+const modalChangeIncome = new bootstrap.Modal(document.getElementById('changeIncomeModal'), {
     keyboard: false
 })
-
-const buttonsChangeBudgetItem = document.querySelectorAll('.button-change-budget-item');
-for (let button of buttonsChangeBudgetItem) {
+const buttonsChangeIncome = document.querySelectorAll('.button-change-income');
+for (let button of buttonsChangeIncome) {
     button.addEventListener('click', function () {
-        modalChangeElement.toggle();
+        modalChangeIncome.toggle();
         assignValuesFromTableToModal(button);
     })
 }
+
+const modalChangeExpense = new bootstrap.Modal(document.getElementById('changeExpenseModal'), {
+    keyboard: false
+})
+const buttonsChangeExpense = document.querySelectorAll('.button-change-expense');
+for (let button of buttonsChangeExpense) {
+    button.addEventListener('click', function () {
+        modalChangeExpense.toggle();
+        assignValuesFromTableToModal(button);
+    })
+}
+
+
 //działa - wysyła modal
 const buttonsConfirmModal = document.querySelectorAll('.button-confirm-modal');
 for (let button of buttonsConfirmModal) {

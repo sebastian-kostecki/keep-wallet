@@ -77,7 +77,7 @@
                         class="budget-item fw-light border-top-0 budget-item-details category-id-{{ income.income_category_assigned_to_user_id }} income-id-{{ income.id }} {{ incomeByCategory.name }}">
                         <td rowspan="2" class="table-data-with-buttons w-25">
                             <div class="buttons-change-budget-item">
-                                <button class="button-change-budget-item btn ms-2 p-0 text-white-50 border-0">
+                                <button class="button-change-income btn ms-2 p-0 text-white-50 border-0">
                                     <i class="fas fa-pen"></i>
                                 </button>
                                 <button
@@ -130,7 +130,7 @@
                         class="budget-item fw-light border-top-0 budget-item-details category-id-{{ expense.income_category_assigned_to_user_id }} expens-id-{{ expense.id }} {{ expenseByCategory.name }}">
                         <td rowspan="2" class="table-data-with-buttons w-25">
                             <div class="buttons-change-budget-item">
-                                <button class="button-change-budget-item btn ms-2 p-0 text-white-50 border-0">
+                                <button class="button-change-expense btn ms-2 p-0 text-white-50 border-0">
                                     <i class="fas fa-pen"></i>
                                 </button>
                                 <button
@@ -260,6 +260,70 @@
                         <div class="row mb-3 ms-0 budget-item-radio">
                             <div class="col-12 p-0 justify-content-center d-flex flex-wrap">
                                 {% for category in incomeCategories %}
+                                <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                                    <input type="radio" class="form-check-input" name="category" id="{{ category.id }}"
+                                        value="{{ category.id }}" required>
+                                    <label for="{{ category.id }}"
+                                        class="balance-label-modal category-label form-check-label text-uppercase px-3 py-2 border border-1 rounded w-100 text-center fs-6"
+                                        role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name
+                                        }}</label>
+                                </div>
+                                {% endfor %}
+                                <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                                    <input id="comment" type="text"
+                                        class="category-label form-control h-100 fs-6 text-dark" name="comment"
+                                        placeholder="Komentarz">
+                                </div>
+                            </div>
+                            {# {% if income.errors is not empty %}
+                            <ul class="list-unstyled">
+                                {% for error in income.errors %}
+                                <li class="error m-0">{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %} #}
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn button-outline" data-bs-dismiss="modal">Zamknij</button>
+                    <button type="submit" class="button-confirm-modal btn button-normal">Potwierdź</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="changeExpenseModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title" id="staticBackdropLabel">Zmiana wydatku</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/expense/change" method="POST" id="form-change-expense"
+                        class="budget-form form-income container-fluid ps-lg-0">
+                        <input type="hidden" name="id" id="id">
+                        <div class="row mb-3">
+                            <div class="col-12 col-sm-6 pe-sm-1 mb-2">
+                                <label for="amount" class="form-label form-label-budget-item fs-4 text-dark">Kwota
+                                </label>
+                                <input type="number" step="0.01" id="amount" name="amount"
+                                    class="form-control fs-6 text-dark" required placeholder="0">
+                            </div>
+                            <div class="col-12 col-sm-6 ps-sm-1 mb-2">
+                                <label for="date" class="form-label form-label-budget-item fs-4 text-dark">Data</label>
+                                <input type="date" id="date" name="date" class="form-control fs-6" required>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-12">
+                                <h2 class="form-label form-label-budget-item text-center fs-4 text-dark">Kategorie</h2>
+                            </div>
+                        </div>
+                        <div class="row mb-3 ms-0 budget-item-radio">
+                            <div class="col-12 p-0 justify-content-center d-flex flex-wrap">
+                                {% for category in expenseCategories %}
                                 <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
                                     <input type="radio" class="form-check-input" name="category" id="{{ category.id }}"
                                         value="{{ category.id }}" required>
