@@ -371,6 +371,10 @@ option,
     background-color: #ee6c4d;
 }
 
+.change-modal #date:focus {
+    color: #293241;
+}
+
 @media (max-width: 1400px) {
     .nav-link {
         font-size: 1rem;
