@@ -198,7 +198,7 @@ for (let budgetItem of rowOfBudgetItems) {
 
 //do zmiany
 //ma wywołac odpowiedni modal
-const modalChangeElement = new bootstrap.Modal(document.getElementById('changeBudgetItemModal'), {
+const modalChangeElement = new bootstrap.Modal(document.getElementById('changeIncomeModal'), {
     keyboard: false
 })
 

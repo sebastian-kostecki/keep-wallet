@@ -207,12 +207,12 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="changeBudgetItemModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    <div class="modal fade" id="changeIncomeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Zmiana pozycji</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Zmiana przychodu</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -230,6 +230,36 @@
                                 <input type="date" id="date" name="date" class="form-control fs-6"
                                     value="{{ expense.date_of_expense }}" required>
                             </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-12">
+                                <h2 class="form-label form-label-budget-item text-center fs-4 text-dark">Kategorie</h2>
+                            </div>
+                        </div>
+                        <div class="row mb-3 ms-0 budget-item-radio">
+                            <div class="col-12 p-0 justify-content-center d-flex flex-wrap">
+                                {% for category in incomeCategories %}
+                                <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                                    <input type="radio" class="form-check-input" name="category" id="{{ category.id }}"
+                                        value="{{ category.id }}" required>
+                                    <label for="{{ category.id }}"
+                                        class="balance-label-modal category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
+                                        role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name
+                                        }}</label>
+                                </div>
+                                {% endfor %}
+                                <div class="form-check-inline categories mb-2 me-2 flex-grow-1" id="comment">
+                                    <input type="text" class="category-label form-control h-100 text-white fs-6"
+                                        name="comment" placeholder="Komentarz">
+                                </div>
+                            </div>
+                            {# {% if income.errors is not empty %}
+                            <ul class="list-unstyled">
+                                {% for error in income.errors %}
+                                <li class="error m-0">{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                            {% endif %} #}
                         </div>
                     </form>
                 </div>

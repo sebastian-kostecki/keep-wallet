@@ -257,7 +257,6 @@ tbody tr:first-of-type {
 
 .form-check-input:checked+.form-check-label {
     background-color: #98c1d9;
-
 }
 
 .budget-item-radio {
@@ -358,6 +357,18 @@ option,
 .budget-item-comment,
 #incomes-table .budget-item-date {
     max-width: 50%;
+}
+
+.balance-label-modal {
+    color: #ee6c4d;
+    border: 1px solid #ee6c4d;
+    background-color: transparent;
+    transition: 0.5s;
+}
+
+.form-check-input:checked+.balance-label-modal {
+    color: #fff;
+    background-color: #ee6c4d;
 }
 
 @media (max-width: 1400px) {
