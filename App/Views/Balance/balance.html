@@ -318,6 +318,27 @@
                         </div>
                         <div class="row mt-1">
                             <div class="col-12">
+                                <h2 class="form-label form-label-budget-item text-center fs-4 text-dark">Sposób
+                                    płatności
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="row mb-3 ms-0 budget-item-radio">
+                            <div id="paymentMethods" class="col-12 p-0 justify-content-center d-flex flex-wrap">
+                                {% for paymentMethod in paymentMethods %}
+                                <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                                    <input type="radio" class="form-check-input" name="paymentMethod"
+                                        id="pm-{{ paymentMethod.id }}" value="{{ paymentMethod.id }}" required>
+                                    <label for="pm-{{ paymentMethod.id }}"
+                                        class="balance-label-modal category-label form-check-label text-uppercase px-3 py-2 border border-1 rounded w-100 text-center fs-6"
+                                        role="button"><i class="{{ paymentMethod.icon }} me-2"></i>{{ paymentMethod.name
+                                        }}</label>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-12">
                                 <h2 class="form-label form-label-budget-item text-center fs-4 text-dark">Kategorie</h2>
                             </div>
                         </div>
@@ -325,9 +346,9 @@
                             <div class="col-12 p-0 justify-content-center d-flex flex-wrap">
                                 {% for category in expenseCategories %}
                                 <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                                    <input type="radio" class="form-check-input" name="category" id="{{ category.id }}"
-                                        value="{{ category.id }}" required>
-                                    <label for="{{ category.id }}"
+                                    <input type="radio" class="form-check-input" name="category"
+                                        id="expense-{{ category.id }}" value="{{ category.id }}" required>
+                                    <label for="expense-{{ category.id }}"
                                         class="balance-label-modal category-label form-check-label text-uppercase px-3 py-2 border border-1 rounded w-100 text-center fs-6"
                                         role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name
                                         }}</label>
