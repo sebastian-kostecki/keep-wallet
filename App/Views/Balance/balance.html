@@ -216,7 +216,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="/expense/save" method="POST" class="budget-form form-income container-fluid ps-lg-0">
+                    <form action="/income/change" method="POST" class="budget-form form-income container-fluid ps-lg-0">
                         <div class="row mb-3">
                             <div class="col-12 col-sm-6 pe-sm-1 mb-2">
                                 <label for="amount" class="form-label form-label-budget-item fs-4 text-dark">Kwota
@@ -265,11 +265,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn button-outline" data-bs-dismiss="modal">Zamknij</button>
-                    <button id="button-remove" type="button"
-                        class="button-confirm-modal btn button-normal">Potwierdź</button>
-                    <form id="form-remove" method="post">
-                        <input type="hidden" name="id">
-                    </form>
+                    <button type="submit" class="button-confirm-modal btn button-normal">Potwierdź</button>
                 </div>
             </div>
         </div>

@@ -214,6 +214,14 @@ for (let button of buttonsChangeBudgetItem) {
         }
     })
 }
+//działa - wysyła modal
+const buttonsConfirmModal = document.querySelectorAll('.button-confirm-modal');
+for (let button of buttonsConfirmModal) {
+    button.addEventListener('click', function () {
+        let form = button.parentElement.previousElementSibling.firstElementChild;
+        form.submit();
+    })
+}
 
 const buttonsConfirmChangeBudgetItem = document.querySelectorAll('.button-confirm-change');
 for (let button of buttonsConfirmChangeBudgetItem) {
