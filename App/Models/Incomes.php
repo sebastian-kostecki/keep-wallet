@@ -71,7 +71,7 @@ class Incomes extends \Core\Model
             $db = static::getDataBase();
             $query = $db->prepare($sql);
             $query->bindValue(':id', $this->id, PDO::PARAM_INT);
-            $query->bindValue(':id', $this->category, PDO::PARAM_INT);
+            $query->bindValue(':category', $this->category, PDO::PARAM_INT);
             $query->bindValue(':amount', $this->amount, PDO::PARAM_STR);
             $query->bindValue(':date', $this->date, PDO::PARAM_STR);
             $query->bindValue(':comment', $this->comment, PDO::PARAM_STR);

@@ -200,6 +200,7 @@ const assignValuesFromTableToModal = (changeButton) => {
     assignDate(firstRow, modalForm);
     assignAmount(firstRow, modalForm);
     assignCategory(firstRow, modalForm);
+    assignComment(firstRow, modalForm);
 }
 
 const assignId = (firstRow, modalForm) => {
@@ -222,14 +223,17 @@ const assignAmount = (firstRow, modalForm) => {
 const assignCategory = (firstRow, modalForm) => {
     let categoryInputs = modalForm.querySelectorAll('.form-check-input');
     for (let input of categoryInputs) {
-        console.log(input.id);
-        console.log(firstRow.classList[4].slice(12));
         if (input.id == firstRow.classList[4].slice(12)) {
             input.checked = 'true';
         }
     }
 }
 
+const assignComment = (firstRow, modalForm) => {
+    let commentInput = modalForm.querySelector('#comment');
+    let commentCell = firstRow.nextElementSibling.querySelector('.budget-item-comment');
+    commentInput.value = commentCell.textContent;
+}
 
 
 //ma działać - DZIAŁA

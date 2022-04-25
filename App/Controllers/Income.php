@@ -35,15 +35,15 @@ class Income extends Authenticated
     public function changeAction()
     {
         $income = new Incomes($_POST);
-        var_dump($income);
+        // var_dump($income);
 
-        // if ($income->change()) {
-        //     Flash::addMessage('Zmieniono wybrany przychód');
-        //     $this->redirect('/balance/show');
-        // } else {
-        //     Flash::addMessage('Nieudana zmiana przychodu', Flash::DANGER);
-        //     $this->redirect('/balance/show');
-        // }
+        if ($income->change()) {
+            Flash::addMessage('Zmieniono wybrany przychód');
+            $this->redirect('/balance/show');
+        } else {
+            Flash::addMessage('Nieudana zmiana przychodu', Flash::DANGER);
+            $this->redirect('/balance/show');
+        }
     }
 
     public function removeAction()
