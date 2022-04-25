@@ -131,8 +131,8 @@ for (let button of buttonsRemoveBudgetItem) {
         modalRemoveElement.toggle();
 
         buttonConfirmRemove.addEventListener('click', function () {
-            formRemoveBudgetItem.action = '/' + button.classList[0].slice(0, -5) + '/remove';
-            formRemoveBudgetItem.firstElementChild.value = button.classList[0].slice(10);
+            formRemoveBudgetItem.action = '/' + button.classList[0] + '/remove';
+            formRemoveBudgetItem.firstElementChild.value = button.classList[1].slice(10);
             formRemoveBudgetItem.submit();
         })
     })
