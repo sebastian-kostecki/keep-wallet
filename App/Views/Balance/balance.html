@@ -147,47 +147,8 @@
                         <td rowspan="2" class="budget-item-amount text-end pe-1 w-25">{{ expense.amount }} zł</td>
                     </tr>
                     <tr class="fw-light border-top-0 extensively budget-item-details {{ expenseByCategory.name }}">
-                        <td class="budget-item-comment text-end pe-1">{{ expense.expense_comment }}</td>
+                        <td colspan="2" class="budget-item-comment text-end pe-1">{{ expense.expense_comment }}</td>
                     </tr>
-                    {# <tr class="budget-item fw-light border-top-0 budget-item-details {{ expenseByCategory.name }}">
-                        <td rowspan="2" class="table-data-with-buttons w-25">
-                            <div class="buttons-change-budget-item">
-                                <button class="button-change-budget-item btn ms-2 p-0 text-white-50 border-0">
-                                    <i class="fas fa-pen"></i>
-                                </button>
-                                <button
-                                    class="expense-id-{{ expense.id }} button-remove btn p-0 ms-2 text-danger border-0">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                            <form action="/expense/change" method="post"
-                                class="id-{{expense.id }} form-change-budget-item d-flex">
-                                <input type="hidden" name="id">
-                                <input type="hidden" name="amount">
-                                <input type="hidden" name="date">
-                                <input type="hidden" name="comment">
-                                <input type="hidden" name="paymentMethod">
-                                <button type="submit"
-                                    class="button-form-change-budget-item button-confirm-change btn ms-1 p-1 text-white bg-success rounded border-0">
-                                    <i class="fas fa-check fs-6"></i>
-                                </button>
-                                <button type="button"
-                                    class="button-form-change-budget-item button-abort-change btn ms-1 p-1 text-white bg-danger rounded border-0">
-                                    <i class="fas fa-times fs-6"></i>
-                                </button>
-                            </form>
-                        </td>
-                        <td class="budget-item-payment-method text-end pe-1 w-25">{{ expense.payment_method }}</td>
-                        <td class="budget-item-date text-end pe-1 w-25">{{
-                            expense.date_of_expense }}
-                        </td>
-                        <td rowspan="2" class="budget-item-amount text-end pe-1 w-25">{{
-                            expense.amount }} zł</td>
-                    </tr>
-                    <tr class="fw-light border-top-0 extensively budget-item-details {{ expenseByCategory.name }}">
-                        <td colspan="2" class="budget-item-comment text-end pe-1">{{ expense.expense_comment
-                            }}</td>
-                    </tr> #}
                     {% endif %}
                     {% endfor %}
                     {% endfor %}
