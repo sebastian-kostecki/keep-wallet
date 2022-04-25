@@ -217,18 +217,17 @@
                 </div>
                 <div class="modal-body">
                     <form action="/income/change" method="POST" class="budget-form form-income container-fluid ps-lg-0">
+                        <input type="hidden" name="id">
                         <div class="row mb-3">
                             <div class="col-12 col-sm-6 pe-sm-1 mb-2">
                                 <label for="amount" class="form-label form-label-budget-item fs-4 text-dark">Kwota
                                 </label>
                                 <input type="number" step="0.01" id="amount" name="amount"
-                                    class="form-control fs-6 text-dark" required placeholder="0"
-                                    value="{{ expense.amount }}">
+                                    class="form-control fs-6 text-dark" required placeholder="0">
                             </div>
                             <div class="col-12 col-sm-6 ps-sm-1 mb-2">
                                 <label for="date" class="form-label form-label-budget-item fs-4 text-dark">Data</label>
-                                <input type="date" id="date" name="date" class="form-control fs-6"
-                                    value="{{ expense.date_of_expense }}" required>
+                                <input type="date" id="date" name="date" class="form-control fs-6" required>
                             </div>
                         </div>
                         <div class="row mt-1">

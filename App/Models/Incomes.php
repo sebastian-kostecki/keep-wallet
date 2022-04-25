@@ -65,12 +65,13 @@ class Incomes extends \Core\Model
         if (empty($this->errors)) {
 
             $sql = "UPDATE incomes
-                    SET amount = :amount, date_of_income = :date, income_comment = :comment
+                    SET income_category_assigned_to_user_id = :category, amount = :amount, date_of_income = :date, income_comment = :comment
                     WHERE id = :id";
 
             $db = static::getDataBase();
             $query = $db->prepare($sql);
             $query->bindValue(':id', $this->id, PDO::PARAM_INT);
+            $query->bindValue(':id', $this->category, PDO::PARAM_INT);
             $query->bindValue(':amount', $this->amount, PDO::PARAM_STR);
             $query->bindValue(':date', $this->date, PDO::PARAM_STR);
             $query->bindValue(':comment', $this->comment, PDO::PARAM_STR);
