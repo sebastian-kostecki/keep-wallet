@@ -198,6 +198,7 @@ const assignValuesFromTableToModal = (changeButton) => {
     let modalForm = document.querySelector('#form-change-income');
     assignId(firstRow, modalForm);
     assignDate(firstRow, modalForm);
+    assignAmount(firstRow, modalForm);
 }
 
 const assignId = (firstRow, modalForm) => {
@@ -209,8 +210,12 @@ const assignDate = (firstRow, modalForm) => {
     let dateInput = modalForm.querySelector('#date');
     let dateCell = firstRow.querySelector('.budget-item-date');
     dateInput.value = formatDate(dateCell.textContent);
-    console.log(dateCell);
-    console.log(dateInput);
+}
+
+const assignAmount = (firstRow, modalForm) => {
+    let amountInput = modalForm.querySelector('#amount');
+    let amountCell = firstRow.querySelector('.budget-item-amount');
+    amountInput.value = amountCell.textContent.slice(0, -3);
 }
 
 
