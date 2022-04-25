@@ -207,6 +207,43 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="changeBudgetItemModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Zmiana pozycji</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/expense/save" method="POST" class="budget-form form-income container-fluid ps-lg-0">
+                        <div class="row mb-3">
+                            <div class="col-12 col-sm-6 pe-sm-1 mb-2">
+                                <label for="amount" class="form-label form-label-budget-item fs-4 text-dark">Kwota
+                                </label>
+                                <input type="number" step="0.01" id="amount" name="amount"
+                                    class="form-control fs-6 text-dark" required placeholder="0"
+                                    value="{{ expense.amount }}">
+                            </div>
+                            <div class="col-12 col-sm-6 ps-sm-1 mb-2">
+                                <label for="date" class="form-label form-label-budget-item fs-4 text-dark">Data</label>
+                                <input type="date" id="date" name="date" class="form-control fs-6"
+                                    value="{{ expense.date_of_expense }}" required>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn button-outline" data-bs-dismiss="modal">Zamknij</button>
+                    <button id="button-remove" type="button"
+                        class="button-confirm-modal btn button-normal">Potwierdź</button>
+                    <form id="form-remove" method="post">
+                        <input type="hidden" name="id">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     {% endblock %}
 
     {% block footer %}

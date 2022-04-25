@@ -190,19 +190,27 @@ const assignRememberedCells = (obj, abortChangeButton) => {
     obj.rememberedComment = '';
 }
 
+//ma działać - DZIAŁA
 const rowOfBudgetItems = document.querySelectorAll('.budget-item');
 for (let budgetItem of rowOfBudgetItems) {
     showAndHideChangeAndRemoveButton(budgetItem);
 }
 
+//do zmiany
+//ma wywołac odpowiedni modal
+const modalChangeElement = new bootstrap.Modal(document.getElementById('changeBudgetItemModal'), {
+    keyboard: false
+})
+
 const buttonsChangeBudgetItem = document.querySelectorAll('.button-change-budget-item');
 for (let button of buttonsChangeBudgetItem) {
     button.addEventListener('click', function () {
         if (checkIsOtherChangeButtonsHidden()) {
-            makeTableCellsEditable(this);
-            hideChangeAndRemoveButtons(this);
-            showConfirmAndAbortButtons(this);
-            rememberChangingCells(rememberedCells, this);
+            modalChangeElement.toggle();
+            //makeTableCellsEditable(this);
+            //hideChangeAndRemoveButtons(this);
+            //showConfirmAndAbortButtons(this);
+            //rememberChangingCells(rememberedCells, this);
         }
     })
 }
