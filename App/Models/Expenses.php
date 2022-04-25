@@ -26,7 +26,7 @@ class Expenses extends \Core\Model
             $db = static::getDataBase();
             $query = $db->prepare($sql);
             $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
-            $query->bindValue(':category', $this->expenseCategory, PDO::PARAM_INT);
+            $query->bindValue(':category', $this->category, PDO::PARAM_INT);
             $query->bindValue(':payment', $this->paymentMethod, PDO::PARAM_INT);
             $query->bindValue(':amount', $this->amount, PDO::PARAM_STR);
             $query->bindValue(':date', $this->date, PDO::PARAM_STR);
@@ -53,7 +53,7 @@ class Expenses extends \Core\Model
         }
 
 
-        $dateArr  = explode('-', $this->date);
+        $dateArr  = explode('/', $this->date);
         if (count($dateArr) == 3) {
             if (!(checkdate($dateArr[0], $dateArr[1], $dateArr[2]))) {
                 $this->errors[]  = 'Data jest nieprawidłowa';
@@ -64,9 +64,9 @@ class Expenses extends \Core\Model
             $this->errors[] = 'Nie wybrano sposobu płatności';
         }
 
-        // if (!isset($this->expenseCategory)) {
-        //     $this->errors[] = 'Nie wybrano kategorii przychodu';
-        // }
+        if (!isset($this->category)) {
+            $this->errors[] = 'Nie wybrano kategorii wydatku';
+        }
 
         if (strlen($this->comment) > 100) {
             $this->errors[]  = 'Komentarz może zawierać maksymalnie 100 znaków';
@@ -76,19 +76,20 @@ class Expenses extends \Core\Model
     public function change()
     {
         $this->validate();
+
         if (empty($this->errors)) {
 
             $sql = "UPDATE expenses
-                    SET amount = :amount, date_of_expense = :date, expense_comment = :comment, payment_method_assigned_to_user_id = 
-                        (SELECT id FROM payment_methods_assigned_to_users WHERE name = :paymentMethod)
+                    SET amount = :amount, date_of_expense = :date, expense_comment = :comment, payment_method_assigned_to_user_id = :paymentMethod, expense_category_assigned_to_user_id = :category
                     WHERE id = :id";
 
             $db = static::getDataBase();
             $query = $db->prepare($sql);
             $query->bindValue(':id', $this->id, PDO::PARAM_INT);
+            $query->bindValue(':category', $this->category, PDO::PARAM_INT);
             $query->bindValue(':amount', $this->amount, PDO::PARAM_STR);
             $query->bindValue(':date', $this->date, PDO::PARAM_STR);
-            $query->bindValue(':paymentMethod', $this->paymentMethod, PDO::PARAM_STR);
+            $query->bindValue(':paymentMethod', $this->paymentMethod, PDO::PARAM_INT);
             $query->bindValue(':comment', $this->comment, PDO::PARAM_STR);
             return $query->execute();
         }

@@ -40,14 +40,14 @@ class Expense extends Authenticated
     public function changeAction()
     {
         $expense = new Expenses($_POST);
-        var_dump($expense);
-        // if ($expense->change()) {
-        //     Flash::addMessage('Zmieniono wybrany wydatek');
-        //     $this->redirect('/balance/show');
-        // } else {
-        //     Flash::addMessage('Nieudana zmiana wydatku', Flash::DANGER);
-        //     $this->redirect('/balance/show');
-        // }
+
+        if ($expense->change()) {
+            Flash::addMessage('Zmieniono wybrany wydatek');
+            $this->redirect('/balance/show');
+        } else {
+            Flash::addMessage('Nieudana zmiana wydatku', Flash::DANGER);
+            $this->redirect('/balance/show');
+        }
     }
 
     public function removeAction()
