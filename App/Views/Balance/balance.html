@@ -204,13 +204,13 @@
                         class="budget-form container-fluid ps-lg-0">
                         <input type="hidden" name="id" id="id">
                         <div class="row mb-3">
-                            <div class="col-12 col-sm-6 pe-sm-1 mb-2">
+                            <div class="col-12 col-sm-6 pe-sm-1 mb-2 d-flex flex-column justify-content-lg-center">
                                 <label for="amount" class="form-label form-label-budget-item fs-4 text-dark">Kwota
                                 </label>
                                 <input type="number" step="0.01" id="amount" name="amount"
                                     class="form-control fs-6 text-dark" required placeholder="0">
                             </div>
-                            <div class="col-12 col-sm-6 ps-sm-1 mb-2">
+                            <div class="col-12 col-sm-6 ps-sm-1 mb-2 d-flex flex-column justify-content-lg-center">
                                 <label for="date" class="form-label form-label-budget-item fs-4 text-dark">Data</label>
                                 <input type="date" id="date" name="date" class="form-control fs-6" required>
                             </div>
@@ -238,13 +238,6 @@
                                         placeholder="Komentarz">
                                 </div>
                             </div>
-                            {# {% if income.errors is not empty %}
-                            <ul class="list-unstyled">
-                                {% for error in income.errors %}
-                                <li class="error m-0">{{ error }}</li>
-                                {% endfor %}
-                            </ul>
-                            {% endif %} #}
                         </div>
                     </form>
                 </div>
@@ -267,13 +260,13 @@
                     <form action="/expense/change" method="POST" class="budget-form container-fluid ps-lg-0">
                         <input type="hidden" name="id" id="id">
                         <div class="row mb-3">
-                            <div class="col-12 col-sm-6 pe-sm-1 mb-2">
+                            <div class="col-12 col-sm-6 pe-sm-1 mb-2 d-flex flex-column justify-content-lg-center">
                                 <label for="amount" class="form-label form-label-budget-item fs-4 text-dark">Kwota
                                 </label>
                                 <input type="number" step="0.01" id="amount" name="amount"
                                     class="form-control fs-6 text-dark" placeholder="0">
                             </div>
-                            <div class="col-12 col-sm-6 ps-sm-1 mb-2">
+                            <div class="col-12 col-sm-6 ps-sm-1 mb-2 d-flex flex-column justify-content-lg-center">
                                 <label for="date" class="form-label form-label-budget-item fs-4 text-dark">Data</label>
                                 <input type="date" id="date" name="date" class="form-control fs-6" required>
                             </div>
