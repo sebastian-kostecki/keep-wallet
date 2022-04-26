@@ -58,8 +58,8 @@ abstract class BudgetCategory extends \Core\Model
     public static function findCategories()
     {
         $sql = "SELECT * 
-                FROM " . static::getNameTableWithBudgetItemsAssignedToUsers() . " NATURAL JOIN icons
-                WHERE " . static::getNameTableWithBudgetItemsAssignedToUsers() . ".user_id = :userId";
+                FROM " . static::NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS . " NATURAL JOIN icons
+                WHERE " . static::NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS . ".user_id = :userId";
 
         $db = static::getDataBase();
         $query = $db->prepare($sql);
@@ -73,8 +73,8 @@ abstract class BudgetCategory extends \Core\Model
     public function save()
     {
         if (empty($this->errors)) {
-            $sql = "INSERT INTO {$this->getNameTableWithBudgetItemsAssignedToUsers()}
-                    VALUES (NULL, :userId, :nameCategory, (SELECT icon_id FROM icons WHERE icon = :nameIcon))";
+            $sql = "INSERT INTO " . static::NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS .
+                " VALUES (NULL, :userId, :nameCategory, (SELECT icon_id FROM icons WHERE icon = :nameIcon))";
 
             $db = static::getDataBase();
             $query = $db->prepare($sql);
@@ -93,8 +93,8 @@ abstract class BudgetCategory extends \Core\Model
 
         if (empty($this->errors)) {
 
-            $sql = "UPDATE {$this->getNameTableWithBudgetItemsAssignedToUsers()}
-                    SET name = :nameCategory, icon_id = (SELECT icon_id FROM icons WHERE icon = :nameIcon)
+            $sql = "UPDATE " . static::NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS .
+                " SET name = :nameCategory, icon_id = (SELECT icon_id FROM icons WHERE icon = :nameIcon)
                     WHERE id = :idPreviousCategory";
 
             $db = static::getDataBase();
@@ -110,15 +110,15 @@ abstract class BudgetCategory extends \Core\Model
 
     public function delete()
     {
-        $sql = "UPDATE {$this->getNameTableWithBudgetItems()}
-                SET {$this->getNameColumnWithCategoryAssignedToUserId()} = 
+        $sql = "UPDATE " . static::NAME_TABLE_WITH_BUDGET_ITEMS .
+            " SET " . static::NAME_COLUMN_WITH_CATEGORY_ASSIGNED_TO_USER_ID . " = 
                     (SELECT id 
-                    FROM {$this->getNameTableWithBudgetItemsAssignedToUsers()} 
-                    WHERE name = '{$this->getCategoryWhichAssignBudgetItemsFromRemovedCategory()}' AND user_id = :userId)
-                WHERE {$this->getNameColumnWithCategoryAssignedToUserId()} = :idCategory;
+                    FROM " . static::NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS .
+            " WHERE name = '" . static::NAME_CATEGORY_WHICH_ASSIGN_BUDGET_ITEMS_FROM_REMOVED_CATEGORY . "' AND user_id = :userId)
+                WHERE " . static::NAME_COLUMN_WITH_CATEGORY_ASSIGNED_TO_USER_ID . " = :idCategory;
                 
-                DELETE FROM {$this->getNameTableWithBudgetItemsAssignedToUsers()} 
-                WHERE id = :idCategory";
+                DELETE FROM " . static::NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS .
+            " WHERE id = :idCategory";
 
         $db = static::getDataBase();
         $query = $db->prepare($sql);
