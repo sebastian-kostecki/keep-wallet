@@ -347,18 +347,6 @@ option,
     display: none;
 }
 
-.table-data-with-buttons,
-.budget-item-amount,
-.budget-item-payment-method,
-#expenses-table .budget-item-date {
-    max-width: 25%;
-}
-
-.budget-item-comment,
-#incomes-table .budget-item-date {
-    max-width: 50%;
-}
-
 .balance-label-modal {
     color: inherit;
     border: 1px solid inherit;
@@ -374,6 +362,7 @@ option,
 .change-modal #date:focus {
     color: #293241;
 }
+
 
 @media (max-width: 1400px) {
     .nav-link {
@@ -416,7 +405,6 @@ option,
 
     .content-nav {
         width: 100%;
-        /* background-color: inherit !important; */
         background: linear-gradient(#00000054, #293241);
         --bs-bg-opacity: 1;
     }

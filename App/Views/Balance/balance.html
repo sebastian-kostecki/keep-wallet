@@ -85,13 +85,9 @@
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
-                            </form>
                         </td>
-                        <td class="budget-item-date text-end pe-1 w-50">{{
-                            income.date_of_income }}
-                        </td>
-                        <td rowspan="2" class="budget-item-amount text-end pe-1 w-25">{{
-                            income.amount }} zł</td>
+                        <td class="budget-item-date text-end pe-1 w-50">{{ income.date_of_income }}</td>
+                        <td rowspan="2" class="budget-item-amount text-end pe-1 w-25">{{ income.amount }} zł</td>
                     </tr>
                     <tr class="fw-light border-top-0 extensively budget-item-details {{ incomeByCategory.name }}">
                         <td class="budget-item-comment text-end pe-1">{{ income.income_comment
@@ -138,7 +134,6 @@
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
-                            </form>
                         </td>
                         <td
                             class="budget-item-payment-method payment-method-id-{{ expense.payment_method_assigned_to_user_id }} text-end pe-1 w-25">
@@ -168,16 +163,18 @@
         </div>
     </div>
     <div class="row footer me-4 px-2 d-flex justify-content-lg-between justify-content-center balance-info">
-        <p class="display-6 balance-heading w-auto p-0 py-2 m-0 text-uppercase fw-bold text-center">Saldo wynosi: <span
-                id="balance-sum">0</span> zł</p>
-        <p class="display-6 balance-heading w-auto text-center p-2 m-0 rounded balance-text"></p>
+        <div class="display-6 balance-heading w-auto p-0 py-2 m-0 text-uppercase fw-bold text-center">
+            <span>Saldo wynosi:</span>
+            <span id="balance-sum">0</span> zł
+        </div>
+        <div class="display-6 balance-heading w-auto text-center p-2 m-0 rounded balance-text"></div>
     </div>
     <div class="modal fade" id="confirmRemoving" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        aria-labelledby="confirmRemovingLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Czy na pewno chcesz usunąć?</h5>
+                    <h5 class="modal-title">Czy na pewno chcesz usunąć?</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-footer">
@@ -192,11 +189,11 @@
         </div>
     </div>
     <div class="modal fade change-modal" id="changeIncomeModal" data-bs-backdrop="static" data-bs-keyboard="false"
-        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        tabindex="-1" aria-labelledby="changeIncomeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title" id="staticBackdropLabel">Zmiana przychodu</h2>
+                    <h2 class="modal-title">Zmiana przychodu</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -249,11 +246,11 @@
         </div>
     </div>
     <div class="modal fade change-modal" id="changeExpenseModal" data-bs-backdrop="static" data-bs-keyboard="false"
-        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        tabindex="-1" aria-labelledby="changeExpenseModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title" id="staticBackdropLabel">Zmiana wydatku</h2>
+                    <h2 class="modal-title">Zmiana wydatku</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -315,13 +312,6 @@
                                         placeholder="Komentarz">
                                 </div>
                             </div>
-                            {# {% if income.errors is not empty %}
-                            <ul class="list-unstyled">
-                                {% for error in income.errors %}
-                                <li class="error m-0">{{ error }}</li>
-                                {% endfor %}
-                            </ul>
-                            {% endif %} #}
                         </div>
                     </form>
                 </div>
@@ -336,12 +326,12 @@
 
     {% block footer %}
     <script src="/js/showModalPeriod.js"></script>
-    <script src="\js\balanceCalculations.js"></script>
-    <script src="\js\displayBalanceInfo.js"></script>
+    <script src="/js/balanceCalculations.js"></script>
+    <script src="/js/displayBalanceInfo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="\js\pieChart.js"></script>
-    <script src="\js\hideShowBalanceRow.js"></script>
-    <script src="\js\formatDate.js"></script>
+    <script src="/js/pieChart.js"></script>
+    <script src="/js/hideShowBalanceRow.js"></script>
+    <script src="/js/formatDate.js"></script>
     <script src="/js/changeBudgetItem.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
     <script src="/js/validateBudgetItem.js"></script>
