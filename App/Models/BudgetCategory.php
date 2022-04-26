@@ -20,26 +20,6 @@ abstract class BudgetCategory extends \Core\Model
         }
     }
 
-    protected static function getNameTableWithBudgetItemsAssignedToUsers(): string
-    {
-        return static::NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS;
-    }
-
-    protected static function getNameTableWithBudgetItems(): string
-    {
-        return static::NAME_TABLE_WITH_BUDGET_ITEMS;
-    }
-
-    protected static function getNameColumnWithCategoryAssignedToUserId(): string
-    {
-        return static::NAME_COLUMN_WITH_CATEGORY_ASSIGNED_TO_USER_ID;
-    }
-
-    protected static function getCategoryWhichAssignBudgetItemsFromRemovedCategory(): string
-    {
-        return static::NAME_CATEGORY_WHICH_ASSIGN_BUDGET_ITEMS_FROM_REMOVED_CATEGORY;
-    }
-
     public function validate()
     {
         if ($this->previousCategory == '') {
