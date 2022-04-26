@@ -1,16 +1,18 @@
 const showAndHideChangeAndRemoveButton = (firstRow) => {
     let secondRow = firstRow.nextElementSibling;
-    firstRow.addEventListener('mouseenter', function () {
-        this.firstElementChild.firstElementChild.style.display = 'block';
+    let icons = firstRow.firstElementChild.firstElementChild;
+
+    firstRow.addEventListener('mouseenter', function (icons) {
+        icons.style.display = 'block';
     })
-    secondRow.addEventListener('mouseenter', function () {
-        this.previousElementSibling.firstElementChild.firstElementChild.style.display = 'block';
+    secondRow.addEventListener('mouseenter', function (icons) {
+        icons.style.display = 'block';
     })
-    firstRow.addEventListener('mouseleave', function () {
-        this.firstElementChild.firstElementChild.style.display = 'none';
+    firstRow.addEventListener('mouseleave', function (icons) {
+        icons.style.display = 'none';
     })
-    secondRow.addEventListener('mouseleave', function () {
-        this.previousElementSibling.firstElementChild.firstElementChild.style.display = 'none';
+    secondRow.addEventListener('mouseleave', function (icons) {
+        icons.style.display = 'none';
     })
 }
 

@@ -55,9 +55,6 @@ for (let form of forms) {
     });
 }
 
-
-
-
 $.validator.addMethod('validAmount',
     function (value) {
         value *= 1000;
