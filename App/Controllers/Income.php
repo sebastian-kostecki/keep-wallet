@@ -31,4 +31,28 @@ class Income extends Authenticated
             ]);
         }
     }
+
+    public function changeAction()
+    {
+        $income = new Incomes($_POST);
+        if ($income->change()) {
+            Flash::addMessage('Zmieniono wybrany przychód');
+            $this->redirect('/balance/show');
+        } else {
+            Flash::addMessage('Nieudana zmiana przychodu', Flash::DANGER);
+            $this->redirect('/balance/show');
+        }
+    }
+
+    public function removeAction()
+    {
+        $income = new Incomes($_POST);
+        if ($income->remove()) {
+            Flash::addMessage('Usunięto wybrany przychód');
+            $this->redirect('/balance/show');
+        } else {
+            Flash::addMessage('Nieudane usunięcie przychodu', Flash::DANGER);
+            $this->redirect('/balance/show');
+        }
+    }
 }

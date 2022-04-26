@@ -5,6 +5,9 @@ namespace App\Controllers;
 use App\Models\UserExpenses;
 use App\Models\UserIncomes;
 use Core\View;
+use App\Models\IncomeCategory;
+use App\Models\ExpenseCategory;
+use App\Models\PaymentMethod;
 
 class Balance extends Authenticated
 {
@@ -24,13 +27,20 @@ class Balance extends Authenticated
         $expensesUserGroupByCategories = UserExpenses::getUserExpensesGroupByCategories();
         $allUseExpenses = UserExpenses::getAllUserExpenses();
 
+        $userIncomeCategories = IncomeCategory::findCategories();
+        $expenseCategories = ExpenseCategory::findCategories();
+        $paymentMethods = PaymentMethod::findCategories();
+
         View::renderTemplate('Balance/balance.html', [
             'incomesGroupByCategories' => $incomesUserGroupByCategories,
             'allIncomes' => $allUserIncomes,
             'expensesGroupByCategories' => $expensesUserGroupByCategories,
             'allExpenses' => $allUseExpenses,
             'selectPeriod' => $_SESSION['nameSelectedPeriod'],
-            'chosenPeriod' => $_SESSION['chosenPeriod']
+            'chosenPeriod' => $_SESSION['chosenPeriod'],
+            'incomeCategories' => $userIncomeCategories,
+            'expenseCategories' => $expenseCategories,
+            'paymentMethods' => $paymentMethods
         ]);
     }
 }

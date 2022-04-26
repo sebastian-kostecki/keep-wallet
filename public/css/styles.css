@@ -257,7 +257,6 @@ tbody tr:first-of-type {
 
 .form-check-input:checked+.form-check-label {
     background-color: #98c1d9;
-
 }
 
 .budget-item-radio {
@@ -328,9 +327,42 @@ option,
     width: 25px !important;
 }
 
+.table-data-with-buttons {
+    display: table-cell;
+    width: 60px;
+    height: 26px;
+}
+
+.button-form-change-budget-item {
+    display: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+    line-height: 1;
+}
+
+.buttons-change-budget-item,
 .fa-angle-up {
     display: none;
 }
+
+.balance-label-modal {
+    color: inherit;
+    border: 1px solid inherit;
+    background-color: transparent;
+    transition: 0.5s;
+}
+
+.form-check-input:checked+.balance-label-modal {
+    color: #fff;
+    background-color: #ee6c4d;
+}
+
+.change-modal #date:focus {
+    color: #293241;
+}
+
 
 @media (max-width: 1400px) {
     .nav-link {
@@ -373,7 +405,6 @@ option,
 
     .content-nav {
         width: 100%;
-        /* background-color: inherit !important; */
         background: linear-gradient(#00000054, #293241);
         --bs-bg-opacity: 1;
     }
@@ -422,5 +453,9 @@ option,
     .settings-hidden,
     .settings-showed {
         right: 2px !important;
+    }
+
+    .buttons-change-budget-item {
+        display: block !important;
     }
 }

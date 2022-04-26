@@ -25,7 +25,7 @@ class UserIncomes extends UserBudgetItems
 
     public static function getAllUserIncomes()
     {
-        $sql = "SELECT income_user.name, incomes.amount, incomes.date_of_income, incomes.income_comment 
+        $sql = "SELECT incomes.id, income_user.name, incomes.amount, incomes.date_of_income, incomes.income_comment, incomes.income_category_assigned_to_user_id
                 FROM incomes INNER JOIN incomes_category_assigned_to_users as income_user 
                 WHERE incomes.user_id = :userId AND incomes.income_category_assigned_to_user_id = income_user.id AND incomes.date_of_income BETWEEN :firstDay AND :lastDay ORDER BY incomes.date_of_income";
 

@@ -58,42 +58,7 @@
     <div class="row justify-content-center w-100 mx-0">
         <div class="col-12 col-lg-4 my-2 ps-xl-0">
             <h2 class="balance-heading text-center fs-3 fw-light">Przychody</h2>
-            <table class="balance-table w-100">
-                <thead>
-                    <tr>
-                        <th class="text-start ps-1">Kategoria</th>
-                        <th class="text-end pe-1">Kwota</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for incomeByCategory in incomesGroupByCategories %}
-                    <tr class="category-row">
-                        <td class="title-item text-start ps-1">{{ incomeByCategory.name }}</td>
-                        <td class="text-end pe-1">{{ incomeByCategory.total }} zł</td>
-                    </tr>
-                    {% for income in allIncomes %}
-                    {% if income.name == incomeByCategory.name %}
-                    <tr class="fw-light border-top-0 extensively budget-item-details {{ incomeByCategory.name }}">
-                        <td class="budget-item-date text-end pe-1">{{ income.date_of_income }}</td>
-                        <td rowspan="2" class="text-end pe-1 income-amount">{{ income.amount }} zł</td>
-                    </tr>
-                    <tr class="fw-light border-top-0 extensively budget-item-details {{ incomeByCategory.name }}">
-                        <td class="text-end pe-1">{{ income.income_comment }}</td>
-                    </tr>
-                    {% endif %}
-                    {% endfor %}
-                    {% endfor %}
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th colspan="2" id="incomes-sum" class="text-end pe-1"></th>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
-        <div class="col-12 col-lg-4 my-2">
-            <h2 class="balance-heading text-center fs-3 fw-light">Wydatki</h2>
-            <table class="w-100 balance-table">
+            <table id="incomes-table" class="balance-table w-100">
                 <thead>
                     <tr>
                         <th colspan="2" class="text-start ps-1">Kategoria</th>
@@ -101,21 +66,83 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {% for incomeByCategory in incomesGroupByCategories %}
+                    <tr class="category-row">
+                        <td colspan="2" class="title-item text-start ps-1">{{ incomeByCategory.name }}</td>
+                        <td class="text-end pe-1 income-amount">{{ incomeByCategory.total }} zł</td>
+                    </tr>
+                    {% for income in allIncomes %}
+                    {% if income.name == incomeByCategory.name %}
+                    <tr
+                        class="budget-item fw-light border-top-0 budget-item-details category-id-{{ income.income_category_assigned_to_user_id }} income-id-{{ income.id }} {{ incomeByCategory.name }}">
+                        <td rowspan="2" class="table-data-with-buttons w-25">
+                            <div class="buttons-change-budget-item">
+                                <button class="button-change-income btn ms-2 p-0 text-white-50 border-0">
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                                <button
+                                    class="income income-id-{{ income.id }} button-remove btn p-0 ms-2 text-danger border-0">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                        <td class="budget-item-date text-end pe-1 w-50">{{ income.date_of_income }}</td>
+                        <td rowspan="2" class="budget-item-amount text-end pe-1 w-25">{{ income.amount }} zł</td>
+                    </tr>
+                    <tr class="fw-light border-top-0 extensively budget-item-details {{ incomeByCategory.name }}">
+                        <td class="budget-item-comment text-end pe-1">{{ income.income_comment
+                            }}</td>
+                    </tr>
+                    {% endif %}
+                    {% endfor %}
+                    {% endfor %}
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="3" id="incomes-sum" class="text-end pe-1"></th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="col-12 col-lg-4 my-2">
+            <h2 class="balance-heading text-center fs-3 fw-light">Wydatki</h2>
+            <table id="expenses-table" class="w-100 balance-table">
+                <thead>
+                    <tr>
+                        <th colspan="3" class="text-start ps-1">Kategoria</th>
+                        <th class="text-end pe-1">Kwota</th>
+                    </tr>
+                </thead>
+                <tbody>
                     {% for expenseByCategory in expensesGroupByCategories %}
                     <tr class="category-row">
-                        <td colspan="2" class="title-item expense-name text-start ps-1">{{ expenseByCategory.name }}
+                        <td colspan="3" class="title-item expense-name text-start ps-1">{{ expenseByCategory.name }}
                         </td>
-                        <td class="expense-cash text-end pe-1">{{ expenseByCategory.total }} zł</td>
+                        <td class="expense-cash text-end pe-1 expense-amount">{{ expenseByCategory.total }} zł</td>
                     </tr>
                     {% for expense in allExpenses %}
                     {% if expenseByCategory.name == expense.name %}
-                    <tr class="fw-light border-top-0 extensively budget-item-details {{ expenseByCategory.name }}">
-                        <td class="text-end pe-1">{{ expense.payment_method }}</td>
-                        <td class="budget-item-date text-end pe-1">{{ expense.date_of_expense }}</td>
-                        <td rowspan="2" class="text-end pe-1 expense-amount">{{ expense.amount }} zł</td>
+                    <tr
+                        class="budget-item fw-light border-top-0 budget-item-details category-id-{{ expense.expense_category_assigned_to_user_id }} expens-id-{{ expense.id }} {{ expenseByCategory.name }}">
+                        <td rowspan="2" class="table-data-with-buttons w-25">
+                            <div class="buttons-change-budget-item">
+                                <button class="button-change-expense btn ms-2 p-0 text-white-50 border-0">
+                                    <i class="fas fa-pen"></i>
+                                </button>
+                                <button
+                                    class="expense expens-id-{{ expense.id }} button-remove btn p-0 ms-2 text-danger border-0">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                        <td
+                            class="budget-item-payment-method payment-method-id-{{ expense.payment_method_assigned_to_user_id }} text-end pe-1 w-25">
+                            {{ expense.payment_method }}</td>
+                        <td class="budget-item-date text-end pe-1 w-50">{{ expense.date_of_expense }} </td>
+                        <td rowspan="2" class="budget-item-amount text-end pe-1 w-25">{{ expense.amount }} zł</td>
                     </tr>
                     <tr class="fw-light border-top-0 extensively budget-item-details {{ expenseByCategory.name }}">
-                        <td colspan="2" class="text-end pe-1">{{ expense.expense_comment }}</td>
+                        <td colspan="2" class="budget-item-comment text-end pe-1">{{ expense.expense_comment }}</td>
                     </tr>
                     {% endif %}
                     {% endfor %}
@@ -136,18 +163,176 @@
         </div>
     </div>
     <div class="row footer me-4 px-2 d-flex justify-content-lg-between justify-content-center balance-info">
-        <p class="display-6 balance-heading w-auto p-0 py-2 m-0 text-uppercase fw-bold text-center">Saldo wynosi: <span
-                id="balance-sum">0</span> zł</p>
-        <p class="display-6 balance-heading w-auto text-center p-2 m-0 rounded balance-text"></p>
+        <div class="display-6 balance-heading w-auto p-0 py-2 m-0 text-uppercase fw-bold text-center">
+            <span>Saldo wynosi:</span>
+            <span id="balance-sum">0</span> zł
+        </div>
+        <div class="display-6 balance-heading w-auto text-center p-2 m-0 rounded balance-text"></div>
+    </div>
+    <div class="modal fade" id="confirmRemoving" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="confirmRemovingLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Czy na pewno chcesz usunąć?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn button-outline" data-bs-dismiss="modal">Zamknij</button>
+                    <button id="button-remove" type="button"
+                        class="button-confirm-modal btn button-normal">Potwierdź</button>
+                    <form id="form-remove" method="post">
+                        <input type="hidden" name="id">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade change-modal" id="changeIncomeModal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="changeIncomeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Zmiana przychodu</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/income/change" method="POST" id="form-change-income"
+                        class="budget-form container-fluid ps-lg-0">
+                        <input type="hidden" name="id" id="id">
+                        <div class="row mb-3">
+                            <div class="col-12 col-sm-6 pe-sm-1 mb-2 d-flex flex-column justify-content-lg-center">
+                                <label for="amount" class="form-label form-label-budget-item fs-4 text-dark">Kwota
+                                </label>
+                                <input type="number" step="0.01" id="amount" name="amount"
+                                    class="form-control fs-6 text-dark" required placeholder="0">
+                            </div>
+                            <div class="col-12 col-sm-6 ps-sm-1 mb-2 d-flex flex-column justify-content-lg-center">
+                                <label for="date" class="form-label form-label-budget-item fs-4 text-dark">Data</label>
+                                <input type="date" id="date" name="date" class="form-control fs-6" required>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-12">
+                                <h2 class="form-label form-label-budget-item text-center fs-4 text-dark">Kategorie</h2>
+                            </div>
+                        </div>
+                        <div class="row mb-3 ms-0 budget-item-radio">
+                            <div class="col-12 p-0 justify-content-center d-flex flex-wrap">
+                                {% for category in incomeCategories %}
+                                <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                                    <input type="radio" class="form-check-input" name="category"
+                                        id="income-{{ category.id }}" value="{{ category.id }}" required>
+                                    <label for="income-{{ category.id }}"
+                                        class="balance-label-modal category-label form-check-label text-uppercase px-3 py-2 border border-1 rounded w-100 text-center fs-6"
+                                        role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name
+                                        }}</label>
+                                </div>
+                                {% endfor %}
+                                <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                                    <input id="comment" type="text"
+                                        class="category-label form-control h-100 fs-6 text-dark" name="comment"
+                                        placeholder="Komentarz">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn button-outline" data-bs-dismiss="modal">Zamknij</button>
+                    <button type="submit" class="button-confirm-modal btn button-normal">Potwierdź</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade change-modal" id="changeExpenseModal" data-bs-backdrop="static" data-bs-keyboard="false"
+        tabindex="-1" aria-labelledby="changeExpenseModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">Zmiana wydatku</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/expense/change" method="POST" class="budget-form container-fluid ps-lg-0">
+                        <input type="hidden" name="id" id="id">
+                        <div class="row mb-3">
+                            <div class="col-12 col-sm-6 pe-sm-1 mb-2 d-flex flex-column justify-content-lg-center">
+                                <label for="amount" class="form-label form-label-budget-item fs-4 text-dark">Kwota
+                                </label>
+                                <input type="number" step="0.01" id="amount" name="amount"
+                                    class="form-control fs-6 text-dark" placeholder="0">
+                            </div>
+                            <div class="col-12 col-sm-6 ps-sm-1 mb-2 d-flex flex-column justify-content-lg-center">
+                                <label for="date" class="form-label form-label-budget-item fs-4 text-dark">Data</label>
+                                <input type="date" id="date" name="date" class="form-control fs-6" required>
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-12">
+                                <h2 class="form-label form-label-budget-item text-center fs-4 text-dark">Sposób
+                                    płatności
+                                </h2>
+                            </div>
+                        </div>
+                        <div class="row mb-3 ms-0 budget-item-radio">
+                            <div id="paymentMethods" class="col-12 p-0 justify-content-center d-flex flex-wrap">
+                                {% for paymentMethod in paymentMethods %}
+                                <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                                    <input type="radio" class="form-check-input" name="paymentMethod"
+                                        id="pm-{{ paymentMethod.id }}" value="{{ paymentMethod.id }}" required>
+                                    <label for="pm-{{ paymentMethod.id }}"
+                                        class="balance-label-modal category-label form-check-label text-uppercase px-3 py-2 border border-1 rounded w-100 text-center fs-6"
+                                        role="button"><i class="{{ paymentMethod.icon }} me-2"></i>{{ paymentMethod.name
+                                        }}</label>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="row mt-1">
+                            <div class="col-12">
+                                <h2 class="form-label form-label-budget-item text-center fs-4 text-dark">Kategorie</h2>
+                            </div>
+                        </div>
+                        <div class="row mb-3 ms-0 budget-item-radio">
+                            <div class="col-12 p-0 justify-content-center d-flex flex-wrap">
+                                {% for category in expenseCategories %}
+                                <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                                    <input type="radio" class="form-check-input" name="category"
+                                        id="expens-{{ category.id }}" value="{{ category.id }}" required>
+                                    <label for="expens-{{ category.id }}"
+                                        class="balance-label-modal category-label form-check-label text-uppercase px-3 py-2 border border-1 rounded w-100 text-center fs-6"
+                                        role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name
+                                        }}</label>
+                                </div>
+                                {% endfor %}
+                                <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                                    <input id="comment" type="text"
+                                        class="category-label form-control h-100 fs-6 text-dark" name="comment"
+                                        placeholder="Komentarz">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn button-outline" data-bs-dismiss="modal">Zamknij</button>
+                    <button type="submit" class="button-confirm-modal btn button-normal">Potwierdź</button>
+                </div>
+            </div>
+        </div>
     </div>
     {% endblock %}
 
     {% block footer %}
     <script src="/js/showModalPeriod.js"></script>
-    <script src="\js\balanceCalculations.js"></script>
-    <script src="\js\displayBalanceInfo.js"></script>
+    <script src="/js/balanceCalculations.js"></script>
+    <script src="/js/displayBalanceInfo.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="\js\pieChart.js"></script>
-    <script src="\js\hideShowBalanceRow.js"></script>
-    <script src="\js\formatDate.js"></script>
+    <script src="/js/pieChart.js"></script>
+    <script src="/js/hideShowBalanceRow.js"></script>
+    <script src="/js/formatDate.js"></script>
+    <script src="/js/changeBudgetItem.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
+    <script src="/js/validateBudgetItem.js"></script>
     {% endblock %}
