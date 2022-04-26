@@ -79,4 +79,14 @@ abstract class BudgetItem extends \Core\Model
             $this->errors[]  = 'Komentarz może zawierać maksymalnie 100 znaków';
         }
     }
+
+    public static function getfirstDayOfPeriod()
+    {
+        return substr($_SESSION['chosenPeriod'], 0, 10);
+    }
+
+    public static function getLastDayOfPeriod()
+    {
+        return substr($_SESSION['chosenPeriod'], 11);
+    }
 }
