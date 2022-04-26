@@ -35,8 +35,6 @@ class Income extends Authenticated
     public function changeAction()
     {
         $income = new Incomes($_POST);
-        // var_dump($income);
-
         if ($income->change()) {
             Flash::addMessage('Zmieniono wybrany przychód');
             $this->redirect('/balance/show');
@@ -49,7 +47,6 @@ class Income extends Authenticated
     public function removeAction()
     {
         $income = new Incomes($_POST);
-        //var_dump($income);
         if ($income->remove()) {
             Flash::addMessage('Usunięto wybrany przychód');
             $this->redirect('/balance/show');

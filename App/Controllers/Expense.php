@@ -40,7 +40,6 @@ class Expense extends Authenticated
     public function changeAction()
     {
         $expense = new Expenses($_POST);
-
         if ($expense->change()) {
             Flash::addMessage('Zmieniono wybrany wydatek');
             $this->redirect('/balance/show');
@@ -53,7 +52,6 @@ class Expense extends Authenticated
     public function removeAction()
     {
         $expense = new Expenses($_POST);
-
         if ($expense->remove()) {
             Flash::addMessage('Usunięto wybrany wydatek');
             $this->redirect('/balance/show');
