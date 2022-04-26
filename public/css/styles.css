@@ -466,4 +466,8 @@ option,
     .settings-showed {
         right: 2px !important;
     }
+
+    .buttons-change-budget-item {
+        display: block !important;
+    }
 }
