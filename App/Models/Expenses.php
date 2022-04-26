@@ -4,16 +4,9 @@ namespace App\Models;
 
 use PDO;
 
-class Expenses extends \Core\Model
+class Expenses extends BudgetItem
 {
-    public $errors = [];
-
-    public function __construct($data = [])
-    {
-        foreach ($data as $key => $value) {
-            $this->$key = $value;
-        }
-    }
+    protected const NAME_OF_TABLE_WITH_BUDGET_ITEMS = "expenses";
 
     public function save()
     {
@@ -39,38 +32,13 @@ class Expenses extends \Core\Model
 
     public function validate()
     {
-        if (!isset($this->amount)) {
-            $this->errors[] = 'Brak kwoty wydatku';
-        }
-
-        $this->amount = filter_var($this->amount, FILTER_VALIDATE_FLOAT);
-        if ((!$this->amount) || ($this->amount < 0) || (strlen(substr(strrchr($this->amount, "."), 1)) > 2)) {
-            $this->errors[] = 'Kwota jest nieprawidłowa';
-        }
-
-        if (!isset($this->date)) {
-            $this->errors[] = 'Nie wybrano daty wydatku';
-        }
-
-
-        $dateArr  = explode('/', $this->date);
-        if (count($dateArr) == 3) {
-            if (!(checkdate($dateArr[0], $dateArr[1], $dateArr[2]))) {
-                $this->errors[]  = 'Data jest nieprawidłowa';
-            }
-        }
-
-        if (!isset($this->paymentMethod)) {
-            $this->errors[] = 'Nie wybrano sposobu płatności';
-        }
-
-        if (!isset($this->category)) {
-            $this->errors[] = 'Nie wybrano kategorii wydatku';
-        }
-
-        if (strlen($this->comment) > 100) {
-            $this->errors[]  = 'Komentarz może zawierać maksymalnie 100 znaków';
-        }
+        $this->isAmountChosen();
+        $this->isAmountValid();
+        $this->isDateChosen();
+        $this->isDateValid();
+        $this->isPaymentMethodChosen();
+        $this->isCategoryChosen();
+        $this->isCommentValid();
     }
 
     public function change()
@@ -96,14 +64,37 @@ class Expenses extends \Core\Model
         return false;
     }
 
-    public function remove()
+    public static function getUserExpensesGroupByCategories()
     {
-        $sql = "DELETE FROM expenses
-                WHERE id = :id";
+        $sql = "SELECT expenses_category_assigned_to_users.name, SUM(expenses.amount) as total
+        FROM expenses INNER JOIN expenses_category_assigned_to_users 
+        WHERE expenses.user_id = :userId AND expenses.expense_category_assigned_to_user_id = expenses_category_assigned_to_users.id AND date_of_expense BETWEEN :firstDay AND :lastDay GROUP BY expenses.expense_category_assigned_to_user_id ORDER BY total DESC";
 
         $db = static::getDataBase();
         $query = $db->prepare($sql);
-        $query->bindValue(':id', $this->id, PDO::PARAM_INT);
-        return $query->execute();
+        $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+        $query->bindValue(':firstDay', self::getfirstDayOfPeriod(), PDO::PARAM_STR);
+        $query->bindValue(':lastDay', self::getLastDayOfPeriod(), PDO::PARAM_STR);
+        $query->execute();
+
+        $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        return $query->fetchAll();
+    }
+
+    public static function getAllUserExpenses()
+    {
+        $sql = "SELECT expenses.id, expense_user.name, expenses.amount, expenses.date_of_expense, expenses.expense_comment, pm.name as payment_method, expenses.expense_category_assigned_to_user_id, expenses.payment_method_assigned_to_user_id 
+                FROM expenses_category_assigned_to_users as expense_user INNER JOIN expenses ON expenses.expense_category_assigned_to_user_id = expense_user.id INNER JOIN payment_methods_assigned_to_users as pm ON pm.id = expenses.payment_method_assigned_to_user_id 
+                WHERE expenses.user_id = :userId AND date_of_expense BETWEEN :firstDay AND :lastDay ORDER BY expenses.date_of_expense";
+
+        $db = static::getDataBase();
+        $query = $db->prepare($sql);
+        $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+        $query->bindValue(':firstDay', self::getfirstDayOfPeriod(), PDO::PARAM_STR);
+        $query->bindValue(':lastDay', self::getLastDayOfPeriod(), PDO::PARAM_STR);
+        $query->execute();
+
+        $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        return $query->fetchAll();
     }
 }

@@ -4,17 +4,9 @@ namespace App\Models;
 
 use PDO;
 
-class Incomes extends \Core\Model
+class Incomes extends BudgetItem
 {
-    public $errors = [];
-    public $incomes = [];
-
-    public function __construct($data = [])
-    {
-        foreach ($data as $key => $value) {
-            $this->$key = $value;
-        }
-    }
+    protected const NAME_OF_TABLE_WITH_BUDGET_ITEMS = "incomes";
 
     public function save()
     {
@@ -38,25 +30,12 @@ class Incomes extends \Core\Model
 
     public function validate()
     {
-        $this->amount = filter_var($this->amount, FILTER_VALIDATE_FLOAT);
-        if ((!$this->amount) || ($this->amount < 0) || (strlen(substr(strrchr($this->amount, "."), 1)) > 2)) {
-            $this->errors[] = 'Kwota jest nieprawidłowa';
-        }
-
-        $dateArr  = explode('/', $this->date);
-        if (count($dateArr) == 3) {
-            if (!(checkdate($dateArr[0], $dateArr[1], $dateArr[2]))) {
-                $this->errors[]  = 'Data jest nieprawidłowa';
-            }
-        }
-
-        if (!isset($this->category)) {
-            $this->errors[] = 'Nie wybrano kategorii przychodu';
-        }
-
-        if (strlen($this->comment) > 100) {
-            $this->errors[]  = 'Komentarz może zawierać maksymalnie 100 znaków';
-        }
+        $this->isAmountChosen();
+        $this->isAmountValid();
+        $this->isDateChosen();
+        $this->isDateValid();
+        $this->isCategoryChosen();
+        $this->isCommentValid();
     }
 
     public function change()
@@ -80,14 +59,37 @@ class Incomes extends \Core\Model
         return false;
     }
 
-    public function remove()
+    public static function getUserIncomesGroupByCategories()
     {
-        $sql = "DELETE FROM incomes
-                WHERE id = :id";
+        $sql = "SELECT incomes.user_id, incomes_category_assigned_to_users.name, SUM(incomes.amount) as total
+                FROM incomes INNER JOIN incomes_category_assigned_to_users 
+                WHERE incomes.user_id = :userId AND incomes.income_category_assigned_to_user_id = incomes_category_assigned_to_users.id AND date_of_income BETWEEN :firstDay AND :lastDay GROUP BY incomes.income_category_assigned_to_user_id ORDER BY total DESC";
 
         $db = static::getDataBase();
         $query = $db->prepare($sql);
-        $query->bindValue(':id', $this->id, PDO::PARAM_INT);
-        return $query->execute();
+        $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+        $query->bindValue(':firstDay', self::getfirstDayOfPeriod(), PDO::PARAM_STR);
+        $query->bindValue(':lastDay', self::getLastDayOfPeriod(), PDO::PARAM_STR);
+        $query->execute();
+
+        $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        return $query->fetchAll();
+    }
+
+    public static function getAllUserIncomes()
+    {
+        $sql = "SELECT incomes.id, income_user.name, incomes.amount, incomes.date_of_income, incomes.income_comment, incomes.income_category_assigned_to_user_id
+                FROM incomes INNER JOIN incomes_category_assigned_to_users as income_user 
+                WHERE incomes.user_id = :userId AND incomes.income_category_assigned_to_user_id = income_user.id AND incomes.date_of_income BETWEEN :firstDay AND :lastDay ORDER BY incomes.date_of_income";
+
+        $db = static::getDataBase();
+        $query = $db->prepare($sql);
+        $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+        $query->bindValue(':firstDay', self::getfirstDayOfPeriod(), PDO::PARAM_STR);
+        $query->bindValue(':lastDay', self::getLastDayOfPeriod(), PDO::PARAM_STR);
+        $query->execute();
+
+        $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
+        return $query->fetchAll();
     }
 }
