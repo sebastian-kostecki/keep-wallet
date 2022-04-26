@@ -18,7 +18,7 @@ abstract class BudgetItem extends \Core\Model
 
     public function remove()
     {
-        $sql = "DELETE FROM " . self::NAME_OF_TABLE_WITH_BUDGET_ITEMS .
+        $sql = "DELETE FROM " . static::NAME_OF_TABLE_WITH_BUDGET_ITEMS .
             " WHERE id = :id";
 
         $db = static::getDataBase();
