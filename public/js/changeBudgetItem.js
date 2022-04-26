@@ -79,15 +79,12 @@ const assignPaymentMethod = (firstRow, modalForm) => {
     }
 }
 
-
-//ma działać - DZIAŁA
 const rowOfBudgetItems = document.querySelectorAll('.budget-item');
 for (let budgetItem of rowOfBudgetItems) {
     showAndHideChangeAndRemoveButton(budgetItem);
 }
 
-//do zmiany
-//ma wywołac odpowiedni modal
+
 const modalChangeIncome = new bootstrap.Modal(document.getElementById('changeIncomeModal'), {
     keyboard: false
 });
@@ -112,13 +109,10 @@ for (let button of buttonsChangeExpense) {
     })
 }
 
-
-//działa - wysyła modal
 const buttonsConfirmModal = document.querySelectorAll('.button-confirm-modal');
 for (let button of buttonsConfirmModal) {
     button.addEventListener('click', function () {
         let form = button.parentElement.previousElementSibling.firstElementChild;
-        //form.submit();
         let validator = $(form).validate();
         if (validator.form()) {
             form.submit();
