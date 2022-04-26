@@ -7,6 +7,7 @@ use App\Models\UserIncomes;
 use Core\View;
 use App\Models\IncomeCategory;
 use App\Models\ExpenseCategory;
+use App\Models\Expenses;
 use App\Models\Incomes;
 use App\Models\PaymentMethod;
 
@@ -25,8 +26,8 @@ class Balance extends Authenticated
         $incomesUserGroupByCategories = Incomes::getUserIncomesGroupByCategories();
         $allUserIncomes = Incomes::getAllUserIncomes();
 
-        $expensesUserGroupByCategories = UserExpenses::getUserExpensesGroupByCategories();
-        $allUseExpenses = UserExpenses::getAllUserExpenses();
+        $expensesUserGroupByCategories = Expenses::getUserExpensesGroupByCategories();
+        $allUseExpenses = Expenses::getAllUserExpenses();
 
         $userIncomeCategories = IncomeCategory::findCategories();
         $expenseCategories = ExpenseCategory::findCategories();
