@@ -166,18 +166,18 @@
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalAddElementLabel">Wybierz ikonę oraz nazwę</h5>
+                        <h5 class="modal-title fw-bold" id="modalAddElementLabel">Edycja kategorii</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid p-0">
+
                             <form id="form-add-change-category" method="post">
-                                <div class="d-flex flex-wrap">
-                                    <button class="btn btn-primary" data-bs-target="#iconsModal"
-                                        data-bs-toggle="modal">Open second modal</button>
-                                </div>
-                                <div>
+                                <h6 class="fw-bold">Ikona i nazwa kategorii</h6>
+                                <div class="input-group">
                                     <input id="previousCategoryId" type="hidden" name="previousCategory" required>
+                                    <button class="btn button-outline" data-bs-target="#iconsModal"
+                                        data-bs-toggle="modal">Wybierz ikonę</button>
                                     <input type="text" class="form-control" name="nameCategory"
                                         placeholder="Wpisz nazwę" required>
                                 </div>
