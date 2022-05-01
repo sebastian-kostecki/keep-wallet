@@ -173,13 +173,17 @@
                         <div class="container-fluid p-0">
 
                             <form id="form-add-change-category" method="post">
-                                <h6 class="fw-bold">Ikona i nazwa kategorii</h6>
+                                <h6 class="fw-bold fw-6">Ikona i nazwa kategorii</h6>
                                 <div class="input-group">
                                     <input id="previousCategoryId" type="hidden" name="previousCategory" required>
                                     <button class="btn button-outline" data-bs-target="#iconsModal"
                                         data-bs-toggle="modal">Wybierz ikonę</button>
                                     <input type="text" class="form-control" name="nameCategory"
                                         placeholder="Wpisz nazwę" required>
+                                </div>
+                                <div class="form-check mt-2">
+                                    <input id="setLimit" class="form-check-input" type="checkbox" name="isLimitSet">
+                                    <label for="setLimit" class="fs-6 fw-bold">Włącz limit dla kategorii</label>
                                 </div>
                             </form>
                         </div>
