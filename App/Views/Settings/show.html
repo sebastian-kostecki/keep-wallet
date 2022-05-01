@@ -160,6 +160,7 @@
                 </div>
             </div>
         </ul>
+        {# modal dodający lub zmieniający kategorię #}
         <div class="modal fade" id="modalCreateChangeCategory" tabindex="-1"
             aria-labelledby="modal-create-change-category" aria-hidden="true">
             <div class="modal-dialog modal-xl">
@@ -172,15 +173,8 @@
                         <div class="container-fluid p-0">
                             <form id="form-add-change-category" method="post">
                                 <div class="d-flex flex-wrap">
-                                    {% for icon in icons %}
-                                    <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                                        <input type="radio" class="form-check-input icon-to-chosen-in-modal" name="icon"
-                                            id="{{ icon.icon }}" value="{{ icon.icon }}" required>
-                                        <label for="{{ icon.icon }}"
-                                            class="form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-2"
-                                            role="button"><i class="{{ icon.icon }} me-2"></i></label>
-                                    </div>
-                                    {% endfor %}
+                                    <button class="btn btn-primary" data-bs-target="#iconsModal"
+                                        data-bs-toggle="modal">Open second modal</button>
                                 </div>
                                 <div>
                                     <input id="previousCategoryId" type="hidden" name="previousCategory" required>
@@ -194,6 +188,39 @@
                         <button type="button" class="btn button-outline" data-bs-dismiss="modal">Zamknij</button>
                         <button id="button-add-change" type="button"
                             class="button-confirm-modal btn button-normal">Zapisz</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {# modal z ikonami #}
+        <div class="modal fade" id="iconsModal" tabindex="-1" aria-labelledby="iconsModal" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-bold" id="modalAddElementLabel">Wybierz ikonę</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid p-0">
+                            <form id="form-chosen-icons">
+                                <div class="d-flex flex-wrap">
+                                    {% for icon in icons %}
+                                    <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                                        <input type="radio" class="form-check-input icon-to-chosen-in-modal" name="icon"
+                                            id="{{ icon.icon }}" value="{{ icon.icon }}" required>
+                                        <label for="{{ icon.icon }}"
+                                            class="form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-2"
+                                            role="button"><i class="{{ icon.icon }} me-2"></i></label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn button-outline" data-bs-dismiss="modal">Zamknij</button>
+                        <button id="button-chosen-icon" type="button"
+                            class="button-confirm-modal btn button-normal">Wybierz</button>
                     </div>
                 </div>
             </div>
