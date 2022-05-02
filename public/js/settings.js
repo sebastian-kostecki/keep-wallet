@@ -92,3 +92,22 @@ const sendRemoveForm = (form) => {
     })
 }
 
+//new code
+const modalChosenIcon = new bootstrap.Modal(document.getElementById('iconsModal'), {
+    keyboard: false
+})
+const buttonTriggeringModalChosenIcon = document.querySelector('#button-triggering-modal-chosen-icon');
+const buttonChosenIcon = document.querySelector('#button-chosen-icon');
+const hiddenInputWithIcon = document.querySelector('#hiddenInputWithIcon');
+
+buttonChosenIcon.addEventListener('click', function () {
+    const inputsWithIcons = document.querySelectorAll('.icon-to-chosen-in-modal');
+    for (let inputRadio of inputsWithIcons) {
+        if (inputRadio.checked === true) {
+            buttonTriggeringModalChosenIcon.innerHTML = '<i class=" ' + inputRadio.value + ' "></i>'
+            hiddenInputWithIcon.value = inputRadio.value;
+        }
+    }
+    modalChosenIcon.toggle();
+    modalCreateAndChangeElement.toggle();
+})

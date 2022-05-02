@@ -175,8 +175,10 @@
                                 <h6 class="fw-bold fs-6">Ikona i nazwa kategorii</h6>
                                 <div class="input-group">
                                     <input id="previousCategoryId" type="hidden" name="previousCategory" required>
-                                    <button class="btn button-outline" data-bs-target="#iconsModal"
-                                        data-bs-toggle="modal">Wybierz ikonę</button>
+                                    <a id="button-triggering-modal-chosen-icon" class="btn button-outline"
+                                        data-bs-target="#iconsModal" data-bs-toggle="modal" role="button">Wybierz
+                                        ikonę</a>
+                                    <input id="hiddenInputWithIcon" type="hidden" name="icon" required>
                                     <input type="text" class="form-control" name="nameCategory"
                                         placeholder="Wpisz nazwę" required>
                                 </div>
@@ -212,19 +214,17 @@
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid p-0">
-                            <form id="form-chosen-icons">
-                                <div class="d-flex flex-wrap">
-                                    {% for icon in icons %}
-                                    <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                                        <input type="radio" class="form-check-input icon-to-chosen-in-modal" name="icon"
-                                            id="{{ icon.icon }}" value="{{ icon.icon }}" required>
-                                        <label for="{{ icon.icon }}"
-                                            class="form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-2"
-                                            role="button"><i class="{{ icon.icon }} me-2"></i></label>
-                                    </div>
-                                    {% endfor %}
+                            <div class="d-flex flex-wrap">
+                                {% for icon in icons %}
+                                <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
+                                    <input type="radio" class="form-check-input icon-to-chosen-in-modal" name="icon"
+                                        id="{{ icon.icon }}" value="{{ icon.icon }}" required>
+                                    <label for="{{ icon.icon }}"
+                                        class="form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-2"
+                                        role="button"><i class="{{ icon.icon }} me-2"></i></label>
                                 </div>
-                            </form>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
