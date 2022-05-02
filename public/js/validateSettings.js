@@ -40,13 +40,13 @@ formChangingUserData.addEventListener('submit', function (e) {
 
 
 $('#form-add-change-category').validate({
+    ignore: "",
     rules: {
         icon: "required",
         nameCategory: {
             required: true,
             isSpecialLetter: true,
-        },
-        previousCategory: "required"
+        }
     },
     messages: {
         icon: {
@@ -55,14 +55,11 @@ $('#form-add-change-category').validate({
         nameCategory: {
             required: 'Wpisz nazwę kategorii',
             isSpecialLetter: 'Nazwa kategorii nie może zawierać znaków specjalnych'
-        },
-        previousCategory: {
-            required: 'Wybierz kategorię do zmiany'
-        },
+        }
     },
     errorPlacement: function (error, element) {
         if (element.attr("name") == "icon") {
-            error.insertAfter(element.parent().parent().siblings().last());
+            error.insertAfter(element.next());
         }
         else {
             error.insertAfter(element);

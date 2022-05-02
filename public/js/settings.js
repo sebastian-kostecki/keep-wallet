@@ -92,6 +92,11 @@ const sendRemoveForm = (form) => {
     })
 }
 
+const validateForm = (form) => {
+    let validator = $(form).validate();
+    validator.form();
+}
+
 //new code
 const modalChosenIcon = new bootstrap.Modal(document.getElementById('iconsModal'), {
     keyboard: false
@@ -101,6 +106,7 @@ const buttonChosenIcon = document.querySelector('#button-chosen-icon');
 const hiddenInputWithIcon = document.querySelector('#hiddenInputWithIcon');
 
 buttonChosenIcon.addEventListener('click', function () {
+    const form = document.querySelector('#form-add-change-category');
     const inputsWithIcons = document.querySelectorAll('.icon-to-chosen-in-modal');
     for (let inputRadio of inputsWithIcons) {
         if (inputRadio.checked === true) {
@@ -110,4 +116,5 @@ buttonChosenIcon.addEventListener('click', function () {
     }
     modalChosenIcon.toggle();
     modalCreateAndChangeElement.toggle();
+    validateForm(form);
 })
