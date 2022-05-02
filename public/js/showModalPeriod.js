@@ -1,20 +1,19 @@
 const selectDatePeriod = document.querySelector("select");
-//const currentData = new Date();
 
 const currentMonthPeriod = () => {
     const currentData = new Date();
-    currentData.setDate(1);
+    currentData.setDate(2);
     const firstDayCurrentMonth = currentData.toISOString().substr(0, 10);
-    currentData.setMonth(currentData.getMonth() + 1, 0);
+    currentData.setMonth(currentData.getMonth() + 1, 1);
     const lastDayCurrentMonth = currentData.toISOString().substr(0, 10);
     return firstDayCurrentMonth + "-" + lastDayCurrentMonth;
 }
 
 const previousMonthPeriod = () => {
     const currentData = new Date();
-    currentData.setMonth(currentData.getMonth() - 1, 1);
+    currentData.setMonth(currentData.getMonth() - 1, 2);
     const firstDayPreviousMonth = currentData.toISOString().substr(0, 10);
-    currentData.setMonth(currentData.getMonth() + 1, 0);
+    currentData.setMonth(currentData.getMonth() + 1, 1);
     const lastDayPreviousMonth = currentData.toISOString().substr(0, 10);
     return firstDayPreviousMonth + "-" + lastDayPreviousMonth;
 }
