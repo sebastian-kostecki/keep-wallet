@@ -118,3 +118,32 @@ buttonChosenIcon.addEventListener('click', function () {
     modalCreateAndChangeElement.toggle();
     validateForm(form);
 })
+
+//pokazanie ustalania limitu
+const buttonsAddingOrChangingCategory = document.querySelectorAll('.button-change-category,.button-add-element');
+const setLimitField = document.querySelector('.set-limit-field');
+for (let button of buttonsAddingOrChangingCategory) {
+    // console.log(button.id)
+    // let positionOfFirstDash = button.id.indexOf('-')
+    // let positionOfLastDash = button.id.lastIndexOf('-')
+    // console.log(positionOfFirstDash);
+    // console.log(positionOfLastDash);
+    // console.log(button.id.slice(positionOfFirstDash + 1, positionOfLastDash))
+    // let nameOfBudgetItem = button.id.slice(positionOfFirstDash + 1, positionOfLastDash);
+    // console.log(nameOfBudgetItem);
+    // console.log('');
+
+    button.addEventListener('click', function () {
+        let positionOfFirstDash = button.id.indexOf('-')
+        let positionOfLastDash = button.id.lastIndexOf('-')
+        let nameOfBudgetItem = button.id.slice(positionOfFirstDash + 1, positionOfLastDash);
+
+        if (nameOfBudgetItem == 'expense') {
+            console.log(nameOfBudgetItem);
+            setLimitField.classList.remove("d-none")
+        } else {
+            setLimitField.classList.add("d-none");
+        }
+    })
+
+}
