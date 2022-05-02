@@ -10,6 +10,7 @@ for (let button of buttonsAddingNewElement) {
         setActionInForm(button, form);
         clearChosenRadioInputs();
         clearCategoryNameInput();
+        clearCategoryIcon();
         sendAddChangeForm(form);
     })
 }
@@ -22,7 +23,7 @@ for (let button of buttonsChangingElement) {
         setActionInForm(button, form);
         setChosenCategoryIdInHiddenInput(button, hiddenInputPreviousCategory);
         setIconChoosingElement(button);
-        clearCategoryNameInput();
+        setNameCategoryChoosingElement(button);
         sendAddChangeForm(form);
     })
 }
@@ -60,6 +61,19 @@ const setIconChoosingElement = (button) => {
     let nameIcon = chosenCategory.childNodes[2].textContent.slice(11, -73);
     let chosenCategoryIcon = document.getElementById(nameIcon);
     chosenCategoryIcon.checked = 'true';
+
+    const fieldWithIcon = document.querySelector('#button-triggering-modal-chosen-icon');
+    fieldWithIcon.innerHTML = '<i class=" ' + nameIcon + ' "></i>'
+
+    const hiddenInputWithIcon = document.querySelector('#hiddenInputWithIcon');
+    hiddenInputWithIcon.value = nameIcon;
+}
+
+const setNameCategoryChoosingElement = (button) => {
+    let nameCategory = button.parentElement.parentElement.innerText.trim();
+    console.log(nameCategory.capitalizeFirstLetter());
+    const nameCategoryInput = document.querySelector('#nameCategory')
+    nameCategoryInput.value = nameCategory.capitalizeFirstLetter()
 }
 
 const clearChosenRadioInputs = () => {
@@ -74,14 +88,18 @@ const clearCategoryNameInput = () => {
     categoryNameInput.value = '';
 }
 
+const clearCategoryIcon = () => {
+    let fieldWithIcon = document.querySelector('#button-triggering-modal-chosen-icon');
+    fieldWithIcon.textContent = 'Wybierz ikonę'
+}
+
 const sendAddChangeForm = (form) => {
     const button = document.querySelector('#button-add-change');
     button.addEventListener('click', function () {
-        let validator = $($(button).parent().parent().find('#form-add-change-category')).validate();
+        let validator = $(form).validate();
         if (validator.form()) {
             form.submit();
         }
-
     })
 }
 
@@ -96,6 +114,14 @@ const validateForm = (form) => {
     let validator = $(form).validate();
     validator.form();
 }
+
+
+Object.defineProperty(String.prototype, 'capitalizeFirstLetter', {
+    value: function () {
+        return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
+    },
+    enumerable: false
+});
 
 //new code
 const modalChosenIcon = new bootstrap.Modal(document.getElementById('iconsModal'), {
