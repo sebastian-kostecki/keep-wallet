@@ -205,5 +205,6 @@ setLimitCheckbox.addEventListener('click', function () {
         setLimitInput.disabled = false
     } else {
         setLimitInput.disabled = true
+        setLimitInput.value = ''
     }
 })

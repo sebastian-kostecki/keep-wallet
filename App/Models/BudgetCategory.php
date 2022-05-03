@@ -121,7 +121,7 @@ abstract class BudgetCategory extends \Core\Model
     protected function changeWithoutLimit()
     {
         $sql = "UPDATE " . static::NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS .
-            " SET name = :nameCategory, icon_id = (SELECT icon_id FROM icons WHERE icon = :nameIcon)
+            " SET name = :nameCategory, icon_id = (SELECT icon_id FROM icons WHERE icon = :nameIcon), limit_category = NULL
         WHERE id = :idPreviousCategory";
 
         $db = static::getDataBase();
