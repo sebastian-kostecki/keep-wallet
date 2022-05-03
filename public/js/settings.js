@@ -1,69 +1,52 @@
+//add and change category
 const modalCreateAndChangeElement = new bootstrap.Modal(document.getElementById('modalCreateChangeCategory'), {
     keyboard: false
 })
-const form = document.querySelector('#form-add-change-category');
 
 const buttonsAddingNewElement = document.querySelectorAll('.button-add-element');
 for (let button of buttonsAddingNewElement) {
     button.addEventListener('click', function () {
         modalCreateAndChangeElement.toggle();
-        setActionInForm(button, form);
-        clearChosenRadioInputs();
+        button.setActionInForm();
+        clearSelectedRadioInput();
         clearCategoryNameInput();
         clearCategoryIcon();
         clearLimit();
-        sendAddChangeForm(form);
+        sendForm();
     })
 }
 
 const buttonsChangingElement = document.querySelectorAll('.button-change-category');
-const hiddenInputPreviousCategory = document.querySelector('#previousCategoryId');
 for (let button of buttonsChangingElement) {
     button.addEventListener('click', function () {
         modalCreateAndChangeElement.toggle();
-        setActionInForm(button, form);
-        setChosenCategoryIdInHiddenInput(button, hiddenInputPreviousCategory);
-        setIconChoosingElement(button);
-        setNameCategoryChoosingElement(button);
-        setLimitFieldChoosingElement(button);
-        sendAddChangeForm(form);
+        button.setActionInForm();
+        button.setChosenCategoryIdInHiddenInput();
+        button.setIconOfSelectedItem();
+        button.setNameCategoryOfSelectedItem();
+        button.setLimitFieldForSelectedItem();
+        sendForm();
     })
 }
 
-
-const modalRemoveElement = new bootstrap.Modal(document.getElementById('confirmRemoving'), {
-    keyboard: false
-})
-const buttonsRemovingElement = document.querySelectorAll('.button-remove-category');
-const formRemove = document.querySelector('#confirmRemoving form');
-const inputWithCategoryIdToRemove = document.querySelector('#categoryIdToRemove');
-
-for (let button of buttonsRemovingElement) {
-    button.addEventListener('click', function () {
-        modalRemoveElement.toggle();
-        setActionInForm(button, formRemove);
-        setChosenCategoryIdInHiddenInput(button, inputWithCategoryIdToRemove);
-        sendRemoveForm(formRemove);
-    })
+HTMLElement.prototype.setActionInForm = function () {
+    const form = document.querySelector('#form-add-change-category');
+    form.action = '/settings/' + this.id;
 }
 
-
-const setChosenCategoryIdInHiddenInput = (button, categoryId) => {
-    let chosenCategory = button.parentElement.parentElement;
-    let idChosenCategory = chosenCategory.classList[0].slice(12);
-    categoryId.value = idChosenCategory;
+HTMLElement.prototype.setChosenCategoryIdInHiddenInput = function () {
+    const hiddenInputPreviousCategory = document.querySelector('#previousCategoryId');
+    let selectedCategory = this.parentElement.parentElement;
+    let idChosenCategory = selectedCategory.classList[0].slice(12);
+    hiddenInputPreviousCategory.value = idChosenCategory;
 }
 
-const setActionInForm = (button, form) => {
-    form.action = '/settings/' + button.id;
-}
+HTMLElement.prototype.setIconOfSelectedItem = function () {
+    let selectedCategory = this.parentElement.parentElement;
+    let nameIcon = 'fas ' + selectedCategory.querySelector('svg').classList[1];
 
-const setIconChoosingElement = (button) => {
-    let chosenCategory = button.parentElement.parentElement;
-    let nameIcon = 'fas ' + chosenCategory.querySelector('svg').classList[1];
-    let chosenCategoryIcon = document.getElementById(nameIcon);
-    chosenCategoryIcon.checked = 'true';
-
+    let selectedCategoryIcon = document.getElementById(nameIcon);
+    selectedCategoryIcon.checked = 'true';
 
     const fieldWithIcon = document.querySelector('#button-triggering-modal-chosen-icon');
     fieldWithIcon.innerHTML = '<i class=" ' + nameIcon + ' "></i>'
@@ -72,16 +55,19 @@ const setIconChoosingElement = (button) => {
     hiddenInputWithIcon.value = nameIcon;
 }
 
-const setNameCategoryChoosingElement = (button) => {
-    let chosenCategory = button.parentElement.parentElement;
-    let nameCategory = chosenCategory.querySelector('.category-name').innerText.trim();
+HTMLElement.prototype.setNameCategoryOfSelectedItem = function () {
+    let selectedCategory = this.parentElement.parentElement;
+    let nameCategory = selectedCategory.querySelector('.category-name').innerText.trim();
     const nameCategoryInput = document.querySelector('#nameCategory')
     nameCategoryInput.value = nameCategory.capitalizeFirstLetter()
 }
 
-const setLimitFieldChoosingElement = (button) => {
-    let chosenCategory = button.parentElement.parentElement;
-    let limitCategoryElement = chosenCategory.querySelector('.limit-category');
+HTMLElement.prototype.setLimitFieldForSelectedItem = function () {
+    let selectedCategory = this.parentElement.parentElement;
+    const setLimitCheckbox = document.querySelector('#setLimitCheckbox');
+    const setLimitInput = document.querySelector('#setLimitInput');
+    let limitCategoryElement = selectedCategory.querySelector('.limit-category');
+
     if (limitCategoryElement) {
         setLimitCheckbox.checked = true
         setLimitInput.disabled = false
@@ -93,7 +79,7 @@ const setLimitFieldChoosingElement = (button) => {
     }
 }
 
-const clearChosenRadioInputs = () => {
+const clearSelectedRadioInput = () => {
     const iconsToChoseInModal = document.querySelectorAll('.icon-to-chosen-in-modal');
     for (let icon of iconsToChoseInModal) {
         icon.checked = false;
@@ -116,7 +102,8 @@ const clearLimit = () => {
     setLimitCheckbox.checked = false;
 }
 
-const sendAddChangeForm = (form) => {
+const sendForm = () => {
+    const form = document.querySelector('#form-add-change-category');
     const button = document.querySelector('#button-add-change');
     button.addEventListener('click', function () {
         let validator = $(form).validate();
@@ -126,7 +113,35 @@ const sendAddChangeForm = (form) => {
     })
 }
 
-const sendRemoveForm = (form) => {
+
+//remove category
+const buttonsRemovingElement = document.querySelectorAll('.button-remove-category');
+for (let button of buttonsRemovingElement) {
+    button.addEventListener('click', function () {
+        const modalRemoveElement = new bootstrap.Modal(document.getElementById('confirmRemoving'), {
+            keyboard: false
+        })
+        modalRemoveElement.toggle();
+        button.setActionInRemoveForm();
+        button.setChosenCategoryIdInHiddenRemoveInput();
+        sendRemoveForm();
+    })
+}
+
+HTMLElement.prototype.setActionInRemoveForm = function () {
+    const form = document.querySelector('#confirmRemoving form');
+    form.action = '/settings/' + this.id;
+}
+
+HTMLElement.prototype.setChosenCategoryIdInHiddenRemoveInput = function () {
+    const hiddenInputPreviousCategory = document.querySelector('#categoryIdToRemove');
+    let selectedCategory = this.parentElement.parentElement;
+    let idChosenCategory = selectedCategory.classList[0].slice(12);
+    hiddenInputPreviousCategory.value = idChosenCategory;
+}
+
+const sendRemoveForm = () => {
+    const form = document.querySelector('#confirmRemoving form');
     const button = document.querySelector('#button-remove');
     button.addEventListener('click', function () {
         form.submit();
@@ -138,7 +153,6 @@ const validateForm = (form) => {
     validator.form();
 }
 
-
 Object.defineProperty(String.prototype, 'capitalizeFirstLetter', {
     value: function () {
         return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
@@ -146,48 +160,50 @@ Object.defineProperty(String.prototype, 'capitalizeFirstLetter', {
     enumerable: false
 });
 
-//new code
+
+//select icon
 const modalChosenIcon = new bootstrap.Modal(document.getElementById('iconsModal'), {
     keyboard: false
 })
-const buttonTriggeringModalChosenIcon = document.querySelector('#button-triggering-modal-chosen-icon');
-const buttonChosenIcon = document.querySelector('#button-chosen-icon');
-const hiddenInputWithIcon = document.querySelector('#hiddenInputWithIcon');
 
-buttonChosenIcon.addEventListener('click', function () {
-    const form = document.querySelector('#form-add-change-category');
+const buttonSelectedIconInModalWithIcons = document.querySelector('#button-chosen-icon');
+buttonSelectedIconInModalWithIcons.addEventListener('click', function () {
+    assignSelectedIconToButton();
+    modalChosenIcon.toggle();
+    modalCreateAndChangeElement.toggle();
+    validateSelectedIcon();
+})
+
+const assignSelectedIconToButton = () => {
     const inputsWithIcons = document.querySelectorAll('.icon-to-chosen-in-modal');
     for (let inputRadio of inputsWithIcons) {
         if (inputRadio.checked === true) {
+            const buttonTriggeringModalChosenIcon = document.querySelector('#button-triggering-modal-chosen-icon');
+            const hiddenInputWithIcon = document.querySelector('#hiddenInputWithIcon');
+
             buttonTriggeringModalChosenIcon.innerHTML = '<i class=" ' + inputRadio.value + ' "></i>'
             hiddenInputWithIcon.value = inputRadio.value;
         }
     }
-    modalChosenIcon.toggle();
-    modalCreateAndChangeElement.toggle();
+}
+
+const validateSelectedIcon = () => {
+    const form = document.querySelector('#form-add-change-category');
+    const hiddenInputWithIcon = document.querySelector('#hiddenInputWithIcon');
     let validator = $(form).validate();
     validator.element($(hiddenInputWithIcon));
-})
+}
 
-//pokazanie ustalania limitu
+
+//hide and show limit field
 const buttonsAddingOrChangingCategory = document.querySelectorAll('.button-change-category,.button-add-element');
-const setLimitField = document.querySelector('.set-limit-field');
 for (let button of buttonsAddingOrChangingCategory) {
-    // console.log(button.id)
-    // let positionOfFirstDash = button.id.indexOf('-')
-    // let positionOfLastDash = button.id.lastIndexOf('-')
-    // console.log(positionOfFirstDash);
-    // console.log(positionOfLastDash);
-    // console.log(button.id.slice(positionOfFirstDash + 1, positionOfLastDash))
-    // let nameOfBudgetItem = button.id.slice(positionOfFirstDash + 1, positionOfLastDash);
-    // console.log(nameOfBudgetItem);
-    // console.log('');
-
     button.addEventListener('click', function () {
         let positionOfFirstDash = button.id.indexOf('-')
         let positionOfLastDash = button.id.lastIndexOf('-')
         let nameOfBudgetItem = button.id.slice(positionOfFirstDash + 1, positionOfLastDash);
 
+        const setLimitField = document.querySelector('.set-limit-field');
         if (nameOfBudgetItem == 'expense') {
             setLimitField.classList.remove("d-none")
         } else {
@@ -197,6 +213,8 @@ for (let button of buttonsAddingOrChangingCategory) {
 
 }
 
+
+//enabled or disabled limit field
 const setLimitCheckbox = document.querySelector('#setLimitCheckbox')
 const setLimitInput = document.querySelector('#setLimitInput')
 
