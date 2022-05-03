@@ -142,7 +142,8 @@ buttonChosenIcon.addEventListener('click', function () {
     }
     modalChosenIcon.toggle();
     modalCreateAndChangeElement.toggle();
-    validateForm(form);
+    let validator = $(form).validate();
+    validator.element($(hiddenInputWithIcon));
 })
 
 //pokazanie ustalania limitu
@@ -173,3 +174,14 @@ for (let button of buttonsAddingOrChangingCategory) {
     })
 
 }
+
+const setLimitCheckbox = document.querySelector('#setLimitCheckbox')
+const setLimitInput = document.querySelector('#setLimitInput')
+
+setLimitCheckbox.addEventListener('click', function () {
+    if (setLimitCheckbox.checked == true) {
+        setLimitInput.disabled = false
+    } else {
+        setLimitInput.disabled = true
+    }
+})
