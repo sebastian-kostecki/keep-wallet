@@ -95,25 +95,32 @@
                     </li>
                 </div>
                 <div class="expenses-category-settings settings-form mt-2">
-                    <ul class="list-unstyled input-group single-form">
-                        {% for category in expenseCategories %}
-                        <li
-                            class="id-category-{{ category.id }} category-of-settings category-label text-uppercase rounded w-100 position-relative fs-6 mb-2 py-2 px-3">
-                            <i class="{{ category.icon }} me-2 settings-icon-for-name-category"></i>
-                            <span>{{ category.name }}</span>
-                            <div class="position-absolute top-50 end-0 translate-middle-y pe-2 d-flex justify-content">
-                                <button id="change-expense-category"
-                                    class="button-change-category btn p-0 text-white border-0 bg-success">
-                                    <i class="change-category fas fa-pen p-1 fs-3 rounded align-middle"></i>
-                                </button>
-                                <button id="delete-expense-category"
-                                    class="button-remove-category btn p-0 text-white border-0 bg-danger ms-2">
-                                    <i class="remove-category fas fa-trash-alt p-1 fs-3 rounded align-middle"></i>
-                                </button>
+                    {% for category in expenseCategories %}
+                    <div
+                        class="id-category-{{ category.id }} category-of-settings category-label text-uppercase rounded w-100 position-relative fs-6 mb-2 py-2 px-3">
+                        <div class="d-flex">
+                            <div>
+                                <i class="{{ category.icon }} me-2 settings-icon-for-name-category"></i>
                             </div>
-                        </li>
-                        {% endfor %}
-                    </ul>
+                            <div>
+                                <p class="m-0">{{ category.name }}</p>
+                                {% if category.limit_category %}
+                                <p class="m-0 fw-light">Limit: {{ category.limit_category }} zł</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="position-absolute top-50 end-0 translate-middle-y pe-2 d-flex justify-content">
+                            <button id="change-expense-category"
+                                class="button-change-category btn p-0 text-white border-0 bg-success">
+                                <i class="change-category fas fa-pen p-1 fs-3 rounded align-middle"></i>
+                            </button>
+                            <button id="delete-expense-category"
+                                class="button-remove-category btn p-0 text-white border-0 bg-danger ms-2">
+                                <i class="remove-category fas fa-trash-alt p-1 fs-3 rounded align-middle"></i>
+                            </button>
+                        </div>
+                    </div>
+                    {% endfor %}
                     <button id="add-expense-category"
                         class="btn button-add-element button-normal border-0 px-3 py-2 text-uppercase w-100 text-start d-flex align-items-center">
                         <i class="fas fa-plus me-2"></i>
@@ -191,7 +198,8 @@
                                     </div>
                                     <div class="mt-2">
                                         <h6 class="fw-bold fs-6">Ustaw miesięczny limit wydatków dla kategorii</h6>
-                                        <input id="setLimitInput" type="number" class="form-control" name="limitAmount" disabled>
+                                        <input id="setLimitInput" type="number" class="form-control" name="limitAmount"
+                                            disabled>
                                     </div>
                                 </div>
                             </form>
