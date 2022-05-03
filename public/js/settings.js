@@ -11,6 +11,7 @@ for (let button of buttonsAddingNewElement) {
         clearChosenRadioInputs();
         clearCategoryNameInput();
         clearCategoryIcon();
+        clearLimit();
         sendAddChangeForm(form);
     })
 }
@@ -91,6 +92,11 @@ const clearCategoryNameInput = () => {
 const clearCategoryIcon = () => {
     let fieldWithIcon = document.querySelector('#button-triggering-modal-chosen-icon');
     fieldWithIcon.textContent = 'Wybierz ikonę'
+}
+
+const clearLimit = () => {
+    setLimitInput.disabled = true;
+    setLimitCheckbox.checked = false;
 }
 
 const sendAddChangeForm = (form) => {
