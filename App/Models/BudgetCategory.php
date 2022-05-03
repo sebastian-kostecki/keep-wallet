@@ -73,17 +73,11 @@ abstract class BudgetCategory extends \Core\Model
 
         if (empty($this->errors)) {
 
-            $sql = "UPDATE " . static::NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS .
-                " SET name = :nameCategory, icon_id = (SELECT icon_id FROM icons WHERE icon = :nameIcon)
-                    WHERE id = :idPreviousCategory";
-
-            $db = static::getDataBase();
-            $query = $db->prepare($sql);
-
-            $query->bindValue(':nameCategory', $this->nameCategory, PDO::PARAM_STR);
-            $query->bindValue(':nameIcon', $this->icon, PDO::PARAM_STR);
-            $query->bindValue(':idPreviousCategory', $this->previousCategory, PDO::PARAM_INT);
-            return $query->execute();
+            if (isset($this->limitAmount)) {
+                return $this->changeWithLimit();
+            } else {
+                return $this->changeWithoutLimit();
+            }
         }
         return false;
     }
@@ -105,6 +99,37 @@ abstract class BudgetCategory extends \Core\Model
 
         $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
         $query->bindValue(':idCategory', $this->id, PDO::PARAM_INT);
+        return $query->execute();
+    }
+
+    protected function changeWithLimit()
+    {
+        $sql = "UPDATE " . static::NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS .
+            " SET name = :nameCategory, icon_id = (SELECT icon_id FROM icons WHERE icon = :nameIcon), limit_category = :limit
+        WHERE id = :idPreviousCategory";
+
+        $db = static::getDataBase();
+        $query = $db->prepare($sql);
+
+        $query->bindValue(':nameCategory', $this->nameCategory, PDO::PARAM_STR);
+        $query->bindValue(':nameIcon', $this->icon, PDO::PARAM_STR);
+        $query->bindValue(':limit', $this->limitAmount, PDO::PARAM_STR);
+        $query->bindValue(':idPreviousCategory', $this->previousCategory, PDO::PARAM_INT);
+        return $query->execute();
+    }
+
+    protected function changeWithoutLimit()
+    {
+        $sql = "UPDATE " . static::NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS .
+            " SET name = :nameCategory, icon_id = (SELECT icon_id FROM icons WHERE icon = :nameIcon)
+        WHERE id = :idPreviousCategory";
+
+        $db = static::getDataBase();
+        $query = $db->prepare($sql);
+
+        $query->bindValue(':nameCategory', $this->nameCategory, PDO::PARAM_STR);
+        $query->bindValue(':nameIcon', $this->icon, PDO::PARAM_STR);
+        $query->bindValue(':idPreviousCategory', $this->previousCategory, PDO::PARAM_INT);
         return $query->execute();
     }
 }

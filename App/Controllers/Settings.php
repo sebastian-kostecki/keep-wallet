@@ -93,6 +93,7 @@ class Settings extends Authenticated
     public function changeExpenseCategoryAction()
     {
         $expenseCategory = new ExpenseCategory($_POST);
+        //var_dump($expenseCategory);
 
         if ($expenseCategory->change()) {
             Flash::addMessage("Zmieniłeś kategorię wydatków");
