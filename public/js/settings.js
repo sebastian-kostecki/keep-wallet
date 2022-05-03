@@ -25,9 +25,7 @@ for (let button of buttonsChangingElement) {
         setChosenCategoryIdInHiddenInput(button, hiddenInputPreviousCategory);
         setIconChoosingElement(button);
         setNameCategoryChoosingElement(button);
-
-
-
+        setLimitFieldChoosingElement(button);
         sendAddChangeForm(form);
     })
 }
@@ -81,6 +79,20 @@ const setNameCategoryChoosingElement = (button) => {
     nameCategoryInput.value = nameCategory.capitalizeFirstLetter()
 }
 
+const setLimitFieldChoosingElement = (button) => {
+    let chosenCategory = button.parentElement.parentElement;
+    let limitCategoryElement = chosenCategory.querySelector('.limit-category');
+    if (limitCategoryElement) {
+        setLimitCheckbox.checked = true
+        setLimitInput.disabled = false
+        setLimitInput.value = limitCategoryElement.textContent.slice(7, -3)
+    } else {
+        setLimitCheckbox.checked = false
+        setLimitInput.disabled = true
+        setLimitInput.value = ''
+    }
+}
+
 const clearChosenRadioInputs = () => {
     const iconsToChoseInModal = document.querySelectorAll('.icon-to-chosen-in-modal');
     for (let icon of iconsToChoseInModal) {
@@ -100,6 +112,7 @@ const clearCategoryIcon = () => {
 
 const clearLimit = () => {
     setLimitInput.disabled = true;
+    setLimitInput.value = ''
     setLimitCheckbox.checked = false;
 }
 
