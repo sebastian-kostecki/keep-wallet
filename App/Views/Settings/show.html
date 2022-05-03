@@ -57,25 +57,23 @@
                     </li>
                 </div>
                 <div class="incomes-category-settings settings-form mt-2">
-                    <ul class="list-unstyled input-group single-form">
-                        {% for category in incomeCategories %}
-                        <li
-                            class="id-category-{{ category.id }} category-of-settings category-label text-uppercase rounded w-100 position-relative fs-6 mb-2 py-2 px-3">
-                            <i class="{{ category.icon }} me-2 settings-icon-for-name-category"></i>
-                            <span>{{ category.name }}</span>
-                            <div class="position-absolute top-50 end-0 translate-middle-y pe-2 d-flex justify-content">
-                                <button id="change-income-category"
-                                    class="button-change-category btn p-0 text-white border-0 bg-success">
-                                    <i class="change-category fas fa-pen p-1 fs-3 rounded align-middle"></i>
-                                </button>
-                                <button id="delete-income-category"
-                                    class="button-remove-category btn p-0 text-white border-0 bg-danger ms-2">
-                                    <i class="remove-category fas fa-trash-alt p-1 fs-3 rounded align-middle"></i>
-                                </button>
-                            </div>
-                        </li>
-                        {% endfor %}
-                    </ul>
+                    {% for category in incomeCategories %}
+                    <div
+                        class="id-category-{{ category.id }} category-of-settings category-label text-uppercase rounded w-100 position-relative fs-6 mb-2 py-2 px-3">
+                        <i class="{{ category.icon }} me-2 settings-icon-for-name-category"></i>
+                        <span class="category-name">{{ category.name }}</span>
+                        <div class="position-absolute top-50 end-0 translate-middle-y pe-2 d-flex justify-content">
+                            <button id="change-income-category"
+                                class="button-change-category btn p-0 text-white border-0 bg-success">
+                                <i class="change-category fas fa-pen p-1 fs-3 rounded align-middle"></i>
+                            </button>
+                            <button id="delete-income-category"
+                                class="button-remove-category btn p-0 text-white border-0 bg-danger ms-2">
+                                <i class="remove-category fas fa-trash-alt p-1 fs-3 rounded align-middle"></i>
+                            </button>
+                        </div>
+                    </div>
+                    {% endfor %}
                     <button id="add-income-category"
                         class="btn button-add-element button-normal border-0 px-3 py-2 text-uppercase w-100 text-start d-flex align-items-center">
                         <i class="fas fa-plus me-2"></i>
@@ -103,7 +101,7 @@
                                 <i class="{{ category.icon }} me-2 settings-icon-for-name-category"></i>
                             </div>
                             <div>
-                                <p class="m-0">{{ category.name }}</p>
+                                <p class="m-0 category-name">{{ category.name }}</p>
                                 {% if category.limit_category %}
                                 <p class="m-0 fw-light">Limit: {{ category.limit_category }} zł</p>
                                 {% endif %}
@@ -140,25 +138,23 @@
                     </li>
                 </div>
                 <div class="payment-methods-settings settings-form mt-2">
-                    <ul class="list-unstyled input-group single-form">
-                        {% for category in paymentMethods %}
-                        <li
-                            class="id-category-{{ category.id }} category-of-settings category-label text-uppercase rounded w-100 position-relative fs-6 mb-2 py-2 px-3">
-                            <i class="{{ category.icon }} me-2 settings-icon-for-name-category"></i>
-                            <span>{{ category.name }}</span>
-                            <div class="position-absolute top-50 end-0 translate-middle-y pe-2 d-flex justify-content">
-                                <button id="change-payment-method"
-                                    class="button-change-category btn p-0 text-white border-0 bg-success">
-                                    <i class="change-category fas fa-pen p-1 fs-3 rounded align-middle"></i>
-                                </button>
-                                <button id="delete-payment-method"
-                                    class="button-remove-category btn p-0 text-white border-0 bg-danger ms-2">
-                                    <i class="remove-category fas fa-trash-alt p-1 fs-3 rounded align-middle"></i>
-                                </button>
-                            </div>
-                        </li>
-                        {% endfor %}
-                    </ul>
+                    {% for category in paymentMethods %}
+                    <div
+                        class="id-category-{{ category.id }} category-of-settings category-label text-uppercase rounded w-100 position-relative fs-6 mb-2 py-2 px-3">
+                        <i class="{{ category.icon }} me-2 settings-icon-for-name-category"></i>
+                        <span class="category-name">{{ category.name }}</span>
+                        <div class="position-absolute top-50 end-0 translate-middle-y pe-2 d-flex justify-content">
+                            <button id="change-payment-method"
+                                class="button-change-category btn p-0 text-white border-0 bg-success">
+                                <i class="change-category fas fa-pen p-1 fs-3 rounded align-middle"></i>
+                            </button>
+                            <button id="delete-payment-method"
+                                class="button-remove-category btn p-0 text-white border-0 bg-danger ms-2">
+                                <i class="remove-category fas fa-trash-alt p-1 fs-3 rounded align-middle"></i>
+                            </button>
+                        </div>
+                    </div>
+                    {% endfor %}
                     <button id="add-payment-method"
                         class="btn button-add-element button-normal border-0 px-3 py-2 text-uppercase w-100 text-start d-flex align-items-center">
                         <i class="fas fa-plus me-2"></i>

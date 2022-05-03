@@ -25,6 +25,9 @@ for (let button of buttonsChangingElement) {
         setChosenCategoryIdInHiddenInput(button, hiddenInputPreviousCategory);
         setIconChoosingElement(button);
         setNameCategoryChoosingElement(button);
+
+
+
         sendAddChangeForm(form);
     })
 }
@@ -59,9 +62,10 @@ const setActionInForm = (button, form) => {
 
 const setIconChoosingElement = (button) => {
     let chosenCategory = button.parentElement.parentElement;
-    let nameIcon = chosenCategory.childNodes[2].textContent.slice(11, -73);
+    let nameIcon = 'fas ' + chosenCategory.querySelector('svg').classList[1];
     let chosenCategoryIcon = document.getElementById(nameIcon);
     chosenCategoryIcon.checked = 'true';
+
 
     const fieldWithIcon = document.querySelector('#button-triggering-modal-chosen-icon');
     fieldWithIcon.innerHTML = '<i class=" ' + nameIcon + ' "></i>'
@@ -71,8 +75,8 @@ const setIconChoosingElement = (button) => {
 }
 
 const setNameCategoryChoosingElement = (button) => {
-    let nameCategory = button.parentElement.parentElement.innerText.trim();
-    console.log(nameCategory.capitalizeFirstLetter());
+    let chosenCategory = button.parentElement.parentElement;
+    let nameCategory = chosenCategory.querySelector('.category-name').innerText.trim();
     const nameCategoryInput = document.querySelector('#nameCategory')
     nameCategoryInput.value = nameCategory.capitalizeFirstLetter()
 }
@@ -172,7 +176,6 @@ for (let button of buttonsAddingOrChangingCategory) {
         let nameOfBudgetItem = button.id.slice(positionOfFirstDash + 1, positionOfLastDash);
 
         if (nameOfBudgetItem == 'expense') {
-            console.log(nameOfBudgetItem);
             setLimitField.classList.remove("d-none")
         } else {
             setLimitField.classList.add("d-none");
