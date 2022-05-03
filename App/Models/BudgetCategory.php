@@ -53,16 +53,11 @@ abstract class BudgetCategory extends \Core\Model
     public function save()
     {
         if (empty($this->errors)) {
-            $sql = "INSERT INTO " . static::NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS .
-                " VALUES (NULL, :userId, :nameCategory, (SELECT icon_id FROM icons WHERE icon = :nameIcon))";
-
-            $db = static::getDataBase();
-            $query = $db->prepare($sql);
-            $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
-            $query->bindValue(':nameCategory', $this->nameCategory, PDO::PARAM_STR);
-            $query->bindValue(':nameIcon', $this->icon, PDO::PARAM_STR);
-
-            return $query->execute();
+            if (isset($this->limitAmount)) {
+                return $this->saveWithLimit();
+            } else {
+                return $this->saveWithoutLimit();
+            }
         }
         return false;
     }
@@ -99,6 +94,33 @@ abstract class BudgetCategory extends \Core\Model
 
         $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
         $query->bindValue(':idCategory', $this->id, PDO::PARAM_INT);
+        return $query->execute();
+    }
+
+    protected function saveWithLimit()
+    {
+        $sql = "INSERT INTO " . static::NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS .
+            " VALUES (NULL, :userId, :nameCategory, (SELECT icon_id FROM icons WHERE icon = :nameIcon), :limit)";
+
+        $db = static::getDataBase();
+        $query = $db->prepare($sql);
+        $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+        $query->bindValue(':nameCategory', $this->nameCategory, PDO::PARAM_STR);
+        $query->bindValue(':nameIcon', $this->icon, PDO::PARAM_STR);
+        $query->bindValue(':limit', $this->limitAmount, PDO::PARAM_STR);
+        return $query->execute();
+    }
+
+    protected function saveWithoutLimit()
+    {
+        $sql = "INSERT INTO " . static::NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS .
+            " VALUES (NULL, :userId, :nameCategory, (SELECT icon_id FROM icons WHERE icon = :nameIcon), NULL)";
+
+        $db = static::getDataBase();
+        $query = $db->prepare($sql);
+        $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
+        $query->bindValue(':nameCategory', $this->nameCategory, PDO::PARAM_STR);
+        $query->bindValue(':nameIcon', $this->icon, PDO::PARAM_STR);
         return $query->execute();
     }
 
