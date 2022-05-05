@@ -61,7 +61,6 @@ abstract class BudgetCategory extends \Core\Model
             $query->bindValue(':userId', $_SESSION['userId'], PDO::PARAM_INT);
             $query->bindValue(':nameCategory', $this->nameCategory, PDO::PARAM_STR);
             $query->bindValue(':nameIcon', $this->icon, PDO::PARAM_STR);
-
             return $query->execute();
         }
         return false;
@@ -72,10 +71,9 @@ abstract class BudgetCategory extends \Core\Model
         $this->validate();
 
         if (empty($this->errors)) {
-
             $sql = "UPDATE " . static::NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS .
                 " SET name = :nameCategory, icon_id = (SELECT icon_id FROM icons WHERE icon = :nameIcon)
-                    WHERE id = :idPreviousCategory";
+                WHERE id = :idPreviousCategory";
 
             $db = static::getDataBase();
             $query = $db->prepare($sql);

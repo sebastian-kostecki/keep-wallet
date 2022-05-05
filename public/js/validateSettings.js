@@ -40,13 +40,17 @@ formChangingUserData.addEventListener('submit', function (e) {
 
 
 $('#form-add-change-category').validate({
+    ignore: "",
     rules: {
         icon: "required",
         nameCategory: {
             required: true,
-            isSpecialLetter: true,
+            isSpecialLetter: true
         },
-        previousCategory: "required"
+        limitAmount: {
+            validAmount: true,
+            step: false
+        }
     },
     messages: {
         icon: {
@@ -56,13 +60,13 @@ $('#form-add-change-category').validate({
             required: 'Wpisz nazwę kategorii',
             isSpecialLetter: 'Nazwa kategorii nie może zawierać znaków specjalnych'
         },
-        previousCategory: {
-            required: 'Wybierz kategorię do zmiany'
-        },
+        limitAmount: {
+            number: 'Kwota jest nieprawidłowa',
+        }
     },
     errorPlacement: function (error, element) {
         if (element.attr("name") == "icon") {
-            error.insertAfter(element.parent().parent().siblings().last());
+            error.insertAfter(element.next());
         }
         else {
             error.insertAfter(element);
@@ -104,4 +108,15 @@ $.validator.addMethod('isDigitInPassword',
         return true;
     },
     'Hasło powinno zawierać przynajmniej jedną cyfrę'
+)
+
+$.validator.addMethod('validAmount',
+    function (value) {
+        value *= 1000;
+        if (value % 10 == 0 && value > 0) {
+            return true;
+        }
+        return false;
+    },
+    'Kwota jest nieprawidłowa'
 )
