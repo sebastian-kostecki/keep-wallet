@@ -163,7 +163,6 @@
                 </div>
             </div>
         </ul>
-        {# modal dodający lub zmieniający kategorię #}
         <div class="modal fade" id="modalCreateChangeCategory" tabindex="-1"
             aria-labelledby="modal-create-change-category" aria-hidden="true">
             <div class="modal-dialog">
@@ -194,8 +193,8 @@
                                     </div>
                                     <div class="mt-2">
                                         <h6 class="fw-bold fs-6">Ustaw miesięczny limit wydatków dla kategorii</h6>
-                                        <input id="setLimitInput" type="number" class="form-control" name="limitAmount"
-                                            disabled>
+                                        <input id="setLimitInput" type="number" step="0.01" class="form-control"
+                                            name="limitAmount" disabled>
                                     </div>
                                 </div>
                             </form>
@@ -209,7 +208,6 @@
                 </div>
             </div>
         </div>
-        {# modal z ikonami #}
         <div class="modal fade" id="iconsModal" tabindex="-1" aria-labelledby="iconsModal" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">

@@ -45,7 +45,11 @@ $('#form-add-change-category').validate({
         icon: "required",
         nameCategory: {
             required: true,
-            isSpecialLetter: true,
+            isSpecialLetter: true
+        },
+        limitAmount: {
+            validAmount: true,
+            step: false
         }
     },
     messages: {
@@ -55,6 +59,9 @@ $('#form-add-change-category').validate({
         nameCategory: {
             required: 'Wpisz nazwę kategorii',
             isSpecialLetter: 'Nazwa kategorii nie może zawierać znaków specjalnych'
+        },
+        limitAmount: {
+            number: 'Kwota jest nieprawidłowa',
         }
     },
     errorPlacement: function (error, element) {
@@ -101,4 +108,15 @@ $.validator.addMethod('isDigitInPassword',
         return true;
     },
     'Hasło powinno zawierać przynajmniej jedną cyfrę'
+)
+
+$.validator.addMethod('validAmount',
+    function (value) {
+        value *= 1000;
+        if (value % 10 == 0 && value > 0) {
+            return true;
+        }
+        return false;
+    },
+    'Kwota jest nieprawidłowa'
 )
