@@ -6,6 +6,7 @@ const modalCreateAndChangeElement = new bootstrap.Modal(document.getElementById(
 const buttonsAddingNewElement = document.querySelectorAll('.button-add-element');
 for (let button of buttonsAddingNewElement) {
     button.addEventListener('click', function () {
+        button.setModulName();
         modalCreateAndChangeElement.toggle();
         button.setActionInForm();
         clearSelectedRadioInput();
@@ -19,6 +20,7 @@ for (let button of buttonsAddingNewElement) {
 const buttonsChangingElement = document.querySelectorAll('.button-change-category');
 for (let button of buttonsChangingElement) {
     button.addEventListener('click', function () {
+        button.setModulName();
         modalCreateAndChangeElement.toggle();
         button.setActionInForm();
         button.setChosenCategoryIdInHiddenInput();
@@ -27,6 +29,16 @@ for (let button of buttonsChangingElement) {
         button.setLimitFieldForSelectedItem();
         sendForm();
     })
+}
+
+HTMLElement.prototype.setModulName = function () {
+    const modalHeading = document.querySelector('#modalAddChangeElementLabel')
+    const nameOfAction = this.id.split('-')[0]
+    if (nameOfAction == 'change') {
+        modalHeading.textContent = 'Edycja kategorii'
+    } else {
+        modalHeading.textContent = 'Dodawanie nowej kategorii'
+    }
 }
 
 HTMLElement.prototype.setActionInForm = function () {
@@ -153,13 +165,9 @@ const validateForm = (form) => {
     validator.form();
 }
 
-Object.defineProperty(String.prototype, 'capitalizeFirstLetter', {
-    value: function () {
-        return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
-    },
-    enumerable: false
-});
-
+String.prototype.capitalizeFirstLetter = function () {
+    return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
+}
 
 //select icon
 const modalChosenIcon = new bootstrap.Modal(document.getElementById('iconsModal'), {
