@@ -95,4 +95,19 @@ class ExpenseCategory extends BudgetCategory
         $query->bindValue(':idPreviousCategory', $this->previousCategory, PDO::PARAM_INT);
         return $query->execute();
     }
+
+    public static function getLimit($categoryId)
+    {
+        $sql = "SELECT limit_category 
+                FROM " . static::NAME_TABLE_WITH_BUDGET_ITEMS_ASSIGNED_TO_USERS .
+            " WHERE id = :categoryId";
+
+        $db = static::getDataBase();
+        $query = $db->prepare($sql);
+        $query->bindValue(':categoryId', $categoryId, PDO::PARAM_INT);
+        $query->execute();
+
+        $query->setFetchMode(PDO::FETCH_ASSOC);
+        return $query->fetch();
+    }
 }

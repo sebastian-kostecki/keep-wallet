@@ -60,4 +60,9 @@ class Expense extends Authenticated
             $this->redirect('/balance/show');
         }
     }
+
+    public function getLimitAction()
+    {
+        echo json_encode(ExpenseCategory::getLimit($this->route_params['id']), JSON_UNESCAPED_UNICODE);
+    }
 }
