@@ -31,10 +31,19 @@ for (let radioButton of selectCategoryButton) {
 
                     //pobranie sumy wydatków podanej kategorii z określonego zakresu dat
                     //pobieram początek i koniec na podstawie wybranej daty
-                    let date = document.querySelector('#date');
-                    let DateFormat = date.value;
+                    let dateElement = document.querySelector('#date');
+                    let DateFormat = dateElement.value;
                     console.log(DateFormat);
                     console.log(getCurrentMonthPeriods(DateFormat)) //to jest format pierwszy - ostatni
+                    let date = getCurrentMonthPeriods(DateFormat);
+
+                    //wysyłamy żądanie zawierające id kategorii oraz zakres dat
+                    axios
+                        .get(`/expense/expenses/${categoryId}?date=${date}`)
+                        .then((d) => {
+                            console.log(d.data.sum);
+                            categorySpent.textContent = d.data.sum;
+                        })
 
 
                 } else if (!showLimit.classList.contains('d-none')) {

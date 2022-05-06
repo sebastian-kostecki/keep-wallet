@@ -65,4 +65,11 @@ class Expense extends Authenticated
     {
         echo json_encode(ExpenseCategory::getLimit($this->route_params['id']), JSON_UNESCAPED_UNICODE);
     }
+
+    public function expensesAction()
+    {
+        $_SESSION['chosenPeriod'] = $_GET['date'];
+        echo json_encode(Expenses::getSum($this->route_params['id']));
+        //to jest właśnie nasza data! -> $GET
+    }
 }

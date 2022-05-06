@@ -21,5 +21,6 @@ $router->add('menu', ['controller' => 'menu', 'action' => 'show']);
 $router->add('logout', ['controller' => 'login', 'action' => 'logout']);
 $router->add('settings', ['controller' => 'settings', 'action' => 'show']);
 $router->add('expense/getLimit/{id:[\d]+}', ['controller' => 'expense', 'action' => 'getLimit']);
+$router->add('expense/expenses/{id:[\d]+}', ['controller' => 'expense', 'action' => 'expenses']);
 
 $router->dispatch($_SERVER['QUERY_STRING']);
