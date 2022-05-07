@@ -12,25 +12,29 @@
     <div class="d-flex justify-content-between">
         <div class="p-2 bg-white bg-opacity-25 rounded me-2 w-100">
             <span class="fw-light">Kategoria: </span>
-            <span id="category-name">Jedzenie</span>
+            <span id="category-name"></span>
         </div>
         <div class="p-2 bg-white bg-opacity-25 rounded me-2 w-100">
             <span class="fw-light">Limit: </span>
-            <span id="category-limit">1500</span>
+            <span id="category-limit"></span>
+            <span>zł</span>
         </div>
         <div class="p-2 bg-white bg-opacity-25 rounded me-2 w-100">
             <span class="fw-light">Wydano: </span>
-            <span id="category-spent">1000</span>
+            <span id="category-spent"></span>
+            <span>zł</span>
         </div>
         <div class="p-2 bg-white bg-opacity-25 rounded w-100">
-            <span id="heading-remainded" class="fw-light">Pozostało: </span>
-            <span id="category-remainded">500</span>
+            <span id="heading-remainded" class="fw-light"></span>
+            <span id="category-remainded"></span>
+            <span>zł</span>
         </div>
     </div>
-    {# <div class="mt-2 p-2 bg-white bg-opacity-25 rounded w-100">
-        <span class="fw-light">Wydatki + wpisana kwota: </span>
-        <span id="category-spent-after-expense">500</span>
-    </div> #}
+    <div id="show-info-after-expense" class="mt-2 p-2 bg-white bg-opacity-25 rounded w-100">
+        <span id="info-after-expense-heading" class="fw-light"></span>
+        <span id="info-after-expense-amount"></span>
+        <span>zł</span>
+    </div>
 </div>
 <form action="/expense/save" method="POST" class="budget-form form-income container-fluid ps-lg-0">
     <div class="row mb-3">

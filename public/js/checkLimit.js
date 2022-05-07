@@ -10,12 +10,24 @@ const getCurrentMonthPeriods = (date) => {
     return firstDayCurrentMonth + "-" + lastDayCurrentMonth;
 }
 
+const isAmountValid = (value) => {
+    value *= 1000;
+    if (value % 10 == 0 && value > 0) {
+        return true;
+    }
+    return false;
+}
+
 const showLimit = document.querySelector('#show-limit')
 const categoryName = document.querySelector('#category-name')
 const categoryLimit = document.querySelector('#category-limit')
 const categorySpent = document.querySelector('#category-spent')
 const categoryRemainded = document.querySelector('#category-remainded')
 const headingRemainded = document.querySelector('#heading-remainded');
+
+const showInfoAfterExpense = document.querySelector('#show-info-after-expense');
+const headingAfterExpense = document.querySelector('#info-after-expense-heading');
+const amountAfterExpense = document.querySelector('#info-after-expense-amount');
 
 const selectCategoryButton = document.querySelectorAll('.select-category-button')
 for (let radioButton of selectCategoryButton) {
@@ -56,8 +68,51 @@ for (let radioButton of selectCategoryButton) {
                                 showLimit.classList.remove('bg-success');
                                 showLimit.classList.add('bg-danger');
                             }
-                        })
 
+                            //wyświetlamy albo nie podsumowanie w oparciu o kwotę
+                            //sytuacja, gdy najpierw wpiszemy kwotę
+                            const amountInput = document.querySelector('#amount');
+                            if (isAmountValid(amountInput.value)) {
+                                showInfoAfterExpense.classList.remove('d-none');
+
+                                //liczymy jaki będzie bilans pomiedzy tym co pozostało a nowym wydatkiem
+                                if ((data.data.limit_category - d.data.sum).toFixed(2) - amountInput.value > 0) {
+                                    headingAfterExpense.textContent = "Do limitu pozostanie ";
+                                    amountAfterExpense.textContent = (data.data.limit_category - d.data.sum).toFixed(2) - amountInput.value;
+                                    showLimit.classList.remove('bg-danger');
+                                    showLimit.classList.add('bg-success');
+                                } else {
+                                    headingAfterExpense.textContent = "Przekroczysz limit o ";
+                                    amountAfterExpense.textContent = amountInput.value - (data.data.limit_category - d.data.sum).toFixed(2);
+                                    showLimit.classList.remove('bg-success');
+                                    showLimit.classList.add('bg-danger');
+                                }
+
+                            } else {
+                                showInfoAfterExpense.classList.add('d-none');
+                            }
+
+                            //sytuacja, gdy najpierw wybierzemy kategorie a potem kwotę
+                            amountInput.addEventListener('change', function () {
+                                if (isAmountValid(amountInput.value)) {
+                                    showInfoAfterExpense.classList.remove('d-none');
+
+                                    if ((data.data.limit_category - d.data.sum).toFixed(2) - amountInput.value > 0) {
+                                        headingAfterExpense.textContent = "Do limitu pozostanie ";
+                                        amountAfterExpense.textContent = (data.data.limit_category - d.data.sum).toFixed(2) - amountInput.value;
+                                        showLimit.classList.remove('bg-danger');
+                                        showLimit.classList.add('bg-success');
+                                    } else {
+                                        headingAfterExpense.textContent = "Przekroczysz limit o ";
+                                        amountAfterExpense.textContent = amountInput.value - (data.data.limit_category - d.data.sum).toFixed(2);
+                                        showLimit.classList.remove('bg-success');
+                                        showLimit.classList.add('bg-danger');
+                                    }
+                                } else {
+                                    showInfoAfterExpense.classList.add('d-none');
+                                }
+                            })
+                        })
 
                 } else if (!showLimit.classList.contains('d-none')) {
                     showLimit.classList.add('d-none');
