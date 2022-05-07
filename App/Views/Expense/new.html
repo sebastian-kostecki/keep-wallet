@@ -7,23 +7,25 @@
 {% endblock %}
 
 {% block body %}
-<div id="show-limit"
-    class="me-sm-4 rounded bg-success text-white fs-5 mb-3 p-2 d-flex justify-content-between text-center d-none">
-    <div class="p-2 bg-white bg-opacity-25 rounded me-2 w-100">
-        <span class="fw-light">Kategoria: </span>
-        <span id="category-name">Jedzenie</span>
-    </div>
-    <div class="p-2 bg-white bg-opacity-25 rounded me-2 w-100">
-        <span class="fw-light">Limit: </span>
-        <span id="category-limit">1500</span>
-    </div>
-    <div class="p-2 bg-white bg-opacity-25 rounded me-2 w-100">
-        <span class="fw-light">Wydano: </span>
-        <span id="category-spent">1000</span>
-    </div>
-    <div class="p-2 bg-white bg-opacity-25 rounded w-100">
-        <span class="fw-light">Pozostało: </span>
-        <span id="category-remainded">500</span>
+<div id="show-limit" class="me-sm-4 rounded bg-success text-white fs-5 mb-3 p-2 d text-center d-none">
+    <h2 class="text-start fw-light fs-4">Informacja o limicie</h2>
+    <div class="d-flex justify-content-between">
+        <div class="p-2 bg-white bg-opacity-25 rounded me-2 w-100">
+            <span class="fw-light">Kategoria: </span>
+            <span id="category-name">Jedzenie</span>
+        </div>
+        <div class="p-2 bg-white bg-opacity-25 rounded me-2 w-100">
+            <span class="fw-light">Limit: </span>
+            <span id="category-limit">1500</span>
+        </div>
+        <div class="p-2 bg-white bg-opacity-25 rounded me-2 w-100">
+            <span class="fw-light">Wydano: </span>
+            <span id="category-spent">1000</span>
+        </div>
+        <div class="p-2 bg-white bg-opacity-25 rounded w-100">
+            <span class="fw-light">Pozostało: </span>
+            <span id="category-remainded">500</span>
+        </div>
     </div>
 </div>
 <form action="/expense/save" method="POST" class="budget-form form-income container-fluid ps-lg-0">
