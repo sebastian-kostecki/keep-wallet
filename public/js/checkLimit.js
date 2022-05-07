@@ -15,6 +15,7 @@ const categoryName = document.querySelector('#category-name')
 const categoryLimit = document.querySelector('#category-limit')
 const categorySpent = document.querySelector('#category-spent')
 const categoryRemainded = document.querySelector('#category-remainded')
+const headingRemainded = document.querySelector('#heading-remainded');
 
 const selectCategoryButton = document.querySelectorAll('.select-category-button')
 for (let radioButton of selectCategoryButton) {
@@ -28,13 +29,12 @@ for (let radioButton of selectCategoryButton) {
                     showLimit.classList.remove('d-none')
                     categoryName.textContent = radioButton.id;
                     categoryLimit.textContent = data.data.limit_category;
+                    console.log(data.data.limit_category);
 
                     //pobranie sumy wydatków podanej kategorii z określonego zakresu dat
                     //pobieram początek i koniec na podstawie wybranej daty
                     let dateElement = document.querySelector('#date');
                     let DateFormat = dateElement.value;
-                    console.log(DateFormat);
-                    console.log(getCurrentMonthPeriods(DateFormat)) //to jest format pierwszy - ostatni
                     let date = getCurrentMonthPeriods(DateFormat);
 
                     //wysyłamy żądanie zawierające id kategorii oraz zakres dat
@@ -43,6 +43,19 @@ for (let radioButton of selectCategoryButton) {
                         .then((d) => {
                             console.log(d.data.sum);
                             categorySpent.textContent = d.data.sum;
+
+                            //wpisujemy różnicę
+                            if (data.data.limit_category - d.data.sum > 0) {
+                                headingRemainded.textContent = "Pozostało: ";
+                                categoryRemainded.textContent = (data.data.limit_category - d.data.sum).toFixed(2);
+                                showLimit.classList.remove('bg-danger');
+                                showLimit.classList.add('bg-success');
+                            } else {
+                                headingRemainded.textContent = "Przekroczono: ";
+                                categoryRemainded.textContent = (d.data.sum - data.data.limit_category).toFixed(2);
+                                showLimit.classList.remove('bg-success');
+                                showLimit.classList.add('bg-danger');
+                            }
                         })
 
 
