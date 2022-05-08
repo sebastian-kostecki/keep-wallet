@@ -16,13 +16,13 @@ async function showLimit() {
 }
 
 const getLimit = async (categoryId) => {
-    let response = await axios.get(`/expense/getLimit/${categoryId}`);
+    let response = await axios.get(`/api/limit/${categoryId}`);
     return response.data.limit_category;
 }
 
 const getSumOfCategory = async (categoryId) => {
     let selectedPeriod = getDateOfSelectedPeriod();
-    let response = await axios.get(`/expense/expenses/${categoryId}?date=${selectedPeriod}`);
+    let response = await axios.get(`/api/expenses/${categoryId}?date=${selectedPeriod}`);
     return response.data.sum;
 }
 
