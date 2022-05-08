@@ -72,7 +72,8 @@ const assignLimit = (limit) => {
 
 const assignSum = (sum) => {
     const categorySpent = document.querySelector('#category-spent');
-    categorySpent.textContent = sum;
+    if (sum != null) { categorySpent.textContent = sum }
+    else { categorySpent.textContent = 0 }
 }
 
 const assignDifference = (limit, sum) => {
