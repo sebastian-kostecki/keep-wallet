@@ -97,4 +97,21 @@ class Expenses extends BudgetItem
         $query->setFetchMode(PDO::FETCH_CLASS, get_called_class());
         return $query->fetchAll();
     }
+
+    public static function getSum($categoryId)
+    {
+        $sql = "SELECT SUM(amount) as sum
+                FROM expenses
+                WHERE expense_category_assigned_to_user_id = :categoryId AND date_of_expense BETWEEN :firstDay AND :lastDay";
+
+        $db = static::getDataBase();
+        $query = $db->prepare($sql);
+        $query->bindValue(':categoryId', $categoryId, PDO::PARAM_INT);
+        $query->bindValue(':firstDay', self::getfirstDayOfPeriod(), PDO::PARAM_STR);
+        $query->bindValue(':lastDay', self::getLastDayOfPeriod(), PDO::PARAM_STR);
+        $query->execute();
+
+        $query->setFetchMode(PDO::FETCH_ASSOC);
+        return $query->fetch();
+    }
 }

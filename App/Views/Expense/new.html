@@ -7,6 +7,35 @@
 {% endblock %}
 
 {% block body %}
+<div id="show-limit" class="me-sm-4 rounded bg-success text-white fs-5 mb-3 p-2 d text-center d-none">
+    <h2 class="text-start fw-light fs-4">Informacja o limicie</h2>
+    <div class="d-flex justify-content-between">
+        <div class="p-2 bg-white bg-opacity-25 rounded me-2 w-100">
+            <span class="fw-light">Kategoria: </span>
+            <span id="category-name"></span>
+        </div>
+        <div class="p-2 bg-white bg-opacity-25 rounded me-2 w-100">
+            <span class="fw-light">Limit: </span>
+            <span id="category-limit"></span>
+            <span>zł</span>
+        </div>
+        <div class="p-2 bg-white bg-opacity-25 rounded me-2 w-100">
+            <span class="fw-light">Wydano: </span>
+            <span id="category-spent"></span>
+            <span>zł</span>
+        </div>
+        <div class="p-2 bg-white bg-opacity-25 rounded w-100">
+            <span id="heading-remainded" class="fw-light"></span>
+            <span id="category-remainded"></span>
+            <span>zł</span>
+        </div>
+    </div>
+    <div id="show-info-after-expense" class="mt-2 p-2 bg-white bg-opacity-25 rounded w-100 d-none">
+        <span id="info-after-expense-heading" class="fw-light"></span>
+        <span id="info-after-expense-amount"></span>
+        <span>zł</span>
+    </div>
+</div>
 <form action="/expense/save" method="POST" class="budget-form form-income container-fluid ps-lg-0">
     <div class="row mb-3">
         <div class="col-12 col-sm-6 pe-sm-1 mb-2">
@@ -47,8 +76,8 @@
         <div class="col-12 p-0 justify-content-center d-flex flex-wrap">
             {% for category in expenseCategories %}
             <div class="form-check-inline categories mb-2 me-2 flex-grow-1">
-                <input type="radio" class="form-check-input" name="category" id="{{ category.name }}"
-                    value="{{ category.id }}" required>
+                <input type="radio" class="form-check-input select-category-button" name="category"
+                    id="{{ category.name }}" value="{{ category.id }}" required>
                 <label for="{{ category.name }}"
                     class="category-label form-check-label text-uppercase px-3 py-2 rounded w-100 text-center fs-6"
                     role="button"><i class="{{ category.icon }} me-2"></i>{{ category.name }}</label>
@@ -85,4 +114,6 @@
 <script src="/js/getCurrentDate.js"></script>
 <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.min.js"></script>
 <script src="/js/validateBudgetItem.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="/js/checkLimit.js"></script>
 {% endblock %}
