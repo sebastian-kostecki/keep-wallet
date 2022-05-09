@@ -10,6 +10,7 @@ async function showLimit() {
         let sumOfCategory = await getSumOfCategory(categoryId);
         showLimitInformation(categoryId, limitCategory, sumOfCategory);
         showDifferenceAfterTypingAmount(limitCategory, sumOfCategory);
+        showSumAfterChangingDate(categoryId);
     } else {
         hideWindowWithInformationsAboutLimit();
     }
@@ -175,6 +176,16 @@ const showInformationAfterTypingAmount = () => {
 const hideInformationAfterTypingAmount = () => {
     const showInfoAfterExpense = document.querySelector('#show-info-after-expense');
     showInfoAfterExpense.classList.add('d-none');
+}
+
+const showSumAfterChangingDate = (categoryId) => {
+    let dateElement = document.querySelector('#date');
+    dateElement.addEventListener('change', async function () {
+        let selectedPeriod = getDateOfSelectedPeriod();
+        let response = await axios.get(`/api/expenses/${categoryId}?date=${selectedPeriod}`);
+        let sum = response.data.sum;
+        assignSum(sum);
+    })
 }
 
 const hideWindowWithInformationsAboutLimit = () => {
