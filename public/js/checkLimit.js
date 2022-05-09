@@ -10,7 +10,6 @@ async function showLimit() {
         let sumOfCategory = await getSumOfCategory(categoryId);
         showLimitInformation(categoryId, limitCategory, sumOfCategory);
         showDifferenceAfterTypingAmount(limitCategory, sumOfCategory);
-        showSumAfterChangingDate(categoryId);
     } else {
         hideWindowWithInformationsAboutLimit();
     }
@@ -118,6 +117,8 @@ const changeColorToDanger = () => {
     windowWithInformationsAboutLimit.classList.add('bg-danger');
 }
 
+
+//changing Amount
 const showDifferenceAfterTypingAmount = (limit, sum) => {
     const amountInput = document.querySelector('#amount');
     showCurrentDifference(limit, sum);
@@ -178,17 +179,27 @@ const hideInformationAfterTypingAmount = () => {
     showInfoAfterExpense.classList.add('d-none');
 }
 
-const showSumAfterChangingDate = (categoryId) => {
-    let dateElement = document.querySelector('#date');
-    dateElement.addEventListener('change', async function () {
-        let selectedPeriod = getDateOfSelectedPeriod();
-        let response = await axios.get(`/api/expenses/${categoryId}?date=${selectedPeriod}`);
-        let sum = response.data.sum;
-        assignSum(sum);
-    })
-}
-
 const hideWindowWithInformationsAboutLimit = () => {
     const windowWithInformationsAboutLimit = document.querySelector('#show-limit');
     windowWithInformationsAboutLimit.classList.add('d-none');
+}
+
+
+//changing date
+const dateElement = document.querySelector('#date');
+dateElement.addEventListener('change', showLimitAfterChangeDate);
+
+async function showLimitAfterChangeDate() {
+    let checkedCategory = document.querySelector('.select-category-button:checked');
+    if (checkedCategory) {
+        let categoryId = checkedCategory.value;
+        let limitCategory = await getLimit(categoryId);
+        if (limitCategory) {
+            let sumOfCategory = await getSumOfCategory(categoryId);
+            showLimitInformation(categoryId, limitCategory, sumOfCategory);
+            showDifferenceAfterTypingAmount(limitCategory, sumOfCategory);
+        } else {
+            hideWindowWithInformationsAboutLimit();
+        }
+    }
 }
