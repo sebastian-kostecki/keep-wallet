@@ -1,10 +1,15 @@
+//changing category
 const selectCategoryButton = document.querySelectorAll('.select-category-button')
 for (let radio of selectCategoryButton) {
-    radio.addEventListener('change', showLimit)
+    radio.addEventListener('change', showLimitForSelectedCategory)
 }
 
-async function showLimit() {
+function showLimitForSelectedCategory() {
     let categoryId = this.value;
+    showLimit(categoryId);
+}
+
+async function showLimit(categoryId) {
     let limitCategory = await getLimit(categoryId);
     if (limitCategory) {
         let sumOfCategory = await getSumOfCategory(categoryId);
@@ -117,6 +122,7 @@ const changeColorToDanger = () => {
     windowWithInformationsAboutLimit.classList.add('bg-danger');
 }
 
+//changing Amount
 const showDifferenceAfterTypingAmount = (limit, sum) => {
     const amountInput = document.querySelector('#amount');
     showCurrentDifference(limit, sum);
@@ -180,4 +186,17 @@ const hideInformationAfterTypingAmount = () => {
 const hideWindowWithInformationsAboutLimit = () => {
     const windowWithInformationsAboutLimit = document.querySelector('#show-limit');
     windowWithInformationsAboutLimit.classList.add('d-none');
+}
+
+
+//changing date
+const dateElement = document.querySelector('#date');
+dateElement.addEventListener('change', showLimitAfterChangeDate);
+
+async function showLimitAfterChangeDate() {
+    let checkedCategory = document.querySelector('.select-category-button:checked');
+    let categoryId = checkedCategory.value;
+    if (checkedCategory) {
+        showLimit(categoryId);
+    }
 }
