@@ -17,8 +17,6 @@ To use the application, visit website:
 To run this project, clone this repository and install:
 ```
 git clone https://github.com/sebastian-kostecki/keep-wallet.git
-npm install
-npm run start
 ```
 ## Functionality
 ### Create your account with authorization by email
